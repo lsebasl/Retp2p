@@ -23,6 +23,15 @@ class CreateInvoicesTable extends Migration
             $table->decimal('subtotal');
             $table->decimal('VAT');
             $table->decimal('total');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+
+            $table->unsignedBigInteger('seller_id');
+            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
+
+
+
             $table->timestamps();
         });
     }

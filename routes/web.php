@@ -48,3 +48,8 @@ Route::get('/sellers/{seller}','sellersController@show')->name('sellers.show');
 Route::get('/sellers/{seller}/edit','sellersController@edit')->name('sellers.edit');
 Route::put('/sellers/{seller}','sellersController@update')->name('sellers.update');
 Route::delete('/sellers/{seller}','sellersController@destroy')->name('sellers.destroy');
+
+Route::get('/layout', function() {
+    return view('layout');
+});
+

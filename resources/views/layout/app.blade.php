@@ -116,7 +116,7 @@
     <div class="full-width navLateral-bg btn-menu"></div>
     <div class="full-width navLateral-body">
         <div class="full-width navLateral-body-logo text-center tittles">
-            <i class="zmdi zmdi-close btn-menu"></i> Sebas Toys
+            <i class="zmdi zmdi-close btn-menu"></i> Inventory
         </div>
         <figure class="full-width" style="height: 77px;">
             <div class="navLateral-body-cl">
@@ -129,6 +129,7 @@
 					</span>
             </figcaption>
         </figure>
+
         <div class="full-width tittles navLateral-body-tittle-menu">
             <i class="zmdi zmdi-desktop-mac"></i><span class="hide-on-tablet">&nbsp; DASHBOARD</span>
         </div>
@@ -191,7 +192,7 @@
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="admin.html" class="full-width">
+                            <a  href="/clients" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-accounts"></i>
                                 </div>
@@ -217,7 +218,7 @@
                 <li class="full-width">
                     <a href="#!" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-face"></i>
+                            <i class="zmdi zmdi-mood"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
                             {{__('SELLERS')}}
@@ -276,7 +277,6 @@
                                 </div>
                                 <div class="navLateral-body-cr hide-on-tablet">
                                     {{__('Create New Product')}}
-
                                 </div>
                             </a>
                         </li>
@@ -285,6 +285,12 @@
             </ul>
         </nav>
     </div>
+</section>
+<!-- pageContent -->
+<section class="full-width pageContent">
+    <section class="full-width text-center" style="padding: 40px 0;">
+        @yield('content')
+    </section>
 </section>
 </body>
 </html>

@@ -4,26 +4,26 @@
 ======================================================*/
 @font-face{
     font-family: "RobotoCondensedLight";
-    src: url("../fonts/robotocondensed-light.ttf"), 
-    url("../fonts/robotocondensed-light.eot"), 
-    url("../fonts/robotocondensed-light.woff"), 
-    url("../fonts/robotocondensed-light.woff2"), 
+    src: url("../fonts/robotocondensed-light.ttf"),
+    url("../fonts/robotocondensed-light.eot"),
+    url("../fonts/robotocondensed-light.woff"),
+    url("../fonts/robotocondensed-light.woff2"),
     url("../fonts/robotocondensed-light.svg");
 }
 @font-face{
     font-family: "RobotoRegular";
-    src: url("../fonts/roboto-regular.ttf"), 
-    url("../fonts/roboto-regular.eot"), 
-    url("../fonts/roboto-regular.woff"), 
-    url("../fonts/roboto-regular.woff2"), 
+    src: url("../fonts/roboto-regular.ttf"),
+    url("../fonts/roboto-regular.eot"),
+    url("../fonts/roboto-regular.woff"),
+    url("../fonts/roboto-regular.woff2"),
     url("../fonts/roboto-regular.svg");
 }
 @font-face{
     font-family: "OswaldLight";
-    src: url("../fonts/oswald-light.ttf"), 
-    url("../fonts/oswald-light.eot"), 
-    url("../fonts/oswald-light.woff"), 
-    url("../fonts/oswald-light.woff2"), 
+    src: url("../fonts/oswald-light.ttf"),
+    url("../fonts/oswald-light.eot"),
+    url("../fonts/oswald-light.woff"),
+    url("../fonts/oswald-light.woff2"),
     url("../fonts/oswald-light.svg");
 }
 /*=====================================================
@@ -251,7 +251,7 @@ html, body{
     background-color: #2e6da4 !important;
 }
 .bg-success {
-    background-color: #3f903f !important;
+    background-color: #BD2765 !important;
 }
 .bg-danger {
     background-color: #d9534f !important;
@@ -434,8 +434,8 @@ html, body{
 }
 .navLateral-body-tittle-menu{
 	height: 70px;
-	line-height: 70px; 
-	font-size:20px; 
+	line-height: 70px;
+	font-size:20px;
 	background-color: #F5F5F5;
 	text-align: center;
 }

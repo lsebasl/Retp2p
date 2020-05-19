@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
 Route::post('/clients/store', 'ClientsController@store')->name('clients.store');

@@ -10,7 +10,7 @@ class ClientsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+
      */
     public function index()
     {
@@ -30,13 +30,27 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Client $client
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Client $client)
     {
-        //
+        dd($request);
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:30',
+            'last_name' => 'required|string|min:3|max:30',
+            'id_type' => 'required|in:Foreign ID, Card ID,Passport,NIT',
+            'identification' => 'required|alpha_num|max:20|min:3',
+            'phone' => 'required|numeric|max:20|min:6',
+            'email' => 'required|max:150|email|unique:clients,email,'.$client->id,
+            'address' => 'required|max:40',
+
+        ]);
+        Client::create($data);
+        return redirect()->route('clients.index')->withSuccess(__('Client created successfully'));
     }
+
 
     /**
      * Display the specified resource.

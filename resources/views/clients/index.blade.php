@@ -52,6 +52,7 @@
                         </div>
                         <div class="full-width panel-content">
                             <form action="{{ route('clients.store') }}"  method="POST">
+                                @csrf
                                 <h5 class="text-condensedLight">Data client</h5>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="name">
@@ -90,9 +91,9 @@
                                 </div>
 
                                 <p class="text-center">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                        Button
-                                    </button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    Save
+                                </button>
                                 `   <div class="mdl-tooltip" for="btn-addClient">Add client</div>
                                 </p>
                             </form>

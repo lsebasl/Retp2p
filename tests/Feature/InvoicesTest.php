@@ -13,7 +13,7 @@ class InvoicesTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testInvoicesIndex()
     {
         $response = $this->get('/invoices');
 

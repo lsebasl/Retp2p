@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testProductsIndex()
     {
         $response = $this->get('/products');
 

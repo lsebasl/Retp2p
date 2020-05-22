@@ -13,7 +13,7 @@ class ClientsTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testClientsIndex()
     {
         $response = $this->get('/clients');
 

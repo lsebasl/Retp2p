@@ -40,7 +40,7 @@ class ClientsController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:30',
             'last_name' => 'required|min:3|max:30',
-            'id_type' => 'required|in:Foreign ID, Card ID,Passport,NIT',
+            'id_type' => 'required|in:Foreign ID,Card ID,Passport,NIT',
             'identification' => 'required|min:3|max:20',
             'phone' => 'required|min:6|max:20',
             'email' => 'required|max:150|email|unique:clients,email',
@@ -61,7 +61,7 @@ class ClientsController extends Controller
 
 
         $createClient->save();
-        return redirect()->route('clients.index')->with('success','Client saved!');
+        return redirect()->route('clients.index')->with('success','Client Has Been Created!');
 
 
        // Client::create($data);

@@ -14,7 +14,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        return response()->view('clients.index',['clients'=> Client::all()]);
+        return response()->view('clients.index', ['clients' => Client::all()]);
     }
 
     /**
@@ -36,19 +36,36 @@ class ClientsController extends Controller
      */
     public function store(Request $request, Client $client)
     {
-        dd($request);
-        $data = $request->validate([
-            'name' => 'required|string|min:3|max:30',
-            'last_name' => 'required|string|min:3|max:30',
-            'id_type' => 'required|in:Foreign ID, Card ID,Passport,NIT',
-            'identification' => 'required|alpha_num|max:20|min:3',
-            'phone' => 'required|numeric|max:20|min:6',
-            'email' => 'required|max:150|email|unique:clients,email,'.$client->id,
-            'address' => 'required|max:40',
 
+        $request->validate([
+            'name' => 'required|min:3|max:30',
+            'last_name' => 'required|min:3|max:30',
+            'id_type' => 'required|in:Foreign ID, Card ID,Passport,NIT',
+            'identification' => 'required|min:3|max:20',
+            'phone' => 'required|min:6|max:20',
+            'email' => 'required|max:150|email|unique:clients,email',
+            'address' => 'required|max:40',
+       ]);
+
+        $createClient = new Client([
+
+            'name' => $request->get('name'),
+            'last_name' => $request->get('last_name'),
+            'id_type' => $request->get('id_type'),
+            'identification' => $request->get('identification'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+            'address' => $request->get('address'),
         ]);
-        Client::create($data);
-        return redirect()->route('clients.index')->withSuccess(__('Client created successfully'));
+
+
+
+        $createClient->save();
+        return redirect()->route('clients.index')->with('success','Client saved!');
+
+
+       // Client::create($data);
+       // return redirect()->route('clients.index')->withSuccess(__('Client created successfully'));
     }
 
 

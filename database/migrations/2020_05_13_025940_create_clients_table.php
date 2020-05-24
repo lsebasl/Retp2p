@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('last_name');
-            $table->string('id_type');
+            $table->enum('id_type',['Foreign ID','Card ID','Passport,NIT']);
             $table->string('identification');
             $table->string('phone');
             $table->string('email');

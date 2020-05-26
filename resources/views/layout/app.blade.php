@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/sweetalert2.css">
-    <link rel="stylesheet" href="css/material.min.css">
-    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/material.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
-    <script src="js/material.min.js" ></script>
-    <script src="js/sweetalert2.min.js" ></script>
-    <script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
-    <script src="js/main.js" ></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery-1.11.2.min.js') }}"><\/script>')</script>
+    <script src="{{ asset('js/material.min.js') }}" ></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}" ></script>
+    <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}" ></script>
+    <script src="{{ asset('js/main.js') }}" ></script>
 </head>
 <body>
 <!-- Notifications area -->
@@ -104,7 +104,7 @@
                 <li class="text-condensedLight noLink" ><small>User Name</small></li>
                 <li class="noLink">
                     <figure>
-                        <img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+                        <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">
                     </figure>
                 </li>
             </ul>
@@ -120,7 +120,7 @@
         </div>
         <figure class="full-width" style="height: 77px;">
             <div class="navLateral-body-cl">
-                <img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+                <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">
             </div>
             <figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
@@ -136,7 +136,7 @@
         <nav class="full-width">
             <ul class="full-width list-unstyle menu-principal">
                 <li class="full-width">
-                    <a href="home.html" class="full-width">
+                    <a href="home   " class="full-width">
                         <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-view-dashboard"></i>
                         </div>

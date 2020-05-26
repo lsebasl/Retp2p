@@ -14,6 +14,7 @@ class ClientsController extends Controller
      */
     public function index()
     {
+
         return response()->view('clients.index', ['clients' => Client::all()]);
     }
 
@@ -72,13 +73,16 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+        public function show(Client $client)
     {
-        //
+        return response()->view('clients.show', ['client'=> $client]);
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -86,10 +90,10 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+       public function edit()
+       {
+           return response()->view('clients.edit', ['client' => Client::all()]);
+       }
 
     /**
      * Update the specified resource in storage.
@@ -106,11 +110,14 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Client $client
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return back();
+
     }
 }

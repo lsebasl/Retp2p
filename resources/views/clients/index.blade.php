@@ -31,7 +31,7 @@
                                             @csrf @method('DELETE')
                                             <button type="submit" class="mdl-list__item-secondary-action"><i class="zmdi zmdi-delete" style= "color : #BD2765; width: 30px; font-size: 25px" ></i></button>
                                         </form>
-                                    </div>  
+                                    </div>
                                         <li class="full-width divider-menu-h"></li>
                                     @empty
                                         <li>{{__('No hay usuarios registrados')}}</li>

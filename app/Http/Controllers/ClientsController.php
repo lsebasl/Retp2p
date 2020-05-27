@@ -83,16 +83,15 @@ class ClientsController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return \Illuminate\Http\Response
      */
-       public function edit()
+       public function edit(Client $client)
        {
-           return response()->view('clients.edit', ['client' => Client::all()]);
+           return response()->view('clients.edit', ['client' => $client]);
        }
 
     /**

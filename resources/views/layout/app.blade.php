@@ -98,10 +98,13 @@
                     <div class="mdl-tooltip" for="notifications">Notifications</div>
                 </li>
                 <li class="btn-exit" id="btn-exit">
-                    <i class="zmdi zmdi-power"></i>
-                    <div class="mdl-tooltip" for="btn-exit">LogOut</div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <i class="zmdi zmdi-power"></i>
+                        <div class="mdl-tooltip" for="logout-form">LogOut</div>
+                    </form>
                 </li>
-                <li class="text-condensedLight noLink" ><small>User Name</small></li>
+                <li class="text-condensedLight noLink" ><small> {{ Auth::user()->name }}</small></li>
                 <li class="noLink">
                     <figure>
                         <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">

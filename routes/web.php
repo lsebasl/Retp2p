@@ -59,3 +59,7 @@ Route::delete('/sellers/{seller}','sellersController@destroy')->name('sellers.de
 Route::put('/sellers/{seller}','sellersController@update')->name('sellers.update');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

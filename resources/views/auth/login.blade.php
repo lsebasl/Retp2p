@@ -36,11 +36,12 @@
             <label class="mdl-textfield__label" for="password">{{ __('Password') }}</label>
             @includeWhen($errors->has('password'), 'partials.__invalid_feedback', ['feedback' => $errors->first('password')])
         </div>
+
         <button id="SingIn" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; float:right;">
             Sign in <i class="zmdi zmdi-mail-send"></i>
         </button>
         @if (Route::has('password.request'))
-            <a class="btn btn-link" href="{{ route('password.request') }}">
+            <a class="btn btn-link" href="{{ route('password.request') }}" style="color: #3F51B5; text-decoration-line: none" >
                 {{ __('Forgot Your Password?') }}
             </a>
         @endif

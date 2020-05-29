@@ -104,7 +104,7 @@
                         <div class="mdl-tooltip" for="logout-form">LogOut</div>
                     </form>
                 </li>
-                <li class="text-condensedLight noLink" ><small> {{ Auth::user()->name }}</small></li>
+                <li class="text-condensedLight noLink" ><small></small></li>
                 <li class="noLink">
                     <figure>
                         <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">

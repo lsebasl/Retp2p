@@ -24,7 +24,9 @@ Route::get('/home', function () {
 Route::get('/show', function () {
     return view('clients.show');
 });
-
+Route::get('/login-sebas', function () {
+    return view('auth.login');
+});
 
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
@@ -50,16 +52,18 @@ Route::get('/products/{product}/edit','ProductsController@edit')->name('products
 Route::delete('/products/{product}','ProductsController@destroy')->name('products.destroy');
 Route::put('/products/{product}','ProductsController@update')->name('products.update');
 
-Route::get('/sellers', 'sellersController@index')->name('sellers.index');
-Route::get('/sellers/create', 'sellersController@create')->name('sellers.create');
-Route::post('/sellers/store', 'sellersController@store')->name('sellers.store');
-Route::get('/sellers/{seller}','sellersController@show')->name('sellers.show');
-Route::get('/sellers/{seller}/edit','sellersController@edit')->name('sellers.edit');
-Route::delete('/sellers/{seller}','sellersController@destroy')->name('sellers.destroy');
-Route::put('/sellers/{seller}','sellersController@update')->name('sellers.update');
+Route::get('/stock', 'StockController@index')->name('stock.index');
+Route::get('/stock/create', 'StockController@create')->name('stock.create');
+Route::post('/stock/store', 'StockController@store')->name('stock.store');
+Route::get('/stock/{seller}','StockController@show')->name('stock.show');
+Route::get('/stock/{seller}/edit','StockController@edit')->name('stocks.edit');
+Route::delete('/stock/{seller}','StockController@destroy')->name('stock.destroy');
+Route::put('/stock/{seller}','StockController@update')->name('stock.update');
 
 
 
 Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home', 'HomeController@index')->name('home');

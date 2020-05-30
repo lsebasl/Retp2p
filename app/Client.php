@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Client extends Model
 {
@@ -20,6 +21,9 @@ class Client extends Model
         'email',
         'address',
     ];
+    /**
+     * @var mixed
+     */
 
     public function invoices()
     {

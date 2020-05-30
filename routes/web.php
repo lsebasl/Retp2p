@@ -27,7 +27,20 @@ Route::get('/show', function () {
 Route::get('/login-sebas', function () {
     return view('auth.login');
 });
+Route::get('/verify', function () {
+    return view('auth.verify');
+});
+Route::get('/verify', function () {
+    return view('auth.verify');
+});
 
+//login routes
+Route::get('/register', 'RegisterController@index')->name('register.index');
+Route::get('/register/create', 'RegisterController@create')->name('register.create');
+Route::post('/register/store', 'RegisterController@store')->name('register.store');
+
+
+//proyects routes
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
 Route::post('/clients/store', 'ClientsController@store')->name('clients.store');
@@ -61,8 +74,8 @@ Route::delete('/stock/{seller}','StockController@destroy')->name('stock.destroy'
 Route::put('/stock/{seller}','StockController@update')->name('stock.update');
 
 
-
 Auth::routes();
+Auth::routes(["verify" => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

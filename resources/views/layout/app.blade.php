@@ -86,6 +86,7 @@
     </section>
 </section>
 <!-- navBar -->
+
 <div class="full-width navBar">
     <div class="full-width navBar-options">
         <i class="zmdi zmdi-more-vert btn-menu" id="btn-menu"></i>
@@ -97,14 +98,30 @@
                     <!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
                     <div class="mdl-tooltip" for="notifications">Notifications</div>
                 </li>
-                <li class="btn-exit" id="btn-exit">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+
+                    <a class="dropdown-item" href="{{ route('logout') }}" style="color: white; text-decoration-line: none"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
-                        <i class="zmdi zmdi-power"></i>
-                        <div class="mdl-tooltip" for="logout-form">LogOut</div>
                     </form>
-                </li>
-                <li class="text-condensedLight noLink" ><small></small></li>
+                    <i class="zmdi zmdi-power"></i>
+
+                @endguest
+
+                <li class="text-condensedLight noLink" ><small> {{ ucfirst(Auth::user()->name) }}</small></li>
                 <li class="noLink">
                     <figure>
                         <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">

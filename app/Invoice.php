@@ -11,11 +11,6 @@ class Invoice extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function sellers()
-    {
-        return $this->belongsTo(Seller::class);
-    }
-
     public function clients()
     {
         return $this->belongsTo(Client::class);

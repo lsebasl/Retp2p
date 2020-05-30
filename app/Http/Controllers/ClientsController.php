@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use Illuminate\Http\Request;
 
+
 class ClientsController extends Controller
 {
     /**
@@ -14,8 +15,9 @@ class ClientsController extends Controller
      */
     public function index()
     {
+        $client = Client::all();
 
-        return response()->view('clients.index', ['clients' => Client::all()]);
+        return response()->view('clients.index', ['clients' => $client]);
     }
 
     /**
@@ -35,7 +37,7 @@ class ClientsController extends Controller
      * @param Client $client
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Client $client)
+    public function store(Request $request)
     {
 
         $request->validate([

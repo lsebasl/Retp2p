@@ -272,7 +272,7 @@ html, body{
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 5px;
-	color: #3F51B5;
+	color: #000000;
 }
 /*=============Estilos barra superior*/
 .navBar{

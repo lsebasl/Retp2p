@@ -41,6 +41,15 @@ Route::post('/register/store', 'RegisterController@store')->name('register.store
 
 
 //proyects routes
+
+Route::get('/users', 'UsersController@index')->name('users.index');
+Route::get('/users/create', 'UsersController@create')->name('users.create');
+Route::post('/users/store', 'UsersController@store')->name('users.store');
+Route::get('/users/{user}/show','UsersController@show')->name('users.show');
+Route::get('/users/{user}/edit','UsersController@edit')->name('users.edit');
+Route::delete('/users/{user}','UsersController@destroy')->name('users.destroy');
+Route::put('/users/{user}','UsersController@update')->name('users.update');
+
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
 Route::post('/clients/store', 'ClientsController@store')->name('clients.store');
@@ -65,13 +74,13 @@ Route::get('/products/{product}/edit','ProductsController@edit')->name('products
 Route::delete('/products/{product}','ProductsController@destroy')->name('products.destroy');
 Route::put('/products/{product}','ProductsController@update')->name('products.update');
 
-Route::get('/stock', 'StockController@index')->name('stock.index');
-Route::get('/stock/create', 'StockController@create')->name('stock.create');
-Route::post('/stock/store', 'StockController@store')->name('stock.store');
-Route::get('/stock/{seller}','StockController@show')->name('stock.show');
-Route::get('/stock/{seller}/edit','StockController@edit')->name('stocks.edit');
-Route::delete('/stock/{seller}','StockController@destroy')->name('stock.destroy');
-Route::put('/stock/{seller}','StockController@update')->name('stock.update');
+Route::get('/stocks', 'StocksController@index')->name('stocks.index');
+Route::get('/stocks/create', 'StocksController@create')->name('stocks.create');
+Route::post('/stocks/store', 'StocksController@store')->name('stocks.store');
+Route::get('/stocks/{stock}','StocksController@show')->name('stocks.show');
+Route::get('/stocks/{stock}/edit','StocksController@edit')->name('stocks.edit');
+Route::delete('/stocks/{stock}','StocksController@destroy')->name('stocks.destroy');
+Route::put('/stocks/{stock}','StocksController@update')->name('stocks.update');
 
 
 Auth::routes();

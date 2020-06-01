@@ -117,8 +117,12 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <i class="zmdi zmdi-power"></i>
-
+                    <!-- <logout tooltip fail></i> -->
+                    <li class="btn-exit" id="btn-exit" >
+                    <i class="zmdi zmdi-power" ></i>
+                        <div class="mdl-tooltip" for="btn-exit">LogOut </div>
+                    </li>
+                    <!-- <logout tooltip fail></i> -->
                 @endguest
 
                 <li class="text-condensedLight noLink" ><small> {{ ucfirst(Auth::user()->name) }}</small></li>
@@ -169,6 +173,107 @@
                 <li class="full-width">
                     <a href="#!" class="full-width btn-subMenu">
                         <div class="navLateral-body-cl">
+                            <i class="zmdi zmdi-account"></i>
+                        </div>
+                        <div class="navLateral-body-cr hide-on-tablet">
+                            {{__('USERS')}}
+                        </div>
+                        <span class="zmdi zmdi-chevron-left"></span>
+                    </a>
+                    <ul class="full-width menu-principal sub-menu-options">
+                        <li class="full-width">
+                            <a  href="{{ route('users.index') }}" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-accounts"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('User List')}}
+                                </div>
+                            </a>
+                        </li>
+                        <li class="full-width">
+                            <a href="{{ route('users.create') }}" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-account"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('Create New User')}}
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="full-width divider-menu-h"></li>
+                <li class="full-width">
+                    <a href="#!" class="full-width btn-subMenu">
+                        <div class="navLateral-body-cl">
+                            <i class="zmdi zmdi-face"></i>
+                        </div>
+                        <div class="navLateral-body-cr hide-on-tablet">
+                            {{__('CLIENTS')}}
+                        </div>
+                        <span class="zmdi zmdi-chevron-left"></span>
+                    </a>
+                    <ul class="full-width menu-principal sub-menu-options">
+                        <li class="full-width">
+                            <a  href="{{ route('clients.index') }}" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-accounts"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('Client List')}}
+                                </div>
+                            </a>
+                        </li>
+                        <li class="full-width">
+                            <a href="{{ route('clients.index') }}" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-account"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('Create New Client')}}
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="full-width divider-menu-h"></li>
+                <li class="full-width">
+                    <a href="#!" class="full-width btn-subMenu">
+                        <div class="navLateral-body-cl">
+                            <i class="zmdi zmdi-toys"></i>
+                        </div>
+                        <div class="navLateral-body-cr hide-on-tablet">
+                            {{__('PRODUCTS')}}
+                        </div>
+                        <span class="zmdi zmdi-chevron-left"></span>
+                    </a>
+                    <ul class="full-width menu-principal sub-menu-options">
+                        <li class="full-width">
+                            <a href="admin.html" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-accounts-list"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('Product List')}}
+                                </div>
+                            </a>
+                        </li>
+                        <li class="full-width">
+                            <a href="{{route("products.index")}}" class="full-width">
+                                <div class="navLateral-body-cl">
+                                    <i class="zmdi zmdi-plus"></i>
+                                </div>
+                                <div class="navLateral-body-cr hide-on-tablet">
+                                    {{__('Create New Product')}}
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                <li class="full-width divider-menu-h"></li>
+                <li class="full-width">
+                    <a href="#!" class="full-width btn-subMenu">
+                        <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-receipt"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
@@ -201,106 +306,25 @@
                 </li>
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
-                    <a href="#!" class="full-width btn-subMenu">
+                    <a href="inventory.html" class="full-width">
                         <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-face"></i>
+                            <i class="zmdi zmdi-store"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
-                            {{__('CLIENTS')}}
+                            INVENTORY
                         </div>
-                        <span class="zmdi zmdi-chevron-left"></span>
                     </a>
-                    <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a  href="/clients" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-accounts"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Client List')}}
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="client.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-account"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Create New Client')}}
-
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
-                    <a href="#!" class="full-width btn-subMenu">
+                    <a href="sales.html" class="full-width">
                         <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-mood"></i>
+                            <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
-                            {{__('SELLERS')}}
+                            SALES
                         </div>
-                        <span class="zmdi zmdi-chevron-left"></span>
                     </a>
-                    <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a href="admin.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-accounts"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Seller List')}}
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="client.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-account"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Create New Seller')}}
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="full-width divider-menu-h"></li>
-                <li class="full-width">
-                    <a href="#!" class="full-width btn-subMenu">
-                        <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-toys"></i>
-                        </div>
-                        <div class="navLateral-body-cr hide-on-tablet">
-                            {{__('PRODUCTS')}}
-                        </div>
-                        <span class="zmdi zmdi-chevron-left"></span>
-                    </a>
-                    <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a href="admin.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-accounts-list"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Product List')}}
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="client.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-plus"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Create New Product')}}
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>

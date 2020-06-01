@@ -22,7 +22,7 @@
     <p class="text-center" style="font-size: 80px;">
         <i class="zmdi zmdi-account-circle"></i>
     </p>
-    <p class="text-center text-condensedLight">Sign in with your Account</p>
+    <p class="text-center text-condensedLight">Sign up your Account</p>
     <div method="POST" action="/verify'" style= "text-align:center">
         @csrf
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

@@ -26,9 +26,40 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input @error('email') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus >
+            <input class="mdl-textfield__input @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus >
             @includeWhen($errors->has('name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('name')])
             <label class="mdl-textfield__label" for="name">{{ __('Name') }}</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input @error('last_name') is-invalid @enderror" type="last_name" id="last_name" name="last_name" value="{{ old('last_name') }}"  autocomplete="last_name" autofocus>
+            @includeWhen($errors->has('identification'), 'partials.__invalid_feedback', ['feedback' => $errors->first('last_name')])
+            <label class="mdl-textfield__label" for="last_name">{{ __('Last Name') }}</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select class="mdl-textfield__input" name="id_type" id="id_type">
+                <option value="" disabled="" selected></option>
+                <option value="Card ID">{{__('Card ID')}}</option>
+                <option value="Foreign ID">{{__('Foreign ID')}}</option>
+                <option value="Passport">{{__('Passport')}}</option>
+                <option value="NIT">{{__('NIT')}}</option>
+            </select>
+            @includeWhen($errors->has('id_type'), 'partials.__invalid_feedback', ['feedback' => $errors->first('id_type')])
+            <label class="mdl-textfield__label" for="id_type">{{ __('ID Type') }}</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input @error('identification') is-invalid @enderror" type="identification" id="identification" name="identification" value="{{ old('identification') }}"  autocomplete="identification" autofocus>
+            @includeWhen($errors->has('identification'), 'partials.__invalid_feedback', ['feedback' => $errors->first('identification')])
+            <label class="mdl-textfield__label" for="identification">{{ __('Identification') }}</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input @error('phone') is-invalid @enderror" type="phone" id="phone" name="phone" value="{{ old('phone') }}"  autocomplete="phone" autofocus>
+            @includeWhen($errors->has('phone'), 'partials.__invalid_feedback', ['feedback' => $errors->first('phone')])
+            <label class="mdl-textfield__label" for="phone">{{ __('Phone') }}</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input @error('address') is-invalid @enderror" type="text" id="address" name="address" value="{{ old('address') }}"  autocomplete="address" autofocus >
+            @includeWhen($errors->has('address'), 'partials.__invalid_feedback', ['feedback' =>     $errors->first('address')])
+            <label class="mdl-textfield__label" for="address">{{ __('Address') }}</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input @error('email') is-invalid @enderror" type="email" id="email" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus>

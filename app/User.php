@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','last_name', 'email', 'password','id_type','identification','phone','address',
     ];
 
     /**
@@ -37,6 +37,16 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullName()
+    {
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
 }
 
 

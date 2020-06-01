@@ -25,11 +25,11 @@ class ClientStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:3|max:30',
-            'last_name' => 'required|string|min:3|max:30',
-            'id_type' => 'required|in:Foreign ID, Card ID,Passport,NIT',
-            'identification' => 'required|alpha_num|max:20|min:3',
-            'phone' => 'required|numeric|max:20|min:6',
+            'name' => 'required|min:3|max:30',
+            'last_name' => 'required|min:3|max:30',
+            'id_type' => 'required|in:Foreign ID,Card ID,Passport,NIT',
+            'identification' => 'required|min:3|max:20',
+            'phone' => 'required|min:6|max:20',
             'email' => 'required|max:150|email|unique:clients,email',
             'address' => 'required|max:40',
         ];

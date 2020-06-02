@@ -11,8 +11,8 @@
     <span class="mdl-textfield__error">Invalid last name</span>
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">-
-    <select class="mdl-textfield__input" name="id_type" id="id_type" value="{{ old('id_type', $user->id_type)}}">
-        <option value="" disabled="" selected></option>
+    <select class="mdl-textfield__input" name="id_type" id="id_type">
+        <option value="{{ old('id_type', $user->id_type)}}" disabled="" selected></option>
         <option value="Card ID">{{__('Card ID')}}</option>
         <option value="Foreign ID">{{__('Foreign ID')}}</option>
         <option value="Passport">{{__('Passport')}}</option>
@@ -44,5 +44,14 @@
     <label class="mdl-textfield__label" for="address">{{__('Address')}}</label>
     <span class="mdl-textfield__error">Invalid address</span>
     @includeWhen($errors->has('address'),'partials.__invalid_feedback', ['feedback' => $errors->first('address')])
+</div>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">-
+    <select class="mdl-textfield__input" name="user_status" id="user_status" value="{{ old('user_status', $user->user_status)}}">
+        <option value="" disabled="" selected></option>
+        <option value="Card ID">{{__('Enable')}}</option>
+        <option value="Foreign ID">{{__('Disable')}}</option>
+    </select>
+    <label class="mdl-textfield__label" for="id_type">{{__('User Status')}}</label>
+    <span class="mdl-textfield__error">Invalid Id Type</span>
 </div>
 

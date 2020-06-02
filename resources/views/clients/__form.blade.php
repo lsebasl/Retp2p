@@ -4,7 +4,7 @@
     <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
     <span class="mdl-textfield__error">Invalid name</span>
 </div>
-<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+<div class="mdl-textfield mdl-js-textfield mdl-textf    ield--floating-label">
     <input class="mdl-textfield__input {{$errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="last_name" value="{{ old('last_name', $client->last_name)}}" >
     @includeWhen($errors->has('last_name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('last_name')])
     <label class="mdl-textfield__label" for="last_name">{{__('Last Name')}}</label>

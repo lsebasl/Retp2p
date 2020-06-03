@@ -11,6 +11,9 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+   const ENABLE_STATUS = 'Enable';
+   const DISABLE_STATUS = 'Disable';
+
     /**
      * The attributes that are mass assignable.
      *

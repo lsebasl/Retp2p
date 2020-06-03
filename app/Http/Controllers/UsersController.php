@@ -8,6 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('user.status');
+    }
+
     public function index()
     {
 
@@ -70,6 +76,7 @@ class UsersController extends Controller
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
             'address' => $request->get('address'),
+            'status' => $request->get('status')
         ]);
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
@@ -89,5 +96,6 @@ class UsersController extends Controller
         return back();
 
     }
+
 
 }

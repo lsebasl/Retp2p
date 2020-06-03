@@ -46,12 +46,12 @@
     @includeWhen($errors->has('address'),'partials.__invalid_feedback', ['feedback' => $errors->first('address')])
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">-
-    <select class="mdl-textfield__input" name="user_status" id="user_status" value="{{ old('user_status', $user->user_status)}}">
+    <select class="mdl-textfield__input" name="status" id="status" value="{{ old('status', $user->status)}}">
         <option value="" disabled="" selected></option>
-        <option value="Card ID">{{__('Enable')}}</option>
-        <option value="Foreign ID">{{__('Disable')}}</option>
+        <option value="Enable">{{__('Enable')}}</option>
+        <option value="Disable">{{__('Disable')}}</option>
     </select>
-    <label class="mdl-textfield__label" for="id_type">{{__('User Status')}}</label>
+    <label class="mdl-textfield__label" for="status">{{__('User Status')}}</label>
     <span class="mdl-textfield__error">Invalid Id Type</span>
 </div>
 

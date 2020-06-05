@@ -42,6 +42,7 @@
                 </div>
             </div>
         </div>
+        {{--CREATE CLIENT--}}
         <div class="mdl-tabs__panel" id="tabNewClient">
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">

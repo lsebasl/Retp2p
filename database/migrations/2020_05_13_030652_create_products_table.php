@@ -15,14 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('barcode');;
+            $table->string('barcode');
             $table->string('name');;
-            $table->decimal('price');
-            $table->integer('units');
-            $table->enum('id_type',['Activate','Desactivated',]);
+            $table->enum('category',['Computers','Tv & Video','Smartphones','Accessories']);
             $table->string('model');
             $table->string('mark');
             $table->string('description');
+            $table->integer('units');
+            $table->decimal('price');
+            $table->decimal('discount');
+            $table->enum('status',['Enable','Disable',]);
             $table->timestamps();
         });
     }

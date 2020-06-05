@@ -121,7 +121,9 @@
                     <li class="btn-exit" id="btn-exit" >
                     <i class="zmdi zmdi-power" ></i>
                         <div class="mdl-tooltip" for="btn-exit">LogOut </div>
+
                     </li>
+
                     <!-- <logout tooltip fail></i> -->
                 @endguest
 
@@ -260,7 +262,7 @@
                             </a>
                         </li>
                         <li class="full-width">
-                            <a href="{{route("products.index")}}" class="full-width">
+                            <a href="{{route("products.create")}}" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-plus"></i>
                                 </div>
@@ -332,8 +334,8 @@
 </section>
 <!-- pageContent -->
 <section class="full-width pageContent">
-    <section class="full-width text-center" style="padding: 40px 0;">
-        @yield('content')
+    <section class="full-width text-center" style="padding: 5px 0;">
+    @yield('content')
     </section>
 </section>
 </body>

@@ -7,6 +7,17 @@ use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'barcode',
+        'name',
+        'category',
+        'model',
+        'description',
+        'units',
+        'price',
+        'discount',
+        'status',
+    ];
     public function invoices()
     {
         Return $this->belongsToMany(Invoice::class);

@@ -21,10 +21,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        {
 
         return response()->view('products.index', ['products' => Product::all()]);
-        }
     }
 
     /**
@@ -34,7 +32,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+
+        return response()->view('products.create', ['products' => Product::all()]);
     }
 
     /**
@@ -45,9 +44,20 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'barcode' => 'required|min:3|max:30',
+            'name' => 'required|min:3|max:30',
+            'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
+            'model' => 'required|min:2|max:30',
+            'mark' => 'required|min:2|max:30',
+            'description' => 'required|min:3|max:20',
+            'units' => 'required|Integer',
+            'price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'status' => 'required|in:Enable,Disable',
 
+        ]);
+    }
     /**
      * Display the specified resource.
      *

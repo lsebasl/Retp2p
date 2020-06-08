@@ -36,9 +36,9 @@
             {{ __('If you did not receive the email,') }}
             <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                 @csrf
-                <button type="submit" style="position: initial;margin-top: 30px; " class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{{ __('click here to request another')}}</button>.
+                <button type="submit" style="position: initial;margin-top: 30px; " class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{{ __('click here to request another')}}</button>
             </form>
-        </div>+
+        </div>
 
     </div>
 </div>

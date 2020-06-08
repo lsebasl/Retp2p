@@ -37,12 +37,12 @@
                                         <a class="mdl-list__item-secondary-action" href="{{route('users.edit', $user)}}"><i class="zmdi zmdi-edit" style= "color : #6574C4; width: 30px; font-size: 25px"></i></a>
                                         <form method="POST" action="{{route('users.destroy',$user)}}">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="mdl-list__item-secondary-action" style="border: none; background-color:white   "><i class="zmdi zmdi-delete" style= "color : #BD2765; width: 20px; font-size: 25px"></i></button>
+                                            <button type="submit" class="mdl-list__item-secondary-action" style="border: none; background-color:white"><i class="zmdi zmdi-delete" style= "color : #BD2765; width: 20px; font-size: 25px"></i></button>
                                         </form>
                                     </div>
                                     <li class="full-width divider-menu-h"></li>
                                 @empty
-                                    <li>{{__('No hay usuarios registrados')}}</li>
+                                    <li>{{__('Without Users')}}</li>
                                 @endforelse
                             </div>
                         </div>

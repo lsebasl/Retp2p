@@ -24,15 +24,11 @@ Route::get('/home', function () {
 Route::get('/show', function () {
     return view('clients.show');
 });
-Route::get('/login-sebas', function () {
-    return view('auth.login');
-});
+
 Route::get('/verify', function () {
     return view('auth.verify');
 });
-Route::get('/verify', function () {
-    return view('auth.verify');
-});
+
 
 //login routes
 Route::get('/register', 'RegisterController@index')->name('register.index');
@@ -74,13 +70,8 @@ Route::get('/products/{product}/edit','ProductsController@edit')->name('products
 Route::delete('/products/{product}','ProductsController@destroy')->name('products.destroy');
 Route::put('/products/{product}','ProductsController@update')->name('products.update');
 
-Route::get('/stocks', 'StocksController@index')->name('stocks.index');
-Route::get('/stocks/create', 'StocksController@create')->name('stocks.create');
-Route::post('/stocks/store', 'StocksController@store')->name('stocks.store');
-Route::get('/stocks/{stock}','StocksController@show')->name('stocks.show');
-Route::get('/stocks/{stock}/edit','StocksController@edit')->name('stocks.edit');
-Route::delete('/stocks/{stock}','StocksController@destroy')->name('stocks.destroy');
-Route::put('/stocks/{stock}','StocksController@update')->name('stocks.update');
+Route::get('/stocks', 'ProductsController@index')->name('stocks.index');
+
 
 
 Auth::routes();
@@ -88,4 +79,4 @@ Auth::routes(["verify" => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+

@@ -22,8 +22,8 @@ class CreateProductsTable extends Migration
             $table->string('mark');
             $table->string('description');
             $table->integer('units');
-            $table->decimal('price');
-            $table->decimal('discount');
+            $table->string('price');
+            $table->string('discount');
             $table->enum('status',['Enable','Disable',]);
             $table->timestamps();
         });

@@ -22,13 +22,13 @@
                             New Product
                         </div>
                         <div class="full-width panel-content">
-                            <form>
+                            <form action="{{ route('products.store') }}" method="POST">
                                 @csrf
                                 @include('products.__form')
 
                                 <p class="text-center">
-                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
-                                        <i class="zmdi zmdi-plus"></i>
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                        {{__('Save')}}
                                     </button>
                                 <div class="mdl-tooltip" for="btn-addProduct">Add Product</div>
                                 </p>

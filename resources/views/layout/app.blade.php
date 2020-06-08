@@ -252,7 +252,7 @@
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="admin.html" class="full-width">
+                            <a href="{{ route('products.index') }}" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-accounts-list"></i>
                                 </div>
@@ -308,12 +308,12 @@
                 </li>
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
-                    <a href="inventory.html" class="full-width">
+                    <a href="{{ route('stocks.index') }}" class="full-width">
                         <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-store"></i>
                         </div>
                         <div class="navLateral-body-cr hide-on-tablet">
-                            INVENTORY
+                            {{__('INVENTORY')}}
                         </div>
                     </a>
                 </li>

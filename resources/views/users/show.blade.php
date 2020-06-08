@@ -1,4 +1,4 @@
-@extends('layout.app')
+    @extends('layout.app')
 @section('content')
 
     <!-- pageContent -->
@@ -7,7 +7,7 @@
     <div class="mdl-tabs__panel is-active" id="tabNewProvider">
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-                <div class="full-width panel mdl-shadow--2dp "style="height:400px;">
+                <div class="full-width panel mdl-shadow--2dp "style="height:500px;">
                     <div class="full-width panel-tittle bg-primary text-center tittles">
 
                         Client Information
@@ -38,6 +38,10 @@
                         <tr>
                             <td class="mdl-data-table__cell--non-numeric">Address</td>
                             <td>{{$user->address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">User Status</td>
+                            <td>{{$user->status}}</td>
                         </tr>
                         </tbody>
                     </table>

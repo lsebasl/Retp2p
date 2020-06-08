@@ -12,6 +12,7 @@ class Product extends Model
         'name',
         'category',
         'model',
+        'mark',
         'description',
         'units',
         'price',
@@ -21,9 +22,5 @@ class Product extends Model
     public function invoices()
     {
         Return $this->belongsToMany(Invoice::class);
-    }
-    public function stocks()
-    {
-        Return $this->belongsTo(Stock::class);
     }
 }

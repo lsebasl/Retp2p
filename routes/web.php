@@ -21,10 +21,6 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/show', function () {
-    return view('clients.show');
-});
-
 Route::get('/verify', function () {
     return view('auth.verify');
 });
@@ -77,6 +73,6 @@ Route::get('/stocks', 'ProductsController@index')->name('stocks.index');
 Auth::routes();
 Auth::routes(["verify" => true]);
 
-    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    Route::get('/home', 'HomeController@index')->name('home');
 
 

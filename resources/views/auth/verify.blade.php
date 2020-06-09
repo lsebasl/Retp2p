@@ -23,7 +23,7 @@
         <i class="zmdi zmdi-account-circle"></i>
     </p>
     <p class="text-center text-condensedLight">Sign up your Account</p>
-    <div method="POST" action="/verify'" style= "text-align:center">
+    <div method="POST" action=VERIFY style= "text-align:center">
         @csrf
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <a class="mdl-textfield" for="email">{{ __('Verify Your Email Address') }}</a>

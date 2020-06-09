@@ -8,11 +8,22 @@ use Illuminate\Http\Request;
 
 class ClientsController extends Controller
 {
+
+
+    public function __construct()
+
+    {
+        $this->middleware('verified');
+        $this->middleware('auth');
+    }
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the clients.
      *
 
      */
+
+
     public function index()
     {
         $client = Client::all();

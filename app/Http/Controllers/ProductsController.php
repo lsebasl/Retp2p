@@ -15,6 +15,7 @@ class ProductsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('user.status');
+        $this->middleware('verified');
     }
 
     /**

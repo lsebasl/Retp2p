@@ -1,24 +1,16 @@
 <?php
-
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ProductsTest extends TestCase
+class StocksTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-
     Public Function testNoAuthenticatedUserCantAccessToProductCreate()
     {
-        $this->get(route('products.create'))
+        $this->get(route('stocks.index'))
             ->assertRedirect(route('login'));
 
     }
-
 }

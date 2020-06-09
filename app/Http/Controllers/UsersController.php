@@ -12,6 +12,8 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('user.status');
+        $this->middleware('verified');
+
     }
 
     public function index()

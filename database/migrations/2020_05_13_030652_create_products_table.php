@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('barcode');
-            $table->string('name');;
+            $table->string('name');
             $table->enum('category',['Computers','Tv & Video','Smartphones','Accessories']);
             $table->string('model');
             $table->string('mark');

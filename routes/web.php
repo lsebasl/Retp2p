@@ -21,26 +21,30 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/verify', function () {
-    return view('auth.verify');
-});
-
 
 //login routes
 Route::get('/register', 'RegisterController@index')->name('register.index');
 Route::get('/register/create', 'RegisterController@create')->name('register.create');
 Route::post('/register/store', 'RegisterController@store')->name('register.store');
 
+Auth::routes();
+Auth::routes(["verify" => true]);
 
-//proyects routes
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/verify', function () {
+    return view('auth.verify');
+});
+
+
+//project routes
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users/create', 'UsersController@create')->name('users.create');
 Route::post('/users/store', 'UsersController@store')->name('users.store');
+Route::put('/users/{user}','UsersController@update')->name('users.update');
+Route::delete('/users/{user}','UsersController@destroy')->name('users.destroy');
 Route::get('/users/{user}/show','UsersController@show')->name('users.show');
 Route::get('/users/{user}/edit','UsersController@edit')->name('users.edit');
-Route::delete('/users/{user}','UsersController@destroy')->name('users.destroy');
-Route::put('/users/{user}','UsersController@update')->name('users.update');
 
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
@@ -68,11 +72,13 @@ Route::put('/products/{product}','ProductsController@update')->name('products.up
 
 Route::get('/stocks', 'ProductsController@index')->name('stocks.index');
 
+//factories routes
+Route::get('factoryU',function (){
+    return factory(\App\User::class)->create();
+});
 
 
-Auth::routes();
-Auth::routes(["verify" => true]);
 
-    Route::get('/home', 'HomeController@index')->name('home');
+
 
 

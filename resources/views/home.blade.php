@@ -2,34 +2,34 @@
 @section('content')
     <h3 class="text-center tittles">RESPONSIVE TILES</h3>
     <!-- Tiles -->
-    <article class="full-width tile">
-        <div class="tile-text">
-					<span class="text-condensedLight">
+    <a class="full-width tile" href="{{ route('invoices.index') }}" >
+        <div class="tile-text" >
+					<span class="text-condensedLight" >
 						1<br>
 						<small>{{__('Invoices')}}</small>
 					</span>
         </div>
         <i class="zmdi zmdi-receipt tile-icon"></i>
-    </article>
-    <article class="full-width tile">
+    </a>
+    <a class="full-width tile" href="{{ route('users.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
 						2<br>
-						<small>{{__('Clients')}}</small>
+						<small>{{__('Users')}}</small>
 					</span>
         </div>
         <i class="zmdi zmdi-accounts tile-icon"></i>
-    </article>
-    <article class="full-width tile">
+    </a>
+    <a class="full-width tile" href="{{ route('stocks.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
 						3<br>
-						<small>{{__('Sellers')}}</small>
+						<small>{{__('Store')}}</small>
 					</span>
         </div>
-        <i class="zmdi zmdi-mood tile-icon"></i>
-    </article>
-    <article class="full-width tile">
+        <i class="zmdi zmdi-store tile-icon"></i>
+    </a>
+    <a class="full-width tile" href="{{ route('products.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
 						121<br>
@@ -37,5 +37,5 @@
 					</span>
         </div>
         <i class="zmdi zmdi-toys tile-icon"></i>
-    </article>
+    </a>
 @endsection

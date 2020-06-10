@@ -6,9 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
+   const ENABLE_STATUS = 'Enable';
+   const DISABLE_STATUS = 'Disable';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','last_name', 'email', 'password','id_type','identification','phone','address','status'
     ];
 
     /**
@@ -36,4 +40,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullName()
+    {
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
 }
+
+

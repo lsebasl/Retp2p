@@ -31,7 +31,7 @@
             <label class="mdl-textfield__label" for="name">{{ __('Name') }}</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input @error('last_name') is-invalid @enderror" type="last_name" id="last_name" name="last_name" value="{{ old('last_name') }}"  autocomplete="last_name" autofocus>
+            <input class="mdl-textfield__input @error('last_name') is-invalid @enderror" type="text" id="last_name" name="last_name" value="{{ old('last_name') }}"  autocomplete="last_name" autofocus>
             @includeWhen($errors->has('identification'), 'partials.__invalid_feedback', ['feedback' => $errors->first('last_name')])
             <label class="mdl-textfield__label" for="last_name">{{ __('Last Name') }}</label>
         </div>

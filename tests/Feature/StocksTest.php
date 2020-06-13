@@ -11,7 +11,7 @@ class StocksTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    Public Function testNoAuthenticatedUserCantAccessToProductCreate()
+    Public Function testNoAuthenticatedUserCantAccessToProductIndex()
     {
         $this->get(route('stocks.index'))
             ->assertRedirect(route('login'));

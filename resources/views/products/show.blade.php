@@ -5,7 +5,7 @@
     <div class="mdl-tabs__panel is-active" id="tabNewProvider">
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-                <div class="full-width panel mdl-shadow--2dp "style="height:700px;">
+                <div class="full-width panel mdl-shadow--2dp "style="height:920px;">
                     <div class="full-width panel-tittle bg-primary text-center tittles">
 
                         Product Information
@@ -55,6 +55,23 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div class="mdl-card mdl-shadow--2dp full-width product-card">
+                        <div class="mdl-card__title">
+                            @if($product->image)
+                                <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
+                            @endif
+                        </div>
+                        <div class="mdl-card__supporting-text">
+                            <small>{{$product->units}}</small><br>
+                            <small>{{$product->category}}</small>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            {{$product->name}}
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                <i class="zmdi zmdi-more"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

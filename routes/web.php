@@ -72,7 +72,7 @@ Route::put('/invoices/{invoice}','InvoicesController@update')->name('invoices.up
 
 
 
-Route::get('/stocks', 'StocksController@index')->name('stocks.index');
+Route::get('/stocks', 'StocksController@index')->name('stocks.index')->middleware("auth");
 
 //factories routes
 Route::get('factoryU',function (){

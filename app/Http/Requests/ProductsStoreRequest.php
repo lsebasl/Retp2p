@@ -34,6 +34,7 @@ class ProductsStoreRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'required|numeric',
             'status' => 'required|in:Enable,Disable',
+            'image' =>'required|image' //jpeg,png,bmp,gif,svg, or webp
         ];
     }
 }

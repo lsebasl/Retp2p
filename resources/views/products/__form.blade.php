@@ -13,7 +13,8 @@
             <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
             <span class="mdl-textfield__error">Invalid name</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('status') ? 'is-invalid' : '' }}">
+            @includeWhen($errors->has('status'), 'partials.__invalid_feedback', ['feedback' => $errors->first('status')])
             <select class="mdl-textfield__input" name="category" id="category">
                 <option value="" disabled="" selected=""></option>
                 <option value="Computers">Computers</option>
@@ -65,8 +66,9 @@
             <span class="mdl-textfield__error">Invalid description</span>
         </div>
         <h5 class="text-condensedLight">Other Data</h5>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <select class="mdl-textfield__input" name="status" id="status">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('status') ? 'is-invalid' : '' }}">
+            @includeWhen($errors->has('status'), 'partials.__invalid_feedback', ['feedback' => $errors->first('status')])
+            <select class="mdl-textfield__input" name="status" id="status" >
                 <option value="" disabled="" selected=""></option>
                 <option value="Enable">Enable</option>
                 <option value="Disable">Disable</option>
@@ -74,7 +76,7 @@
             <label class="mdl-textfield__label" for="status">{{__('Select Status')}}</label>
             <span class="mdl-textfield__error">Invalid Status</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield">
+        <div class="mdl-textfield mdl-js-textfield ">
             <input type="file" name="image" id="file">
         </div>
     </div>

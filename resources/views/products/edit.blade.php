@@ -8,7 +8,7 @@
                         Edit Product
                     </div>
                     <div class="full-width panel-content">
-                        <form method="POST" action="{{route('products.update', $product)}}">
+                        <form method="POST" action="{{route('products.update', $product)}} " enctype="multipart/form-data">
                             <h5 class="text-condensedLight">Data Product</h5>
                             @method('PUT')
                             @csrf

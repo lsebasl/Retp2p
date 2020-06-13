@@ -21,7 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'last_name' => $faker->lastName,
-        'id_type' => $faker->randomElement(['Card ID','Foreign ID','Passport','Nit']),
+        'id_type' => $faker->randomElement(['Card ID','Foreign ID','Passport','NIT']),
         'identification'=>$faker->numberBetween(00000, 9999999999),
         'phone'=>$faker->numberBetween(0000000, 999999999999),
         'address'=>$faker->address,

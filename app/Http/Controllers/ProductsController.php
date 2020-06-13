@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Product;
-use App\Stock;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-
 class ProductsController extends Controller
 
 {
@@ -92,7 +87,16 @@ class ProductsController extends Controller
 
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-        $product->update($request->validated());
+        if($request->hasFile('image')) {
+           $product->fill($request->validated());
+
+        $product->image = $request->file('image')->store('images');
+
+        $product->save();
+        }
+        else{
+            $product->update(array_filter($request->validated()));
+        }
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }

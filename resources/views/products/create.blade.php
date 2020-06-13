@@ -21,6 +21,7 @@
                         <div class="full-width panel-tittle bg-primary text-center tittles">
                             New Product
                         </div>
+                        @include('partials.__alerts')
                         <div class="full-width panel-content">
                             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf

@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Void_;
 
 class UsersController extends Controller
 {

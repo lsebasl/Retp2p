@@ -27,7 +27,9 @@ class ProductsUpdateRequest extends FormRequest
     public function rules(Product $product)
     {
         return [
-            'barcode' => 'required','min:3','max:30','unique:products,barcode,' . $product->getId(),
+            'barcode' => [
+                'required',Rule::unique('products')->ignore($product->id),'min:3','max:30'
+            ],
             'name' => 'required|min:3|max:30',
             'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
             'model' => 'required|min:2|max:30',
@@ -37,6 +39,8 @@ class ProductsUpdateRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'required|numeric',
             'status' => 'required|in:Enable,Disable',
+
         ];
+
     }
 }

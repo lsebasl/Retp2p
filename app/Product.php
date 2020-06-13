@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use phpDocumentor\Reflection\Types\Integer;
+
 
 
 class Product extends Model

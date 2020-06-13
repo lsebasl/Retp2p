@@ -22,7 +22,7 @@
                             New Product
                         </div>
                         <div class="full-width panel-content">
-                            <form action="{{ route('products.store') }}" method="POST">
+                            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @include('products.__form')
 

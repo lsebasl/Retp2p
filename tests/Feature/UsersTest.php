@@ -25,15 +25,15 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
-    /*Public Function testNoAuthenticatedUserCantAccessToUsersEdit()
+    Public Function testNoAuthenticatedUserCantAccessToUsersEdit()
     {
         $user=factory(User::class)->create();
 
         $this->get(route('users.edit',$user))
              ->assertRedirect(route('login'));
 
-    }*/
-    /*Public Function testNoAuthenticatedUserCantAccessToUsersUpdate()
+    }
+    Public Function testNoAuthenticatedUserCantAccessToUsersUpdate()
     {
         $user=factory(User::class)->create();
 
@@ -49,5 +49,5 @@ class UsersTest extends TestCase
         $this->delete(route('users.destroy',$user))
              ->assertRedirect(route('login'));
 
-    }*/
+    }
 }

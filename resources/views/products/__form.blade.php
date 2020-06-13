@@ -75,7 +75,7 @@
             <span class="mdl-textfield__error">Invalid Status</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield">
-            <input type="file">
+            <input type="file" name="image" id="file">
         </div>
     </div>
 </div>

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Http\Requests\ProductsStoreRequest;
+use App\Http\Requests\ProductsUpdateRequest;
 use App\Product;
 use App\Stock;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class ProductsController extends Controller
 
@@ -21,147 +25,90 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index():View
 
     {
         $product = Product::all();
 
-        return response()->view('stocks.index', ['products' => $product]);
-    }
+        return view('products.index', ['products' => $product]);
 
+    }
 
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create():View
     {
-        $product = new product;
-        return response()->view('products.create', ['product' => $product]);
+        $product = new Product();
+        return view('products.create', ['product' => $product]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductsStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductsStoreRequest $request):RedirectResponse
     {
-        $request->validate([
-            'barcode' => 'required|min:3|max:30|unique:barcode',
-            'name' => 'required|min:3|max:30',
-            'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
-            'model' => 'required|min:2|max:30',
-            'mark' => 'required|min:2|max:30',
-            'description' => 'required|min:3|max:20',
-            'units' => 'required|Integer',
-            'price' => 'required|numeric',
-            'discount' => 'required|numeric',
-            'status' => 'required|in:Enable,Disable',
 
-        ]);
-        $createProduct = new Product([
+        $product= new Product($request->validated());
 
-            'barcode' => $request->get('barcode'),
-            'name' => $request->get('name'),
-            'category' => $request->get('category'),
-            'model' => $request->get('model'),
-            'mark' => $request->get('mark'),
-            'description' => $request->get('description'),
-            'units' => $request->get('units'),
-            'price' => $request->get('price'),
-            'discount' => $request->get('discount'),
-            'status' => $request->get('status'),
-            ]);
-        $createProduct->save();
+        $product->image = $request->file('image')->store('images');
+
+        $product->save();
+
         return redirect()->route('stocks.index')->with('success','Client Has Been Created!');
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product):View
 
     {
-        return response()->view('products.show', ['product' => $product]);
+        return view('products.show', ['product' => $product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-
      * @param Product $product
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit(Product $product)
-
+    public function edit(Product $product):View
     {
-        return response()->view('products.edit', ['product' => $product]);
+        return view('products.edit', ['product' => $product]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param Product $product
-     * @return void
-     */
-
-    public function update(Request $request,Product $product)
+    public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-        {
-            $request->validate([
-                'barcode' => ['required',Rule::unique('products')->ignore($product->id),'min:3','max:30'],
-                'name' => 'required|min:3|max:30',
-                'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
-                'model' => 'required|min:2|max:30',
-                'mark' => 'required|min:2|max:30',
-                'description' => 'required|min:3|max:20',
-                'units' => 'required|Integer',
-                'price' => 'required|numeric',
-                'discount' => 'required|numeric',
-                'status' => 'required|in:Enable,Disable',
-            ]);
+        $product->update($request->validated());
 
-            $product->update([
-
-                'barcode' => $request->get('barcode'),
-                'name' => $request->get('name'),
-                'category' => $request->get('category'),
-                'model' => $request->get('model'),
-                'mark' => $request->get('mark'),
-                'description' => $request->get('description'),
-                'units' => $request->get('units'),
-                'price' => $request->get('price'),
-                'discount' => $request->get('discount'),
-                'status' => $request->get('status'),
-
-            ]);
-
-            return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
-
-        }
+        return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Product $product
-     * @return void
+     * @return RedirectResponse
      * @throws \Exception
      */
 
-    public function destroy(Product $product)
+    public function destroy(Product $product):RedirectResponse
     {
         $product->delete();
         return back();
     }
 }
+

@@ -1,39 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-use http\Client;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Void_;
 
 class UsersController extends Controller
 {
+    /**
+     * UsersController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('user.status');
         $this->middleware('verified');
-
     }
 
-    public function index()
+    public function index(): View
     {
 
         $user = User::all();
 
-        return response()->view('users.index', ['users' => $user]);
+        return view('users.index', ['users' => $user]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
 
-    public function show(User $user)
+    public function show(User $user):View
     {
-        return response()->view('users.show', ['user'=> $user]);
+        return view('users.show', ['user'=> $user]);
     }
 
 
@@ -41,12 +44,12 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit(User $user)
+    public function edit(User $user):View
     {
 
-        return response()->view('users.edit', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**

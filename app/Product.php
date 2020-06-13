@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use phpDocumentor\Reflection\Types\Integer;
+
 
 class Product extends Model
 {
@@ -19,8 +21,21 @@ class Product extends Model
         'discount',
         'status',
     ];
-    public function invoices()
+
+    /**
+     * @return BelongsToMany
+     */
+    public function invoices():BelongsToMany
     {
         Return $this->belongsToMany(Invoice::class);
     }
+
+    /**
+     * @return int
+     */
+    public function getId():int
+    {
+        return $this->getAttribute('id');
+    }
+
 }

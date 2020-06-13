@@ -46,6 +46,14 @@ Route::delete('/users/{user}','UsersController@destroy')->name('users.destroy');
 Route::get('/users/{user}/show','UsersController@show')->name('users.show');
 Route::get('/users/{user}/edit','UsersController@edit')->name('users.edit');
 
+Route::get('/products', 'ProductsController@index')->name('products.index');
+Route::get('/products/create', 'ProductsController@create')->name('products.create');
+Route::post('/products/store', 'ProductsController@store')->name('products.store');
+Route::put('/products/{product}','ProductsController@update')->name('products.update');
+Route::get('/products/{product}','ProductsController@show')->name('products.show');
+Route::get('/products/{product}/edit','ProductsController@edit')->name('products.edit');
+Route::delete('/products/{product}','ProductsController@destroy')->name('products.destroy');
+
 Route::get('/clients', 'ClientsController@index')->name('clients.index');
 Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
 Route::post('/clients/store', 'ClientsController@store')->name('clients.store');
@@ -62,15 +70,9 @@ Route::get('/invoices/{invoice}/edit','InvoicesController@edit')->name('invoices
 Route::delete('/invoices/{invoice}','InvoicesController@destroy')->name('invoices.destroy');
 Route::put('/invoices/{invoice}','InvoicesController@update')->name('invoices.update');
 
-Route::get('/products', 'ProductsController@index')->name('products.index');
-Route::get('/products/create', 'ProductsController@create')->name('products.create');
-Route::post('/products/store', 'ProductsController@store')->name('products.store');
-Route::get('/products/{product}','ProductsController@show')->name('products.show');
-Route::get('/products/{product}/edit','ProductsController@edit')->name('products.edit');
-Route::delete('/products/{product}','ProductsController@destroy')->name('products.destroy');
-Route::put('/products/{product}','ProductsController@update')->name('products.update');
 
-Route::get('/stocks', 'ProductsController@index')->name('stocks.index');
+
+Route::get('/stocks', 'StocksController@index')->name('stocks.index');
 
 //factories routes
 Route::get('factoryU',function (){

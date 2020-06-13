@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,11 +42,34 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function getFullName()
+    /**
+     * @return string
+     */
+    public function getName():string
     {
-        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+     return $this->getAttribute('name');
     }
-    public function invoices()
+
+    /**
+     * @return string
+     */
+    public function getLastName():string
+    {
+        return $this->getAttribute('last_name');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName():string
+    {
+        return ucfirst($this->getName()) . ' ' . ucfirst($this->getLastName());
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices():HasMany
     {
         return $this->hasMany(Invoice::class);
     }

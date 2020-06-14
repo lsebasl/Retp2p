@@ -31,9 +31,9 @@ class Product extends Model
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId():int
+    public function getId():string
     {
         return $this->getAttribute('id');
     }

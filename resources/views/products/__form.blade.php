@@ -1,3 +1,4 @@
+
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
         <h5 class="text-condensedLight">Basic Information</h5>
@@ -79,5 +80,13 @@
         <div class="mdl-textfield mdl-js-textfield ">
             <input type="file" name="image" id="file">
         </div>
+        @if($product->image)
+            <div class="mdl-card mdl-shadow--2dp full-width product-card">
+                <div class="mdl-card__title">
+                        <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
+                </div>
+            </div>
+        @endif
     </div>
 </div>
+

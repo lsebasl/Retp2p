@@ -28,19 +28,19 @@ $(document).ready(function(){
     });
     /*Salir del sistema*/
     $('.btn-exit').on('click', function(){
-    	swal({
-		  	title: 'You want out of the system?',
-		 	text: "The current session will be closed and will leave the system",
-		  	type: 'warning',
-		  	showCancelButton: true,
-		  	confirmButtonText: 'Yes, exit',
-		  	closeOnConfirm: false
-		},
-		function(isConfirm) {
-		  	if (isConfirm) {
-		    	window.location='index.html'; 
-		  	}
-		});
+        swal({
+                title: 'You want out of the system?',
+                text: "The current session will be closed and will leave the system",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, exit',
+                closeOnConfirm: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location='index.html';
+                }
+            });
     });
     /*Mostrar y ocultar submenus*/
     $('.btn-subMenu').on('click', function(){

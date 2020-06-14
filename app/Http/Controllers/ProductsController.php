@@ -6,7 +6,10 @@ use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
+
 class ProductsController extends Controller
 
 {
@@ -85,14 +88,28 @@ class ProductsController extends Controller
         return view('products.edit', ['product' => $product]);
     }
 
+    /**
+     *  Update the specified resource in storage.
+     *
+     * @param Product $product
+     * @param ProductsUpdateRequest $request
+     * @return RedirectResponse
+     */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
         if($request->hasFile('image')) {
-           $product->fill($request->validated());
+            Storage::delete($product->image);
 
-        $product->image = $request->file('image')->store('images');
+            $product->fill($request->validated());
 
-        $product->save();
+            $product->image = $request->file('image')->store('images');
+
+            $product->save();
+            $image= Image::make(Storage::get($product->image));
+            $image->widen(600)->encode();
+
+            Storage::put($product->image,(string) $image);
+
         }
         else{
             $product->update(array_filter($request->validated()));
@@ -111,8 +128,9 @@ class ProductsController extends Controller
 
     public function destroy(Product $product):RedirectResponse
     {
+        Storage::delete($product->image);
         $product->delete();
-        return back();
+        return back()->with('success','Product Has Been Deleted');
     }
 }
 

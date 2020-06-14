@@ -27,9 +27,7 @@ class ProductsUpdateRequest extends FormRequest
     public function rules(Product $product)
     {
         return [
-            'barcode' => [
-                'required',Rule::unique('products')->ignore($product->id),'min:3','max:30'
-            ],
+            'barcode' => ['required',],
             'name' => 'required|min:3|max:30',
             'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
             'model' => 'required|min:2|max:30',

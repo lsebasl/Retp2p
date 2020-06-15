@@ -74,9 +74,14 @@ Route::put('/invoices/{invoice}','InvoicesController@update')->name('invoices.up
 
 Route::get('/stocks', 'StocksController@index')->name('stocks.index')->middleware("auth");
 
-//factories routes
-Route::get('factoryU',function (){
-    return factory(\App\User::class)->create();
+//Routes Store
+
+Route::get('/layout', function () {
+    return view('store.layout.layout');
+});
+
+Route::get('/home-store', function () {
+    return view('store.home');
 });
 
 

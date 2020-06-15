@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Validation\Rule;
@@ -18,6 +19,12 @@ class UsersController extends Controller
         $this->middleware('verified');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @return View
+     */
+
     public function index(): View
     {
 
@@ -27,7 +34,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display a listing of the clients..
      *
      * @param User $user
      * @return View
@@ -92,13 +99,13 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
-    public function destroy(User $user)
+    public function destroy(User $user):RedirectResponse
     {
         $user->delete();
-        return back();
+        return back()->with('success','Product Has Been Deleted');
 
     }
 

@@ -72,7 +72,7 @@ Route::put('/invoices/{invoice}','InvoicesController@update')->name('invoices.up
 
 
 
-Route::get('/stocks', 'StocksController@index')->name('stocks.index');
+Route::get('/stocks','StocksController@index')->name('stocks.index');
 
 //Routes Store
 
@@ -80,9 +80,7 @@ Route::get('/layout', function () {
     return view('store.layout.layout');
 });
 
-Route::get('/home-store', function () {
-    return view('store.home');
-});
+Route::get('/home-store','Store\HomeController@index')->name('home.store');
 
 
 

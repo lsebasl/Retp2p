@@ -50,4 +50,10 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
+    function testUserCanSeeRegisterView()
+    {
+        $this->get(route('register.create'))
+            ->assertStatus(200)
+            ->assertSee('Project');
+    }
 }

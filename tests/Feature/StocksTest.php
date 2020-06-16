@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+
 class StocksTest extends TestCase
 {
     use RefreshDatabase;
@@ -34,4 +35,21 @@ class StocksTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
+    Public Function testNoAuthenticatedUserCantAccessToProductUpdate()
+    {
+        $product=factory(Product::class)->create();
+
+        $this->get(route('products.update',$product))
+            ->assertRedirect(route('login'));
+
+    }
+    Public Function testNoAuthenticatedUserCantAccessToProductDelete()
+    {
+        $product=factory(Product::class)->create();
+
+        $this->get(route('products.destroy',$product))
+            ->assertRedirect(route('login'));
+
+    }
+
 }

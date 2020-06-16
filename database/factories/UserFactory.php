@@ -26,6 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'phone'=>$faker->numberBetween(0000000, 999999999999),
         'address'=>$faker->address,
         'email' => $faker->unique()->safeEmail,
+        'email_verified_at'=> $faker ->date(),
         'status' => $faker->randomElement(['Enable','Disable']),
         'password' => $faker->password,
     ];

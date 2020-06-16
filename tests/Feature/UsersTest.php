@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+
 class UsersTest extends TestCase
 {
     use WithFaker;
@@ -50,10 +51,6 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
-    function testUserCanSeeRegisterView()
-    {
-        $this->get(route('register.create'))
-            ->assertStatus(200)
-            ->assertSee('Project');
-    }
+
+
 }

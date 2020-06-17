@@ -10,7 +10,7 @@
                 <div class="full-width panel mdl-shadow--2dp "style="height:500px;">
                     <div class="full-width panel-tittle bg-primary text-center tittles">
 
-                        Client Information
+                        User Information
                     </div>
                     @include('partials.__alerts')
                     <table class="mdl-data-table mdl-js-data-table mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop" style="font-family:'roboto'; top: 40px; padding: 40px; font-size: large;" >

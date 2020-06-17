@@ -12,13 +12,15 @@ class UsersTest extends TestCase
     use WithFaker;
     use RefreshDatabase;
 
-    Public Function testNoAuthenticatedUserCantAccessToUsersIndex()
+    /** @test */
+    Function testNoAuthenticatedUserCantAccessToUsersIndex()
     {
         $this->get(route('users.index'))
              ->assertRedirect(route('login'));
 
     }
-    Public Function testNoAuthenticatedUserCantAccessToUsersShow()
+    /** @test */
+    Function testNoAuthenticatedUserCantAccessToUsersShow()
     {
         $user=factory(User::class)->create();
 
@@ -26,7 +28,8 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
-    Public Function testNoAuthenticatedUserCantAccessToUsersEdit()
+    /** @test */
+    Function testNoAuthenticatedUserCantAccessToUsersEdit()
     {
         $user=factory(User::class)->create();
 
@@ -34,7 +37,8 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
-    Public Function testNoAuthenticatedUserCantAccessToUsersUpdate()
+    /** @test */
+    Function testNoAuthenticatedUserCantAccessToUsersUpdate()
     {
         $user=factory(User::class)->create();
 
@@ -42,8 +46,8 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
-
-    Public Function testNoAuthenticatedUserCantAccessToUsersDelete()
+    /** @test */
+    Function testNoAuthenticatedUserCantAccessToUsersDelete()
     {
         $user=factory(User::class)->create();
 

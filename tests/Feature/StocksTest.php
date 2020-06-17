@@ -2,6 +2,7 @@
 namespace Tests\Feature;
 
 use App\Product;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -45,11 +46,24 @@ class StocksTest extends TestCase
     }
     Public Function testNoAuthenticatedUserCantAccessToProductDelete()
     {
-        $product=factory(Product::class)->create();
+        $product = factory(Product::class)->create();
 
-        $this->get(route('products.destroy',$product))
+        $this->get(route('products.destroy', $product))
             ->assertRedirect(route('login'));
-
     }
+
+        /** @test */
+
+        function testItShowADefaultMessageIfTheStockListIsEmpty()
+
+        {
+            $user = factory(User::class)->create();
+
+            $this->actingAs($user)->get(route('stocks.index'));
+
+            $this->get(route('stocks.index'))
+                ->assertStatus(200)
+                ->assertSee('Stock Empty');
+        }
 
 }

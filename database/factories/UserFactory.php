@@ -27,7 +27,7 @@ $factory->define(User::class, function (Faker $faker) {
         'address'=>$faker->address,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at'=> $faker ->date(),
-        'status' => $faker->randomElement(['Enable','Disable']),
+        'status' => User::ENABLE_STATUS,
         'password' => $faker->password,
     ];
 });

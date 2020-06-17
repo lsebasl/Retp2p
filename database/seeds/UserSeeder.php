@@ -9,7 +9,7 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run():void
     {
         factory(User::class,30)->create();
     }

@@ -1,17 +1,12 @@
 <?php
 namespace Tests\Feature;
 
-use App\Http\Controllers\UsersController;
-use App\Notifications\VerifyEmail;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-
 
 class AdminTest extends TestCase
 {
-    use WithFaker;
     use RefreshDatabase;
 
     /** @test*/

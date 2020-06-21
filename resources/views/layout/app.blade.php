@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-    <link rel="stylesheet" href="{{ asset('/css/admin/all.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/admin/all.css') }}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery-1.11.2.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('js/material.min.js') }}" ></script>
-    <script src="{{ asset('js/sweetalert2.min.js') }}" ></script>
-    <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}" ></script>
-    <script src="{{ asset('js/main.js') }}" ></script>
+    <script>window.jQuery || document.write('<script src="{{ mix('js/admin/all.js') }}"><\/script>')</script>
+    <script src="{{ mix('js/admin/all.js') }}" ></script>
+
 </head>
 <body>
 <!-- Notifications area -->
@@ -112,14 +110,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <!-- <logout tooltip fail></i> -->
-                    <li class="btn-exit" id="btn-exit" >
-                    <i class="zmdi zmdi-power" ></i>
-                        <div class="mdl-tooltip" for="btn-exit">LogOut </div>
 
-                    </li>
-
-                    <!-- <logout tooltip fail></i> -->
                 @endguest
 
                 <li class="text-condensedLight noLink" ><small> {{ ucfirst(Auth::user()->name) }}</small></li>

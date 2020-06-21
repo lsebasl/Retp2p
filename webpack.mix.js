@@ -12,12 +12,31 @@ const mix = require('laravel-mix');
  */
 
 mix.scripts([
-        'public/js/admin/jquery.mCustomScrollbar.concat.min.js',
-        'public/js/admin/jquery-1.11.2.min.js',
-        'public/js/admin/main.js',
-        'public/js/admin/material.min.js',
-        'public/js/admin/sweetalert2.min.js',
+        'resources/js/admin/jquery.mCustomScrollbar.concat.min.js',
+        'resources/js/admin/jquery-1.11.2.min.js',
+        'resources/js/admin/main.js',
+        'resources/js/admin/material.min.js',
+        'resources/js/admin/sweetalert2.min.js',
 ], 'public/js/admin/all.js');
+
+mix.scripts([
+    'resources/js/store/jquery.min.js',
+    'resources/js/store/jquery.countdown.js',
+    'resources/js/store/jquery.flexisel.js',
+    'resources/js/store/jquery.jquery.flexslider.js',
+    'resources/js/store/jquery.jquery.magnific-popup.js',
+    'resources/js/store/jquery.wmuSlider.js',
+    'resources/js/store/minicart.js',
+    'resources/js/store/easyResponsiveTabs.js',
+    'resources/js/store/imagezoom.js',
+    'resources/js/store/script.js',
+    'resources/js/store/bootstrap-3.1.1.min.js',
+
+], 'public/js/store/all.js');
+
+mix.scripts([
+    'resources/js/store/minicart.js',
+], 'public/js/store/minicart.js');
 
 
 mix.styles(['public/css/admin/normalize.css',
@@ -36,3 +55,5 @@ mix.styles(['public/css/store/bootstrap.css',
     'public/css/store/popuo-box.css',
     'public/css/store/style.css',
 ],'public/css/store/all.css');
+
+

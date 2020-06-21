@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Project Store a Ecommerce Online Shopping Category </title>
+    <title>Project Store a Ecommerce Online Shopping </title>
     <!-- Custom Theme files -->
     <link href="{{ asset('css/store/all.css') }}" rel="stylesheet" type="text/css" media="all" />
 
     <!-- //font-awesome icons -->
     <!-- js -->
-    <script src="{{ asset('store/js/jquery.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('store/css/jquery.countdown.css')}}" /> <!-- countdown -->
+    <script src="{{ mix('js/store/all.js') }}" ></script>
     <!-- //js -->
     <!-- web fonts -->
     <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
@@ -26,9 +25,6 @@
     <!-- //end-smooth-scrolling -->
 </head>
 <body>
-<!-- for bootstrap working -->
-<script type="text/javascript" src="{{ asset('store/js/bootstrap-3.1.1.min.js') }}"></script>
-<!-- //for bootstrap working -->
 <!-- header modal -->
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
@@ -52,7 +48,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <script src="{{ asset('store/js/easyResponsiveTabs.js')}}" type="text/javascript"></script>
+                        <script src="src={{ mix('js/store/all.js') }}" type="text/javascript"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
                                 $('#horizontalTab').easyResponsiveTabs({
@@ -74,19 +70,45 @@
         </div>
     </div>
 </div>
-<script>
-    $('#myModal88').modal('show');
-</script>
-<!-- header modal -->
+
 <!-- header -->
-<div class="header" id="home1">
-    <div class="container">
-        <div class="w3l_login">
-            <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+@guest()
+    <a href="{{ route('login') }}">Login</a>
+    <div class="top-right links" style="">
+        <div class="header" id="home1">
+            <div class="container">
+                <div class="w3l_login">
+                    <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                </div>
+                <div class="w3l_logo">
+                    <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
+                </div>
+                <a href="{{ route('register') }}">Register</a>
+            </div>
+            @else
+            <div class="container" id="home1">
+                <br>
+                <h2><small>Hola {{ ucfirst(Auth::user()->name) }}</small></h2>
+                <h5>your account is {{ ucfirst(Auth::user()->status) }}</small></h5>
+                <a class="header" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                </br>
+            </div>
+                <div class="container">
+                    <div class="w3l_logo">
+                        <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
+                    </div>
+            </div>
         </div>
-        <div class="w3l_logo">
-            <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
-        </div>
+    </div>
+@endguest
+
         {{--<div class="search">
             <input class="search_box" type="checkbox" id="search_box">
             <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
@@ -104,8 +126,7 @@
                 <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
             </form>
         </div>--}}
-    </div>
-</div>
+
 <!-- //header -->
 <!-- navigation -->
 <div class="navigation">
@@ -165,6 +186,15 @@
                         <ul class="dropdown-menu">
                             <li><a href="icons.html">View Profile</a></li>
                             <li><a href="codes.html">Update Profile</a></li>
+                            <li><a class="header" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form></li>
+
                         </ul>
                     </li>
                 </ul>
@@ -229,7 +259,7 @@
 </div>
 <!-- //footer -->
 <!-- cart-js -->
-<script src="{{ asset('store/js/minicart.js')}}"></script>
+<script src="{{ mix('js/store/minicart.js') }}" ></script>
 <script>
     w3ls.render();
 

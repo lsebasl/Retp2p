@@ -235,7 +235,7 @@
                         <h4>We Offer <span>Best Products</span></h4>
                     </div>
                 </div>
-                <script src="{{ asset('js/jquery.wmuSlider.js') }}"></script>
+                <script src="{{ mix('js/store/all.js') }}" ></script>
             </div>
             <div class="col-md-5 w3agile_special_deals_grid_right">
                 <img src="{{ asset('store/images/20.jpg')}}" alt=" " class="img-responsive" />
@@ -381,7 +381,7 @@
 
             });
         </script>
-        <script type="text/javascript" src="{{ asset('store/js/jquery.flexisel.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('js/store/all.js') }}"></script>
     </div>
 </div>
 <!-- //top-brands -->

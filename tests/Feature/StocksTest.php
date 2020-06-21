@@ -4,14 +4,13 @@ namespace Tests\Feature;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+
 use Tests\TestCase;
 
 
 class StocksTest extends TestCase
 {
     use RefreshDatabase;
-    use WithFaker;
 
     Public Function testNoAuthenticatedUserCantAccessToProductIndex()
     {

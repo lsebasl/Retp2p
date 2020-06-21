@@ -4,13 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ asset('/css/admin/all.css') }}">
-        <script src="//ajax.google apis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="js/material.min.js" ></script>
-        <script src="js/sweetalert2.min.js" ></script>
-        <script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
-        <script src="js/main.js" ></script>
+        <link rel="stylesheet" href="{{ mix('/css/admin/all.css') }}">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ mix('js/admin/all.js') }}"><\/script>')</script>
+        <script src="{{ mix('js/admin/all.js') }}" ></script>
 
         <title>Project Store</title>
 

@@ -486,7 +486,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 /*-- //navigation --*/
 /*-- banner --*/
 .banner{
-	background:url(../images/b1.jpg) no-repeat center 0px;
+	background:url(../../store/images/b1.jpg) no-repeat center 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -508,7 +508,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 	text-align: left;
 }
 .banner.banner1{
-	background:url(../images/bg1.jpg) no-repeat center;
+	background:url(../../store/images/bg1.jpg) no-repeat center;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -516,7 +516,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 	-ms-background-size:cover;
 }
 .banner.banner2{
-	background:url(../images/bg2.jpg) no-repeat center;
+	background:url(../../store/images/bg2.jpg) no-repeat center;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -524,7 +524,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 	-ms-background-size:cover;
 }
 .banner.banner3{
-	background:url(../images/bg3.jpg) no-repeat center;
+	background:url(../../store/images/bg3.jpg) no-repeat center;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -572,7 +572,7 @@ li.w3pages .dropdown-menu > li > a:hover{
     border: none;
 }
 .video-img {
-    background: url(../images/2.jpg)no-repeat right center;
+    background: url(../../store/images/2.jpg)no-repeat right center;
     -webkit-background-size: cover;
     background-size: cover;
     -moz-background-size: cover;
@@ -844,7 +844,7 @@ li.w3pages .dropdown-menu > li > a:hover{
 
 .starRating:not(old) > label {
     float: right;
-    background: url(../images/star.png);
+    background: url(../../store/images/star.png);
     background-size: contain;
     margin-right: 2px;
 }
@@ -854,7 +854,7 @@ li.w3pages .dropdown-menu > li > a:hover{
   display         : block;
   width           : 18px;
   height          : 18px;
-  background      : url(../images/star-.png);
+  background      : url(../../store/images/star-.png);
   background-size : contain;
   opacity         : 0;
   transition      : opacity 0.2s linear;
@@ -1109,7 +1109,7 @@ ul.wmuSliderPagination {
 /*-- //new-products --*/
 /*-- banner-bottom1 --*/
 .agileinfo_banner_bottom1_grid_left{
-	background:url(../images/44.jpg) no-repeat 0px 0px;
+	background:url(../../store/images/44.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -1146,15 +1146,15 @@ ul.wmuSliderPagination {
     font-size: 1em;
     letter-spacing: 2px;
     color: #ff5063;
-    background: url(../images/img-sp.png) no-repeat 112px -4px;
+    background: url(../../store/images/img-sp.png) no-repeat 112px -4px;
     padding: 0 45px 0 0;
 }
 .agileinfo_banner_bottom1_grid_left a:hover,.team-bottom a:hover{
 	color:#212121;
-	background:url(../images/img-sp.png) no-repeat 112px -38px;
+	background:url(../../store/images/img-sp.png) no-repeat 112px -38px;
 }
 .agileinfo_banner_bottom1_grid_right{
-	background:url(../images/45.jpg) no-repeat 0px 0px;
+	background:url(../../store/images/45.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -1272,7 +1272,7 @@ ul.wmuSliderPagination {
 	outline: none;
     padding: 9px 0;
     width: 15%;
-    background: url(../images/img-sp.png) no-repeat 26px -65px #ff5063;
+    background: url(../../store/images/img-sp.png) no-repeat 26px -65px #ff5063;
     border: none;
 	-webkit-transition:.5s all;
 	-moz-transition:.5s all;
@@ -1334,7 +1334,7 @@ ul.wmuSliderPagination {
 }
 .w3_footer_grid ul.info li a {
     padding-left:2.2em;
-    background: url(../images/img-sp.png) no-repeat -6px -98px;
+    background: url(../../store/images/img-sp.png) no-repeat -6px -98px;
 }
 .w3_footer_grid h4{
 	margin:2em 0 1em;
@@ -1347,7 +1347,7 @@ ul.wmuSliderPagination {
 	margin: 0 !important;
 }
 .agileits_social_button ul li a{
-	background: url(../images/img-sp.png) no-repeat 1px -130px #414141;
+	background: url(../../store/images/img-sp.png) no-repeat 1px -130px #414141;
     display: block;
     width: 35px;
     height: 35px;
@@ -1575,7 +1575,7 @@ h3.other-nw {
 }
 .entypo-facebook:before {
     content: " ";
-    background: url(../images/img-sp.png) no-repeat 7px -125px;
+    background: url(../../store/images/img-sp.png) no-repeat 7px -125px;
     display: block;
     width: 3em;
     height: 3em;
@@ -1587,7 +1587,7 @@ h3.other-nw {
 }
 .entypo-twitter:before {
     content: " ";
-    background:url(../images/img-sp.png) no-repeat -35px -125px;
+    background:url(../../store/images/img-sp.png) no-repeat -35px -125px;
     display: block;
     width: 3em;
     height: 3em;
@@ -1599,7 +1599,7 @@ h3.other-nw {
 }
 .entypo-dribbble:before {
     content: " ";
-    background:url(../images/img-sp.png) no-repeat -74px -125px;
+    background:url(../../store/images/img-sp.png) no-repeat -74px -125px;
     display: block;
     width: 3em;
     height: 3em;
@@ -1611,7 +1611,7 @@ h3.other-nw {
 }
 .entypo-behance:before {
     content: " ";
-    background:url(../images/img-sp.png) no-repeat -117px -125px;
+    background:url(../../store/images/img-sp.png) no-repeat -117px -125px;
     display: block;
     width: 3em;
     height: 3em;
@@ -1729,7 +1729,7 @@ h3.other-nw {
 	list-style-type: none;
     margin-bottom: 1em;
     padding-left: 1.5em;
-    background: url(../images/img-sp.png) no-repeat -13px -172px;
+    background: url(../../store/images/img-sp.png) no-repeat -13px -172px;
 }
 .panel-body ul li a{
     font-size: 14px;
@@ -1962,12 +1962,12 @@ select.select_item {
 .nbs-flexisel-nav-left {
 	left:-5%;
 	top:38% !important;
-	background:url(../images/left-arrow.png) no-repeat 0px 0px;
+	background:url(../../store/images/left-arrow.png) no-repeat 0px 0px;
 }
 .nbs-flexisel-nav-right {
 	right:-5%;
 	top:38% !important;
-	background:url(../images/right-arrow.png) no-repeat 0px 0px;
+	background:url(../../store/images/right-arrow.png) no-repeat 0px 0px;
 }
 /*-- //flexisel --*/
 .w3l_related_products_grid{
@@ -2779,7 +2779,7 @@ h2.typoh2{
 }
 .checkbox input + i:after {
     content: '';
-    background: url("../images/check.png") no-repeat 1px 2px;
+    background: url("../../store/images/check.png") no-repeat 1px 2px;
     top: 0px;
     left: 2px;
     width: 16px;
@@ -2992,7 +2992,7 @@ td.invert-image a img {
 	position:relative;
 }
 .close1,.close2,.close3 {
-    background: url('../images/close.png') no-repeat 0px 0px;
+    background: url('../../store/images/close.png') no-repeat 0px 0px;
     cursor: pointer;
     width: 32px;
     height: 32px;
@@ -3782,22 +3782,22 @@ td.invert-image a img {
 		width: 2em;
 	}
 	.entypo-facebook:before {
-		background: url(../images/img-sp.png) no-repeat -1px -131px;
+		background: url(../../store/images/img-sp.png) no-repeat -1px -131px;
 		width: 2em;
 		height: 2em;
 	}
 	.entypo-dribbble:before {
-		background: url(../images/img-sp.png) no-repeat -82px -131px;
+		background: url(../../store/images/img-sp.png) no-repeat -82px -131px;
 		width: 2em;
 		height: 2em;
 	}
 	.entypo-twitter:before {
-		background: url(../images/img-sp.png) no-repeat -42px -131px;
+		background: url(../../store/images/img-sp.png) no-repeat -42px -131px;
 		width: 2em;
 		height: 2em;
 	}
 	.entypo-behance:before {
-		background: url(../images/img-sp.png) no-repeat -124px -131px;
+		background: url(../../store/images/img-sp.png) no-repeat -124px -131px;
 		width: 2em;
 		height: 2em;
 	}
@@ -4855,10 +4855,10 @@ td.invert-image a img {
 	}
 	.agileinfo_banner_bottom1_grid_left a, .team-bottom a {
 		font-size: 14px;
-		background: url(../images/img-sp.png) no-repeat 93px -5px;
+		background: url(../../store/images/img-sp.png) no-repeat 93px -5px;
 	}
 	.agileinfo_banner_bottom1_grid_left a:hover, .team-bottom a:hover {
-		background:url(../images/img-sp.png) no-repeat 93px -39px;
+		background:url(../../store/images/img-sp.png) no-repeat 93px -39px;
 	}
 	.top-brands img {
 		width: 60%;

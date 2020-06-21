@@ -4,27 +4,27 @@
 ======================================================*/
 @font-face{
     font-family: "RobotoCondensedLight";
-    src: url("../fonts/robotocondensed-light.ttf"),
-    url("../fonts/robotocondensed-light.eot"),
-    url("../fonts/robotocondensed-light.woff"),
-    url("../fonts/robotocondensed-light.woff2"),
-    url("../fonts/robotocondensed-light.svg");
+    src: url("../../fonts/robotocondensed-light.ttf"),
+    url("../../fonts/robotocondensed-light.eot"),
+    url("../../fonts/robotocondensed-light.woff"),
+    url("../../fonts/robotocondensed-light.woff2"),
+    url("../../fonts/robotocondensed-light.svg");
 }
 @font-face{
     font-family: "RobotoRegular";
-    src: url("../fonts/roboto-regular.ttf"),
-    url("../fonts/roboto-regular.eot"),
-    url("../fonts/roboto-regular.woff"),
-    url("../fonts/roboto-regular.woff2"),
-    url("../fonts/roboto-regular.svg");
+    src: url("../../fonts/roboto-regular.ttf"),
+    url("../../fonts/roboto-regular.eot"),
+    url("../../fonts/roboto-regular.woff"),
+    url("../../fonts/roboto-regular.woff2"),
+    url("../../fonts/roboto-regular.svg");
 }
 @font-face{
     font-family: "OswaldLight";
-    src: url("../fonts/oswald-light.ttf"),
-    url("../fonts/oswald-light.eot"),
-    url("../fonts/oswald-light.woff"),
-    url("../fonts/oswald-light.woff2"),
-    url("../fonts/oswald-light.svg");
+    src: url("../../fonts/oswald-light.ttf"),
+    url("../../fonts/oswald-light.eot"),
+    url("../../fonts/oswald-light.woff"),
+    url("../../fonts/oswald-light.woff2"),
+    url("../../fonts/oswald-light.svg");
 }
 /*=====================================================
 					Estilos generales
@@ -71,12 +71,12 @@ html, body{
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-color: #fff;
-	background-image: url(../assets/img/fontLogin.jpg);
+	background-image: url(../../assets/img/fontLogin.jpg);
 }
 .mdl-list__item-avatar{
-	line-height: 40px;
-	text-align: center;
-	font-size: 30px;
+	line-height: 40px !important;
+	text-align: center !important;
+	font-size: 30px !important;
 }
 .table-responsive{
 	width: 100%;
@@ -540,11 +540,11 @@ html, body{
 	z-index: 2;
 }
 .tile-icon{
-	bottom: 9px;
-	right: 4px;
-	font-size: 90px;
-	line-height: 67px;
-	z-index: 1;
+	bottom: 9px!important;
+	right: 4px!important;
+	font-size: 90px !important;
+	line-height: 67px!important;
+	z-index: 1 !important;
 }
 /*=============Linea de tiempo (TimeLine)*/
 .timeline-c{

@@ -11,12 +11,12 @@
     <span class="mdl-textfield__error">Invalid last name</span>
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <select class="mdl-textfield__input" name="id_type" id="id_type" required>
-            <option value="" disabled="" selected></option>
-        <option value="Card ID">{{__('Card ID')}}</option>
-        <option value="Foreign ID">{{__('Foreign ID')}}</option>
-        <option value="Passport">{{__('Passport')}}</option>
-        <option value="NIT">{{__('NIT')}}</option>
+        <select class="mdl-textfield__input" name="id_type" id="id_type" required>
+            <option value="" ></option>
+        <option value="Foreign ID" {{ old('id_type',$user->id_type)=='Foreign ID' ? 'selected' : '' }}>{{__('Foreign ID')}}</option>
+        <option value="Card ID" {{ old('id_type',$user->id_type)=='Card ID' ? 'selected' : '' }}>{{__('Card ID')}}</option>
+        <option value="Passport" {{ old('id_type',$user->id_type)=='Passport' ? 'selected' : '' }}>{{__('Passport')}}</option>
+        <option value="NIT" {{ old('id_type',$user->id_type)=='NIT' ? 'selected' : '' }}>{{__('NIT')}}
     </select>
     <label class="mdl-textfield__label" for="id_type">{{__('Select Id Type')}}</label>
     <span class="mdl-textfield__error">Invalid Id Type</span>
@@ -47,9 +47,9 @@
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <select class="mdl-textfield__input" name="status" id="status" required>
-        <option value="" disabled="" selected></option>
-        <option value="Enable">{{__('Enable')}}</option>
-        <option value="Disable">{{__('Disable')}}</option>
+        <option value=""></option>
+        <option value="Enable" {{ old('status',$user->status)=='Enable' ? 'selected' : '' }}>{{__('Enable')}}</option>
+        <option value="Disable" {{ old('status',$user->status)=='Disable' ? 'selected' : '' }}>{{__('Disable')}}</option>
     </select>
     <label class="mdl-textfield__label" for="status">{{__('User Status')}}</label>
     <span class="mdl-textfield__error">Invalid status</span>

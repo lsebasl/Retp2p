@@ -68,14 +68,14 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required|min:3|max:30',
-            'last_name' => 'required|min:3|max:30',
+            'name' => 'required|min:3|max:150',
+            'last_name' => 'required|min:3|max:150',
             'id_type' => 'required|in:Foreign ID,Card ID,Passport,NIT',
             'identification' => [
                 'required', Rule::unique('users')->ignore($user->id), 'min:3', 'max:20'
             ],
             'phone' => 'required|min:6|max:20',
-            'address' => 'required|max:40',
+            'address' => 'required|max:150',
             'email' => ['required','max:150','email',
                 Rule::unique('users', 'email')->ignore($user->id)],
         ]);

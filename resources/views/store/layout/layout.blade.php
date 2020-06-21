@@ -3,13 +3,8 @@
 <head>
     <title>Project Store a Ecommerce Online Shopping Category </title>
     <!-- Custom Theme files -->
-    <link href="{{ asset('store/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('store/css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('store/css/fasthover.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('store/css/popuo-box.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
-    <link href="{{ asset('store/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/store/all.css') }}" rel="stylesheet" type="text/css" media="all" />
+
     <!-- //font-awesome icons -->
     <!-- js -->
     <script src="{{ asset('store/js/jquery.min.js') }}"></script>

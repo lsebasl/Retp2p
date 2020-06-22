@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\User;
@@ -59,35 +60,16 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     *
+     * @param UserUpdateRequest $request
      * @param User $user
-     * @return void
+     * @return RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|min:3|max:150',
-            'last_name' => 'required|min:3|max:150',
-            'id_type' => 'required|in:Foreign ID,Card ID,Passport,NIT',
-            'identification' => [
-                'required', Rule::unique('users')->ignore($user->id), 'min:3', 'max:20'
-            ],
-            'phone' => 'required|min:6|max:20',
-            'address' => 'required|max:150',
-            'email' => ['required','max:150','email',
-                Rule::unique('users', 'email')->ignore($user->id)],
-        ]);
 
-        $user->update([
-            'name' => $request->get('name'),
-            'last_name' => $request->get('last_name'),
-            'id_type' => $request->get('id_type'),
-            'identification' => $request->get('identification'),
-            'phone' => $request->get('phone'),
-            'email' => $request->get('email'),
-            'address' => $request->get('address'),
-            'status' => $request->get('status')
-        ]);
+        $user->update($request->validated());
+
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }

@@ -1,4 +1,3 @@
-
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
         <h5 class="text-condensedLight">Basic Information</h5>

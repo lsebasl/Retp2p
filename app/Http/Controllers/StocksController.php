@@ -10,7 +10,7 @@ class StocksController extends Controller
 {
     public function __construct()
     {
-
+        //
     }
 
     /**

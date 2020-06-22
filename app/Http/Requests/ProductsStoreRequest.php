@@ -21,7 +21,7 @@ class ProductsStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
             'barcode' => 'required|min:3|max:30|unique:products,barcode',

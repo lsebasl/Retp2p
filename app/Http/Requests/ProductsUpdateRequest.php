@@ -21,10 +21,10 @@ class ProductsUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @param Product $product
+     *
      * @return array
      */
-    public function rules(Product $product)
+    public function rules():array
     {
         return [
             'barcode' => ['required',],

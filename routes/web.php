@@ -20,39 +20,39 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 //project routes
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/users', 'UsersController@index')->name('users.index');
-    Route::get('/users/create', 'UsersController@create')->name('users.create');
-    Route::post('/users/store', 'UsersController@store')->name('users.store');
-    Route::put('/users/{user}', 'UsersController@update')->name('users.update');
-    Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
-    Route::get('/users/{user}/show', 'UsersController@show')->name('users.show');
-    Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::get('/users', 'UserController@index')->name('users.index');
+    Route::get('/users/create', 'UserController@create')->name('users.create');
+    Route::post('/users/store', 'UserController@store')->name('users.store');
+    Route::put('/users/{user}', 'UserController@update')->name('users.update');
+    Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+    Route::get('/users/{user}/show', 'UserController@show')->name('users.show');
+    Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 
-    Route::get('/products', 'ProductsController@index')->name('products.index');
-    Route::get('/products/create', 'ProductsController@create')->name('products.create');
-    Route::post('/products/store', 'ProductsController@store')->name('products.store');
-    Route::put('/products/{product}', 'ProductsController@update')->name('products.update');
-    Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
-    Route::get('/products/{product}/edit', 'ProductsController@edit')->name('products.edit');
-    Route::delete('/products/{product}', 'ProductsController@destroy')->name('products.destroy');
+    Route::get('/products', 'ProductController@index')->name('products.index');
+    Route::get('/products/create', 'ProductController@create')->name('products.create');
+    Route::post('/products/store', 'ProductController@store')->name('products.store');
+    Route::put('/products/{product}', 'ProductController@update')->name('products.update');
+    Route::get('/products/{product}', 'ProductController@show')->name('products.show');
+    Route::get('/products/{product}/edit', 'ProductController@edit')->name('products.edit');
+    Route::delete('/products/{product}', 'ProductController@destroy')->name('products.destroy');
 
-    Route::get('/clients', 'ClientsController@index')->name('clients.index');
-    Route::get('/clients/create', 'ClientsController@create')->name('clients.create');
-    Route::post('/clients/store', 'ClientsController@store')->name('clients.store');
-    Route::get('/clients/{client}/show', 'ClientsController@show')->name('clients.show');
-    Route::get('/clients/{client}/edit', 'ClientsController@edit')->name('clients.edit');
-    Route::delete('/clients/{client}', 'ClientsController@destroy')->name('clients.destroy');
-    Route::put('/clients/{client}', 'ClientsController@update')->name('clients.update');
+    Route::get('/clients', 'ClientController@index')->name('clients.index');
+    Route::get('/clients/create', 'ClientController@create')->name('clients.create');
+    Route::post('/clients/store', 'ClientController@store')->name('clients.store');
+    Route::get('/clients/{client}/show', 'ClientController@show')->name('clients.show');
+    Route::get('/clients/{client}/edit', 'ClientController@edit')->name('clients.edit');
+    Route::delete('/clients/{client}', 'ClientController@destroy')->name('clients.destroy');
+    Route::put('/clients/{client}', 'ClientController@update')->name('clients.update');
 
-    Route::get('/invoices', 'InvoicesController@index')->name('invoices.index');
-    Route::get('/invoices/create', 'InvoicesController@create')->name('invoices.create');
-    Route::post('/invoices/store', 'InvoicesController@store')->name('invoices.store');
-    Route::get('/invoices/{invoice}', 'InvoicesController@show')->name('invoices.show');
-    Route::get('/invoices/{invoice}/edit', 'InvoicesController@edit')->name('invoices.edit');
-    Route::delete('/invoices/{invoice}', 'InvoicesController@destroy')->name('invoices.destroy');
-    Route::put('/invoices/{invoice}', 'InvoicesController@update')->name('invoices.update');
+    Route::get('/invoices', 'InvoiceController@index')->name('invoices.index');
+    Route::get('/invoices/create', 'InvoiceController@create')->name('invoices.create');
+    Route::post('/invoices/store', 'InvoiceController@store')->name('invoices.store');
+    Route::get('/invoices/{invoice}', 'InvoiceController@show')->name('invoices.show');
+    Route::get('/invoices/{invoice}/edit', 'InvoiceController@edit')->name('invoices.edit');
+    Route::delete('/invoices/{invoice}', 'InvoiceController@destroy')->name('invoices.destroy');
+    Route::put('/invoices/{invoice}', 'InvoiceController@update')->name('invoices.update');
 
-    Route::get('/stocks', 'StocksController@index')->name('stocks.index');
+    Route::get('/stocks', 'StockController@index')->name('stocks.index');
 });
 
 //Routes Store

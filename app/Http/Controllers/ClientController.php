@@ -6,7 +6,7 @@ use App\Client;
 use Illuminate\Http\Request;
 
 
-class ClientsController extends Controller
+class ClientController extends Controller
 {
 
 

@@ -6,7 +6,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class StocksController extends Controller
+class StockController extends Controller
 {
     public function __construct()
     {

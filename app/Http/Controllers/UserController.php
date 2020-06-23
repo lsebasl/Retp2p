@@ -8,10 +8,10 @@ use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
-     * UsersController constructor.
+     * UserController constructor.
      */
     public function __construct()
     {
@@ -85,7 +85,7 @@ class UsersController extends Controller
     public function destroy(User $user):RedirectResponse
     {
         $user->delete();
-        return back()->with('success','Product Has Been Deleted');
+        return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
 
     }
 

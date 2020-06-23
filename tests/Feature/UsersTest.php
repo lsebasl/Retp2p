@@ -53,6 +53,45 @@ class UsersTest extends TestCase
              ->assertRedirect(route('login'));
 
     }
+    /** @test */
+    Function testNoAuthenticatedUserCanSeeLogin()
+    {
+
+        $this->get(route('login'))
+            ->assertSee('Sign in with your Account')
+            ->assertSee('Password');
+
+    }
+    /** @test */
+    Function testNoAuthenticatedUserCanSeeWelcome()
+    {
+
+        $this->get('/')
+            ->assertSee('Project Store');
+
+    }
+    /** @test */
+    public function testNoAuthenticatedUserCantUpdateAClient()
+    {
+        $user = factory(User::class)->create();
+
+        $this->put(route('users.update', $user), [
+
+            'name' => 'Test Name',
+            'last_name' => 'Test Last Name',
+            'id_type' => 'NIT',
+            'identification' => 'Test User last Name',
+            'phone' => '3172798026',
+            'address' => 'Test User address',
+            'email' => 'test@gmail.com',
+
+        ])
+            ->assertRedirect(route('login'));
+
+        $this->assertDatabaseMissing('users',['id'=>$user->name]);
+
+    }
+
 
 
 }

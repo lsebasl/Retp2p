@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 
 {
     public function __construct()

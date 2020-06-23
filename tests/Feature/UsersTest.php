@@ -92,6 +92,16 @@ class UsersTest extends TestCase
 
     }
 
+    function testNoAuthenticatedUserCantsDeleteAUser()
+    {
+        $user = factory(User::class)->create();
+
+        $this->delete(route('users.destroy',$user))
+            ->assertRedirect(route('login'));
+
+        $this->assertDatabasehas('users',['id'=>$user->id]);
+    }
+
 
 
 }

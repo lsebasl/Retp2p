@@ -56,4 +56,5 @@ mix.styles(['public/css/store/bootstrap.css',
     'public/css/store/style.css',
 ],'public/css/store/all.css');
 
+mix.browserSync('http://localhost');
 

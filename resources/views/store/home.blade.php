@@ -8,7 +8,6 @@
         <h3>Project Store, <span>Special Offers</span></h3>
     </div>
 </div>
-<!-- banner H -->
 <!-- banner-bottom - style.ccs 566 -->
 <div class="banner-bottom">
     <div class="container">

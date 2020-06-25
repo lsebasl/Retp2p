@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -26,8 +27,7 @@ class UserController extends Controller
 
     public function index(): View
     {
-
-        $user = User::all();
+        $user = User::paginate();
 
         return view('users.index', ['users' => $user]);
     }

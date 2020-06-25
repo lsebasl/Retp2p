@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
+DB::listen(function ($request){
+  //echo "<pre>{$request->sql}</pre>";
+});
 
 Route::get('/', function () {
     return view('welcome');

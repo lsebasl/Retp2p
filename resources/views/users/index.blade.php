@@ -45,9 +45,12 @@
                                     <li>{{__('Without Users')}}</li>
                                 @endforelse
                             </div>
+                            <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
+                            <div class="pagination"><div>{{$users->links()}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 @endsection

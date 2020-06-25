@@ -7,7 +7,7 @@ test:
   adapter: mysql
   database: laravelTesting
   username: travis
-  
+
 
 
 php:

@@ -1,6 +1,14 @@
 language: php
 services:
   - mysql
+  - mongodb
+
+test:
+  adapter: mysql
+  database: laravelTesting
+  username: root
+
+
 php:
     7.2
     7.2.15

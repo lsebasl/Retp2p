@@ -1,13 +1,9 @@
 language: php
 php:
-  '7.2'
-  '7.2.15'
+    7.2
+    7.2.15
 
 install:
-    composer install
+  composer install
 
 script: vendor/phpunit/phpunit/phpunit
-
-
-
-

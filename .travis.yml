@@ -1,9 +1,12 @@
 language: php
 php:
-  -7.2.19
-  -5.6
-  -7.0
-  -5.5.9
+  '5.6'
+  '5.5.9'
+  '7.0'
+  '7.2.19'
+
+
+
 
 install:
     composer install

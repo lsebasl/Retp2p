@@ -6,7 +6,7 @@ services:
 test:
   adapter: mysql
   database: laravelTesting
-  username: root
+  username: travis
 
 
 php:

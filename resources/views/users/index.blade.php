@@ -18,14 +18,16 @@
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
                     <div class="full-width panel mdl-shadow--2dp">
-
                         <div class="full-width panel-tittle bg-success text-center tittles">
                             {{__('List Users')}}
                         </div>
-                        <div class="full-width panel-content">
+                        <div class="mdl-textfield mdl-js-textfield input-placa">{{$users->links()}}
+                            <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
+                        </div>
                             {{--add search form--}}
                             @include('partials.__alerts')
                             <div class="mdl-list">
+                                <li class="full-width divider-menu-h"></li>
                                 @forelse($users as $user)
                                     <div class="mdl-list__item mdl-list__item--two-line">
                                             <span class="mdl-list__item-primary-content">
@@ -45,8 +47,6 @@
                                     <li>{{__('Without Users')}}</li>
                                 @endforelse
                             </div>
-                            <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
-                            <div class="pagination"><div>{{$users->links()}}</div>
                         </div>
                     </div>
                 </div>

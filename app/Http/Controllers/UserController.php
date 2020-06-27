@@ -27,7 +27,18 @@ class UserController extends Controller
 
     public function index(): View
     {
-        $user = User::orderBy('created_at','DESC')->paginate();
+        $key = "users.page." . request('page',1);//users.page.1 default
+
+        if(Cache::has($key))
+        {
+            $user = Cache::get($key);
+        }
+        else
+        {
+            $user = User::orderBy('created_at', 'DESC')->paginate();
+
+            Cache::put($key, $user, 5);
+        }
 
         return view('users.index', ['users' => $user]);
     }
@@ -36,12 +47,15 @@ class UserController extends Controller
      * Display a listing of the clients..
      *
      * @param User $user
+     * @param $id
      * @return View
      */
 
     public function show(User $user):View
     {
+
         return view('users.show', ['user'=> $user]);
+
     }
 
 
@@ -67,9 +81,9 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
-
         $user->update($request->validated());
 
+       Cache::flush();
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
@@ -85,6 +99,8 @@ class UserController extends Controller
     public function destroy(User $user):RedirectResponse
     {
         $user->delete();
+
+        Cache::flush();
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
 
     }

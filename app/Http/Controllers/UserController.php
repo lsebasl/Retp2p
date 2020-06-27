@@ -29,16 +29,10 @@ class UserController extends Controller
     {
         $key = "users.page." . request('page',1);//users.page.1 default
 
-        if(Cache::has($key))
-        {
-            $user = Cache::get($key);
-        }
-        else
-        {
-            $user = User::orderBy('created_at', 'DESC')->paginate();
+        $user= Cache::remember($key,900,function (){
 
-            Cache::put($key, $user, 5);
-        }
+            return User::orderBy('created_at', 'DESC')->paginate();
+        });
 
         return view('users.index', ['users' => $user]);
     }
@@ -83,7 +77,7 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-       Cache::flush();
+        Cache::flush();
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }

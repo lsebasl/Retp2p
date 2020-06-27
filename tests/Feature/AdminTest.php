@@ -9,10 +9,9 @@ class AdminTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /** @test*/
 
-    function testAdminCanSeeHomeView()
+    public function testAdminCanSeeHomeView()
     {
 
         $user = factory(User::class)->create();
@@ -21,12 +20,13 @@ class AdminTest extends TestCase
 
         $response->assertSee('logout')
             -> assertSee('RESPONSIVE')
-            ->assertViewIs('home');
+            ->assertViewIs('home')
+            ->assertOk();
     }
 
     /** @test*/
 
-    function testAdminCanSeeUserListView()
+    public function testAdminCanSeeUserListView()
     {
 
         $user = factory(User::class)->create();
@@ -34,14 +34,17 @@ class AdminTest extends TestCase
         $response = $this->actingAs($user)->get(route('users.index'));
 
         $response->assertSee('List')
-                 -> assertSee('Users')
+                 ->assertSee('Users')
                  ->assertViewIs('users.index')
-                 -> assertSee($user->name);
+                 ->assertSee($user->name)
+                 ->assertOk();
+        $responseUser= $response->getOriginalContent()['users'];
+        $this->assertEquals($user->id,$responseUser->first()->id);
     }
 
     /** @test*/
 
-    function testAdminCanSeeUserShowView()
+    public function testAdminCanSeeUserShowView()
     {
 
         $user = factory(User::class)->create();
@@ -51,25 +54,28 @@ class AdminTest extends TestCase
         $response->assertSee('User')
             -> assertSee('Name')
             ->assertViewIs('users.show')
-            -> assertSee($user->name);
+            -> assertSee($user->name)
+            ->assertOk();
+
 
     }
     /** @test*/
-    function testAdminCanSeeUserEditView()
+    public function testAdminCanSeeUserEditView()
 
     {
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get(route('users.edit',$user));
 
-        $response->assertSee('Edit')
-            -> assertSee('Name')
+        $response->assertSeeText('Edit')
+            -> assertSeeText('Name')
             -> assertSee($user->name)
-            ->assertViewIs('users.edit');
+            ->assertViewIs('users.edit')
+            ->assertOk();
     }
     /** @test*/
 
-    function testAdminCanDeleteUpdated()
+    public function testAdminCanDeleteUpdated()
     {
 
         $user = factory(User::class)->create();
@@ -96,7 +102,7 @@ class AdminTest extends TestCase
     }
     /** @test*/
 
-    function testAdminCanDeleteUser()
+    public function testAdminCanDeleteUser()
     {
         $user = factory(User::class)->create();
         $admin = factory(User::class)->create();
@@ -105,6 +111,29 @@ class AdminTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->assertDatabaseMissing('users',['id'=>$user->id]);
+    }
+    /** @test*/
+
+    public function testAssertAuthenticatedCanStoreUser()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)
+            ->post(route('users.store'),[
+                'first_name' => 'jhon',
+                'last_name'  => 'velez',
+                'email' => 'jjvelez@mail.com',
+                'password'=> 'admin',
+                ]);
+        $this->assertDatabaseHas('users',[
+                'first_name' => 'jhon',
+                'last_name'  => 'velez',
+                'email' => 'jjvelez@mail.com',
+
+            ]);
+
+        $response->assertRedirect(route('users.index'));
+
     }
 
 

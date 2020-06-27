@@ -53,7 +53,7 @@ class StocksTest extends TestCase
 
         /** @test */
 
-        function testItShowADefaultMessageIfTheStockListIsEmpty()
+    public function testItShowADefaultMessageIfTheStockListIsEmpty()
 
         {
             $user = factory(User::class)->create();
@@ -62,7 +62,8 @@ class StocksTest extends TestCase
 
             $this->get(route('stocks.index'))
                 ->assertStatus(200)
-                ->assertSee('Stock Empty');
+                ->assertSee('Stock Empty')
+                ->assertOk();
         }
 
 }

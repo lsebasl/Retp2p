@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
 
 
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToProductIndex()
+    public function testNoAuthenticatedUserCantAccessToProductIndex()
     {
         $this->get(route('products.index'))
             ->assertRedirect(route('login'));
@@ -21,7 +21,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    function testNoAuthenticatedUserCantAccessToProductCreate()
+    public function testNoAuthenticatedUserCantAccessToProductCreate()
     {
         $this->get(route('products.create'))
             ->assertRedirect(route('login'));
@@ -29,7 +29,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToProductShow()
+    public function testNoAuthenticatedUserCantAccessToProductShow()
     {
         $product=factory(Product::class)->create();
 
@@ -38,7 +38,7 @@ class ProductsTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToProductEdit()
+    public function testNoAuthenticatedUserCantAccessToProductEdit()
     {
         $Product=factory(Product::class)->create();
 
@@ -47,7 +47,7 @@ class ProductsTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToProductUpdate()
+    public function testNoAuthenticatedUserCantAccessToProductUpdate()
     {
         $Product=factory(Product::class)->create();
 
@@ -56,7 +56,7 @@ class ProductsTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToProductDelete()
+    public function testNoAuthenticatedUserCantAccessToProductDelete()
     {
         $product=factory(Product::class)->create();
 
@@ -67,7 +67,7 @@ class ProductsTest extends TestCase
 
 
     /** @test */
-    function testItShowADefaultMessageIfTheProductListIsEmpty()
+    public function testItShowADefaultMessageIfTheProductListIsEmpty()
 
     {
         $user = factory(User::class)->create();
@@ -76,7 +76,8 @@ class ProductsTest extends TestCase
 
         $this->get(route('products.index'))
             ->assertStatus(200)
-            ->assertSee('Without Products');
+            ->assertSee('Without Products')
+            ->assertOk();
 
 
     }

@@ -11,14 +11,14 @@ class UsersTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToUsersIndex()
+    public function testNoAuthenticatedUserCantAccessToUsersIndex()
     {
-        $this->get(route('users.index'))
-             ->assertRedirect(route('login'));
+        $response = $this->get(route('users.index'));
+        $response->assertRedirect(route('login'));
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToUsersShow()
+    public function testNoAuthenticatedUserCantAccessToUsersShow()
     {
         $user=factory(User::class)->create();
 
@@ -27,7 +27,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToUsersEdit()
+    public function testNoAuthenticatedUserCantAccessToUsersEdit()
     {
         $user=factory(User::class)->create();
 
@@ -36,7 +36,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToUsersUpdate()
+    public function testNoAuthenticatedUserCantAccessToUsersUpdate()
     {
         $user=factory(User::class)->create();
 
@@ -45,7 +45,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCantAccessToUsersDelete()
+    public function testNoAuthenticatedUserCantAccessToUsersDelete()
     {
         $user=factory(User::class)->create();
 
@@ -54,7 +54,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCanSeeLogin()
+    public function testNoAuthenticatedUserCanSeeLogin()
     {
 
         $this->get(route('login'))
@@ -63,7 +63,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    Function testNoAuthenticatedUserCanSeeWelcome()
+    public function testNoAuthenticatedUserCanSeeWelcome()
     {
 
         $this->get('/')
@@ -92,7 +92,7 @@ class UsersTest extends TestCase
 
     }
 
-    function testNoAuthenticatedUserCantsDeleteAUser()
+    public function testNoAuthenticatedUserCantsDeleteAUser()
     {
         $user = factory(User::class)->create();
 

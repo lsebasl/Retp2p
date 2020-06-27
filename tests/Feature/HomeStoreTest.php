@@ -12,7 +12,7 @@ class HomeStoreTest extends TestCase
 {
     /** @test*/
 
-    function testUserCanSeeHomeStoreView()
+    public function testUserCanSeeHomeStoreView()
     {
         $this->get(route('home.store'))
              ->assertStatus(200)

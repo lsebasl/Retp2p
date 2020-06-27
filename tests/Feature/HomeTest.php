@@ -9,7 +9,7 @@ class HomeTest extends TestCase
 {
     /** @test*/
 
-    Function testNoAuthenticatedUserCantAccessToHome()
+    public function testNoAuthenticatedUserCantAccessToHome()
     {
         $this->get(route('home'))
             ->assertRedirect(route('login'));

@@ -1,5 +1,6 @@
 @extends('layout.app')
 @section('content')
+
         <section class="full-width header-well" >
             <div class="full-width header-well-icon">
                 <i class="zmdi zmdi-accounts"></i>

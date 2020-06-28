@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-DB::listen(function ($request){
-  //echo "<pre>{$request->sql}</pre>";
-});
+//DB::listen(function ($query){
+    //var_dump($query->sql);
+//});
 
 Route::get('/', function () {
     return view('welcome');

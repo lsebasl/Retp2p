@@ -96,7 +96,7 @@ class UserController extends Controller
         $admin = Auth::user()->getFullName();
 
         Log::info("Updated user profile: $user by Admin: $admin ");
-        
+
         $user->update($request->validated());
 
         Cache::flush();

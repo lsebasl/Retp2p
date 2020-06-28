@@ -75,7 +75,7 @@ class AdminTest extends TestCase
     }
     /** @test*/
 
-    public function testAdminCanDeleteUpdated()
+    public function testAdminCanUpdatedUser()
     {
 
         $user = factory(User::class)->create();
@@ -86,10 +86,11 @@ class AdminTest extends TestCase
             'name' => 'Test Name',
             'last_name' => 'Test Last Name',
             'id_type' => 'NIT',
-            'identification' => 'Test User last Name',
+            'identification' => '1212124',
             'phone' => '3172798026',
             'address' => 'Test User address',
             'email' => 'test@gmail.com',
+            'status' => 'Enable'
 
         ])
              ->assertRedirect(route('users.show',$user))

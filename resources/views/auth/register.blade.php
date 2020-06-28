@@ -30,10 +30,10 @@
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <select class="mdl-textfield__input" name="id_type" id="id_type">
                 <option value="" disabled="" selected></option>
-                <option value="Card ID">{{__('Card ID')}}</option>
-                <option value="Foreign ID">{{__('Foreign ID')}}</option>
-                <option value="Passport">{{__('Passport')}}</option>
-                <option value="NIT">{{__('NIT')}}</option>
+                <option value="Foreign ID" {{ old('id_type')=='Foreign ID' ? 'selected' : '' }}>{{__('Foreign ID')}}</option>
+                <option value="Card ID" {{ old('id_type')=='Card ID' ? 'selected' : '' }}>{{__('Card ID')}}</option>
+                <option value="Passport" {{ old('id_type')=='Passport' ? 'selected' : '' }}>{{__('Passport')}}</option>
+                <option value="NIT" {{ old('id_type')=='NIT' ? 'selected' : '' }}>{{__('NIT')}}
             </select>
             @includeWhen($errors->has('id_type'), 'partials.__invalid_feedback', ['feedback' => $errors->first('id_type')])
             <label class="mdl-textfield__label" for="id_type">{{ __('ID Type') }}</label>

@@ -112,29 +112,7 @@ class AdminTest extends TestCase
 
         $this->assertDatabaseMissing('users',['id'=>$user->id]);
     }
-    /** @test*/
 
-    public function testAssertAuthenticatedCanStoreUser()
-    {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
-            ->post(route('users.store'),[
-                'first_name' => 'jhon',
-                'last_name'  => 'velez',
-                'email' => 'jjvelez@mail.com',
-                'password'=> 'admin',
-                ]);
-        $this->assertDatabaseHas('users',[
-                'first_name' => 'jhon',
-                'last_name'  => 'velez',
-                'email' => 'jjvelez@mail.com',
-
-            ]);
-
-        $response->assertRedirect(route('users.index'));
-
-    }
 
 
 }

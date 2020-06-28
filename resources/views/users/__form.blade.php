@@ -1,11 +1,11 @@
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="name" value="{{ old('name', $user->name)}}" required>
+    <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"  id="name" value="{{ old('name', $user->name)}}" required>
     @includeWhen($errors->has('name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('name')])
     <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
     <span class="mdl-textfield__error">Invalid name</span>
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input {{$errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="last_name" value="{{ old('last_name', $user->last_name)}}" required>
+    <input class="mdl-textfield__input {{$errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name"  id="last_name" value="{{ old('last_name', $user->last_name)}}" required>
     @includeWhen($errors->has('last_name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('last_name')])
     <label class="mdl-textfield__label" for="last_name">{{__('Last Name')}}</label>
     <span class="mdl-textfield__error">Invalid last name</span>
@@ -22,13 +22,13 @@
     <span class="mdl-textfield__error">Invalid Id Type</span>
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input {{$errors->has('identification') ? 'is-invalid' : ''}}" type="text" name="identification" pattern="-?[0-9]*(\.[0-9]+)?" id="identification" value="{{ old('identification', $user->identification)}}" required>
+    <input class="mdl-textfield__input {{$errors->has('identification') ? 'is-invalid' : ''}}" type="text" name="identification" id="identification" value="{{ old('identification', $user->identification)}}" required>
     <label class="mdl-textfield__label" for="identification">{{__('Identification')}}</label>
     <span class="mdl-textfield__error">Invalid Identification</span>
     @includeWhen($errors->has('identification'),'partials.__invalid_feedback', ['feedback' => $errors->first('identification')])
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input {{$errors->has('phone') ? 'is-invalid' : ''}}" type="number" name="phone" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phone" value="{{ old('phone', $user->phone)}}" required>
+    <input class="mdl-textfield__input {{$errors->has('phone') ? 'is-invalid' : ''}}" type="number" name="phone"  id="phone" value="{{ old('phone', $user->phone)}}" required>
     <label class="mdl-textfield__label" for="phone">{{__('Phone')}}</label>
     <span class="mdl-textfield__error">Invalid phone number</span>
     @includeWhen($errors->has('phone'),'partials.__invalid_feedback', ['feedback' => $errors->first('phone')])

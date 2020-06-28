@@ -31,6 +31,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => 'required|min:6|max:20',
             'address' => 'required|max:150',
             'email' => 'required','max:150','email',
+            'status' => 'required|in:Enable,Disable',
         ];
     }
 }

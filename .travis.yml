@@ -1,0 +1,26 @@
+language: php
+services:
+  - mysql
+  - mongodb
+
+test:
+  adapter: mysql
+  database: laravelTesting
+  username: travis
+
+
+
+php:
+    7.2
+    7.2.15
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravelTesting; USE laravelTesting';
+
+install:
+  composer install
+
+
+
+
+script: vendor/phpunit/phpunit/phpunit

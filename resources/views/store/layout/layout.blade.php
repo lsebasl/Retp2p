@@ -143,7 +143,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html" class="act">Home</a></li>
+                    <li><a href="{{ route('home.store') }}" class="act">Home</a></li>
                     <!-- Mega Menu -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
@@ -152,27 +152,26 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Mobiles</h6>
-                                        <li><a href="products.html">Mobile Phones</a></li>
-                                        <li><a href="products.html">Popular Models</a></li>
+                                        <li><a href="products.html">Smartphones</a></li>
+
                                     </ul>
                                 </div>
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Computers</h6>
                                         <li><a href="products1.html">Laptop</a></li>
-                                        <li><a href="products1.html">   Desktop</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Tv & Video</h6>
-                                        <li><a href="products2.html">Tv & Video</a></li>
+                                        <li><a href="products2.html">Televisions</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Accessories</h6>
-                                        <li><a href="products2.html">Accesories</a></li>
+                                        <li><a href="products2.html">headphones</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-4">
@@ -181,11 +180,10 @@
                             </div>
                         </ul>
                     </li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="{{ route('store.about') }}">About Us</a></li>
                     <li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="icons.html">View Profile</a></li>
-                            <li><a href="codes.html">Update Profile</a></li>
+                            <li><a href="{{ route('store.profile') }}">View Profile</a></li>
                             <li><a class="header" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -222,9 +220,7 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Information</h3>
                 <ul class="info">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="mail.html">Contact Us</a></li>
-                    <li><a href="products.html">Special Products</a></li>
+                    <li><a href="{{ route('store.about') }}">About Us</a></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">
@@ -240,7 +236,6 @@
                 <h3>Profile</h3>
                 <ul class="info">
                     <li><a href="index.html">View Profile</a></li>
-                    <li><a href="products.html">Update Profile</a></li>
                 </ul>
             </div>
             <div class="clearfix"> </div>

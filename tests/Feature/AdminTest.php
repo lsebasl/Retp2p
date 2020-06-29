@@ -99,6 +99,13 @@ class AdminTest extends TestCase
         $this->assertDatabasehas('users',[
             'name' => 'Test Name',
             'last_name' => 'Test Last Name',
+            'id_type' => 'NIT',
+            'identification' => '1212124',
+            'phone' => '3172798026',
+            'address' => 'Test User address',
+            'email' => 'test@gmail.com',
+            'status' => 'Enable'
+
         ]);
     }
     /** @test*/

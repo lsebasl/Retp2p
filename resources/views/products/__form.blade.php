@@ -19,7 +19,7 @@
                 <option value="" disabled="" selected=""></option>
                 <option value="Computers">Computers</option>
                 <option value="Tv & Video">Tv & Video</option>
-                <option value="Smartphones">Smartphones</option>
+                <option value="Smartphones">Mobiles</option>
                 <option value="Accessories">Accessories</option>
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>

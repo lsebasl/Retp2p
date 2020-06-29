@@ -19,7 +19,7 @@
                             <ul class="list-unstyle text-center">
                                 <li><a href="#!">Computers</a></li>
                                 <li><a href="#!">Tv & Video</a></li>
-                                <li><a href="#!">Smartphones</a></li>
+                                <li><a href="#!">Mobiles</a></li>
                                 <li><a href="#!">Accessories</a></li>
                             </ul>
                         </nav>

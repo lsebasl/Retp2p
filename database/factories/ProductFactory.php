@@ -9,7 +9,7 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
         'barcode'=>$faker->numberBetween(17700000000000,17799999999999),
         'name' => $faker->company,
-        'category'=>$faker->randomElement(['Computers','Tv & Video','Smartphones','Accessories']),
+        'category'=>$faker->randomElement(['Computers','Tv & Video','Mobiles','Accessories']),
         'model' => $faker->sentence(1),
         'mark' => $faker->sentence(1),
         'description' => $faker->colorName,

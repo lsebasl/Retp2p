@@ -18,10 +18,14 @@ Route::get('/verify', function () {
     return view('auth.verify');
 });
 
-Route::get('/home-store','Store\HomeController@index')->name('home.store');
+
 
 Route::middleware(['auth','user.status','verified'])->group(function () {
 //project routes
+    Route::get('/home-store','Store\HomeController@index')->name('home.store');
+    Route::get('/about', 'Store\AboutController@index')->name('store.about');
+    Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
+
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/users', 'UserController@index')->name('users.index');
@@ -57,6 +61,8 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::put('/invoices/{invoice}', 'InvoiceController@update')->name('invoices.update');
 
     Route::get('/stocks', 'StockController@index')->name('stocks.index');
+
+
 });
 
 //Routes Store

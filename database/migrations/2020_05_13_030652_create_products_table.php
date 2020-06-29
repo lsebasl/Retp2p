@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('barcode')->unique();
             $table->string('name');
-            $table->enum('category',['Computers','Tv & Video','Smartphones','Accessories']);
+            $table->enum('category',['Computers','Tv & Video','Mobiles','Accessories']);
             $table->string('model');
             $table->string('mark');
             $table->string('description');

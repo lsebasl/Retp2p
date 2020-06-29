@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Store;
 
-use App\Http\Controllers\Controller;;
+use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class HomeController extends Controller
+class AboutController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,12 +19,12 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the about us in the store.
      *
      * @return View
      */
     public function index():View
     {
-        return view('store.home');
+        return view('store.about');
     }
 }

@@ -73,7 +73,7 @@
 
 <!-- header -->
 @guest()
-    <a href="{{ route('login') }}">Login</a>
+    {{--<a href="{{ route('login') }}">Login</a>"boton no login" --}}
     <div class="top-right links" style="">
         <div class="header" id="home1">
             <div class="container">
@@ -83,49 +83,47 @@
                 <div class="w3l_logo">
                     <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
                 </div>
-                <a href="{{ route('register') }}">Register</a>
-            </div>
-            @else
-            <div class="container" id="home1">
-                <br>
-                <h2><small>Hola {{ ucfirst(Auth::user()->name) }}</small></h2>
-                <h5>your account is {{ ucfirst(Auth::user()->status) }}</small></h5>
-                <a class="header" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                </br>
-            </div>
-                <div class="container">
-                    <div class="w3l_logo">
-                        <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
-                    </div>
-            </div>
-        </div>
-    </div>
+            {{--  <a href="{{ route('register') }}">Register</a>"boton register--}}
+          </div>
+          @else
+          <div class="container" id="home1">
+                  <h2><small>Hola {{ ucfirst(Auth::user()->name) }}</small></h2>
+                  <h5>your account is {{ ucfirst(Auth::user()->status) }}</small></h5>
+                  <a class="header" href="{{ route('logout') }}"
+                 onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                  </form>
+          </div>
+              <div class="container">
+                  <div class="w3l_logo">
+                      <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
+                  </div>
+          </div>
+      </div>
+  </div>
 @endguest
 
-        {{--<div class="search">
-            <input class="search_box" type="checkbox" id="search_box">
-            <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
-            <div class="search_form">
-                <form action="#" method="post">
-                    <input type="text" name="Search" placeholder="Search...">
-                    <input type="submit" value="Send">
-                </form>
-            </div>
-        </div>
-        <div class="cart cart box_1">
-            <form action="#" method="post" class="last">
-                <input type="hidden" name="cmd" value="_cart" />
-                <input type="hidden" name="display" value="1" />
-                <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-            </form>
-        </div>--}}
+      {{--<div class="search">
+          <input class="search_box" type="checkbox" id="search_box">
+          <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
+          <div class="search_form">
+              <form action="#" method="post">
+                  <input type="text" name="Search" placeholder="Search...">
+                  <input type="submit" value="Send">
+              </form>
+          </div>
+      </div>
+      <div class="cart cart box_1">
+          <form action="#" method="post" class="last">
+              <input type="hidden" name="cmd" value="_cart" />
+              <input type="hidden" name="display" value="1" />
+              <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+          </form>
+      </div>--}}
 
 <!-- //header -->
 <!-- navigation -->

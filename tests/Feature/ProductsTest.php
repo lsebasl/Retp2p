@@ -31,36 +31,39 @@ class ProductsTest extends TestCase
     /** @test */
     public function testNoAuthenticatedUserCantAccessToProductShow()
     {
-        $product=factory(Product::class)->create();
+        $product = factory(Product::class)->create();
 
-        $this->get(route('products.show',$product))
+        $this->get(route('products.show', $product))
             ->assertRedirect(route('login'));
 
     }
+
     /** @test */
     public function testNoAuthenticatedUserCantAccessToProductEdit()
     {
-        $Product=factory(Product::class)->create();
+        $Product = factory(Product::class)->create();
 
-        $this->get(route('products.edit',$Product))
+        $this->get(route('products.edit', $Product))
             ->assertRedirect(route('login'));
 
     }
+
     /** @test */
     public function testNoAuthenticatedUserCantAccessToProductUpdate()
     {
-        $Product=factory(Product::class)->create();
+        $Product = factory(Product::class)->create();
 
-        $this->put(route('products.update',$Product))
+        $this->put(route('products.update', $Product))
             ->assertRedirect(route('login'));
 
     }
+
     /** @test */
     public function testNoAuthenticatedUserCantAccessToProductDelete()
     {
-        $product=factory(Product::class)->create();
+        $product = factory(Product::class)->create();
 
-        $this->delete(route('products.destroy',$product))
+        $this->delete(route('products.destroy', $product))
             ->assertRedirect(route('login'));
 
     }
@@ -81,5 +84,5 @@ class ProductsTest extends TestCase
 
 
     }
-
 }
+

@@ -17,6 +17,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->numberBetween(1000,100000000),
         'discount'=>$faker->numberBetween(10,80),
         'status' => $faker->randomElement(['Enable','Disable']),
-        'image' => 'images/fju1lCwmMm7GuHi7635pHnNz9dVQNLM89NyUtWma.jpeg'
+        'image' => 'images/t6GQuSdICP4ahpfEBlZl0son1VSBS9uGg7jhoS4V.jpeg'
     ];
 });

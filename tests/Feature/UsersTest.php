@@ -2,6 +2,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -90,7 +91,9 @@ class UsersTest extends TestCase
 
         $this->assertDatabaseMissing('users',['id'=>$user->name]);
 
+
     }
+    /** @test */
 
     public function testNoAuthenticatedUserCantsDeleteAUser()
     {
@@ -101,7 +104,5 @@ class UsersTest extends TestCase
 
         $this->assertDatabasehas('users',['id'=>$user->id]);
     }
-
-
 
 }

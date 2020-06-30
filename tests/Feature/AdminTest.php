@@ -1,7 +1,9 @@
 <?php
 namespace Tests\Feature;
 
+use App\Product;
 use App\User;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -105,9 +107,9 @@ class AdminTest extends TestCase
             'address' => 'Test User address',
             'email' => 'test@gmail.com',
             'status' => 'Enable'
-
         ]);
     }
+
     /** @test*/
 
     public function testAdminCanDeleteUser()
@@ -121,6 +123,42 @@ class AdminTest extends TestCase
         $this->assertDatabaseMissing('users',['id'=>$user->id]);
     }
 
+
+    /** @test*/
+
+    public function testAdminCanSeeProductsView()
+    {
+
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->get(route('products.index'));
+
+        $response->assertSee('Computers')
+            -> assertSee('Mobiles')
+            -> assertSee('Accessories')
+            ->assertViewIs('products.index')
+            ->assertOk();
+    }
+    /** @test*/
+
+    public function testAdminCanSeeProductEditView()
+
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+
+        $response = $this->actingAs($user)->get(route('products.edit',$product));
+
+        $response->assertSeeText('Barcode')
+            -> assertSeeText('Name')
+            -> assertSeeText('Mark')
+            -> assertSeeText('Category')
+            -> assertSeeText('Description')
+            -> assertSeeText('Status')
+            -> assertSee($product->name)
+            ->assertViewIs('products.edit')
+            ->assertOk();
+    }
 
 
 }

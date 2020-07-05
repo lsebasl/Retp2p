@@ -9,43 +9,26 @@ use Illuminate\Support\Facades\Log;
 
 class UserRepository
 {
-    public function logOperation($action, $model)
-    {
-        $admin = Auth::user()->getFullName();
-        Log::info("Action performed $action over $model by Admin:$admin ");
-    }
+
     public function getPaginated()
     {
-        $key = "users.page." . request('page',1);//users.page.1 default
-
-        return Cache::tags('users')->rememberForever($key,function () {
-
-            return User::orderBy('created_at', 'DESC')->paginate();
-        });
+        return User::orderBy('created_at', 'DESC')->paginate();
     }
 
     public function cacheFindByUser(User $user)
     {
-        return Cache::tags('users')->rememberForever("'user'.{$user}",function() use ($user) {
-
-            return $user;
-        });
-
+        return $user;
     }
 
     public function update($request,$user)
 
     {
-        Cache::tags('users')->flush();
-
         return $user->update($request->validated());
     }
 
     public function delete($user)
 
     {
-        Cache::tags('users')->flush();
-
         $user->delete();
     }
 

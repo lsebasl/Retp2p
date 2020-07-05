@@ -20,7 +20,7 @@
                 <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
                     <div class="full-width panel mdl-shadow--2dp">
                         <div class="full-width panel-tittle bg-success text-center tittles">
-                            {{__('List Users')}}
+                            {{__('List UserRepository')}}
                         </div>
                         <div class="mdl-textfield mdl-js-textfield input-placa">{{$users->links()}}
                             <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
@@ -45,7 +45,7 @@
                                     </div>
                                     <li class="full-width divider-menu-h"></li>
                                 @empty
-                                    <li>{{__('Without Users')}}</li>
+                                    <li>{{__('Without UserRepository')}}</li>
                                 @endforelse
                             </div>
                         </div>

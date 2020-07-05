@@ -16,7 +16,12 @@ class UserRepository
     }
     public function getPaginated()
     {
+        $key = "users.page." . request('page',1);//users.page.1 default
+
+        return Cache::tags('users')->rememberForever($key,function () {
+
             return User::orderBy('created_at', 'DESC')->paginate();
+        });
     }
 
     public function cacheFindByUser(User $user)

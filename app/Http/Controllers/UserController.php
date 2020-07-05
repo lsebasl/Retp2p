@@ -15,13 +15,12 @@ use Illuminate\Support\Facades\Cache;
 class UserController extends Controller
 {
     protected $userRepository;
-    protected $cacheUser;
 
-    public function __construct(UserRepository $userRepository,CacheUser $cacheUser)
+    public function __construct(UserRepository $userRepository)
 
     {
         $this->userRepository = $userRepository;
-        $this->cacheUser =  $cacheUser;
+
     }
 
     /**
@@ -32,7 +31,7 @@ class UserController extends Controller
 
     public function index(): View
     {
-        $user = $this->cacheUser->getPaginated();
+        $user = $this->userRepository->getPaginated();
 
         return view('users.index', ['users' => $user]);
 

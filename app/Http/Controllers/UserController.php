@@ -1,39 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
-use App\Logs\AuditLogger;
 use App\Repositories\CacheUser;
-use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Cache;
+
 
 class UserController extends Controller
 {
-    protected $userRepository;
+    protected $cacheUser;
 
-    public function __construct(CacheUser $userRepository)
+    public function __construct(CacheUser $cacheUser)
 
     {
-        $this->userRepository = $userRepository;
+        $this->cacheUser = $cacheUser;
 
     }
 
     /**
      * Display the specified resource.
      *
+     * @param User $user
      * @return View
      */
 
-    public function index(): View
+    public function index(User $user): View
     {
-        $user = $this->userRepository->getPaginated();
+        $users = $this->cacheUser->getPaginated($user);
 
-        return view('users.index', ['users' => $user]);
+        return view('users.index', ['users' => $users]);
 
     }
 
@@ -46,9 +44,9 @@ class UserController extends Controller
 
     public function show(User $user):View
     {
-        $this->userRepository->logOperation('show',$user);
+        Logs::AuditLogger($user,'show');
 
-        $this->userRepository->cacheFindByUser($user);
+        $this->cacheUser->cacheFindByModel($user);
 
         return view('users.show', ['user'=> $user]);
 
@@ -63,9 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user):View
     {
-        $this->userRepository->logOperation('edit',$user);
+        Logs::AuditLogger($user,'edit');
 
-        $this->userRepository->cacheFindByUser($user);
+        $this->cacheUser->cacheFindByModel($user);
 
         return view('users.edit', ['user' => $user]);
     }
@@ -80,9 +78,9 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
-        $this->userRepository->logOperation('update',$user);
+        Logs::AuditLogger($user,'update');
 
-        $this->userRepository->update($request,$user);
+        $this->cacheUser->update($request,$user);
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
@@ -97,9 +95,9 @@ class UserController extends Controller
      */
     public function destroy(User $user):RedirectResponse
     {
-        $this->userRepository->logOperation('delete',$user);
+        Logs::AuditLogger($user,'delete');
 
-        $this->userRepository->delete($user);
+        $this->cacheUser->delete($user);
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
 

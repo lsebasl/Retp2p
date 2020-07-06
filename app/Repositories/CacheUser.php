@@ -1,44 +1,39 @@
 <?php
-
-
 namespace App\Repositories;
 
-
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class CacheUser
 {
-    protected $UserRepository;
+    protected $modelRepository;
 
-    public function __construct(UserRepository $UserRepository)
+    public function __construct(ModelRepository $modelRepository)
 
     {
-       $this->UserRepository = $UserRepository;
+       $this->modelRepository = $modelRepository;
     }
 
-    public function getPaginated()
+    public function getPaginated(User $user)
     {
         $key = "users.page." . request('page',1);//users.page.1 default
 
-        return Cache::tags('users')->rememberForever($key,function () {
+        return Cache::tags('users')->rememberForever($key,function () use ($user){
 
-            return $this->UserRepository->getPaginated();
+            return $this->modelRepository->getPaginated($user);
         });
     }
-        public function cacheFindByUser(User $user)
+        public function cacheFindByModel(User $user)
         {
             return Cache::tags('users')->rememberForever("'user'.{$user}",function() use ($user) {
 
-                return $this->UserRepository->cacheFindByUser($user);
+                return $this->modelRepository->cacheFindByModel($user);
             });
 
         }
     public function update($request,$user)
     {
-        $this->UserRepository->update($request,$user);
+        $this->modelRepository->update($request,$user);
 
         Cache::tags('users')->flush();
 
@@ -47,16 +42,11 @@ class CacheUser
     }
     public function delete($user)
     {
-        $this->UserRepository->delete($user);
+        $this->modelRepository->delete($user);
 
         Cache::tags('users')->flush();
 
         return $user;
-    }
-    public function logOperation($action, $model)
-    {
-        $admin = Auth::user()->getFullName();
-        Log::info("Action performed $action over $model by Admin:$admin ");
     }
 
 }

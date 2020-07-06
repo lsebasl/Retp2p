@@ -1,41 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\CacheUser;
 use Illuminate\Http\RedirectResponse;
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Cache;
+
 
 class UserController extends Controller
 {
-    /**
-     * UserController constructor.
-     */
-    public function __construct()
+    protected $cacheUser;
+
+    public function __construct(CacheUser $cacheUser)
+
     {
-        //
+        $this->cacheUser = $cacheUser;
+
     }
 
     /**
      * Display the specified resource.
      *
+     * @param User $user
      * @return View
-     *
      */
 
-    public function index(): View
+    public function index(User $user): View
     {
-        $key = "users.page." . request('page',1);//users.page.1 default
+        $users = $this->cacheUser->getPaginated($user);
 
-        $user= Cache::rememberForever($key,function (){
-
-            return User::orderBy('created_at', 'DESC')->paginate();
-        });
-
-        return view('users.index', ['users' => $user]);
+        return view('users.index', ['users' => $users]);
 
     }
 
@@ -48,14 +44,9 @@ class UserController extends Controller
 
     public function show(User $user):View
     {
-        $admin = Auth::user()->getFullName();
+        Logs::AuditLogger($user,'show');
 
-        Log::info("Showing user profile: $user to Admin: $admin ");
-
-        $user = Cache::rememberForever("'user'.{$user}",function() use ($user) {
-
-            return $user;
-        });
+        $this->cacheUser->cacheFindByModel($user);
 
         return view('users.show', ['user'=> $user]);
 
@@ -70,15 +61,9 @@ class UserController extends Controller
      */
     public function edit(User $user):View
     {
+        Logs::AuditLogger($user,'edit');
 
-        $admin = Auth::user()->getFullName();
-
-        Log::info("Edited user profile: $user by Admin: $admin ");
-
-        $user = Cache::remember("'user'.{$user}",900,function() use ($user) {
-
-            return $user;
-        });
+        $this->cacheUser->cacheFindByModel($user);
 
         return view('users.edit', ['user' => $user]);
     }
@@ -93,13 +78,9 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
-        $admin = Auth::user()->getFullName();
+        Logs::AuditLogger($user,'update');
 
-        Log::info("Updated user profile: $user by Admin: $admin ");
-
-        $user->update($request->validated());
-
-        Cache::flush();
+        $this->cacheUser->update($request,$user);
 
        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
@@ -114,13 +95,9 @@ class UserController extends Controller
      */
     public function destroy(User $user):RedirectResponse
     {
-        $admin = Auth::user()->getFullName();
+        Logs::AuditLogger($user,'delete');
 
-        Log::info("Deleted profile: $user by Admin: $admin ");
-
-        $user->delete();
-
-        Cache::flush();
+        $this->cacheUser->delete($user);
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
 

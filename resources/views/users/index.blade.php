@@ -45,7 +45,7 @@
                                     </div>
                                     <li class="full-width divider-menu-h"></li>
                                 @empty
-                                    <li>{{__('Without Users')}}</li>
+                                    <li>{{__('Without UserRepository')}}</li>
                                 @endforelse
                             </div>
                         </div>

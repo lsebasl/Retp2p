@@ -36,7 +36,7 @@ class AdminTest extends TestCase
         $response = $this->actingAs($user)->get(route('users.index'));
 
         $response->assertSee('List')
-                 ->assertSee('Users')
+                 ->assertSee('User')
                  ->assertViewIs('users.index')
                  ->assertSee($user->name)
                  ->assertOk();

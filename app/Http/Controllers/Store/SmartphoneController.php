@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\View\View;
+
 
 class SmartphoneController extends Controller
 {
@@ -25,6 +27,11 @@ class SmartphoneController extends Controller
      */
     public function index():View
     {
-        return view('store.smartphones');
+        $product = Product::where('category','Mobiles')
+            ->where('status','enable')
+            ->orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('store.smartphones', ['products' => $product]);
     }
+
 }

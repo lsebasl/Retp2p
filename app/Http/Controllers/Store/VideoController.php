@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\View\View;
 
 class VideoController extends Controller
@@ -25,6 +26,8 @@ class VideoController extends Controller
      */
     public function index():View
     {
-        return view('store.video');
+        $product = Product::where('status','enable')->get();
+
+        return view('store.video', ['products' => $product]);
     }
 }

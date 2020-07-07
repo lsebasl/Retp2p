@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\View\View;
 
 class LaptopController extends Controller
@@ -25,6 +26,8 @@ class LaptopController extends Controller
      */
     public function index():View
     {
-        return view('store.laptop');
+        $product = Product::where('status','enable')->get();
+
+        return view('store.laptop', ['products' => $product]);
     }
 }

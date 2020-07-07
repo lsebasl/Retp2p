@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Product;
 use Illuminate\View\View;
 
 class AccessoriesController extends Controller
@@ -25,6 +26,8 @@ class AccessoriesController extends Controller
      */
     public function index():View
     {
-        return view('store.accessories');
+        $product = Product::where('status','enable')->get();
+
+        return view('store.accessories', ['products' => $product]);
     }
 }

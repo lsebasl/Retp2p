@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'barcode'=>$faker->numberBetween(17700000000000,17799999999999),
-        'name' => $faker->company,
+        'name' => $faker->sentence(1),
         'category'=>$faker->randomElement(['Computers','Tv & Video','Mobiles','Accessories']),
         'model' => $faker->sentence(1),
         'mark' => $faker->sentence(1),
@@ -17,6 +17,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->numberBetween(1000,100000000),
         'discount'=>$faker->numberBetween(10,80),
         'status' => $faker->randomElement(['Enable','Disable']),
-        'image' => 'images/t6GQuSdICP4ahpfEBlZl0son1VSBS9uGg7jhoS4V.jpeg'
+        'image' => 'images/vUivZIOhlHZFAuj5iwvN5R8Xy8BAdwmIP50IZr0V.jpeg'
     ];
 });

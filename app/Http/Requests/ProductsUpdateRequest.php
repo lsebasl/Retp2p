@@ -28,7 +28,7 @@ class ProductsUpdateRequest extends FormRequest
     {
         return [
             'barcode' => ['required',],
-            'name' => 'required|min:3|max:30',
+            'name' => 'required|min:3|max:12',
             'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',

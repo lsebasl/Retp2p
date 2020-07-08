@@ -29,7 +29,7 @@ class SmartphoneController extends Controller
     {
         $product = Product::where('category','Mobiles')
             ->where('status','enable')
-            ->orderBy('created_at', 'DESC')->paginate(10);
+            ->orderBy('created_at',request('sorted', 'DESC'))->paginate(9);
 
         return view('store.smartphones', ['products' => $product]);
     }

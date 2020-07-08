@@ -70,8 +70,7 @@
                         @endforelse
                     <div class="clearfix"> </div>
                 </div>
-                <div class="mdl-textfield mdl-js-textfield input-placa">{{$products->links()}}
-                    <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
+               {{$products->fragment('hash')->appends(request()->query())->links('pagination::default')}}
                 </div>
             </div>
         </div>

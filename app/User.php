@@ -2,8 +2,10 @@
 
 namespace App;
 
+use http\QueryString;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -73,6 +75,21 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Invoice::class);
     }
+
+    /**
+     * Scope
+     * @param $query
+     * @param string|null $name
+     * @return Builder
+     */
+    public function scopeName(Builder $query,?  string $name)
+    {
+        if($name){
+            return $query->where('name','LIKE',"%name%");
+        }
+        return $query;
+    }
+
 
 }
 

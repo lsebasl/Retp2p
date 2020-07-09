@@ -2,13 +2,18 @@
 
 namespace App;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Database\Query\Builder;
+use phpDocumentor\Reflection\Types\Object_;
 
 
 class Product extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     */
     protected $fillable = [
         'barcode',
         'name',
@@ -38,4 +43,19 @@ class Product extends Model
         return $this->getAttribute('id');
     }
 
+
+    /**
+     * Scope
+     *
+     * @param $query
+     * @param $name
+     *
+     */
+    public function scopeName($query, $name)
+    {
+        if($name){
+            return $query->where('name','LIKE',"$name%");
+        }
+        return $query;
+    }
 }

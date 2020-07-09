@@ -23,10 +23,9 @@
                 {{--nav bar--}}
                 <div class="col-md-8 w3ls_mobiles_grid_right">
                     <div class="clearfix"> </div>
-
                     <div class="w3ls_mobiles_grid_right_grid2">
                         <div class="w3ls_mobiles_grid_right_grid2_left">
-                            <h3>Showing Results: 0-1</h3>
+                            @include('partials.__search_store')
                         </div>
                         <div class="w3ls_mobiles_grid_right_grid2_right">
                             <select name="select_item" class="select_item">
@@ -40,7 +39,6 @@
                         </div>
                         <div class="clearfix"> </div>
                     </div>
-
                         @forelse($products as $product)
                         <div class="w3ls_mobiles_grid_right_grid3">
                             <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
@@ -52,7 +50,7 @@
                                     </div>
                                 <h5><a href="single.html">{{$product->name}}</a></h5>
                                       <div class="simpleCart_shelfItem">
-                                    <p> <i class="item_price">{{$product->price}}</i></p>
+                                    <p> <i class="item_price">$ {{$product->price}}</i></p>
                                     <form action="#" method="post">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
@@ -62,7 +60,7 @@
                                     </form>
                                 </div>
                             </div>
-                                <p>@</p>
+                                <hr>
                         </div>
                         @empty
                             <li>{{__('Without Products')}}</li>

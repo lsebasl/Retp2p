@@ -1,6 +1,6 @@
 
 
-<form method='GET' action="{{ route('store.smartphones')}}" class="form-inline">
+<form method='GET' action="{{ route('smartphones.index')}}" class="form-inline">
     <input type="search" class="form-control mr-sm-2" name="name" placeholder="Search..." value="{{ request()->input('name')}}">
     <div class="form-group">
         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>

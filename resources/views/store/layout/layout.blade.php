@@ -134,7 +134,7 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Mobiles</h6>
-                                        <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
+                                        <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
 
                                     </ul>
                                 </div>
@@ -210,7 +210,7 @@
                 <ul class="info">
                     <li><a href="products.html">Computers</a></li>
                     <li><a href="products1.html">Tv & Video</a></li>
-                    <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
+                    <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
                     <li><a href="products1.html">Accessories</a></li>
                 </ul>
             </div>

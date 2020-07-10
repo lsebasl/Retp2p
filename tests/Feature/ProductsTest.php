@@ -81,8 +81,22 @@ class ProductsTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
+    }
+    /** @test */
+    public function it_create_a_new_product()
 
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
+
+        $response = $this->actingAs($user)->get(route('stocks.index'));
+
+        $response->assertSee($product->name)
+            ->assertSee($product->Barcode)
+            ->assertSee($product->Units)
+            ->assertSee($product->Price);
 
     }
+
 }
 

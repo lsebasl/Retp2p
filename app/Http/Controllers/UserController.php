@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
+use App\Product;
 use App\Repositories\CacheUser;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\User;
 use Illuminate\View\View;
@@ -24,11 +26,15 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param User $user
+     * @param Request $request
      * @return View
      */
 
-    public function index(User $user): View
+    public function index(User $user,Request $request): View
     {
+        $name = $request->get('name');
+        $users= Product::name($name);
+
         $users = $this->cacheUser->getPaginated($user);
 
         return view('users.index', ['users' => $users]);

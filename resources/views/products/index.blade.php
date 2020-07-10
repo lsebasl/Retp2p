@@ -4,17 +4,7 @@
             <div class="mdl-tabs__panel" id="tabListProducts">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                                <label class="mdl-button mdl-js-button mdl-button--icon" for="searchProduct">
-                                    <i class="zmdi zmdi-search"></i>
-                                </label>
-                                <div class="mdl-textfield__expandable-holder">
-                                    <input class="mdl-textfield__input" type="text" id="searchProduct">
-                                    <label class="mdl-textfield__label"></label>
-                                </div>
-                            </div>
-                        </form>
+                        @include('partials.__search')
                         <nav class="full-width menu-categories">
                             <ul class="list-unstyle text-center">
                                 <li><a href="#!">Computers</a></li>
@@ -47,6 +37,9 @@
                             @empty
                                 <li>{{__('Without Products')}}</li>
                             @endforelse
+                                <div class="mdl-textfield mdl-js-textfield input-placa">{{$products->links()}}
+                                    <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
+                                </div>
                          </div>
                     </div>
                 </div>

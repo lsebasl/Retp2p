@@ -13,7 +13,7 @@ class AdminTest extends TestCase
 
     /** @test*/
 
-    public function testAdminCanSeeHomeView()
+    public function admin_can_see_home_view()
     {
 
         $user = factory(User::class)->create();
@@ -28,7 +28,7 @@ class AdminTest extends TestCase
 
     /** @test*/
 
-    public function testAdminCanSeeUserListView()
+    public function admin_can_see_user_list_view()
     {
 
         $user = factory(User::class)->create();
@@ -46,7 +46,7 @@ class AdminTest extends TestCase
 
     /** @test*/
 
-    public function testAdminCanSeeUserShowView()
+    public function admin_can_see_show_user()
     {
 
         $user = factory(User::class)->create();
@@ -62,7 +62,7 @@ class AdminTest extends TestCase
 
     }
     /** @test*/
-    public function testAdminCanSeeUserEditView()
+    public function admin_can_see_edit_user_view()
 
     {
         $user = factory(User::class)->create();
@@ -77,7 +77,7 @@ class AdminTest extends TestCase
     }
     /** @test*/
 
-    public function testAdminCanUpdatedUser()
+    public function admin_can_update_a_user()
     {
 
         $user = factory(User::class)->create();
@@ -112,7 +112,7 @@ class AdminTest extends TestCase
 
     /** @test*/
 
-    public function testAdminCanDeleteUser()
+    public function admin_can_delete_a_user()
     {
         $user = factory(User::class)->create();
         $admin = factory(User::class)->create();
@@ -126,7 +126,7 @@ class AdminTest extends TestCase
 
     /** @test*/
 
-    public function testAdminCanSeeProductsView()
+    public function admin_can_see_product_view()
     {
 
         $user = factory(User::class)->create();
@@ -139,26 +139,7 @@ class AdminTest extends TestCase
             ->assertViewIs('products.index')
             ->assertOk();
     }
-    /** @test*/
 
-    public function testAdminCanSeeProductEditView()
-
-    {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.edit',$product));
-
-        $response->assertSeeText('Barcode')
-            -> assertSeeText('Name')
-            -> assertSeeText('Mark')
-            -> assertSeeText('Category')
-            -> assertSeeText('Description')
-            -> assertSeeText('Status')
-            -> assertSee($product->name)
-            ->assertViewIs('products.edit')
-            ->assertOk();
-    }
 
 
 }

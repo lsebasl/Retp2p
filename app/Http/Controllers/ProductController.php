@@ -6,6 +6,7 @@ use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
@@ -21,12 +22,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
-    public function index():View
+    public function index(Request $request):View
 
     {
-        $product = Product::all();
+
+        //dd($request);
+
+        $product = Product::where('category','Mobiles')
+            ->where('status','enable')
+            ->orderBy('created_at',request('sorted', 'DESC'))
+            ->name($request->get('search'))
+            ->paginate(8);
 
         return view('products.index', ['products' => $product]);
 

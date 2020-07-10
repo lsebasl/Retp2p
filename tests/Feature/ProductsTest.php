@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
 
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductIndex()
+    public function no_authenticated_user_cant_access_to_product_index()
     {
         $this->get(route('products.index'))
             ->assertRedirect(route('login'));
@@ -21,7 +21,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductCreate()
+    public function no_authenticated_user_cant_access_to_product_create()
     {
         $this->get(route('products.create'))
             ->assertRedirect(route('login'));
@@ -29,7 +29,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductShow()
+    public function no_authenticated_user_cant_access_to_product_show()
     {
         $product = factory(Product::class)->create();
 
@@ -39,7 +39,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductEdit()
+    public function no_authenticated_user_cant_access_to_product_edit()
     {
         $Product = factory(Product::class)->create();
 
@@ -49,7 +49,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductUpdate()
+    public function no_authenticated_user_cant_access_to_product_update()
     {
         $Product = factory(Product::class)->create();
 
@@ -59,7 +59,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToProductDelete()
+    public function no_authenticated_user_cant_access_to_product_delete()
     {
         $product = factory(Product::class)->create();
 
@@ -70,7 +70,7 @@ class ProductsTest extends TestCase
 
 
     /** @test */
-    public function testItShowADefaultMessageIfTheProductListIsEmpty()
+    public function it_show_if_product_list_is_empty()
 
     {
         $user = factory(User::class)->create();

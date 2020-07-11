@@ -12,7 +12,7 @@
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <select class="mdl-textfield__input" name="id_type" id="id_type" required>
-            <option value="" ></option>
+            <option value=""></option>
         <option value="Foreign ID" {{ old('id_type',$user->id_type)=='Foreign ID' ? 'selected' : '' }}>{{__('Foreign ID')}}</option>
         <option value="Card ID" {{ old('id_type',$user->id_type)=='Card ID' ? 'selected' : '' }}>{{__('Card ID')}}</option>
         <option value="Passport" {{ old('id_type',$user->id_type)=='Passport' ? 'selected' : '' }}>{{__('Passport')}}</option>

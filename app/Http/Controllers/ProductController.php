@@ -29,10 +29,7 @@ class ProductController extends Controller
 
     {
 
-        //dd($request);
-
-        $product = Product::where('category','Mobiles')
-            ->where('status','enable')
+        $product = Product::where('status','enable')
             ->orderBy('created_at',request('sorted', 'DESC'))
             ->name($request->get('search'))
             ->paginate(8);

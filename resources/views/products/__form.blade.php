@@ -13,17 +13,17 @@
             <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
             <span class="mdl-textfield__error">Invalid name</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('status') ? 'is-invalid' : '' }}">
-            @includeWhen($errors->has('status'), 'partials.__invalid_feedback', ['feedback' => $errors->first('status')])
-            <select class="mdl-textfield__input" name="category" id="category">
-                <option value="" disabled="" selected=""></option>
-                <option value="Computers">Computers</option>
-                <option value="Tv & Video">Tv & Video</option>
-                <option value="Smartphones">Mobiles</option>
-                <option value="Accessories">Accessories</option>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('category') ? 'is-invalid' : '' }}">
+            <select class="mdl-textfield__input" name="category" id="category"  >
+                <option value=""></option>
+                <option value="Mobiles" {{ old('Mobiles',$product->Mobiles)=='Mobiles' ? 'selected' : '' }}>{{__('Mobiles')}}</option>
+                <option value="Computers" {{ old('Computers',$product->Computers)=='Computers' ? 'Computers' : '' }}>{{__('Computers')}}</option>
+                <option value="Tv & Video" {{ old('Tv & Video',$product->Tv)=='Tv & Video' ? 'Tv & Video' : '' }}>{{__('Tv & Video')}}</option>
+                <option value="Accessories" {{ old('Accessories',$product->Accessories)=='Accessories' ? 'Accessories' : '' }}>{{__('Accessories')}}</option>
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
-            <span class="mdl-textfield__error">Invalid Id Type</span>
+            @includeWhen($errors->has('category'), 'partials.__invalid_feedback', ['feedback' => $errors->first('category')])
+            <span class="mdl-textfield__error">Invalid Category</span>
         </div>
         <h5 class="text-condensedLight">Units and Price</h5>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

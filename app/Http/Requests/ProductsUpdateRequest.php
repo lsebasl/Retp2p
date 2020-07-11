@@ -29,7 +29,7 @@ class ProductsUpdateRequest extends FormRequest
         return [
             'barcode' => ['required',],
             'name' => 'required|min:3|max:12',
-            'category' => 'required|in:Computers,Tv & Video,Smartphones,Accessories',
+            'category' => 'required|in:Mobiles,Computers,Tv & Video,,Accessories',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',
@@ -39,6 +39,7 @@ class ProductsUpdateRequest extends FormRequest
             'status' => 'required|in:Enable,Disable',
 
         ];
+
 
     }
 }

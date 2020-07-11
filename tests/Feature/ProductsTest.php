@@ -120,11 +120,12 @@ class ProductsTest extends TestCase
     /** @test */
     function the_name_is_required()
     {
-        $this->from('products/create')
-            ->post('products', [
-                'name' => '',
-                'barcode' => '70024411 ',
-                'category' => 'Mobiles',
+        $this->actingAs($user = $this->createUser());
+
+        $this->post('products/store', [
+                'name' => 'Juan',
+                'barcode' => '7044024411',
+                'category' => 'Accessories',
                 'model' => 'p123',
                 'mark' => 'Huawei',
                 'description' => 'Verde',
@@ -134,8 +135,42 @@ class ProductsTest extends TestCase
                 'status' => 'Enable',]);
 
             $this->assertDatabaseEmpty('products');
+    }
+    /** @test */
+    function the_barcode_is_required()
+    {
+        $this->from('products/create')
+            ->post('products', [
+                'name' => 'sebastian',
+                'barcode' => '',
+                'category' => 'Mobiles',
+                'model' => 'p123',
+                'mark' => 'Huawei',
+                'description' => 'Verde',
+                'units' => '5',
+                'price' => '200',
+                'discount' => '10',
+                'status' => 'Enable',]);
 
+        $this->assertDatabaseEmpty('products');
+    }
+    /** @test */
+    function the_category_is_required()
+    {
+        $this->from('products/create')
+            ->post('products', [
+                'name' => 'sebastian',
+                'barcode' => '70024411',
+                'category' => '',
+                'model' => 'p123',
+                'mark' => 'Huawei',
+                'description' => 'Verde',
+                'units' => '5',
+                'price' => '200',
+                'discount' => '10',
+                'status' => 'Enable',]);
 
+        $this->assertDatabaseEmpty('products');
     }
 }
 

@@ -47,7 +47,7 @@
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <select class="mdl-textfield__input" name="status" id="status" required>
-        <option value=""></option>
+        <option value="" ></option>
         <option value="Enable" {{ old('status',$user->status)=='Enable' ? 'selected' : '' }}>{{__('Enable')}}</option>
         <option value="Disable" {{ old('status',$user->status)=='Disable' ? 'selected' : '' }}>{{__('Disable')}}</option>
     </select>

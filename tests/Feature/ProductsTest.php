@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
 
 
     /** @test */
-    public function no_authenticated_user_cant_access_to_product_index()
+    public function no_authenticated_user_cant_access_to_view_product_index()
     {
         $this->get(route('products.index'))
             ->assertRedirect(route('login'));
@@ -21,15 +21,35 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function no_authenticated_user_cant_access_to_product_create()
+    public function no_authenticated_user_cant_access_to_view_product_create()
     {
         $this->get(route('products.create'))
             ->assertRedirect(route('login'));
 
     }
+    /** @test */
+    public function no_authenticated_user_cant_create_product()
+    {
+        $this->actingAs($user = $this->createUser());
+
+        $this->post('products',['name' => '',
+            'barcode' => '70024411 ',
+            'category' => 'Mobiles',
+            'model' => 'p123',
+            'mark' => 'Huawei',
+            'description' => 'Verde',
+            'units' => '5',
+            'price' => '200',
+            'discount' => '10',
+            'status' => 'Enable',]);
+
+        $this->assertDatabaseEmpty('products');
+
+
+    }
 
     /** @test */
-    public function no_authenticated_user_cant_access_to_product_show()
+    public function no_authenticated_user_cant_access_to_view_product_show()
     {
         $product = factory(Product::class)->create();
 
@@ -39,7 +59,7 @@ class ProductsTest extends TestCase
     }
 
     /** @test */
-    public function no_authenticated_user_cant_access_to_product_edit()
+    public function no_authenticated_user_cant_access_to_view_product_edit()
     {
         $Product = factory(Product::class)->create();
 
@@ -97,6 +117,25 @@ class ProductsTest extends TestCase
             ->assertSee($product->Price);
 
     }
+    /** @test */
+    function the_name_is_required()
+    {
+        $this->from('products/create')
+            ->post('products', [
+                'name' => '',
+                'barcode' => '70024411 ',
+                'category' => 'Mobiles',
+                'model' => 'p123',
+                'mark' => 'Huawei',
+                'description' => 'Verde',
+                'units' => '5',
+                'price' => '200',
+                'discount' => '10',
+                'status' => 'Enable',]);
 
+            $this->assertDatabaseEmpty('products');
+
+
+    }
 }
 

@@ -8,7 +8,7 @@
             <span class="mdl-textfield__error">Invalid barcode</span>
         </div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="name" value="{{ old('name', $product->name)}}">
+            <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $product->name)}}">
           @includeWhen($errors->has('name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('name')])
             <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
             <span class="mdl-textfield__error">Invalid name</span>
@@ -17,10 +17,10 @@
             @includeWhen($errors->has('category'), 'partials.__invalid_feedback', ['feedback' => $errors->first('category')])
             <select class="mdl-textfield__input" name="category" id="category"  >
                 <option value=""></option>
-                <option value="Mobiles" {{ old('category',$product->Mobiles)=='Mobiles' ? 'selected' : '' }}>{{__('Mobiles')}}</option>
-                <option value="Computers" {{ old('category',$product->Computers)=='Computers' ? 'selected' : '' }}>{{__('Computers')}}</option>
-                <option value="Tv & Video" {{ old('category',$product->Tv)=='Tv & Video' ? 'selected' : '' }}>{{__('Tv & Video')}}</option>
-                <option value="Accessories" {{ old('category',$product->Accessories)=='Accessories' ? 'selected' : '' }}>{{__('Accessories')}}</option>
+                <option value="Mobiles" {{ old('category',$product->category)=='Mobiles' ? 'selected' : '' }}>{{__('Mobiles')}}</option>
+                <option value="Computers" {{ old('category',$product->category)=='Computers' ? 'selected' : '' }}>{{__('Computers')}}</option>
+                <option value="Tv & Video" {{ old('category',$product->category)=='Tv & Video' ? 'selected' : '' }}>{{__('Tv & Video')}}</option>
+                <option value="Accessories" {{ old('category',$product->category=='Accessories' ? 'selected' : '' }}>{{__('Accessories')}}</option>
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
             <span class="mdl-textfield__error">Invalid Category</span>

@@ -20,7 +20,7 @@
                 <option value="Mobiles" {{ old('category',$product->category)=='Mobiles' ? 'selected' : '' }}>{{__('Mobiles')}}</option>
                 <option value="Computers" {{ old('category',$product->category)=='Computers' ? 'selected' : '' }}>{{__('Computers')}}</option>
                 <option value="Tv & Video" {{ old('category',$product->category)=='Tv & Video' ? 'selected' : '' }}>{{__('Tv & Video')}}</option>
-                <option value="Accessories" {{ old('category',$product->category=='Accessories' ? 'selected' : '' }}>{{__('Accessories')}}</option>
+                <option value="Accessories" {{ old('category',$product->category)=='Accessories' ? 'selected' : '' }}>{{__('Accessories')}}</option>
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
             <span class="mdl-textfield__error">Invalid Category</span>

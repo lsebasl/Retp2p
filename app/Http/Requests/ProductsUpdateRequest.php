@@ -27,15 +27,15 @@ class ProductsUpdateRequest extends FormRequest
     public function rules():array
     {
         return [
-            'barcode' => ['required',],
-            'name' => 'required|min:3|max:12',
+            'barcode' => ['required', 'min:3','max:30',
+                Rule::unique('products', 'barcode')->ignore($this->route('product'))],
             'category' => 'required|in:Mobiles,Computers,Tv & Video,,Accessories',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',
-            'units' => 'required|Integer',
-            'price' => 'required|numeric',
-            'discount' => 'required|numeric',
+            'units' => 'required|Integer|min:1|max:1000',
+            'price' => 'required|numeric|min:0|max:100000000',
+            'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
 
         ];

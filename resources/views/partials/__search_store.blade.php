@@ -1,7 +1,8 @@
 
 
 <form method='GET' action="{{ route('smartphones.index')}}" class="form-inline">
-    <input type="search" class="form-control mr-sm-2" name="name" placeholder="Search..." value="{{ request()->input('name')}}">
+    <input type="search" class="form-control mr-sm-2" name="name" placeholder="Name..." value="{{ request()->input('name')}}">
+    <input type="search" class="form-control mr-sm-2" name="mark" placeholder="Mark..." value="{{ request()->input('mark')}}">
     <div class="form-group">
         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
     </div>

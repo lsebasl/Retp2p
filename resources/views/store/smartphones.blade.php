@@ -49,7 +49,7 @@
                                         @endif
                                     </div>
                                 <h5><a href="single.html">{{$product->name}}</a></h5>
-                                      <div class="simpleCart_shelfItem">
+                                    <p> <i class="item_price">{{$product->mark}}</i></p>                                   <div class="simpleCart_shelfItem">
                                     <p> <i class="item_price">$ {{$product->price}}</i></p>
                                     <form action="#" method="post">
                                         <input type="hidden" name="cmd" value="_cart" />
@@ -72,6 +72,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @stop

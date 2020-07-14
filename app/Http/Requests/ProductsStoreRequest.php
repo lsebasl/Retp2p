@@ -30,9 +30,9 @@ class ProductsStoreRequest extends FormRequest
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',
-            'units' => 'required|Integer',
-            'price' => 'required|numeric',
-            'discount' => 'required|numeric',
+            'units' => 'required|Integer|min:1|max:10000000',
+            'price' => 'required|numeric|min:0|max:100000000',
+            'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
             'image' =>'required|image' //jpeg,png,bmp,gif,svg, or webp
         ];

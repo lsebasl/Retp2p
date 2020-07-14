@@ -29,9 +29,10 @@ class ProductController extends Controller
 
     {
 
-        $product = Product::where('status','enable')
-            ->orderBy('created_at',request('sorted', 'DESC'))
+        $product = Product::orderBy('created_at',request('sorted', 'DESC'))
             ->name($request->get('search'))
+            ->category($request->get('search-category'))
+            ->status($request->get('search-status'))
             ->paginate(8);
 
         return view('products.index', ['products' => $product]);

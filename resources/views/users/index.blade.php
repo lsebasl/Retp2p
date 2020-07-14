@@ -24,7 +24,7 @@
                         </div>
 
                             {{--add search form--}}
-                        @include('partials.__search')
+                        @include('partials.__search_users')
                             @include('partials.__alerts')
                             <div class="mdl-list">
                                 <li class="full-width divider-menu-h"></li>

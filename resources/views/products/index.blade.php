@@ -1,19 +1,7 @@
 @extends('layout.app')
 @section('content')
-
-            <div class="mdl-tabs__panel" id="tabListProducts">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-                        @include('partials.__search')
-                        <nav class="full-width menu-categories">
-                            <ul class="list-unstyle text-center">
-                                <li><a href="#!">Computers</a></li>
-                                <li><a href="#!">Tv & Video</a></li>
-                                <li><a href="#!">Mobiles</a></li>
-                                <li><a href="#!">Accessories</a></li>
-                            </ul>
-                        </nav>
-                        @include('partials.__alerts')
+    <div class="mdl-grid portfolio-max-width">
+                <div class="mdl-card mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-shadow--2dp">
                         <div class="full-width text-center" style="padding: 30px 0;">
                             @forelse($products as $product)
                             <div class="mdl-card mdl-shadow--2dp full-width product-card">
@@ -23,8 +11,9 @@
                                         @endif
                                 </div>
                                 <div class="mdl-card__supporting-text">
-                                    <small>{{$product->units}}</small><br>
+                                    <small>{{$product->units}} units</small><br>
                                     <small>{{$product->category}}</small>
+                                    <small>{{$product->status}}</small>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
                                     {{$product->name}}
@@ -37,12 +26,16 @@
                             @empty
                                 <li>{{__('Without Products')}}</li>
                             @endforelse
-                                <div class="mdl-textfield mdl-js-textfield input-placa">{{$products->links()}}
+                                <div class="mdl-textfield mdl-js-textfield input-placa">{{$products->fragment('hash')->appends(request()->query())->links()}}
                                     <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
                                 </div>
                          </div>
                     </div>
-                </div>
-            </div>
+        <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+            @include('partials.__search_products')</small><br>
+            @include('partials.__alerts')
+        </div>
+    </div>
+
     </section>
 @endsection

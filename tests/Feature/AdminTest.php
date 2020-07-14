@@ -59,6 +59,8 @@ class AdminTest extends TestCase
             -> assertSee($user->name)
             ->assertOk();
 
+       $this->assertDatabaseHas('users',['name' => $user->name]);
+
 
     }
     /** @test*/
@@ -133,9 +135,9 @@ class AdminTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('products.index'));
 
-        $response->assertSee('Computers')
-            -> assertSee('Mobiles')
-            -> assertSee('Accessories')
+        $response->assertSee('Status')
+            -> assertSee('Search')
+            -> assertSee('Clear')
             ->assertViewIs('products.index')
             ->assertOk();
     }

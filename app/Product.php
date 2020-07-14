@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Contracts\View\View;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Query\Builder;
-use phpDocumentor\Reflection\Types\Object_;
+
 
 
 class Product extends Model
@@ -34,28 +34,93 @@ class Product extends Model
     {
         Return $this->belongsToMany(Invoice::class);
     }
+    /**
+     * @return BelongsToMany
+     */
+    public function User():BelongsToMany
+    {
+        Return $this->belongsToMany(Invoice::class);
+    }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->getAttribute('id');
+
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBarcode(): ?string
+    {
+        return $this->getAttribute('barcode');
     }
 
 
     /**
-     * Scope
+     * Query Scope Name
      *
-     * @param $query
-     * @param $name
-     *
+     * @param Builder $query
+     * @param string|null $name
+     * @return Builder
      */
-    public function scopeName($query, $name)
+    public function scopeName(Builder $query, ? string $name):Builder
     {
-        if($name){
+        if(null !== $name){
             return $query->where('name','LIKE',"$name%");
         }
         return $query;
+
+    }
+
+    /**
+     * Query Scope Status
+     *
+     * @param Builder $query
+     * @param $status
+     * @return Builder
+     */
+    public function scopeStatus(Builder $query, ? string $status):Builder
+    {
+        if(null !== $status){
+            return $query->where('status','LIKE',"$status%");
+        }
+        return $query;
+
+    }
+
+    /**
+     *Query Scope Mark
+     *
+     * @param Builder $query
+     * @param $mark
+     * @return Builder
+     */
+    public function scopeMark(Builder$query, ? string $mark):Builder
+    {
+        if(null !== $mark){
+            return $query->where('mark','LIKE',"$mark%");
+        }
+        return $query;
+
+    }
+
+    /**
+     *Query Scope Category
+     *
+     * @param Builder $query
+     * @param string|null $category
+     * @return Builder
+     */
+    public function scopeCategory(Builder$query, ? string $category):Builder
+    {
+        if(null !== $category){
+            return $query->where('category','LIKE',"$category%");
+        }
+        return $query;
+
     }
 }

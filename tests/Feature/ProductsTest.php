@@ -6,6 +6,9 @@ use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+
 
 class ProductsTest extends TestCase
 {
@@ -118,59 +121,104 @@ class ProductsTest extends TestCase
 
     }
     /** @test */
+    public function admin_can_store_a_product()
+    {
+        $user = factory(User::class)->create();
+
+        Storage::fake('image');
+        $file = uploadedfile::fake()->image('product.jpg');
+
+         $response =$this->actingAs($user)->post(route('products.store'), [
+
+            'image' => $file,
+            'barcode' => '70440244123',
+            'name' => 'Huawei',
+            'category' => 'Computers',
+            'model' => 'p123',
+            'mark' => 'Huawei',
+            'description' => 'Verde',
+            'units' => '5',
+            'price' => '200',
+            'discount' => '10',
+            'status' => 'Enable',
+
+
+        ])->assertRedirect(route('stocks.index'))
+         ->assertStatus(302);
+
+         Storage::disk('image')->assertExists($file->hashName());
+
+
+        $this->assertDatabaseHas('products',[
+
+            'image' => ('images/' . $file->hashName()),
+            'barcode' => '70440244123',
+            'name' => 'Huawei',
+            'category' => 'Computers',
+            'model' => 'p123',
+            'mark' => 'Huawei',
+            'description' => 'Verde',
+            'units' => '5',
+            'price' => '200',
+            'discount' => '10',
+            'status' => 'Enable',
+
+            ]);
+
+
+
+    }
     function the_name_is_required()
     {
+        $this->withExceptionHandling();
         $this->actingAs($user = $this->createUser());
 
-        $this->post('products/store', [
-                'name' => 'Juan',
-                'barcode' => '7044024411',
-                'category' => 'Accessories',
-                'model' => 'p123',
-                'mark' => 'Huawei',
-                'description' => 'Verde',
-                'units' => '5',
-                'price' => '200',
-                'discount' => '10',
-                'status' => 'Enable',]);
+        $data = [
+                    'image' => 'public/img/avatar-female2.png',
+                    'barcode' => '7044024411',
+                    'name' => 'JUAN',
+                    'category' => 'Computers',
+                    'model' => 'p123',
+                    'mark' => 'Huawei',
+                    'description' => 'Verde',
+                    'units' => '5',
+                    'price' => '200',
+                    'discount' => '10',
+                    'status' => 'Enable',
+                ];
+                $response = $this->actingAs($user)->post(route('users.store',$data));
 
-            $this->assertDatabaseEmpty('products');
-    }
-    /** @test */
-    function the_barcode_is_required()
-    {
-        $this->from('products/create')
-            ->post('products', [
-                'name' => 'sebastian',
-                'barcode' => '',
-                'category' => 'Mobiles',
-                'model' => 'p123',
-                'mark' => 'Huawei',
-                'description' => 'Verde',
-                'units' => '5',
-                'price' => '200',
-                'discount' => '10',
-                'status' => 'Enable',]);
+                $this->assertDatabaseHas('products', $data);
 
-        $this->assertDatabaseEmpty('products');
     }
-    /** @test */
-    function the_category_is_required()
-    {
-        $this->from('products/create')
-            ->post('products', [
-                'name' => 'sebastian',
-                'barcode' => '70024411',
-                'category' => '',
-                'model' => 'p123',
-                'mark' => 'Huawei',
-                'description' => 'Verde',
-                'units' => '5',
-                'price' => '200',
-                'discount' => '10',
-                'status' => 'Enable',]);
 
-        $this->assertDatabaseEmpty('products');
-    }
+
+       // /** @test */
+
+    /*public function it_cant_a_product_without_unique_barcode()
+{
+    $user = factory(User::class)->create();
+    $product = factory(Product::class)->create(['barcode' => '712122117']);
+
+    $data = [
+        'name' => 'JUAN',
+        'barcode' => '7044024411',
+        'category' => 'Accessories',
+        'model' => 'p123',
+        'mark' => 'Huawei',
+        'description' => 'Verde',
+        'units' => '5',
+        'price' => '200',
+        'discount' => '10',
+        'status' => 'Enable',
+        'image' => 'storage/app/images/uww65v8E4Yv2z9NO4DtYujpRJfo4uEQU6DvgSJEy.jpeg'
+    ];
+
+    $response = $this->actingAs($product)
+        ->post(route('users.store'),$data);
+
+    $response->assertSessionHasErrors('barcode');
+    }*/
+
 }
 

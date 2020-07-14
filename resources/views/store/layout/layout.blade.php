@@ -105,6 +105,8 @@
           </div>
       </div>
   </div>
+    </div>
+
 @endguest
 
 
@@ -174,7 +176,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -182,6 +183,7 @@
         </nav>
     </div>
 </div>
+
 <!-- //navigation -->
 
 @yield('content')
@@ -234,6 +236,9 @@
         </div>
     </div>
 </div>
+
+
+
 <!-- //footer -->
 <!-- cart-js -->
 <script src="{{ mix('js/store/minicart.js') }}" ></script>

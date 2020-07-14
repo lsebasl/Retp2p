@@ -30,11 +30,13 @@ class SmartphoneController extends Controller
     public function index(Request $request):View
     {
         $name = $request->get('name');
+        $mark = $request->get('mark');
 
         $product = Product::where('category','Mobiles')
             ->where('status','enable')
             ->orderBy('created_at',request('sorted', 'DESC'))
             ->name($name)
+            ->mark($mark)
             ->paginate(9);
 
         return view('store.smartphones', ['products' => $product]);

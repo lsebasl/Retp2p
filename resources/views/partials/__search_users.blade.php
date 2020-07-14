@@ -1,4 +1,4 @@
-<form method=Get action="{{ route('products.index')}}">
+<form method=Get action="{{ route('users.index')}}">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
             <i class="zmdi zmdi-search"></i>

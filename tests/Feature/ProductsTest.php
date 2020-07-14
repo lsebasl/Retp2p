@@ -146,8 +146,6 @@ class ProductsTest extends TestCase
         ])->assertRedirect(route('stocks.index'))
          ->assertStatus(302);
 
-         Storage::disk('image')->assertExists($file->hashName());
-
 
         $this->assertDatabaseHas('products',[
 

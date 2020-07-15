@@ -7,7 +7,9 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
+
 
 
 class ProductsTest extends TestCase
@@ -128,23 +130,10 @@ class ProductsTest extends TestCase
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
 
-         $response =$this->actingAs($user)->post(route('products.store'), [
-
-            'image' => $file,
-            'barcode' => '70440244123',
-            'name' => 'Huawei',
-            'category' => 'Computers',
-            'model' => 'p123',
-            'mark' => 'Huawei',
-            'description' => 'Verde',
-            'units' => '5',
-            'price' => '200',
-            'discount' => '10',
-            'status' => 'Enable',
-
-
-        ])->assertRedirect(route('stocks.index'))
-         ->assertStatus(302);
+        $this->actingAs($user)
+             ->post(route('products.store'), $this->getValidData($file))
+             ->assertRedirect(route('stocks.index'))
+             ->assertStatus(302);
 
 
         $this->assertDatabaseHas('products',[
@@ -163,60 +152,89 @@ class ProductsTest extends TestCase
 
             ]);
 
-
-
     }
-    function the_name_is_required()
+
+
+    /**
+     * @test
+     * @dataProvider productsDataProvider
+    */
+    public function admin_cant_store_a_incomplete_product_form()
     {
-        $this->withExceptionHandling();
-        $this->actingAs($user = $this->createUser());
+        $user = factory(User::class)->create();
 
-        $data = [
-                    'image' => 'public/img/avatar-female2.png',
-                    'barcode' => '7044024411',
-                    'name' => 'JUAN',
-                    'category' => 'Computers',
-                    'model' => 'p123',
-                    'mark' => 'Huawei',
-                    'description' => 'Verde',
-                    'units' => '5',
-                    'price' => '200',
-                    'discount' => '10',
-                    'status' => 'Enable',
-                ];
-                $response = $this->actingAs($user)->post(route('users.store',$data));
+        Storage::fake('image');
 
-                $this->assertDatabaseHas('products', $data);
+        $file = uploadedfile::fake()->image('product.jpg');
+
+        $response =$this->actingAs($user)->post(route('products.store'), [
+
+            'image' => $file,
+            'barcode' => '70440244123',
+            'name' => 'Huawei',
+            'category' => 'Computers',
+            'model' => 'p123',
+            'mark' => 'Huawei',
+            'description' => 'Verde',
+            'units' => '5',
+            'price' => '200',
+            'discount' => '10',
+            'status' => '',
+
+        ]);
+
+        $this->assertDatabaseEmpty('products');
+
+    }
+    public function productsDataProvider():array{
+        return [
+            'Test barcode is required' => ['barcode',null],
+            'Test barcode is too short' => ['barcode','1'],
+            'Test barcode is too long' => ['barcode',Str::random(81)],
+            'Test name is required' => ['name',null],
+            'Test name is too short' => ['name','n'],
+            'Test name is too long' => ['name',Str::random(81)],
+            'Test category is required' => ['category',null],
+            'Test category is short' => ['category','c'],
+            'Test category is long' => ['category',Str::random(81)],
+            'Test model is required' => ['model',null],
+            'Test model is short' => ['model','m'],
+            'Test model is long' => ['model',Str::random(81)],
+            'Test mark is required' => ['mark',null],
+            'Test description is required' => ['description',null],
+            'Test description is short' => ['description','d'],
+            'Test description is long' => ['description',Str::random(81)],
+            'Test units is required' => ['units',null],
+            'Test units is long' => ['units','100000'],
+            'Test price is status' => ['model',null],
+            'Test discount is required' => ['discount',null],
+
+        ];
 
     }
 
+    /**
+     * @param \Illuminate\Http\Testing\File $file
+     * @return array
+     */
+    public function getValidData(\Illuminate\Http\Testing\File $file)
+    {
+        return ([
 
-       // /** @test */
+            'image' => $file,
+            'barcode' => '70440244123',
+            'name' => 'Huawei',
+            'category' => 'Computers',
+            'model' => 'p123',
+            'mark' => 'Huawei',
+            'description' => 'Verde',
+            'units' => '5',
+            'price' => '200',
+            'discount' => '10',
+            'status' => 'Enable',
+        ]);
 
-    /*public function it_cant_a_product_without_unique_barcode()
-{
-    $user = factory(User::class)->create();
-    $product = factory(Product::class)->create(['barcode' => '712122117']);
-
-    $data = [
-        'name' => 'JUAN',
-        'barcode' => '7044024411',
-        'category' => 'Accessories',
-        'model' => 'p123',
-        'mark' => 'Huawei',
-        'description' => 'Verde',
-        'units' => '5',
-        'price' => '200',
-        'discount' => '10',
-        'status' => 'Enable',
-        'image' => 'storage/app/images/uww65v8E4Yv2z9NO4DtYujpRJfo4uEQU6DvgSJEy.jpeg'
-    ];
-
-    $response = $this->actingAs($product)
-        ->post(route('users.store'),$data);
-
-    $response->assertSessionHasErrors('barcode');
-    }*/
+    }
 
 }
 

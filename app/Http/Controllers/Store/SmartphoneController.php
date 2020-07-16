@@ -24,7 +24,7 @@ class SmartphoneController extends Controller
     /**
      * Show the about us in the store.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return View
      */
     public function index(Request $request):View
@@ -32,9 +32,9 @@ class SmartphoneController extends Controller
         $name = $request->get('name');
         $mark = $request->get('mark');
 
-        $product = Product::where('category','Mobiles')
-            ->where('status','enable')
-            ->orderBy('created_at',request('sorted', 'DESC'))
+        $product = Product::where('category', 'Mobiles')
+            ->where('status', 'enable')
+            ->orderBy('created_at', request('sorted', 'DESC'))
             ->name($name)
             ->mark($mark)
             ->paginate(9);

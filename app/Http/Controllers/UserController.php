@@ -16,7 +16,6 @@ class UserController extends Controller
     protected $cacheUser;
 
     public function __construct(CacheUser $cacheUser)
-
     {
         $this->cacheUser = $cacheUser;
 
@@ -25,8 +24,8 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $user
-     * @param Request $request
+     * @param  User    $user
+     * @param  Request $request
      * @return View
      */
 
@@ -44,13 +43,13 @@ class UserController extends Controller
     /**
      * Display a listing of the clients..
      *
-     * @param User $user
+     * @param  User $user
      * @return View
      */
 
     public function show(User $user):View
     {
-        Logs::AuditLogger($user,'show');
+        Logs::AuditLogger($user, 'show');
 
         $this->cacheUser->cacheFindByModel($user);
 
@@ -62,12 +61,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $user
+     * @param  User $user
      * @return View
      */
     public function edit(User $user):View
     {
-        Logs::AuditLogger($user,'edit');
+        Logs::AuditLogger($user, 'edit');
 
         $this->cacheUser->cacheFindByModel($user);
 
@@ -77,31 +76,30 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     *
-     * @param UserUpdateRequest $request
-     * @param User $user
+     * @param  UserUpdateRequest $request
+     * @param  User              $user
      * @return RedirectResponse
      */
     public function update(UserUpdateRequest $request, User $user):RedirectResponse
     {
-        Logs::AuditLogger($user,'update');
+        Logs::AuditLogger($user, 'update');
 
-        $this->cacheUser->update($request,$user);
+        $this->cacheUser->update($request, $user);
 
-       return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
+        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param  User $user
      * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy(User $user):RedirectResponse
     {
-        Logs::AuditLogger($user,'delete');
+        Logs::AuditLogger($user, 'delete');
 
         $this->cacheUser->delete($user);
 

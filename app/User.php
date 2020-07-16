@@ -14,13 +14,11 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-   const ENABLE_STATUS = 'Enable';
-   const DISABLE_STATUS = 'Disable';
+    const ENABLE_STATUS = 'Enable';
+    const DISABLE_STATUS = 'Disable';
 
     /**
      * The attributes that are mass assignable.
-     *
-     *
      */
     protected $fillable = [
         'name','last_name', 'email', 'password','id_type','identification','phone','address','status'
@@ -49,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getName():string
     {
-     return $this->getAttribute('name');
+        return $this->getAttribute('name');
     }
 
     /**
@@ -78,14 +76,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Scope
+     *
      * @param $query
      * @param $name
-     *
      */
     public function scopeName( $query, $name)
     {
-        if($name){
-            return $query->where('name','LIKE',"%$name%");
+        if($name) {
+            return $query->where('name', 'LIKE', "%$name%");
         }
         return $query;
     }

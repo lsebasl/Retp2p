@@ -12,7 +12,6 @@ use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
-
 {
     public function __construct()
     {
@@ -22,14 +21,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return View
      */
-    public function index(Request $request):View
-
+    public function index(Request $request)
     {
 
-        $product = Product::orderBy('created_at',request('sorted', 'DESC'))
+        $product = Product::orderBy('created_at', request('sorted', 'DESC'))
             ->name($request->get('search'))
             ->category($request->get('search-category'))
             ->status($request->get('search-status'))
@@ -54,7 +52,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProductsStoreRequest $request
+     * @param  ProductsStoreRequest $request
      * @return RedirectResponse
      */
     public function store(ProductsStoreRequest $request):RedirectResponse
@@ -66,18 +64,17 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('stocks.index')->with('success','Client Has Been Created!');
+        return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return View
      */
-    public function show(Product $product):View
-
+    public function show(Product $product)
     {
         return view('products.show', ['product' => $product]);
     }
@@ -85,7 +82,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return View
      */
     public function edit(Product $product):View
@@ -96,8 +93,8 @@ class ProductController extends Controller
     /**
      *  Update the specified resource in storage.
      *
-     * @param Product $product
-     * @param ProductsUpdateRequest $request
+     * @param  Product               $product
+     * @param  ProductsUpdateRequest $request
      * @return RedirectResponse
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
@@ -113,7 +110,7 @@ class ProductController extends Controller
             $image= Image::make(Storage::get($product->image));
             $image->widen(600)->encode();
 
-            Storage::put($product->image,(string) $image);
+            Storage::put($product->image, (string) $image);
 
         }
         else{
@@ -126,7 +123,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return RedirectResponse
      * @throws \Exception
      */
@@ -135,7 +132,7 @@ class ProductController extends Controller
     {
         Storage::delete($product->image);
         $product->delete();
-        return back()->with('success','Product Has Been Deleted');
+        return back()->with('success', 'Product Has Been Deleted');
     }
 }
 

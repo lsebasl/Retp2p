@@ -63,14 +63,14 @@ class Product extends Model
     /**
      * Query Scope Name
      *
-     * @param Builder $query
-     * @param string|null $name
+     * @param  Builder     $query
+     * @param  string|null $name
      * @return Builder
      */
     public function scopeName(Builder $query, ? string $name):Builder
     {
-        if(null !== $name){
-            return $query->where('name','LIKE',"$name%");
+        if(null !== $name) {
+            return $query->where('name', 'LIKE', "$name%");
         }
         return $query;
 
@@ -79,46 +79,46 @@ class Product extends Model
     /**
      * Query Scope Status
      *
-     * @param Builder $query
-     * @param $status
+     * @param  Builder $query
+     * @param  $status
      * @return Builder
      */
     public function scopeStatus(Builder $query, ? string $status):Builder
     {
-        if(null !== $status){
-            return $query->where('status','LIKE',"$status%");
+        if(null !== $status) {
+            return $query->where('status', 'LIKE', "$status%");
         }
         return $query;
 
     }
 
     /**
-     *Query Scope Mark
+     * Query Scope Mark
      *
-     * @param Builder $query
-     * @param $mark
+     * @param  Builder $query
+     * @param  $mark
      * @return Builder
      */
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
-        if(null !== $mark){
-            return $query->where('mark','LIKE',"$mark%");
+        if(null !== $mark) {
+            return $query->where('mark', 'LIKE', "$mark%");
         }
         return $query;
 
     }
 
     /**
-     *Query Scope Category
+     * Query Scope Category
      *
-     * @param Builder $query
-     * @param string|null $category
+     * @param  Builder     $query
+     * @param  string|null $category
      * @return Builder
      */
     public function scopeCategory(Builder$query, ? string $category):Builder
     {
-        if(null !== $category){
-            return $query->where('category','LIKE',"$category%");
+        if(null !== $category) {
+            return $query->where('category', 'LIKE', "$category%");
         }
         return $query;
 

@@ -21,7 +21,7 @@ class ModelRepository
 
     public function delete($model)
     {
-       return $model->delete();
+        return $model->delete();
     }
 
 }

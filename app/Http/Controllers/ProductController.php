@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
+use App\Mark;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,8 +46,9 @@ class ProductController extends Controller
      */
     public function create():View
     {
+        $marks = Mark::all();
         $product = new Product();
-        return view('products.create', ['product' => $product]);
+        return view('products.create', compact('product','marks'));
     }
 
     /**
@@ -87,7 +89,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product):View
     {
-        return view('products.edit', ['product' => $product]);
+        $marks = Mark::all();
+        return view('products.edit', compact('product','marks'));
     }
 
     /**

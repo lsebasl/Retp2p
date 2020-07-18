@@ -93,22 +93,39 @@ class ProductsTest extends TestCase
 
     }
 
-
     /** @test */
     public function it_show_if_product_list_is_empty()
 
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('users.index'));
-
-        $this->get(route('products.index'))
+        $this->actingAs($user)->get(route('products.index'))
             ->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
+
+    }
+
+    /** @test */
+    public function admin_can_see_product_list_view()
+    {
+        $product = factory(Product::class)->create();
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->get(route('products.index'));
+
+        $response->assertSee('Status')
+            -> assertSee('Search')
+            ->assertSee('Clear')
+            ->assertSee('units')
+            ->assertViewIs('products.index')
+            ->assertOk()
+            ->assertSee($product->Units)
+            ->assertSee($product->status)
+            ->assertSee($product->category);
     }
     /** @test */
-    public function it_create_a_new_product()
+    public function admin_can_see_product_stocks_view()
 
     {
         $user = factory(User::class)->create();
@@ -119,7 +136,25 @@ class ProductsTest extends TestCase
         $response->assertSee($product->name)
             ->assertSee($product->Barcode)
             ->assertSee($product->Units)
-            ->assertSee($product->Price);
+            ->assertSee($product->Price)
+            ->assertStatus(200)
+            ->assertOk();
+
+    }
+    /** @test */
+    public function admin_can_see_create_products_form()
+
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->get(route('products.create'));
+
+        $response->assertSee('barcode')
+            ->assertSee('name')
+            ->assertSee('status')
+            ->assertSee('price')
+            ->assertStatus(200)
+            ->assertOk();;
 
     }
     /** @test */
@@ -153,7 +188,6 @@ class ProductsTest extends TestCase
             ]);
 
     }
-
 
     /**
      * @test

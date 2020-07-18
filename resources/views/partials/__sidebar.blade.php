@@ -75,7 +75,7 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="#">Huawei</a></li>
+                    <li><a href="{{route('smartphones.index','Huawei')}}">Huawei</a></li>
                     <li><a href="#">Samsung</a></li>
                     <li><a href="#">Apple</a></li>
                     <li><a href="#">Xiaomi</a></li>

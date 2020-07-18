@@ -30,4 +30,5 @@ class VideoController extends Controller
 
         return view('store.video', ['products' => $product]);
     }
+
 }

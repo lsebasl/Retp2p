@@ -126,21 +126,7 @@ class AdminTest extends TestCase
     }
 
 
-    /** @test*/
 
-    public function admin_can_see_product_view()
-    {
-
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)->get(route('products.index'));
-
-        $response->assertSee('Status')
-            -> assertSee('Search')
-            -> assertSee('Clear')
-            ->assertViewIs('products.index')
-            ->assertOk();
-    }
 
 
 

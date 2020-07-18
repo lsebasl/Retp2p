@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Mark;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -32,14 +33,16 @@ class SmartphoneController extends Controller
         $name = $request->get('name');
         $mark = $request->get('mark');
 
-        $product = Product::where('category', 'Mobiles')
+        $products = Product::where('category', 'Mobiles')
             ->where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
             ->name($name)
             ->mark($mark)
             ->paginate(9);
 
-        return view('store.smartphones', ['products' => $product]);
+        $marks = Mark::all();
+
+        return view('store.smartphones', compact('products','marks'));
     }
 
 }

@@ -1133,6 +1133,7 @@ img {
   border-radius: 6px;
 }
 .img-thumbnail {
+    object-fit: contain;
   display: inline-block;
   max-width: 100%;
   height: auto;

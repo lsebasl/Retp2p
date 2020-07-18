@@ -4,8 +4,8 @@
                 <div class="mdl-card mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-shadow--2dp">
                         <div class="full-width text-center" style="padding: 30px 0;">
                             @forelse($products as $product)
-                            <div class="mdl-card mdl-shadow--2dp full-width product-card">
-                                <div class="mdl-card__title" style="height: 300px; object-fit:cover" >
+                            <div class="mdl-card mdl-shadow--2dp full-width product-card ">
+                                <div class="mdl-card__title" style="height: 300px; object-fit:cover; top: 30px; padding: 30px; font-size: large;" >
                                     @if($product->image)
                                     <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif

@@ -75,11 +75,11 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.index','Huawei')}}">Huawei</a></li>
-                    <li><a href="#">Samsung</a></li>
-                    <li><a href="#">Apple</a></li>
-                    <li><a href="#">Xiaomi</a></li>
-                    <li><a href="#">LG</a></li>
+                    <li><a href="{{route('smartphones.search','Huawei')}}">Huawei</a></li>
+                    <li><a href="{{route('smartphones.search','Samsung')}}">Samsung</a></li>
+                    <li><a href="{{route('smartphones.search','Apple')}}">Apple</a></li>
+                    <li><a href="{{route('smartphones.search','Xiaomi')}}">Xiaomi</a></li>
+                    <li><a href="{{route('smartphones.search','Xiaomi')}}">Lg</a></li>
                 </ul>
             </div>
         </div>
@@ -89,7 +89,7 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="#">Below $ 100</a></li>
+                    <li><a href="{{route('smartphones.search',100)}}">$ Below $ 100</a>
                     <li><a href="#">$ 100-500</a></li>
                     <li><a href="#">$ 1k-10k</a></li>
                     <li><a href="#">$ 10k-20k</a></li>

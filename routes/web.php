@@ -26,6 +26,8 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::get('/about', 'Store\AboutController@index')->name('store.about');
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
     Route::get('/smartphones', 'Store\SmartphoneController@index')->name('smartphones.index');
+    Route::get('/smartphones/{mark}', 'Store\SmartphoneController@searchMark')->name('smartphones.search');
+    Route::get('/smartphones/{price}', 'Store\SmartphoneController@searchPrice')->name('smartphones.price');
     Route::get('/laptop', 'Store\LaptopController@index')->name('store.laptop');
     Route::get('/video', 'Store\VideoController@index')->name('store.video');
     Route::get('/accessories', 'Store\AccessoriesController@index')->name('store.accessories');

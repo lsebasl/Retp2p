@@ -3,7 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use App\Mark;
 use App\Sidebar;
 
 /*
@@ -17,7 +16,7 @@ use App\Sidebar;
 |
 */
 
-$factory->define(Mark::class, function (Faker $faker) {
+$factory->define(Sidebar::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
     ];

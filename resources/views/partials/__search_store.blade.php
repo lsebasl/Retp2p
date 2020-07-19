@@ -3,10 +3,13 @@
 <form method='GET' action="{{ route('smartphones.index')}}" class="form-inline">
     <input type="search" class="form-control mr-sm-2" name="name" placeholder="Name..." value="{{ request()->input('name')}}">
     <input type="search" class="form-control mr-sm-2" name="mark" placeholder="Mark..." value="{{ request()->input('mark')}}">
+    <input type="search" class="form-control mr-sm-2" name="price" placeholder="Max Price..." value="{{ request()->input('price')}}">
     <div class="form-group">
         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
     </div>
+
 </form>
+
 
 
  {{--<div class="row row-filters">

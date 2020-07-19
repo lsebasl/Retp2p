@@ -109,6 +109,22 @@ class Product extends Model
     }
 
     /**
+     * Query Scope Mark
+     *
+     * @param Builder $query
+     * @param string|null $price
+     * @return Builder
+     */
+    public function scopePrice(Builder$query, ? string $price):Builder
+    {
+        if(null !== $price) {
+            return $query->where('price', '<=', $price);
+        }
+        return $query;
+
+    }
+
+    /**
      * Query Scope Category
      *
      * @param  Builder     $query
@@ -121,7 +137,23 @@ class Product extends Model
             return $query->where('category', 'LIKE', "$category%");
         }
         return $query;
-
     }
 
+    /**
+     * Query Scope Category
+     *
+     * @param Builder $query
+     * @param string|null $sidebar
+     * @return Builder
+     */
+    public function scopeSearchByMark(Builder$query, ? string $sidebar):Builder
+    {
+        if(null !== $sidebar) {
+            return $query->where('mark', '=', $sidebar);
+        }
+        return $query;
+    }
+
+
 }
+

@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     public function run():void
     {
         //Admin
-       /* User::create([
+       User::create([
             'name' => 'Joan Sebastian',
             'last_name' => 'Baron Betancur',
             'id_type' => 'Card ID',
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'email_verified_at'=> '2020-07-12 18:59:40',
             'status' => 'Enable',
             'password' => bcrypt('12345678'),
-        ]);*/
+        ]);
 
         factory(User::class,30)->create();
     }

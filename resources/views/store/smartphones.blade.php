@@ -19,7 +19,7 @@
     <div class="mobiles">
         <div class="container">
             <div class="w3ls_mobiles_grids">
-                @include('partials.__sidebar')
+                @include('partials.__sidebar_smartphones')
                 {{--nav bar--}}
                 <div class="col-md-8 w3ls_mobiles_grid_right">
                     <div class="clearfix"> </div>
@@ -27,17 +27,13 @@
                         <div class="w3ls_mobiles_grid_right_grid2_left">
                             @include('partials.__search_store')
                         </div>
-                        <div class="w3ls_mobiles_grid_right_grid2_right">
-                            <select name="select_item" class="select_item">
-                                <option selected="selected">Default sorting</option>
-                                <option>Sort by popularity</option>
-                                <option>Sort by average rating</option>
-                                <option>Sort by newness</option>
-                                <option>Sort by price: low to high</option>
-                                <option>Sort by price: high to low</option>
-                            </select>
-                        </div>
+                        <form>
+                        <button class="btn-info href="{{route('smartphones.index')}}">
+                            {{__('Clear')}}
+                        </button>
+                        </form>
                         <div class="clearfix"> </div>
+
                     </div>
                         @forelse($products as $product)
                         <div class="w3ls_mobiles_grid_right_grid3">
@@ -55,7 +51,7 @@
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
                                         <input type="hidden" name="w3ls_item" value={{$product->name}} />
-                                        <input type="hidden" name="amount" value="245.00"/>
+                                        <input type="hidden" name="amount" value={{$product->price}}/>
                                         <button type="submit" class="w3ls-cart">Add to cart</button>
                                     </form>
                                 </div>

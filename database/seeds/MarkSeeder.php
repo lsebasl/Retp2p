@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Mark;
+use App\Sidebar;
 
 
 class MarkSeeder extends Seeder
@@ -101,6 +102,29 @@ class MarkSeeder extends Seeder
         factory(Mark::class)->create([
             'name' => 'BenQ',
         ]);
+
+        //sidebar
+
+        factory(Sidebar::class)->create([
+            'name' => 'Huawei',
+        ]);
+
+        factory(Sidebar::class)->create([
+            'name' => 'Samsung',
+        ]);
+
+        factory(Sidebar::class)->create([
+            'name' => 'Apple',
+        ]);
+
+        factory(Sidebar::class)->create([
+            'name' => 'Xiaomi',
+        ]);
+
+        factory(Sidebar::class)->create([
+            'name' => 'Lg',
+        ]);
+
 
     }
 }

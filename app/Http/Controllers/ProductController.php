@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Mark;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
+use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
@@ -22,14 +24,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Request $request
+     * @param ProductsSearchRequest $request
      * @return View
      */
-    public function index(Request $request)
+    public function index(ProductsSearchRequest $request):View
     {
 
         $product = Product::orderBy('created_at', request('sorted', 'DESC'))
-            ->name($request->get('search'))
+            ->name($request->get('search-name'))
             ->category($request->get('search-category'))
             ->status($request->get('search-status'))
             ->paginate(8);

@@ -32,8 +32,8 @@
                          </div>
                     </div>
         <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
-            @include('partials.__search_products')</small><br>
             @include('partials.__alerts')
+            @include('partials.__search_products')</small><br>
         </div>
     </div>
 

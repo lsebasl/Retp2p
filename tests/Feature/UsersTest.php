@@ -105,23 +105,7 @@ class UsersTest extends TestCase
 
         $this->assertDatabasehas('users',['id'=>$user->id]);
     }
-    /** @test */
 
-    public function show_smartphones_with_a_partial_search_by_name_product()
-    {
-
-        $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create(['name' => 'product1']);
-        $product2 = factory(Product::class)->create(['name' => 'product2']);
-
-        $this->actingAs($user)->get('/smartphones?name=product1')
-            ->assertStatus(200)
-            ->assertSee('Smartphones')
-            ->assertSee($product1->name)
-            ->assertDontSee($product2->name);
-
-
-    }
 
 
 }

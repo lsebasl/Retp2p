@@ -89,7 +89,7 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.search',100)}}">$ Below $ 100</a>
+                    <li><a href="{{route('smartphones.price',100)}}">$ Below $ 100</a>
                     <li><a href="#">$ 100-500</a></li>
                     <li><a href="#">$ 1k-10k</a></li>
                     <li><a href="#">$ 10k-20k</a></li>

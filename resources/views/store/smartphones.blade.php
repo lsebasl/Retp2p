@@ -28,10 +28,11 @@
                             @include('partials.__search_store')
                         </div>
                         <form>
-                        <button class="btn-info href="{{route('smartphones.index')}}">
-                            {{__('Clear')}}
-                        </button>
+                            <div class="form-group">
+                                <button  href="{{ route('smartphones.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
+                            </div>
                         </form>
+
                         <div class="clearfix"> </div>
 
                     </div>

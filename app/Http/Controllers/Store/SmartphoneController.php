@@ -36,8 +36,6 @@ class SmartphoneController extends Controller
         $mark = $request->get('mark');
         $price = $request->get('price');
 
-
-
         $products = Product::where('category', 'Mobiles')
             ->where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
@@ -60,6 +58,7 @@ class SmartphoneController extends Controller
 
             return view('store.smartphones', compact('products'));
     }
+
 
 
 }

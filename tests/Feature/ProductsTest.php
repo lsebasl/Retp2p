@@ -157,6 +157,57 @@ class ProductsTest extends TestCase
             ->assertOk();;
 
     }
+
+    /** @test */
+    public function show_smartphones_with_a_partial_search_by_name_product()
+    {
+
+        $user = factory(User::class)->create();
+        $product1 = factory(Product::class)->create(['name' => 'product1']);
+        $product2 = factory(Product::class)->create(['name' => 'product2']);
+
+        $this->actingAs($user)->get('/smartphones?name=product1')
+            ->assertStatus(200)
+            ->assertSee('Smartphones')
+            ->assertSee($product1->name)
+            ->assertDontSee($product2->name);
+
+
+    }
+
+    /** @test */
+    public function show_smartphones_with_a_partial_search_by_mark_product()
+    {
+
+        $user = factory(User::class)->create();
+        $product1 = factory(Product::class)->create(['mark' => 'mark1']);
+        $product2 = factory(Product::class)->create(['mark' => 'mark2']);
+
+        $this->actingAs($user)->get('/smartphones?name=mark1')
+            ->assertStatus(200)
+            ->assertSee('Smartphones')
+            ->assertSee($product1->mark)
+            ->assertDontSee($product2->mark);
+
+    }
+
+    /** @test */
+    public function show_smartphones_with_a_partial_search_by_price_product()
+    {
+
+        $user = factory(User::class)->create();
+        $product1 = factory(Product::class)->create(['price' => 1000]);
+        $product2 = factory(Product::class)->create(['price' => 4000]);
+
+        $this->actingAs($user)->get('/smartphones?name=&mark=&price=3000')
+            ->assertStatus(200)
+            ->assertSee('Smartphones')
+            ->assertSee($product1->price)
+            ->assertDontSee($product2->price);
+
+    }
+
+
     /** @test */
     public function admin_can_store_a_product()
     {
@@ -269,6 +320,7 @@ class ProductsTest extends TestCase
         ]);
 
     }
+
 
 }
 

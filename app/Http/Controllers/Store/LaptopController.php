@@ -26,7 +26,7 @@ class LaptopController extends Controller
      */
     public function index():View
     {
-        $product = Product::where('status','enable')->get();
+        $product = Product::where('status', 'enable')->get();
 
         return view('store.laptop', ['products' => $product]);
     }

@@ -105,6 +105,8 @@
           </div>
       </div>
   </div>
+    </div>
+
 @endguest
 
 
@@ -134,7 +136,7 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Mobiles</h6>
-                                        <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
+                                        <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
 
                                     </ul>
                                 </div>
@@ -174,7 +176,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -182,6 +183,7 @@
         </nav>
     </div>
 </div>
+
 <!-- //navigation -->
 
 @yield('content')
@@ -210,7 +212,7 @@
                 <ul class="info">
                     <li><a href="products.html">Computers</a></li>
                     <li><a href="products1.html">Tv & Video</a></li>
-                    <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
+                    <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
                     <li><a href="products1.html">Accessories</a></li>
                 </ul>
             </div>
@@ -234,6 +236,9 @@
         </div>
     </div>
 </div>
+
+
+
 <!-- //footer -->
 <!-- cart-js -->
 <script src="{{ mix('js/store/minicart.js') }}" ></script>

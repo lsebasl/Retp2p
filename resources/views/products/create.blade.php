@@ -31,7 +31,7 @@
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                                         {{__('Save')}}
                                     </button>
-                                <div class="mdl-tooltip" for="btn-addProduct">Add Product</div>
+                                     <div class="mdl-tooltip" for="btn-addProduct">Add Product</div>
                                 </p>
                             </form>
                         </div>

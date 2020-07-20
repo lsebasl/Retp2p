@@ -22,10 +22,9 @@
                         <div class="full-width panel-tittle bg-success text-center tittles">
                             {{__('List Users')}}
                         </div>
-                        <div class="mdl-textfield mdl-js-textfield input-placa">{{$users->links()}}
-                            <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
-                        </div>
+
                             {{--add search form--}}
+                        @include('partials.__search_users')
                             @include('partials.__alerts')
                             <div class="mdl-list">
                                 <li class="full-width divider-menu-h"></li>
@@ -47,6 +46,9 @@
                                 @empty
                                     <li>{{__('Without UserRepository')}}</li>
                                 @endforelse
+                                <div class="mdl-textfield mdl-js-textfield input-placa">{{$users->links()}}
+                                    <link rel="stylesheet" href="{{ mix('/css/admin/all2.css') }}">
+                                </div>
                             </div>
                         </div>
                     </div>

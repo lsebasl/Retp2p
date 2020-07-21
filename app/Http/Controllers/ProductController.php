@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductCreated;
 use App\Helpers\Logs;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
+use App\Events\ProductUpdate;
 
 class ProductController extends Controller
 {
@@ -67,7 +69,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        Logs::AuditLogger($product, 'create');
+        ProductCreated::dispatch($product, auth()->user());
 
         return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
 
@@ -102,13 +104,12 @@ class ProductController extends Controller
     /**
      *  Update the specified resource in storage.
      *
-     * @param  Product               $product
+     * @param  Product $product
      * @param  ProductsUpdateRequest $request
      * @return RedirectResponse
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-        Logs::AuditLogger($product, 'update');
 
         if($request->hasFile('image')) {
             Storage::delete($product->image);
@@ -127,6 +128,8 @@ class ProductController extends Controller
         else{
             $product->update(array_filter($request->validated()));
         }
+
+        ProductUpdate::dispatch($product, auth()->user());
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }

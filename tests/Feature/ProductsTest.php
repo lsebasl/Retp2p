@@ -207,6 +207,31 @@ class ProductsTest extends TestCase
 
     }
 
+    /**
+     * @param string $field
+     * @param string|null $value
+     * @test
+     * @dataProvider notValidSearchItemsProvider
+     */
+    public function products_search_fails_when_a_search_item_is_not_valid(string $field, ?string $value)
+    {
+
+        $user = factory(User::class)->create();
+
+        $filters = [
+            'filter' => [
+                $field=> $value
+             ]
+        ];
+
+        $response =  $this->actingAs($user)
+            ->get(route('products.index',$filters));
+
+
+        $response->assertSessionHasErrors('filter.'.$field);
+
+    }
+
 
     /** @test */
     public function admin_can_store_a_product()
@@ -271,7 +296,24 @@ class ProductsTest extends TestCase
         $this->assertDatabaseEmpty('products');
 
     }
-    public function productsDataProvider():array{
+
+    /**
+     * @return array
+     */
+    public function notValidSearchItemsProvider(): array
+    {
+        return [
+            'Test name is too long' => ['search-name', Str::random(50)],
+            'Test status is incorrect' => ['search-status', 'ena'],
+            'Test category is incorrect' => ['search-category', 'test'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function productsDataProvider():array
+    {
         return [
             'Test barcode is required' => ['barcode',null],
             'Test barcode is too short' => ['barcode','1'],

@@ -30,7 +30,7 @@
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body panel_text">
                             <ul>
-                                <li><a href="{{ route('store.laptop') }}">Laptop</a></li>
+                                <li><a href="{{ route('laptop.index') }}">Laptop</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                         <div class="panel-body panel_text">
                             <ul>
-                                <li><a href="{{ route('store.video') }}">Tv & Video</a></li>
+                                <li><a href="{{ route('video.index') }}">Tv & Video</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                         <div class="panel-body panel_text">
                             <ul>
-                                <li><a href="{{ route('store.accessories')}}">Accessories</a></li>
+                                <li><a href="{{ route('headphones.index') }}">Headphones</a></li>
                             </ul>
                         </div>
                     </div>

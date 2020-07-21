@@ -40,7 +40,7 @@
                         <div class="w3ls_mobiles_grid_right_grid3">
                             <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
                                 <div class="agile_ecommerce_tab_left mobiles_grid">
-                                    <div class="" style="height: 300px; object-fit:cover; ">
+                                    <div class="" style="height: 250px; object-fit:cover; ">
                                         @if($product->image)
                                              <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif

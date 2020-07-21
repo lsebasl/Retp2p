@@ -26,7 +26,7 @@ class VideoController extends Controller
      */
     public function index():View
     {
-        $product = Product::where('status', 'enable')->get();
+        $product = Product::where('status', 'enable')->paginate();
 
         return view('store.video', ['products' => $product]);
     }

@@ -59,6 +59,15 @@ class Product extends Model
         return $this->getAttribute('barcode');
     }
 
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->getAttribute('name');
+    }
+
+
 
     /**
      * Query Scope Name

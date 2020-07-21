@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\View\View;
 
-class AccessoriesController extends Controller
+class HeadphonesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,8 +26,8 @@ class AccessoriesController extends Controller
      */
     public function index():View
     {
-        $product = Product::where('status', 'enable')->get();
+        $product = Product::where('status', 'enable')->paginate();
 
-        return view('store.accessories', ['products' => $product]);
+        return view('store.headphones', ['products' => $product]);
     }
 }

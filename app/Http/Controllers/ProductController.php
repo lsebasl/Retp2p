@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logs;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Mark;
 use App\Product;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
-use function GuzzleHttp\Promise\all;
 
 class ProductController extends Controller
 {
@@ -30,13 +29,13 @@ class ProductController extends Controller
     public function index(ProductsSearchRequest $request):View
     {
 
-        $product = Product::orderBy('created_at', request('sorted', 'DESC'))
+        $products = Product::orderBy('created_at', request('sorted', 'DESC'))
             ->name($request->get('search-name'))
             ->category($request->get('search-category'))
             ->status($request->get('search-status'))
             ->paginate(8);
 
-        return view('products.index', ['products' => $product]);
+        return view('products.index', compact('products'));
 
     }
 
@@ -68,6 +67,8 @@ class ProductController extends Controller
 
         $product->save();
 
+        Logs::AuditLogger($product, 'create');
+
         return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
 
     }
@@ -80,6 +81,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        Logs::AuditLogger($product, 'show');
+
         return view('products.show', ['product' => $product]);
     }
 
@@ -91,6 +94,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product):View
     {
+        Logs::AuditLogger($product, 'edit');
         $marks = Mark::all();
         return view('products.edit', compact('product','marks'));
     }
@@ -104,6 +108,8 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
+        Logs::AuditLogger($product, 'update');
+
         if($request->hasFile('image')) {
             Storage::delete($product->image);
 
@@ -135,6 +141,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product):RedirectResponse
     {
+        Logs::AuditLogger($product, 'destroy');
+
         Storage::delete($product->image);
         $product->delete();
         return back()->with('success', 'Product Has Been Deleted');

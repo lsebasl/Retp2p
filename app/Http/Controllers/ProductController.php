@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ProductCreated;
+use App\Events\ProductSaveImage;
 use App\Helpers\Logs;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
@@ -16,6 +17,8 @@ use Intervention\Image\Facades\Image;
 use App\Events\ProductUpdate;
 
 class ProductController extends Controller
+
+
 {
     public function __construct()
     {
@@ -69,6 +72,8 @@ class ProductController extends Controller
 
         $product->save();
 
+        ProductSaveImage::dispatch($product);
+
         ProductCreated::dispatch($product, auth()->user());
 
         return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
@@ -119,15 +124,12 @@ class ProductController extends Controller
             $product->image = $request->file('image')->store('images');
 
             $product->save();
-            $image= Image::make(Storage::get($product->image));
-            $image->widen(600)->encode();
+                    }
 
-            Storage::put($product->image, (string) $image);
-
-        }
         else{
             $product->update(array_filter($request->validated()));
         }
+        ProductSaveImage::dispatch($product);
 
         ProductUpdate::dispatch($product, auth()->user());
 

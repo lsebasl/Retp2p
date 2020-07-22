@@ -224,8 +224,10 @@ class ProductsTest extends TestCase
              ]
         ];
 
+
         $response =  $this->actingAs($user)
             ->get(route('products.index',$filters));
+        dd($response->getContent());
 
 
         $response->assertSessionHasErrors('filter.'.$field);

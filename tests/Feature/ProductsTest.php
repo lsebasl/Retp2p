@@ -210,7 +210,6 @@ class ProductsTest extends TestCase
     /**
      * @param string $field
      * @param string|null $value
-     * @test
      * @dataProvider notValidSearchItemsProvider
      */
     public function products_search_fails_when_a_search_item_is_not_valid(string $field, ?string $value)

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\facades\Cache;
 
 class Mark extends Model
 {
@@ -12,4 +14,16 @@ class Mark extends Model
     protected $fillable = [
         'name' ,
     ];
+
+    /**
+     *Obtain cache marks
+     * @return Collection
+     */
+    public function getCacheMarks():Collection
+    {
+        return Cache::remember('marks',now()->addDay(),function(){
+            return $this->all();
+
+         });
+    }
 }

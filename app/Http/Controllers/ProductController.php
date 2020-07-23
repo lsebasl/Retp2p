@@ -10,19 +10,18 @@ use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Mark;
 use App\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
 use App\Events\ProductUpdate;
 
 class ProductController extends Controller
-
-
 {
-    public function __construct()
+    Protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        //
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -33,15 +32,9 @@ class ProductController extends Controller
      */
     public function index(ProductsSearchRequest $request):View
     {
-
-        $products = Product::orderBy('created_at', request('sorted', 'DESC'))
-            ->name($request->get('search-name'))
-            ->category($request->get('search-category'))
-            ->status($request->get('search-status'))
-            ->paginate(8);
+        $products = $this->productRepository->getPaginated($request);
 
         return view('products.index', compact('products'));
-
     }
 
 
@@ -53,7 +46,9 @@ class ProductController extends Controller
     public function create():View
     {
         $marks = Mark::all();
+
         $product = new Product();
+
         return view('products.create', compact('product','marks'));
     }
 
@@ -65,19 +60,13 @@ class ProductController extends Controller
      */
     public function store(ProductsStoreRequest $request):RedirectResponse
     {
-
-        $product= new Product($request->validated());
-
-        $product->image = $request->file('image')->store('images');
-
-        $product->save();
+        $product = $this->productRepository->store($request);
 
         ProductSaveImage::dispatch($product);
 
         ProductCreated::dispatch($product, auth()->user());
 
         return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
-
     }
 
     /**
@@ -115,23 +104,18 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-
         if($request->hasFile('image')) {
-            Storage::delete($product->image);
 
-            $product->fill($request->validated());
+            $this->productRepository->DeleteImage($product);
 
-            $product->image = $request->file('image')->store('images');
+            $product = $this->productRepository->SaveImage($product, $request);
 
-            $product->save();
-                    }
+            ProductSaveImage::dispatch($product);
 
-        else{
-            $product->update(array_filter($request->validated()));
+        }else{
+            $product = $this->productRepository->Update($product, $request);
         }
-        ProductSaveImage::dispatch($product);
-
-        ProductUpdate::dispatch($product, auth()->user());
+             ProductUpdate::dispatch($product, auth()->user());
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }
@@ -148,9 +132,11 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'destroy');
 
-        Storage::delete($product->image);
-        $product->delete();
-        return back()->with('success', 'Product Has Been Deleted');
+        $this->productRepository->DeleteImage($product);
+
+        $this->productRepository->Delete($product);
+
+        return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }
 }
 

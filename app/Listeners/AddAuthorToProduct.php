@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 
-class AddAuthorToProduct
+class AddAuthorToProduct implements ShouldQueue
 {
     /**
      * Handle the event.

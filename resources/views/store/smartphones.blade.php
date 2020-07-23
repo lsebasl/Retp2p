@@ -25,6 +25,7 @@
                     <div class="clearfix"> </div>
                     <div class="w3ls_mobiles_grid_right_grid2">
                         <div class="w3ls_mobiles_grid_right_grid2_left">
+                            @include('partials.__alerts')
                             @include('partials.__search_store')
                         </div>
                         <form>

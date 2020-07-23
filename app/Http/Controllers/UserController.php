@@ -24,15 +24,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  User    $user
-     * @param  Request $request
+     * @param User $user
      * @return View
      */
 
-    public function index(User $user,Request $request): View
+    public function index(User $user): View
     {
-        $name = $request->get('name');
-        $users= Product::name($name);
 
         $users = $this->cacheUser->getPaginated($user);
 

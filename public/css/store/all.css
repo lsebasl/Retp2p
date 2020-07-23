@@ -1133,6 +1133,7 @@ img {
   border-radius: 6px;
 }
 .img-thumbnail {
+    object-fit: contain;
   display: inline-block;
   max-width: 100%;
   height: auto;
@@ -2788,6 +2789,32 @@ select[multiple].form-group-lg .form-control {
   text-align: center;
   pointer-events: none;
 }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+    display: block;
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
 .input-lg + .form-control-feedback {
   width: 46px;
   height: 46px;
@@ -6870,7 +6897,7 @@ button.close {
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Contributing author: Tyler Smith (@mbmufffin)
- *
+ * 
  */
 /* ====================================================================================================================
  * FONT-FACE
@@ -6960,15 +6987,15 @@ html[xmlns] .flexslider .slides {
 .flexslider .slides img {
   height: auto;
 }
-.flex-viewport {
+.flex-viewport { 
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
-  border: 1px solid #D1CFCF;
+  border: 1px solid #D1CFCF; 
 }
-.single-left .flex-viewport {
+.single-left .flex-viewport { 
 	max-height: 450px;
 }
 .loading .flex-viewport {
@@ -9342,7 +9369,7 @@ html[xmlns] .flexslider .slides {
 	}
 	.position {
 		margin-top: 17px;
-	}
+	} 
 }
 @media (max-width:1024px){
 .position {
@@ -9658,7 +9685,7 @@ button::-moz-focus-inner {
     opacity: 1; }
 
 .mfp-close-btn-in .mfp-close {
-  color: #333333;
+  color: #333333; 
   background: none;
   }
 
@@ -9668,7 +9695,7 @@ button::-moz-focus-inner {
   right: -6px;
   text-align: right;
   padding-right: 6px;
-  width: 100%;
+  width: 100%; 
 }
 .login h3,.signup h3{
 	margin:1em 0;
@@ -9677,7 +9704,7 @@ button::-moz-focus-inner {
 .login input[type="text"],.login input[type="password"]{
 	width:90%;
 	padding:5px;
-	margin:3px 0;
+	margin:3px 0;x
 	border: 1px solid #a63d56;
 	outline: none !important;
 }
@@ -9706,7 +9733,7 @@ button::-moz-focus-inner {
 	font-size: 18px;
 	color: #fff;
 	text-transform: uppercase;
-	width: 17%;
+	width: 17%;	
 	-webkit-appearance: none;
 }
 .login input[type="submit"]:hover,.signup input[type="submit"]:hover{
@@ -9782,7 +9809,7 @@ button::-moz-focus-inner {
 		height: 100%;
 		left: 0px;
 	}
-}
+} 
 
 /*--
 Author: W3layouts

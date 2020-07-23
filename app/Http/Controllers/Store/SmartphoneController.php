@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductsStoreSearchRequest;
 use App\Mark;
 use App\Product;
 use App\Sidebar;
@@ -27,21 +28,18 @@ class SmartphoneController extends Controller
     /**
      * Show the about us in the store.
      *
-     * @param  Request $request
+     * @param ProductsStoreSearchRequest $request
      * @return View
      */
-    public function index(Request $request):View
+    public function index(ProductsStoreSearchRequest $request):View
     {
-        $name = $request->get('name');
-        $mark = $request->get('mark');
-        $price = $request->get('price');
 
         $products = Product::where('category', 'Mobiles')
             ->where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
-            ->price($price)
-            ->name($name)
-            ->mark($mark)
+            ->price($request->get('price'))
+            ->name($request->get('name'))
+            ->mark($request->get('mark'))
             ->paginate(9);
 
 

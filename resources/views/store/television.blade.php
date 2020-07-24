@@ -19,17 +19,17 @@
     <div class="mobiles">
         <div class="container">
             <div class="w3ls_mobiles_grids">
-                @include('partials.__sidebar_smartphones')
+                @include('partials.__sidebar_television')
                 {{--nav bar--}}
                 <div class="col-md-8 w3ls_mobiles_grid_right">
                     <div class="clearfix"> </div>
                     <div class="w3ls_mobiles_grid_right_grid2">
                         <div class="w3ls_mobiles_grid_right_grid2_left">
-                            @include('partials.__search_store')
+                            @include('partials.__search_store_television')
                         </div>
                         <form>
                             <div class="form-group">
-                                <button  href="{{ route('smartphones.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
+                                <button  href="{{ route('television.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
                             </div>
                         </form>
 
@@ -46,7 +46,7 @@
                                         @endif
                                     </div>
                                     <h5><a href="single.html">{{$product->name}}</a></h5>
-                                    <p> <i class="item_price">{{$product->mark}}</i></p>                                   <div class="simpleCart_shelfItem">
+                                    <p> <i class="item_price">{{$product->mark}}</i></p><div class="simpleCart_shelfItem">
                                         <p> <i class="item_price">$ {{$product->price}}</i></p>
                                         <form action="#" method="post">
                                             <input type="hidden" name="cmd" value="_cart" />

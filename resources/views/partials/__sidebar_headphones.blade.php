@@ -75,11 +75,11 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.search','Huawei')}}">Huawei</a></li>
-                    <li><a href="{{route('smartphones.search','Samsung')}}">Samsung</a></li>
-                    <li><a href="{{route('smartphones.search','Apple')}}">Apple</a></li>
-                    <li><a href="{{route('smartphones.search','Xiaomi')}}">Xiaomi</a></li>
-                    <li><a href="{{route('smartphones.search','Lg')}}">Lg</a></li>
+                    <li><a href="{{route('headphones.search','Huawei')}}">Huawei</a></li>
+                    <li><a href="{{route('headphones.search','Samsung')}}">Samsung</a></li>
+                    <li><a href="{{route('headphones.search','Apple')}}">Apple</a></li>
+                    <li><a href="{{route('headphones.search','Xiaomi')}}">Xiaomi</a></li>
+                    <li><a href="{{route('headphones.search','Lg')}}">Lg</a></li>
                 </ul>
             </div>
         </div>
@@ -89,11 +89,11 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.price',5000)}}">$ Below $ 5000</a>
-                    <li><a href="{{route('smartphones.price',10000)}}">$ 5000-10000</a></li>
-                    <li><a href="{{route('smartphones.price',20000)}}">$ 10000-20000</a></li>
-                    <li><a href="{{route('smartphones.price',30000)}}">$ 20000-30000</a></li>
-                    <li><a href="{{route('smartphones.price',31000)}}">$ Above $ 30000</a>
+                    <li><a href="{{route('headphones.price',5000)}}">$ Below $ 5000</a>
+                    <li><a href="{{route('headphones.price',10000)}}">$ 5000-10000</a></li>
+                    <li><a href="{{route('headphones.price',20000)}}">$ 10000-20000</a></li>
+                    <li><a href="{{route('headphones.price',30000)}}">$ 20000-30000</a></li>
+                    <li><a href="{{route('headphones.price',31000)}}">$ Above $ 30000</a>
                 </ul>
             </div>
         </div>

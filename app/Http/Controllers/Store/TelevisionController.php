@@ -50,4 +50,11 @@ class TelevisionController extends Controller
         return view('store.television', compact('products'));
     }
 
+    public function searchPrice($price):View
+    {
+        $products = $this->categoryRepository->getSearchPrice($price,'Tv & Video');
+
+        return view('store.television', compact('products'));
+    }
+
 }

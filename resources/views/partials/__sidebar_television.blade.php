@@ -75,11 +75,11 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.search','Huawei')}}">Huawei</a></li>
-                    <li><a href="{{route('smartphones.search','Samsung')}}">Samsung</a></li>
-                    <li><a href="{{route('smartphones.search','Apple')}}">Apple</a></li>
-                    <li><a href="{{route('smartphones.search','Xiaomi')}}">Xiaomi</a></li>
-                    <li><a href="{{route('smartphones.search','Lg')}}">Lg</a></li>
+                    <li><a href="{{route('television.search','BenQ')}}">BenQ</a></li>
+                    <li><a href="{{route('television.search','Samsung')}}">Samsung</a></li>
+                    <li><a href="{{route('television.search','Apple')}}">Apple</a></li>
+                    <li><a href="{{route('television.search','Dell')}}">Dell</a></li>
+                    <li><a href="{{route('television.search','Lg')}}">Lg</a></li>
                 </ul>
             </div>
         </div>
@@ -89,11 +89,11 @@
         <div class="w3ls_mobiles_grid_left_grid_sub">
             <div class="ecommerce_color ecommerce_size">
                 <ul>
-                    <li><a href="{{route('smartphones.price',5000)}}">$ Below $ 5000</a>
-                    <li><a href="{{route('smartphones.price',10000)}}">$ 5000-10000</a></li>
-                    <li><a href="{{route('smartphones.price',20000)}}">$ 10000-20000</a></li>
-                    <li><a href="{{route('smartphones.price',30000)}}">$ 20000-30000</a></li>
-                    <li><a href="{{route('smartphones.price',31000)}}">$ Above $ 30000</a>
+                    <li><a href="{{route('television.price',5000)}}">$ Below $ 5000</a>
+                    <li><a href="{{route('television.price',10000)}}">$ 5000-10000</a></li>
+                    <li><a href="{{route('television.price',20000)}}">$ 10000-20000</a></li>
+                    <li><a href="{{route('television.price',30000)}}">$ 20000-30000</a></li>
+                    <li><a href="{{route('television.price',31000)}}">$ Above $ 30000</a>
                 </ul>
             </div>
         </div>

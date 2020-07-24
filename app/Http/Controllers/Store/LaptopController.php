@@ -49,4 +49,11 @@ class LaptopController extends Controller
         return view('store.laptop', compact('products'));
     }
 
+    public function searchPrice($price):View
+    {
+        $products = $this->categoryRepository->getSearchPrice($price,'Computers');
+
+        return view('store.laptop', compact('products'));
+    }
+
 }

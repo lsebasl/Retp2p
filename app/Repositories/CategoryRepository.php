@@ -26,6 +26,16 @@ class CategoryRepository implements CategoryInterface
     }
 
 
+        public function getSearchPrice($price,$category)
+    {
+        return Product::where('category', $category)
+            ->where('status', 'enable')
+            ->orderBy('created_at', request('sorted', 'DESC'))
+            ->SidebarPrice($price)
+            ->paginate(9);
+    }
+
+
 
 
 }

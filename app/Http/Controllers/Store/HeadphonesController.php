@@ -32,7 +32,7 @@ class HeadphonesController extends Controller
 
         $products = $this->categoryRepository->getPaginated($request,'Accessories');
 
-        return view('store.video', compact('products'));
+        return view('store.headphones', compact('products'));
     }
 
     /**
@@ -46,7 +46,14 @@ class HeadphonesController extends Controller
     {
         $products = $this->categoryRepository->getSearchMark($sidebar,'Accessories');
 
-        return view('store.headphone', compact('products'));
+        return view('store.headphones', compact('products'));
+    }
+
+    public function searchPrice($price):View
+    {
+        $products = $this->categoryRepository->getSearchPrice($price,'Accessories');
+
+        return view('store.headphones', compact('products'));
     }
 
 }

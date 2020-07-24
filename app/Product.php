@@ -140,6 +140,25 @@ class Product extends Model
         return $query;
 
     }
+    public function scopeSidebarPrice(Builder$query, ? string $price):Builder
+    {
+
+        if($price == 5000) {
+            return $query->where('price', '<=',5000);
+        }elseif ($price == 10000){
+            return $query->whereBetween('price',[5000,10000]);
+        }
+        elseif ($price == 20000){
+            return $query->whereBetween('price',[10000,20000]);
+        }
+        elseif ($price == 30000){
+            return $query->whereBetween('price',[20000,30000]);
+        }
+        else
+            return $query->where('price', '>',30000);
+
+
+    }
 
     /**
      * Query Scope Category

@@ -50,6 +50,14 @@ class Product extends Model
         return $this->getAttribute('id');
 
     }
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
+    {
+        return $this->getAttribute('category');
+
+    }
 
     /**
      * @return string|null

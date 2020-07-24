@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
         ]);
         factory(Product::class,50)->create([
             'category' => 'Accessories',
-            'image' => 'TtUKKFg9JsdxKirFCzUvnN4jPnKQ2KtV9woybwHP.jpeg',
+            'image' => 'images/TtUKKFg9JsdxKirFCzUvnN4jPnKQ2KtV9woybwHP.jpeg',
         ]);
 
         factory(Product::class, 50)->create();

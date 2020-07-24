@@ -20,8 +20,6 @@ class ProductRepository
     {
         $product = new Product($request->validated());
 
-        $product->fill($request->validated());
-
         $product->image = $request->file('image')->store('images');
 
         $product->save();

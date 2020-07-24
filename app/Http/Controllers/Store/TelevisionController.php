@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsStoreSearchRequest;
+use App\Product;
 use Illuminate\View\View;
 use App\Repositories\CategoryInterface;
 
-class LaptopController extends Controller
+class TelevisionController extends Controller
 {
     protected $categoryRepository;
 
@@ -30,9 +31,9 @@ class LaptopController extends Controller
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = $this->categoryRepository->getPaginated($request,'Computers');
+        $products = $this->categoryRepository->getPaginated($request,'Tv & Video');
 
-        return view('store.laptop', compact('products'));
+        return view('store.television', compact('products'));
     }
 
     /**
@@ -44,9 +45,9 @@ class LaptopController extends Controller
 
     public function searchMark($sidebar)
     {
-        $products = $this->categoryRepository->getSearchMark($sidebar,'Computers');
+        $products = $this->categoryRepository->getSearchMark($sidebar,'Tv & Video');
 
-        return view('store.laptop', compact('products'));
+        return view('store.television', compact('products'));
     }
 
 }

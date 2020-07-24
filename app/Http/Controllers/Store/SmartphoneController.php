@@ -4,29 +4,28 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsStoreSearchRequest;
-use App\Mark;
 use App\Product;
-use App\Sidebar;
-use Faker\Guesser\Name;
-use Illuminate\Http\Request;
+use App\Repositories\CategoryInterface;
+use App\Repositories\CategoryRepository;
 use Illuminate\View\View;
 
 
 class SmartphoneController extends Controller
 {
+    protected $categoryRepository;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param CategoryInterface $categoryRepository
      */
-    public function __construct()
+    public function __construct(CategoryInterface $categoryRepository)
     {
-
-
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
-     * Show the about us in the store.
+     * Show the products in the store.
      *
      * @param ProductsStoreSearchRequest $request
      * @return View
@@ -34,27 +33,23 @@ class SmartphoneController extends Controller
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = Product::where('category', 'Mobiles')
-            ->where('status', 'enable')
-            ->orderBy('created_at', request('sorted', 'DESC'))
-            ->price($request->get('price'))
-            ->name($request->get('name'))
-            ->mark($request->get('mark'))
-            ->paginate(9);
-
+        $products = $this->categoryRepository->getPaginated($request,'Mobiles');
 
         return view('store.smartphones', compact('products'));
     }
 
+    /**
+     * Show the products in the store searching by mark.
+     *
+     * @param $sidebar
+     * @return View
+     */
+
     public function searchMark($sidebar)
     {
-        $products = Product::where('category', 'Mobiles')
-            ->where('status', 'enable')
-            ->orderBy('created_at', request('sorted', 'DESC'))
-            ->SearchByMark($sidebar)
-            ->paginate(6);
+        $products = $this->categoryRepository->getSearchMark($sidebar,'Mobiles');
 
-            return view('store.smartphones', compact('products'));
+        return view('store.smartphones', compact('products'));
     }
 
 

@@ -29,7 +29,7 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::get('/smartphones/{mark}', 'Store\SmartphoneController@searchMark')->name('smartphones.search');
     Route::get('/smartphones/{price}', 'Store\SmartphoneController@searchPrice')->name('smartphones.price');
     Route::get('/laptop', 'Store\LaptopController@index')->name('laptop.index');
-    Route::get('/video', 'Store\VideoController@index')->name('video.index');
+    Route::get('/television', 'Store\TelevisionController@index')->name('television.index');
     Route::get('/headphones', 'Store\HeadphonesController@index')->name('headphones.index');
 
     Route::get('/home', 'HomeController@index')->name('home');

@@ -9,31 +9,34 @@ class CacheUser
     protected $modelRepository;
 
     public function __construct(ModelRepository $modelRepository)
-
     {
-       $this->modelRepository = $modelRepository;
+        $this->modelRepository = $modelRepository;
     }
 
     public function getPaginated(User $user)
     {
-        $key = "users.page." . request('page',1);//users.page.1 default
+        $key = "users.page." . request('page', 1);//users.page.1 default
 
-        return Cache::tags('users')->rememberForever($key,function () use ($user){
+        return Cache::tags('users')->rememberForever(
+            $key, function () use ($user) {
 
-            return $this->modelRepository->getPaginated($user);
-        });
+                return $this->modelRepository->getPaginated($user);
+            }
+        );
     }
-        public function cacheFindByModel(User $user)
-        {
-            return Cache::tags('users')->rememberForever("'user'.{$user}",function() use ($user) {
+    public function cacheFindByModel(User $user)
+    {
+        return Cache::tags('users')->rememberForever(
+            "'user'.{$user}", function () use ($user) {
 
-                return $this->modelRepository->cacheFindByModel($user);
-            });
+                    return $this->modelRepository->cacheFindByModel($user);
+            }
+        );
 
-        }
+    }
     public function update($request,$user)
     {
-        $this->modelRepository->update($request,$user);
+        $this->modelRepository->update($request, $user);
 
         Cache::tags('users')->flush();
 

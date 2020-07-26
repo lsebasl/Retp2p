@@ -105,25 +105,11 @@
           </div>
       </div>
   </div>
+    </div>
+
 @endguest
 
-      {{--<div class="search">
-          <input class="search_box" type="checkbox" id="search_box">
-          <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
-          <div class="search_form">
-              <form action="#" method="post">
-                  <input type="text" name="Search" placeholder="Search...">
-                  <input type="submit" value="Send">
-              </form>
-          </div>
-      </div>
-      <div class="cart cart box_1">
-          <form action="#" method="post" class="last">
-              <input type="hidden" name="cmd" value="_cart" />
-              <input type="hidden" name="display" value="1" />
-              <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-          </form>
-      </div>--}}
+
 
 <!-- //header -->
 <!-- navigation -->
@@ -150,26 +136,26 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Mobiles</h6>
-                                        <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
+                                        <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
 
                                     </ul>
                                 </div>
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Computers</h6>
-                                        <li><a href="products1.html">Laptop</a></li>
+                                        <li><a href="{{ route('laptop.index') }}">Laptop</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Tv & Video</h6>
-                                        <li><a href="products2.html">Televisions</a></li>
+                                        <li><a href="{{ route('television.index') }}">Televisions</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Accessories</h6>
-                                        <li><a href="products2.html">headphones</a></li>
+                                        <li><a href="{{ route('headphones.index') }}">headphones</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-4">
@@ -190,7 +176,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form></li>
-
                         </ul>
                     </li>
                 </ul>
@@ -198,6 +183,7 @@
         </nav>
     </div>
 </div>
+
 <!-- //navigation -->
 
 @yield('content')
@@ -224,10 +210,10 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Category</h3>
                 <ul class="info">
-                    <li><a href="products.html">Computers</a></li>
-                    <li><a href="products1.html">Tv & Video</a></li>
-                    <li><a href="{{ route('store.smartphones') }}">Smartphones</a></li>
-                    <li><a href="products1.html">Accessories</a></li>
+                    <li><a href="{{ route('laptop.index') }}">Laptop</a></li>
+                    <li><a href="{{ route('television.index') }}">Television</a></li>
+                    <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
+                    <li><a href="{{ route('headphones.index') }}">Headphones</a></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">
@@ -250,6 +236,9 @@
         </div>
     </div>
 </div>
+
+
+
 <!-- //footer -->
 <!-- cart-js -->
 <script src="{{ mix('js/store/minicart.js') }}" ></script>

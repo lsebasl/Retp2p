@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Feature;
 
+use App\Product;
 use App\User;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,14 +13,14 @@ class UsersTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToUsersIndex()
+    public function NoAuthenticatedUserCantAccessToUsersIndex()
     {
         $response = $this->get(route('users.index'));
         $response->assertRedirect(route('login'));
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToUsersShow()
+    public function NoAuthenticatedUserCantAccessToUsersShow()
     {
         $user=factory(User::class)->create();
 
@@ -28,7 +29,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToUsersEdit()
+    public function NoAuthenticatedUserCantAccessToUsersEdit()
     {
         $user=factory(User::class)->create();
 
@@ -37,7 +38,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToUsersUpdate()
+    public function NoAuthenticatedUserCantAccessToUsersUpdate()
     {
         $user=factory(User::class)->create();
 
@@ -46,7 +47,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCantAccessToUsersDelete()
+    public function NoAuthenticatedUserCantAccessToUsersDelete()
     {
         $user=factory(User::class)->create();
 
@@ -55,7 +56,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCanSeeLogin()
+    public function NoAuthenticatedUserCanSeeLogin()
     {
 
         $this->get(route('login'))
@@ -64,7 +65,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCanSeeWelcome()
+    public function NoAuthenticatedUserCanSeeWelcome()
     {
 
         $this->get('/')
@@ -72,7 +73,7 @@ class UsersTest extends TestCase
 
     }
     /** @test */
-    public function testNoAuthenticatedUserCantUpdateAClient()
+    public function NoAuthenticatedUserCantUpdateAClient()
     {
         $user = factory(User::class)->create();
 
@@ -95,7 +96,7 @@ class UsersTest extends TestCase
     }
     /** @test */
 
-    public function testNoAuthenticatedUserCantsDeleteAUser()
+    public function NoAuthenticatedUserCantsDeleteAUser()
     {
         $user = factory(User::class)->create();
 
@@ -104,5 +105,7 @@ class UsersTest extends TestCase
 
         $this->assertDatabasehas('users',['id'=>$user->id]);
     }
+
+
 
 }

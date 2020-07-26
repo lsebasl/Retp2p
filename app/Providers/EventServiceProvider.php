@@ -2,10 +2,19 @@
 
 namespace App\Providers;
 
+use App\Events\ProductCreated;
+use App\Events\ProductUpdate;
+use App\Events\ProductSaveImage;
+use App\Listeners\AddAuthorToProduct;
+use App\Listeners\AddAuthorToProductUpdate;
+use App\Listeners\LogProductActions;
+use App\Listeners\LogProductUpdateActions;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use App\Listeners\OptimizeProductImage;
+
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +27,18 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ProductCreated::class =>[
+            LogProductActions::class,
+            AddAuthorToProduct::class,
+        ],
+        ProductUpdate::class =>[
+            LogProductUpdateActions::class,
+            AddAuthorToProductUpdate::class,
+        ],
+        ProductSaveImage::class =>[
+            OptimizeProductImage::class,
+        ],
+
     ];
 
     /**

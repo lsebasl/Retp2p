@@ -12,7 +12,7 @@ class HomeStoreTest extends TestCase
 {
     /** @test*/
 
-    public function testUserCanSeeHomeStoreView()
+    public function no_authenticated_user_cant_access_to_home_store_view()
     {
         $this->get(route('home.store'))
              ->assertStatus(200)

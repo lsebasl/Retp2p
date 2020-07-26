@@ -34,4 +34,5 @@ class UserUpdateRequest extends FormRequest
             'status' => 'required|in:Enable,Disable',
         ];
     }
+    
 }

@@ -15,7 +15,7 @@
         <div class="tile-text">
 					<span class="text-condensedLight">
 						2<br>
-						<small>{{__('UserRepository')}}</small>
+						<small>{{__('Users')}}</small>
 					</span>
         </div>
         <i class="zmdi zmdi-accounts tile-icon"></i>

@@ -25,10 +25,24 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 //project routes
     Route::get('/about', 'Store\AboutController@index')->name('store.about');
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
-    Route::get('/smartphones', 'Store\SmartphoneController@index')->name('store.smartphones');
-    Route::get('/laptop', 'Store\LaptopController@index')->name('store.laptop');
-    Route::get('/video', 'Store\VideoController@index')->name('store.video');
-    Route::get('/accessories', 'Store\AccessoriesController@index')->name('store.accessories');
+
+    Route::get('/smartphones', 'Store\SmartphoneController@index')->name('smartphones.index');
+    Route::get('/smartphones/{mark}', 'Store\SmartphoneController@searchMark')->name('smartphones.search');
+    Route::get('/smartphones1/{price}', 'Store\SmartphoneController@searchPrice')->name('smartphones.price');
+    Route::get('smartphones2/{smartphones}', 'Store\SmartphoneController@show')->name('store.show');
+
+    Route::get('/laptop', 'Store\LaptopController@index')->name('laptop.index');
+    Route::get('/laptop/{mark}', 'Store\LaptopController@searchMark')->name('laptop.search');
+    Route::get('/laptop1/{price}', 'Store\LaptopController@searchPrice')->name('laptop.price');
+
+    Route::get('/television', 'Store\TelevisionController@index')->name('television.index');
+    Route::get('/television/{mark}', 'Store\TelevisionController@searchMark')->name('television.search');
+    Route::get('/television1/{price}', 'Store\TelevisionController@searchPrice')->name('television.price');
+
+    Route::get('/headphones', 'Store\HeadphonesController@index')->name('headphones.index');
+    Route::get('/headphones/{mark}', 'Store\HeadphonesController@searchMark')->name('headphones.search');
+    Route::get('/headphones1/{price}', 'Store\HeadphonesController@searchPrice')->name('headphones.price');
+
 
     Route::get('/home', 'HomeController@index')->name('home');
 

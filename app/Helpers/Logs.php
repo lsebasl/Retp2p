@@ -12,4 +12,5 @@ class Logs
 
         Log::info("Action performed $action $model by Admin:$admin");
     }
+
 }

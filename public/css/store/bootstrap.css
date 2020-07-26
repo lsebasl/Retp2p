@@ -1133,6 +1133,7 @@ img {
   border-radius: 6px;
 }
 .img-thumbnail {
+    object-fit: contain;
   display: inline-block;
   max-width: 100%;
   height: auto;
@@ -2788,6 +2789,32 @@ select[multiple].form-group-lg .form-control {
   text-align: center;
   pointer-events: none;
 }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+    display: block;
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
 .input-lg + .form-control-feedback {
   width: 46px;
   height: 46px;

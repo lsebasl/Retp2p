@@ -2,34 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductCreated;
+use App\Events\ProductSaveImage;
+use App\Helpers\Logs;
+use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
+use App\Mark;
 use App\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
+use App\Events\ProductUpdate;
 
 class ProductController extends Controller
-
 {
-    public function __construct()
+    Protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        //
+        $this->productRepository = $productRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param ProductsSearchRequest $request
      * @return View
      */
-    public function index():View
-
+    public function index(ProductsSearchRequest $request):View
     {
-        $product = Product::all();
+        $products = $this->productRepository->getPaginated($request);
 
-        return view('products.index', ['products' => $product]);
-
+        return view('products.index', compact('products'));
     }
 
 
@@ -40,78 +45,77 @@ class ProductController extends Controller
      */
     public function create():View
     {
+        $marks = Mark::all();
+
         $product = new Product();
-        return view('products.create', ['product' => $product]);
+
+        return view('products.create', compact('product','marks'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param ProductsStoreRequest $request
+     * @param  ProductsStoreRequest $request
      * @return RedirectResponse
      */
     public function store(ProductsStoreRequest $request):RedirectResponse
     {
+        $product = $this->productRepository->store($request);
 
-        $product= new Product($request->validated());
+        ProductSaveImage::dispatch($product);
 
-        $product->image = $request->file('image')->store('images');
+        ProductCreated::dispatch($product, auth()->user());
 
-        $product->save();
-
-        return redirect()->route('stocks.index')->with('success','Client Has Been Created!');
-
+        return redirect()->route('stocks.index')->with('success', 'Client Has Been Created!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return View
      */
-    public function show(Product $product):View
-
+    public function show(Product $product)
     {
+        Logs::AuditLogger($product, 'show');
+
         return view('products.show', ['product' => $product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return View
      */
     public function edit(Product $product):View
     {
-        return view('products.edit', ['product' => $product]);
+        Logs::AuditLogger($product, 'edit');
+        $marks = Mark::all();
+        return view('products.edit', compact('product','marks'));
     }
 
     /**
      *  Update the specified resource in storage.
      *
-     * @param Product $product
-     * @param ProductsUpdateRequest $request
+     * @param  Product $product
+     * @param  ProductsUpdateRequest $request
      * @return RedirectResponse
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
         if($request->hasFile('image')) {
-            Storage::delete($product->image);
 
-            $product->fill($request->validated());
+            $this->productRepository->DeleteImage($product);
 
-            $product->image = $request->file('image')->store('images');
+            $product = $this->productRepository->SaveImage($product, $request);
 
-            $product->save();
-            $image= Image::make(Storage::get($product->image));
-            $image->widen(600)->encode();
+            ProductSaveImage::dispatch($product);
 
-            Storage::put($product->image,(string) $image);
-
+        }else{
+            $product = $this->productRepository->Update($product, $request);
         }
-        else{
-            $product->update(array_filter($request->validated()));
-        }
+             ProductUpdate::dispatch($product, auth()->user());
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }
@@ -119,16 +123,20 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return RedirectResponse
      * @throws \Exception
      */
 
     public function destroy(Product $product):RedirectResponse
     {
-        Storage::delete($product->image);
-        $product->delete();
-        return back()->with('success','Product Has Been Deleted');
+        Logs::AuditLogger($product, 'destroy');
+
+        $this->productRepository->DeleteImage($product);
+
+        $this->productRepository->Delete($product);
+
+        return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }
 }
 

@@ -8,22 +8,22 @@
             <span class="mdl-textfield__error">Invalid barcode</span>
         </div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="name" value="{{ old('name', $product->name)}}">
+            <input class="mdl-textfield__input {{$errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $product->name)}}">
           @includeWhen($errors->has('name'), 'partials.__invalid_feedback', ['feedback' => $errors->first('name')])
             <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
             <span class="mdl-textfield__error">Invalid name</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('status') ? 'is-invalid' : '' }}">
-            @includeWhen($errors->has('status'), 'partials.__invalid_feedback', ['feedback' => $errors->first('status')])
-            <select class="mdl-textfield__input" name="category" id="category">
-                <option value="" disabled="" selected=""></option>
-                <option value="Computers">Computers</option>
-                <option value="Tv & Video">Tv & Video</option>
-                <option value="Smartphones">Mobiles</option>
-                <option value="Accessories">Accessories</option>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('category') ? 'is-invalid' : '' }}">
+            @includeWhen($errors->has('category'), 'partials.__invalid_feedback', ['feedback' => $errors->first('category')])
+            <select class="mdl-textfield__input" name="category" id="category"  >
+                <option value=""></option>
+                <option value="Mobiles" {{ old('category',$product->category)=='Mobiles' ? 'selected' : '' }}>{{__('Mobiles')}}</option>
+                <option value="Computers" {{ old('category',$product->category)=='Computers' ? 'selected' : '' }}>{{__('Computers')}}</option>
+                <option value="Tv & Video" {{ old('category',$product->category)=='Tv & Video' ? 'selected' : '' }}>{{__('Tv & Video')}}</option>
+                <option value="Accessories" {{ old('category',$product->category)=='Accessories' ? 'selected' : '' }}>{{__('Accessories')}}</option>
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
-            <span class="mdl-textfield__error">Invalid Id Type</span>
+            <span class="mdl-textfield__error">Invalid Category</span>
         </div>
         <h5 class="text-condensedLight">Units and Price</h5>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -48,10 +48,10 @@
     <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
         <h5 class="text-condensedLight">Mark and model</h5>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input {{$errors->has('mark') ? 'is-invalid' : '' }}" type="text" name="mark" id="mark" value="{{ old('mark', $product->mark)}}">
-            @includeWhen($errors->has('mark'), 'partials.__invalid_feedback', ['feedback' => $errors->first('mark')])
-            <label class="mdl-textfield__label" for="mark">{{__('Mark')}}</label>
-            <span class="mdl-textfield__error">Invalid Mark</span>
+            <input class="mdl-textfield__input {{$errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', $product->description)}}">
+            @includeWhen($errors->has('description'), 'partials.__invalid_feedback', ['feedback' => $errors->first('description')])
+            <label class="mdl-textfield__label" for="description">{{__('Description')}}</label>
+            <span class="mdl-textfield__error">Invalid description</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input {{$errors->has('model') ? 'is-invalid' : '' }}" type="text" name="model" id="model" value="{{ old('model', $product->model)}}">
@@ -59,19 +59,24 @@
             <label class="mdl-textfield__label" for="model">{{__('Model')}}</label>
             <span class="mdl-textfield__error">Invalid model</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input {{$errors->has('description') ? 'is-invalid' : '' }}" type="text" name="description" id="description" value="{{ old('description', $product->description)}}">
-            @includeWhen($errors->has('description'), 'partials.__invalid_feedback', ['feedback' => $errors->first('description')])
-            <label class="mdl-textfield__label" for="description">{{__('Description')}}</label>
-            <span class="mdl-textfield__error">Invalid description</span>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('mark') ? 'is-invalid' : '' }}">
+            @includeWhen($errors->has('mark'), 'partials.__invalid_feedback', ['feedback' => $errors->first('mark')])
+            <select class="mdl-textfield__input" name="mark" id="mark" >
+                <option value=""></option>
+                @foreach($marks as $mark)
+                    <option value="{{$mark->name}}" @if($mark->name === old('mark',$product->mark) )selected @endif>{{$mark->name}}</option>
+                @endforeach
+            </select>
+            <label class="mdl-textfield__label" for="mark">{{__('Select Mark')}}</label>
+            <span class="mdl-textfield__error">Invalid Mark</span>
         </div>
         <h5 class="text-condensedLight">Other Data</h5>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('status') ? 'is-invalid' : '' }}">
             @includeWhen($errors->has('status'), 'partials.__invalid_feedback', ['feedback' => $errors->first('status')])
             <select class="mdl-textfield__input" name="status" id="status" >
-                <option value="" disabled="" selected=""></option>
-                <option value="Enable">Enable</option>
-                <option value="Disable">Disable</option>
+                <option value=""></option>
+                <option value="Enable" {{ old('status',$product->status)=='Enable' ? 'selected' : '' }}>{{__('Enable')}}</option>
+                <option value="Disable" {{ old('status',$product->status)=='Disable' ? 'selected' : '' }}>{{__('Disable')}}</option>
             </select>
             <label class="mdl-textfield__label" for="status">{{__('Select Status')}}</label>
             <span class="mdl-textfield__error">Invalid Status</span>

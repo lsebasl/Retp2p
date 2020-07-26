@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsSearchRequest;
 use App\Product;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class StockController extends Controller
@@ -16,12 +16,17 @@ class StockController extends Controller
     /**
      * Display a listing of the clients..
      *
+     * @param ProductsSearchRequest $request
      * @return View
      */
 
-    public function index():View
+    public function index(ProductsSearchRequest $request):View
     {
-        $product = Product::all();
+        $product = Product::orderBy('created_at', request('sorted', 'DESC'))
+            ->name($request->get('search-name'))
+            ->category($request->get('search-category'))
+            ->status($request->get('search-status'))
+            ->paginate(20);
 
         return view('stocks.index', ['products' => $product]);
 

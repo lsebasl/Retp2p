@@ -4,7 +4,7 @@
     <!-- banner -->
     <div class="banner banner10">
         <div class="container">
-            <h2>Single Page</h2>
+            <h2>{{$product->name}}</h2>
         </div>
     </div>
     <!-- //banner -->
@@ -12,8 +12,8 @@
     <div class="breadcrumb_dress">
         <div class="container">
             <ul>
-                <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
-                <li>Single Page</li>
+                <li><a href="{{route('home.store')}}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
+                <li>{{$product->name}}</li>
             </ul>
         </div>
     </div>
@@ -22,38 +22,16 @@
     <div class="single">
         <div class="container">
             <div class="col-md-4 single-left">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li data-thumb="images/a.jpg">
-                            <div class="thumb-image"> <img src="images/a.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                        </li>
-                        <li data-thumb="images/b.jpg">
-                            <div class="thumb-image"> <img src="images/b.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                        </li>
-                        <li data-thumb="images/c.jpg">
-                            <div class="thumb-image"> <img src="images/c.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- flexslider -->
-                <script defer src="js/jquery.flexslider.js"></script>
-                <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-                <script>
-                    // Can also be used with $(document).ready()
-                    $(window).load(function() {
-                        $('.flexslider').flexslider({
-                            animation: "slide",
-                            controlNav: "thumbnails"
-                        });
-                    });
-                </script>
-                <!-- flexslider -->
+
                 <!-- zooming-effect -->
+                @if($product->image)
+                    <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
+                @endif
                 <script src="js/imagezoom.js"></script>
                 <!-- //zooming-effect -->
             </div>
             <div class="col-md-8 single-right">
-                <h3>{{$product->name}}</h3>
+                <h3>{{$product->name}} {{$product->model}}</h3>
                 <div class="rating1">
 					<span class="starRating">
 						<input id="rating5" type="radio" name="rating" value="5">
@@ -70,11 +48,7 @@
                 </div>
                 <div class="description">
                     <h5><i>Description</i></h5>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                        odit aut fugit, sed quia consequuntur magni dolores eos qui
-                        ratione voluptatem sequi nesciunt.</p>
+                    <p>{{$product->description}} {{$product->mark}} {{$product->model}}</p>
                 </div>
                 <div class="color-quality">
                     <div class="color-quality-left">
@@ -87,11 +61,11 @@
                         </ul>
                     </div>
                     <div class="color-quality-right">
-                        <h5>Quality :</h5>
+                        <h5>Units :</h5>
                         <div class="quantity">
                             <div class="quantity-select">
                                 <div class="entry value-minus1">&nbsp;</div>
-                                <div class="entry value1"><span>1</span></div>
+                                <div class="entry value1"><span>{{$product->units}}</span></div>
                                 <div class="entry value-plus1 active">&nbsp;</div>
                             </div>
                         </div>
@@ -112,27 +86,9 @@
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div class="occasional">
-                    <h5>RAM :</h5>
-                    <div class="colr ert">
-                        <div class="check">
-                            <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>3 GB</label>
-                        </div>
-                    </div>
-                    <div class="colr">
-                        <div class="check">
-                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>2 GB</label>
-                        </div>
-                    </div>
-                    <div class="colr">
-                        <div class="check">
-                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>1 GB</label>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
+
                 <div class="simpleCart_shelfItem">
-                    <p><span>$460</span> <i class="item_price">$450</i></p>
+                    <p><span>{{$product->price}}</span> <i class="item_price">{{$product->price}}</i></p>
                     <form action="#" method="post">
                         <input type="hidden" name="cmd" value="_cart">
                         <input type="hidden" name="add" value="1">
@@ -145,8 +101,6 @@
             <div class="clearfix"> </div>
         </div>
     </div>
-
-
 
     <!-- cart-js -->
     <script src="js/minicart.js"></script>

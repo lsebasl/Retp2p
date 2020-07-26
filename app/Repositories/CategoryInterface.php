@@ -10,4 +10,6 @@ interface CategoryInterface
 
     public function getSearchPrice($price,$category);
 
+    public function getFindOrFail($id);
+
 }

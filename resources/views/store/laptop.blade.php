@@ -45,7 +45,7 @@
                                             <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif
                                     </div>
-                                    <h5><a href="single.html">{{$product->name}}</a></h5>
+                                    <h5><a href="{{route('store.show',$product)}}">{{$product->name}}</a></h5>
                                     <p> <i class="item_price">{{$product->mark}}</i></p>                                   <div class="simpleCart_shelfItem">
                                         <p> <i class="item_price">$ {{$product->price}}</i></p>
                                         <form action="#" method="post">

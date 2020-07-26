@@ -25,9 +25,9 @@ class ProductsStoreSearchRequest extends FormRequest
     public function rules()
     {
         return [
-             'name' => 'bail|nullable|min:2|max:30',
-             'mark' => 'bail|nullable|min:2|max:30',
-             'price' => 'bail|nullable|min:2|max:30',
+             'name' => 'bail|nullable|min:1|max:30',
+             'mark' => 'bail|nullable|min:1|max:30',
+             'price' => 'bail|nullable|min:1|max:1000000|numeric',
 
         ];
     }

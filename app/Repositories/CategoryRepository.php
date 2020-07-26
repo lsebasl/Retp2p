@@ -35,6 +35,11 @@ class CategoryRepository implements CategoryInterface
             ->paginate(9);
     }
 
+        public function getFindOrFail($id)
+    {
+        return  Product::findOrfail($id);
+    }
+
 
 
 

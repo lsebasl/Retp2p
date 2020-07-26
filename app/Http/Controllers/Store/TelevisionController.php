@@ -37,24 +37,42 @@ class TelevisionController extends Controller
     }
 
     /**
+     * Show a specific television product.
+     *
+     * @param $id
+     * @return View
+     */
+    public function show($id):View
+    {
+        $product = $this->categoryRepository->getFindOrFail($id);
+
+        return view('store.show', ['product' => $product]);
+    }
+
+    /**
      * Show the products in the store searching by mark.
      *
      * @param $sidebar
      * @return View
      */
 
-    public function searchMark($sidebar)
+    public function searchMark($sidebar):View
     {
         $products = $this->categoryRepository->getSearchMark($sidebar,'Tv & Video');
 
         return view('store.television', compact('products'));
     }
 
+    /**
+     * Show the products in the store searching by price.
+     *
+     * @param $price
+     * @return View
+     */
     public function searchPrice($price):View
     {
         $products = $this->categoryRepository->getSearchPrice($price,'Tv & Video');
 
         return view('store.television', compact('products'));
     }
-
 }

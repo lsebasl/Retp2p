@@ -128,8 +128,8 @@ class Product extends Model
     /**
      * Query Scope Mark
      *
-     * @param Builder $query
-     * @param string|null $price
+     * @param  Builder     $query
+     * @param  string|null $price
      * @return Builder
      */
     public function scopePrice(Builder$query, ? string $price):Builder
@@ -144,18 +144,19 @@ class Product extends Model
     {
 
         if($price == 5000) {
-            return $query->where('price', '<=',5000);
-        }elseif ($price == 10000){
-            return $query->whereBetween('price',[5000,10000]);
+            return $query->where('price', '<=', 5000);
+        }elseif ($price == 10000) {
+            return $query->whereBetween('price', [5000,10000]);
         }
-        elseif ($price == 20000){
-            return $query->whereBetween('price',[10000,20000]);
+        elseif ($price == 20000) {
+            return $query->whereBetween('price', [10000,20000]);
         }
-        elseif ($price == 30000){
-            return $query->whereBetween('price',[20000,30000]);
+        elseif ($price == 30000) {
+            return $query->whereBetween('price', [20000,30000]);
         }
-        else
-            return $query->where('price', '>',30000);
+        else {
+            return $query->where('price', '>', 30000);
+        }
 
 
     }
@@ -178,8 +179,8 @@ class Product extends Model
     /**
      * Query Scope Category
      *
-     * @param Builder $query
-     * @param string|null $sidebar
+     * @param  Builder     $query
+     * @param  string|null $sidebar
      * @return Builder
      */
     public function scopeSearchByMark(Builder$query, ? string $sidebar):Builder

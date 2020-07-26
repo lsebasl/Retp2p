@@ -16,7 +16,7 @@ class StockController extends Controller
     /**
      * Display a listing of the clients..
      *
-     * @param ProductsSearchRequest $request
+     * @param  ProductsSearchRequest $request
      * @return View
      */
 

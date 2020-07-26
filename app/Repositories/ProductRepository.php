@@ -41,7 +41,6 @@ class ProductRepository
     }
 
     public function Update($product,$request)
-
     {
         $product->update(array_filter($request->validated()));
 
@@ -49,14 +48,12 @@ class ProductRepository
     }
 
     public function DeleteImage($product)
-
     {
         return Storage::delete($product->image);
     }
 
 
     public function Delete($product)
-
     {
         $product->delete();
 

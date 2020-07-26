@@ -26,7 +26,7 @@ class OptimizeProductImage implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param ProductSaveImage $event
+     * @param  ProductSaveImage $event
      * @return void
      */
     public function handle(ProductSaveImage $event)

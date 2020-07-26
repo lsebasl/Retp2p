@@ -26,7 +26,7 @@ class CategoryRepository implements CategoryInterface
     }
 
 
-        public function getSearchPrice($price,$category)
+    public function getSearchPrice($price,$category)
     {
         return Product::where('category', $category)
             ->where('status', 'enable')
@@ -35,7 +35,7 @@ class CategoryRepository implements CategoryInterface
             ->paginate(9);
     }
 
-        public function getFindOrFail($id)
+    public function getFindOrFail($id)
     {
         return  Product::findOrfail($id);
     }

@@ -16,14 +16,17 @@ class Mark extends Model
     ];
 
     /**
-     *Obtain cache marks
+     * Obtain cache marks
+     *
      * @return Collection
      */
     public function getCacheMarks():Collection
     {
-        return Cache::remember('marks',now()->addDay(),function(){
-            return $this->all();
+        return Cache::remember(
+            'marks', now()->addDay(), function () {
+                return $this->all();
 
-         });
+            }
+        );
     }
 }

@@ -12,7 +12,7 @@ class AddAuthorToProduct implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param ProductCreated $event
+     * @param  ProductCreated $event
      * @return void
      */
     public function handle(ProductCreated $event)

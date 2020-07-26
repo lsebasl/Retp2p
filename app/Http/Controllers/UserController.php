@@ -24,7 +24,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param  User $user
      * @return View
      */
 

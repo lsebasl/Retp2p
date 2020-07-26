@@ -25,13 +25,13 @@ class TelevisionController extends Controller
     /**
      * Show the products in the store.
      *
-     * @param ProductsStoreSearchRequest $request
+     * @param  ProductsStoreSearchRequest $request
      * @return View
      */
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = $this->categoryRepository->getPaginated($request,'Tv & Video');
+        $products = $this->categoryRepository->getPaginated($request, 'Tv & Video');
 
         return view('store.television', compact('products'));
     }
@@ -39,7 +39,7 @@ class TelevisionController extends Controller
     /**
      * Show a specific television product.
      *
-     * @param $id
+     * @param  $id
      * @return View
      */
     public function show($id):View
@@ -52,13 +52,13 @@ class TelevisionController extends Controller
     /**
      * Show the products in the store searching by mark.
      *
-     * @param $sidebar
+     * @param  $sidebar
      * @return View
      */
 
     public function searchMark($sidebar):View
     {
-        $products = $this->categoryRepository->getSearchMark($sidebar,'Tv & Video');
+        $products = $this->categoryRepository->getSearchMark($sidebar, 'Tv & Video');
 
         return view('store.television', compact('products'));
     }
@@ -66,12 +66,12 @@ class TelevisionController extends Controller
     /**
      * Show the products in the store searching by price.
      *
-     * @param $price
+     * @param  $price
      * @return View
      */
     public function searchPrice($price):View
     {
-        $products = $this->categoryRepository->getSearchPrice($price,'Tv & Video');
+        $products = $this->categoryRepository->getSearchPrice($price, 'Tv & Video');
 
         return view('store.television', compact('products'));
     }

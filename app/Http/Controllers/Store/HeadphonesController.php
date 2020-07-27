@@ -73,7 +73,4 @@ class HeadphonesController extends Controller
 
         return view('store.headphones', compact('products'));
     }
-
-
-
 }

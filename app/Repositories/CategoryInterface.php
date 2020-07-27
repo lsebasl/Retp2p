@@ -4,12 +4,32 @@ namespace App\Repositories;
 
 interface CategoryInterface
 {
-    public function getPaginated($request,$category);
+    /**
+     *
+     * @param  $request
+     * @param  $category
+     * @return mixed
+     */
+    public function getPaginated($request, $category);
 
-    public function getSearchMark($sidebar,$category);
+    /**
+     * @param  $sidebar
+     * @param  $category
+     * @return mixed
+     */
+    public function getSearchMark($sidebar, $category);
 
-    public function getSearchPrice($price,$category);
+    /**
+     * @param  $price
+     * @param  $category
+     * @return mixed
+     */
+    public function getSearchPrice($price, $category);
 
+    /**
+     * @param  $id
+     * @return mixed
+     */
     public function getFindOrFail($id);
 
 }

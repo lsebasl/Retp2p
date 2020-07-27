@@ -2,10 +2,16 @@
 
 namespace App\Repositories;
 use App\Product;
+use Illuminate\View\View;
 
 class CategoryRepository implements CategoryInterface
 {
-    public function getPaginated($request,$category)
+    /**
+     * @param  $request
+     * @param  $category
+     * @return mixed
+     */
+    public function getPaginated($request, $category)
     {
         return Product::where('category', $category)
             ->where('status', 'enable')
@@ -16,7 +22,12 @@ class CategoryRepository implements CategoryInterface
             ->paginate(9);
     }
 
-    public function getSearchMark($sidebar,$category)
+    /**
+     * @param  $sidebar
+     * @param  $category
+     * @return mixed
+     */
+    public function getSearchMark($sidebar, $category)
     {
         return Product::where('category', $category)
             ->where('status', 'enable')
@@ -26,7 +37,12 @@ class CategoryRepository implements CategoryInterface
     }
 
 
-    public function getSearchPrice($price,$category)
+    /**
+     * @param  $price
+     * @param  $category
+     * @return mixed
+     */
+    public function getSearchPrice($price, $category)
     {
         return Product::where('category', $category)
             ->where('status', 'enable')
@@ -35,6 +51,10 @@ class CategoryRepository implements CategoryInterface
             ->paginate(9);
     }
 
+    /**
+     * @param  $id
+     * @return mixed
+     */
     public function getFindOrFail($id)
     {
         return  Product::findOrfail($id);

@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Log;
 
 class Logs
 {
+    /**
+     * @param $model
+     * @param $action
+     */
     public static function AuditLogger($model, $action)
     {
         $admin = Auth::user()->getFullName();

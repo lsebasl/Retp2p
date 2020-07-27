@@ -28,6 +28,8 @@ class Product extends Model
     ];
 
     /**
+     * Relationship many invoices belong to many products
+     *
      * @return BelongsToMany
      */
     public function invoices():BelongsToMany
@@ -35,6 +37,7 @@ class Product extends Model
         Return $this->belongsToMany(Invoice::class);
     }
     /**
+     *
      * @return BelongsToMany
      */
     public function User():BelongsToMany
@@ -43,6 +46,8 @@ class Product extends Model
     }
 
     /**
+     * Get id in a specific product
+     *
      * @return string|null
      */
     public function getId(): ?string
@@ -51,6 +56,8 @@ class Product extends Model
 
     }
     /**
+     * Get category in a specific product
+     *
      * @return string|null
      */
     public function getCategory(): ?string
@@ -60,6 +67,8 @@ class Product extends Model
     }
 
     /**
+     * Get barcode in a specific product
+     *
      * @return string|null
      */
     public function getBarcode(): ?string
@@ -68,6 +77,8 @@ class Product extends Model
     }
 
     /**
+     * * Get the name in a specific product
+     *
      * @return string|null
      */
     public function getName(): ?string
@@ -140,6 +151,14 @@ class Product extends Model
         return $query;
 
     }
+
+    /**
+     * Query Scope Sidebar Price
+     *
+     * @param Builder $query
+     * @param string|null $price
+     * @return Builder
+     */
     public function scopeSidebarPrice(Builder$query, ? string $price):Builder
     {
 

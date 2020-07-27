@@ -14,9 +14,11 @@ abstract class TestCase extends BaseTestCase
     {
         $total = $this->getConnection($connection)->table($table)->count();
 
-        $this->assertSame(0, $total, sprintf(
-            "Failed asserting the table [%s] is empty. %s %s found.", $table, $total, str_plural('row', $total)
-        ));
+        $this->assertSame(
+            0, $total, sprintf(
+                "Failed asserting the table [%s] is empty. %s %s found.", $table, $total, str_plural('row', $total)
+            )
+        );
     }
     protected function createUser(array $attributes = [])
     {

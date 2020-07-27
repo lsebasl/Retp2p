@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Feature;
 
 use App\User;
@@ -10,13 +9,15 @@ use Tests\TestCase;
 
 class HomeStoreTest extends TestCase
 {
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function no_authenticated_user_cant_access_to_home_store_view()
     {
         $this->get(route('home.store'))
-             ->assertStatus(200)
-             ->assertSee('Project');
+            ->assertStatus(200)
+            ->assertSee('Project');
     }
 
 }

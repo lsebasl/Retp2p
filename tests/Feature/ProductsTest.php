@@ -5,19 +5,20 @@ namespace Tests\Feature;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
-
-
 
 class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_view_product_index()
     {
         $this->get(route('products.index'))
@@ -25,19 +26,24 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_view_product_create()
     {
         $this->get(route('products.create'))
             ->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_create_product()
     {
         $this->actingAs($user = $this->createUser());
 
-        $this->post('products',['name' => '',
+        $this->post(
+            'products', ['name' => '',
             'barcode' => '70024411 ',
             'category' => 'Mobiles',
             'model' => 'p123',
@@ -46,14 +52,17 @@ class ProductsTest extends TestCase
             'units' => '5',
             'price' => '200',
             'discount' => '10',
-            'status' => 'Enable',]);
+            'status' => 'Enable',]
+        );
 
         $this->assertDatabaseEmpty('products');
 
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_view_product_show()
     {
         $product = factory(Product::class)->create();
@@ -63,7 +72,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_view_product_edit()
     {
         $Product = factory(Product::class)->create();
@@ -73,7 +84,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_product_update()
     {
         $Product = factory(Product::class)->create();
@@ -83,7 +96,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function no_authenticated_user_cant_access_to_product_delete()
     {
         $product = factory(Product::class)->create();
@@ -93,9 +108,10 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function it_show_if_product_list_is_empty()
-
     {
         $user = factory(User::class)->create();
 
@@ -106,7 +122,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function admin_can_see_product_list_view()
     {
         $product = factory(Product::class)->create();
@@ -124,9 +142,10 @@ class ProductsTest extends TestCase
             ->assertSee($product->status)
             ->assertSee($product->category);
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function admin_can_see_product_stocks_view()
-
     {
         $user = factory(User::class)->create();
         $product = factory(Product::class)->create();
@@ -141,9 +160,10 @@ class ProductsTest extends TestCase
             ->assertOk();
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function admin_can_see_create_products_form()
-
     {
         $user = factory(User::class)->create();
 
@@ -158,7 +178,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function show_smartphones_with_a_partial_search_by_name_product()
     {
 
@@ -175,7 +197,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function show_smartphones_with_a_partial_search_by_mark_product()
     {
 
@@ -191,7 +215,9 @@ class ProductsTest extends TestCase
 
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function show_smartphones_with_a_partial_search_by_price_product()
     {
 
@@ -208,12 +234,14 @@ class ProductsTest extends TestCase
     }
 
     /**
-     * @param string $field
-     * @param string|null $value
+     * @param        string      $field
+     * @param        string|null $value
      * @dataProvider notValidSearchItemsProvider
+     * @test
      */
     public function products_search_fails_when_a_search_item_is_not_valid(string $field, ?string $value)
     {
+
 
         $user = factory(User::class)->create();
 
@@ -223,18 +251,19 @@ class ProductsTest extends TestCase
              ]
         ];
 
-        $response =  $this->actingAs($user)
-            ->get(route('products.index',$filters));
+        $response = $this->actingAs($user)
+            ->get(route('products.index', $filters));
 
-        dd($response->getContent());
-
+        $response->assertStatus(200);
 
         $response->assertSessionHasErrors('filter.'.$field);
 
     }
 
 
-    /** @test */
+    /**
+     * @test
+     */
     public function admin_can_store_a_product()
     {
         $user = factory(User::class)->create();
@@ -242,13 +271,16 @@ class ProductsTest extends TestCase
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
 
-      $this->actingAs($user)
-             ->post(route('products.store'), $this->getValidData($file));
-             //->assertRedirect(route('stocks.index'))
-             //->assertStatus(302);
+        Event::fake();
+
+        $this->actingAs($user)
+            ->post(route('products.store'), $this->getValidData($file))
+            ->assertRedirect(route('stocks.index'))
+            ->assertStatus(302);
 
 
-        $this->assertDatabaseHas('products',[
+        $this->assertDatabaseHas(
+            'products', [
 
             'image' => ('images/' . $file->hashName()),
             'barcode' => '70440244123',
@@ -262,14 +294,15 @@ class ProductsTest extends TestCase
             'discount' => '10',
             'status' => 'Enable',
 
-            ]);
+            ]
+        );
 
     }
 
     /**
      * @test
      * @dataProvider productsDataProvider
-    */
+     */
     public function admin_cant_store_a_incomplete_product_form()
     {
         $user = factory(User::class)->create();
@@ -278,7 +311,8 @@ class ProductsTest extends TestCase
 
         $file = uploadedfile::fake()->image('product.jpg');
 
-        $response =$this->actingAs($user)->post(route('products.store'), [
+        $response =$this->actingAs($user)->post(
+            route('products.store'), [
 
             'image' => $file,
             'barcode' => '70440244123',
@@ -292,7 +326,8 @@ class ProductsTest extends TestCase
             'discount' => '10',
             'status' => '',
 
-        ]);
+            ]
+        );
 
         $this->assertDatabaseEmpty('products');
 
@@ -342,7 +377,7 @@ class ProductsTest extends TestCase
     }
 
     /**
-     * @param \Illuminate\Http\Testing\File $file
+     * @param  \Illuminate\Http\Testing\File $file
      * @return array
      */
     public function getValidData(\Illuminate\Http\Testing\File $file)

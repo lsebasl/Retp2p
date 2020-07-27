@@ -18,7 +18,6 @@ class UserController extends Controller
     public function __construct(CacheUser $cacheUser)
     {
         $this->cacheUser = $cacheUser;
-
     }
 
     /**
@@ -27,14 +26,11 @@ class UserController extends Controller
      * @param  User $user
      * @return View
      */
-
     public function index(User $user): View
     {
-
         $users = $this->cacheUser->getPaginated($user);
 
         return view('users.index', ['users' => $users]);
-
     }
 
     /**
@@ -43,7 +39,6 @@ class UserController extends Controller
      * @param  User $user
      * @return View
      */
-
     public function show(User $user):View
     {
         Logs::AuditLogger($user, 'show');
@@ -51,9 +46,7 @@ class UserController extends Controller
         $this->cacheUser->cacheFindByModel($user);
 
         return view('users.show', ['user'=> $user]);
-
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -86,7 +79,6 @@ class UserController extends Controller
         return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -101,8 +93,5 @@ class UserController extends Controller
         $this->cacheUser->delete($user);
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
-
     }
-
-
 }

@@ -76,8 +76,4 @@ class SmartphoneController extends Controller
 
         return view('store.smartphones', compact('products'));
     }
-
-
-
-
 }

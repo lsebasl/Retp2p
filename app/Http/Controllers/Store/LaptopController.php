@@ -62,6 +62,8 @@ class LaptopController extends Controller
     }
 
     /**
+     * Show the products in the store searching by price.
+     *
      * @param  $price
      * @return View
      */
@@ -71,5 +73,4 @@ class LaptopController extends Controller
 
         return view('store.laptop', compact('products'));
     }
-
 }

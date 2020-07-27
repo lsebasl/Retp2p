@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         ]);
         factory(Product::class,50)->create([
             'category' => 'Computers',
-            'image' => 'images/nS5RcjXs7P3VsrsCRiJ09nijy5UrcSiByB36cBzM.jpeg',
+            'image' => 'images/hevM5gobDtC3exIikBHYiOHwo7Pe9JGfpS0W7l4O.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category' => 'Accessories',

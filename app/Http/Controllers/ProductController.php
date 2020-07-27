@@ -37,7 +37,6 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -91,7 +90,9 @@ class ProductController extends Controller
     public function edit(Product $product):View
     {
         Logs::AuditLogger($product, 'edit');
+
         $marks = Mark::all();
+
         return view('products.edit', compact('product', 'marks'));
     }
 

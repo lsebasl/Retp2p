@@ -38,7 +38,6 @@ class EventServiceProvider extends ServiceProvider
         ProductSaveImage::class =>[
             OptimizeProductImage::class,
         ],
-
     ];
 
     /**

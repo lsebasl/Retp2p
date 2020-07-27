@@ -3,10 +3,12 @@
 namespace App\Repositories;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
-
-
 class ProductRepository
 {
+    /**
+     * @param  $request
+     * @return mixed
+     */
     public function getPaginated($request)
     {
         return Product::orderBy('created_at', request('sorted', 'DESC'))
@@ -16,6 +18,10 @@ class ProductRepository
             ->paginate(8);
     }
 
+    /**
+     * @param  $request
+     * @return Product
+     */
     public function store($request)
     {
         $product = new Product($request->validated());
@@ -25,10 +31,13 @@ class ProductRepository
         $product->save();
 
         return $product;
-
-
     }
 
+    /**
+     * @param  $product
+     * @param  $request
+     * @return mixed
+     */
     public function SaveImage($product, $request)
     {
         $product->fill($request->validated());
@@ -40,26 +49,36 @@ class ProductRepository
         return $product;
     }
 
-    public function Update($product,$request)
+    /**
+     * @param  $product
+     * @param  $request
+     * @return mixed
+     */
+    public function Update($product, $request)
     {
         $product->update(array_filter($request->validated()));
 
         return $product;
     }
 
+    /**
+     * @param  $product
+     * @return bool
+     */
     public function DeleteImage($product)
     {
         return Storage::delete($product->image);
     }
 
-
+    /**
+     * @param  $product
+     * @return mixed
+     */
     public function Delete($product)
     {
         $product->delete();
 
         return $product;
-
-
     }
 
 

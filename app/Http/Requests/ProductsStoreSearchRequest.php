@@ -22,7 +22,7 @@ class ProductsStoreSearchRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
              'name' => 'bail|nullable|min:1|max:30',

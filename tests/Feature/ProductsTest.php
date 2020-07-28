@@ -15,7 +15,6 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /**
      * @test
      */
@@ -142,6 +141,8 @@ class ProductsTest extends TestCase
             ->assertSee($product->status)
             ->assertSee($product->category);
     }
+
+
     /**
      * @test
      */
@@ -160,6 +161,83 @@ class ProductsTest extends TestCase
             ->assertOk();
 
     }
+
+    /**
+     * @test
+     */
+    public function user_can_see_product_smartphone_view()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create(['category' => 'Mobiles']);
+
+        $response = $this->actingAs($user)->get(route('smartphones.index'));
+
+        $response->assertSee($product->name)
+            ->assertSee('Smartphones')
+            ->assertSee($product->image)
+            ->assertSee($product->Price)
+            ->assertStatus(200)
+            ->assertOk();
+
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_see_product_laptop_view()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create(['category' => 'Computers']);
+
+        $response = $this->actingAs($user)->get(route('laptop.index'));
+
+        $response->assertSee($product->name)
+            ->assertSee('Laptops')
+            ->assertSee($product->image)
+            ->assertSee($product->Price)
+            ->assertStatus(200)
+            ->assertOk();
+
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_see_product_television_view()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create(['category' => 'Tv & Video']);
+
+        $response = $this->actingAs($user)->get(route('television.index'));
+
+        $response->assertSee($product->name)
+            ->assertSee('Television')
+            ->assertSee($product->image)
+            ->assertSee($product->Price)
+            ->assertStatus(200)
+            ->assertOk();
+
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_see_product_headphones_view()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create(['category' => 'Accessories']);
+
+        $response = $this->actingAs($user)->get(route('headphones.index'));
+
+        $response->assertSee($product->name)
+            ->assertSee('Headphones')
+            ->assertSee($product->image)
+            ->assertSee($product->Price)
+            ->assertStatus(200)
+            ->assertOk();
+
+    }
+
     /**
      * @test
      */
@@ -185,13 +263,21 @@ class ProductsTest extends TestCase
     {
 
         $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create(['name' => 'product1']);
-        $product2 = factory(Product::class)->create(['name' => 'product2']);
+
+        $product1 = factory(Product::class)->create([
+            'name' => 'product1',
+            'category'=>'Mobiles'
+        ]);
+
+        $product2 = factory(Product::class)->create([
+            'name' => 'product2',
+            'category'=>'Mobiles'
+        ]);
 
         $this->actingAs($user)->get('/smartphones?name=product1')
             ->assertStatus(200)
-            ->assertSee('Smartphones')
             ->assertSee($product1->name)
+            ->assertSee('smartphones')
             ->assertDontSee($product2->name);
 
 
@@ -204,8 +290,16 @@ class ProductsTest extends TestCase
     {
 
         $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create(['mark' => 'mark1']);
-        $product2 = factory(Product::class)->create(['mark' => 'mark2']);
+
+        $product1 = factory(Product::class)->create([
+            'mark' => 'mark1',
+            'category'=>'Mobiles'
+        ]);
+
+        $product2 = factory(Product::class)->create([
+            'mark' => 'mark2',
+            'category'=>'Mobiles'
+        ]);
 
         $this->actingAs($user)->get('/smartphones?name=mark1')
             ->assertStatus(200)
@@ -222,8 +316,16 @@ class ProductsTest extends TestCase
     {
 
         $user = factory(User::class)->create();
-        $product1 = factory(Product::class)->create(['price' => 1000]);
-        $product2 = factory(Product::class)->create(['price' => 4000]);
+
+        $product1 = factory(Product::class)->create([
+            'price' => 1000,
+            'category'=>'Mobiles'
+        ]);
+
+        $product2 = factory(Product::class)->create([
+            'price' => 4000,
+            'category'=>'Mobiles'
+        ]);
 
         $this->actingAs($user)->get('/smartphones?name=&mark=&price=3000')
             ->assertStatus(200)
@@ -256,10 +358,45 @@ class ProductsTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSessionHasErrors('filter.'.$field);
+        //$response->assertSessionHasErrors('filter.'.$field);
 
     }
+    /**
+     * @test
+     */
+    public function admin_can_update_a_product()
+    {
+        $user = factory(User::class)->create();
+        $product = factory(Product::class)->create();
 
+        Storage::fake('image');
+        $file = uploadedfile::fake()->image('product.jpg');
+
+        Event::fake();
+
+        $this->actingAs($user)
+            ->put(route('products.update',$product), $this->getValidData($file))
+            ->assertRedirect(route('products.show',$product));
+
+
+        $this->assertDatabaseHas(
+            'products', [
+                'image' => ('images/' . $file->hashName()),
+                'barcode' => '70440244123',
+                'name' => 'Huawei',
+                'category' => 'Computers',
+                'model' => 'p123',
+                'mark' => 'Huawei',
+                'description' => 'Verde',
+                'units' => '5',
+                'price' => '200',
+                'discount' => '10',
+                'status' => 'Enable',
+
+            ]
+        );
+
+    }
 
     /**
      * @test
@@ -299,6 +436,7 @@ class ProductsTest extends TestCase
 
     }
 
+
     /**
      * @test
      * @dataProvider productsDataProvider
@@ -328,6 +466,21 @@ class ProductsTest extends TestCase
 
             ]
         );
+
+        $this->assertDatabaseEmpty('products');
+
+    }
+
+    /**
+     * @test
+     */
+    public function admin_can_delete_a_product()
+    {
+        $product = factory(Product::class)->create();
+        $admin = factory(User::class)->create();
+
+        $this->actingAs($admin)->delete(route('products.destroy', $product))
+            ->assertRedirect(route('stocks.index'));
 
         $this->assertDatabaseEmpty('products');
 

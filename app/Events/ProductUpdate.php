@@ -23,7 +23,7 @@ class ProductUpdate
      * Create a new event instance.
      *
      * @param Product $product
-     * @param User $author
+     * @param User    $author
      */
     public function __construct(Product $product, User $author)
     {

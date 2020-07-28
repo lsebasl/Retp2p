@@ -21,7 +21,7 @@ class UserUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
             'name' => 'required|min:3|max:150',
@@ -34,5 +34,5 @@ class UserUpdateRequest extends FormRequest
             'status' => 'required|in:Enable,Disable',
         ];
     }
-    
+
 }

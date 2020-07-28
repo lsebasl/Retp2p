@@ -26,7 +26,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['products.create','product__form'],MarkComposer::class
+        View::composer(
+            ['products.create','product__form'], MarkComposer::class
         );
     }
 }

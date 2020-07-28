@@ -27,13 +27,13 @@ class SmartphoneController extends Controller
     /**
      * Show the products in the store.
      *
-     * @param ProductsStoreSearchRequest $request
+     * @param  ProductsStoreSearchRequest $request
      * @return View
      */
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = $this->categoryRepository->getPaginated($request,'Mobiles');
+        $products = $this->categoryRepository->getPaginated($request, 'Mobiles');
 
         return view('store.smartphones', compact('products'));
     }
@@ -41,7 +41,7 @@ class SmartphoneController extends Controller
     /**
      * Show a specific smartphone product.
      *
-     * @param $id
+     * @param  $id
      * @return View
      */
     public function show($id):View
@@ -54,12 +54,12 @@ class SmartphoneController extends Controller
     /**
      * Show the products in the smartphone searching by price.
      *
-     * @param $sidebar
+     * @param  $sidebar
      * @return View
      */
     public function searchMark($sidebar):View
     {
-        $products = $this->categoryRepository->getSearchMark($sidebar,'Mobiles');
+        $products = $this->categoryRepository->getSearchMark($sidebar, 'Mobiles');
 
         return view('store.smartphones', compact('products'));
     }
@@ -67,17 +67,13 @@ class SmartphoneController extends Controller
     /**
      * Show the products in the smartphone searching by price.
      *
-     * @param $price
+     * @param  $price
      * @return View
      */
     public function searchPrice($price):View
     {
-        $products = $this->categoryRepository->getSearchPrice($price,'Mobiles');
+        $products = $this->categoryRepository->getSearchPrice($price, 'Mobiles');
 
         return view('store.smartphones', compact('products'));
     }
-
-
-
-
 }

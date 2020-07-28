@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 
 class ClientController extends Controller
 {
-
-
     public function __construct()
     {
         //
@@ -18,8 +19,6 @@ class ClientController extends Controller
     /**
      * Display a listing of the clients.
      */
-
-
     public function index()
     {
         $client = Client::all();
@@ -30,7 +29,7 @@ class ClientController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -40,9 +39,8 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Client                   $client
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -61,7 +59,6 @@ class ClientController extends Controller
 
         $createClient = new Client(
             [
-
             'name' => $request->get('name'),
             'last_name' => $request->get('last_name'),
             'id_type' => $request->get('id_type'),
@@ -87,7 +84,7 @@ class ClientController extends Controller
      * Display the specified resource.
      *
      * @param  Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
 
     public function show(Client $client)
@@ -100,7 +97,7 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  Client $client
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Client $client)
     {
@@ -110,9 +107,9 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     * @return \Illuminate\Http\Response
+     * @param  Request $request
+     * @param  int     $id
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -123,13 +120,12 @@ class ClientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Client $client
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Client $client)
     {
         $client->delete();
         return back();
-
     }
 }

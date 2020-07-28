@@ -28,6 +28,8 @@ class Product extends Model
     ];
 
     /**
+     * Relationship many invoices belong to many products
+     *
      * @return BelongsToMany
      */
     public function invoices():BelongsToMany
@@ -35,6 +37,7 @@ class Product extends Model
         Return $this->belongsToMany(Invoice::class);
     }
     /**
+     *
      * @return BelongsToMany
      */
     public function User():BelongsToMany
@@ -43,6 +46,8 @@ class Product extends Model
     }
 
     /**
+     * Get id in a specific product
+     *
      * @return string|null
      */
     public function getId(): ?string
@@ -51,6 +56,8 @@ class Product extends Model
 
     }
     /**
+     * Get category in a specific product
+     *
      * @return string|null
      */
     public function getCategory(): ?string
@@ -60,6 +67,8 @@ class Product extends Model
     }
 
     /**
+     * Get barcode in a specific product
+     *
      * @return string|null
      */
     public function getBarcode(): ?string
@@ -68,6 +77,8 @@ class Product extends Model
     }
 
     /**
+     * * Get the name in a specific product
+     *
      * @return string|null
      */
     public function getName(): ?string
@@ -128,8 +139,8 @@ class Product extends Model
     /**
      * Query Scope Mark
      *
-     * @param Builder $query
-     * @param string|null $price
+     * @param  Builder     $query
+     * @param  string|null $price
      * @return Builder
      */
     public function scopePrice(Builder$query, ? string $price):Builder
@@ -140,22 +151,31 @@ class Product extends Model
         return $query;
 
     }
+
+    /**
+     * Query Scope Sidebar Price
+     *
+     * @param Builder $query
+     * @param string|null $price
+     * @return Builder
+     */
     public function scopeSidebarPrice(Builder$query, ? string $price):Builder
     {
 
         if($price == 5000) {
-            return $query->where('price', '<=',5000);
-        }elseif ($price == 10000){
-            return $query->whereBetween('price',[5000,10000]);
+            return $query->where('price', '<=', 5000);
+        }elseif ($price == 10000) {
+            return $query->whereBetween('price', [5000,10000]);
         }
-        elseif ($price == 20000){
-            return $query->whereBetween('price',[10000,20000]);
+        elseif ($price == 20000) {
+            return $query->whereBetween('price', [10000,20000]);
         }
-        elseif ($price == 30000){
-            return $query->whereBetween('price',[20000,30000]);
+        elseif ($price == 30000) {
+            return $query->whereBetween('price', [20000,30000]);
         }
-        else
-            return $query->where('price', '>',30000);
+        else {
+            return $query->where('price', '>', 30000);
+        }
 
 
     }
@@ -178,8 +198,8 @@ class Product extends Model
     /**
      * Query Scope Category
      *
-     * @param Builder $query
-     * @param string|null $sidebar
+     * @param  Builder     $query
+     * @param  string|null $sidebar
      * @return Builder
      */
     public function scopeSearchByMark(Builder$query, ? string $sidebar):Builder

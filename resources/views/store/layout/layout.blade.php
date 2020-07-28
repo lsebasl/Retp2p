@@ -3,7 +3,7 @@
 <head>
     <title>Project Store a Ecommerce Online Shopping </title>
     <!-- Custom Theme files -->
-    <link href="{{ asset('css/store/all.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ mix('css/store/all.css') }}" rel="stylesheet" type="text/css" media="all" />
 
     <!-- //font-awesome icons -->
     <!-- js -->

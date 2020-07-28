@@ -27,7 +27,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ProductsSearchRequest $request
+     * @param  ProductsSearchRequest $request
      * @return View
      */
     public function index(ProductsSearchRequest $request):View
@@ -36,7 +36,6 @@ class ProductController extends Controller
 
         return view('products.index', compact('products'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -49,7 +48,7 @@ class ProductController extends Controller
 
         $product = new Product();
 
-        return view('products.create', compact('product','marks'));
+        return view('products.create', compact('product', 'marks'));
     }
 
     /**
@@ -91,14 +90,16 @@ class ProductController extends Controller
     public function edit(Product $product):View
     {
         Logs::AuditLogger($product, 'edit');
+
         $marks = Mark::all();
-        return view('products.edit', compact('product','marks'));
+
+        return view('products.edit', compact('product', 'marks'));
     }
 
     /**
      *  Update the specified resource in storage.
      *
-     * @param  Product $product
+     * @param  Product               $product
      * @param  ProductsUpdateRequest $request
      * @return RedirectResponse
      */

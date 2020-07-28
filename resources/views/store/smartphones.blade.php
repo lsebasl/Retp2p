@@ -9,8 +9,8 @@
     <div class="breadcrumb_dress">
         <div class="container">
             <ul>
-                <li><a href="{{ route('home.store') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
-                <li>Products</li>
+                <li><a href="{{ route('home.store') }}"><span class="glyphicon glyphicon-home"></span>Home</a> <i>/</i></li>
+                <li><a href="{{ route('smartphones.index') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>Smartphones</a></li>
             </ul>
         </div>
     </div>

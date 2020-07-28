@@ -10,7 +10,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ route('home.store') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
-                <li>Products</li>
+                <li><a href="{{ route('television.index') }}"><span class="glyphicon glyphicon-sd-video" aria-hidden="true"></span> Television</a> </li>
             </ul>
         </div>
     </div>

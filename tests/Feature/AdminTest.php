@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature;
 
 use App\Product;
@@ -11,7 +12,9 @@ class AdminTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function admin_can_see_home_view()
     {
@@ -26,7 +29,9 @@ class AdminTest extends TestCase
             ->assertOk();
     }
 
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function admin_can_see_user_list_view()
     {
@@ -36,22 +41,24 @@ class AdminTest extends TestCase
         $response = $this->actingAs($user)->get(route('users.index'));
 
         $response->assertSee('List')
-                 ->assertSee('User')
-                 ->assertViewIs('users.index')
-                 ->assertSee($user->name)
-                 ->assertOk();
+            ->assertSee('User')
+            ->assertViewIs('users.index')
+            ->assertSee($user->name)
+            ->assertOk();
         $responseUser= $response->getOriginalContent()['users'];
-        $this->assertEquals($user->id,$responseUser->first()->id);
+        $this->assertEquals($user->id, $responseUser->first()->id);
     }
 
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function admin_can_see_show_user()
     {
 
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.show',$user));
+        $response = $this->actingAs($user)->get(route('users.show', $user));
 
         $response->assertSee('User')
             -> assertSee('Name')
@@ -59,17 +66,18 @@ class AdminTest extends TestCase
             -> assertSee($user->name)
             ->assertOk();
 
-       $this->assertDatabaseHas('users',['name' => $user->name]);
+        $this->assertDatabaseHas('users', ['name' => $user->name]);
 
 
     }
-    /** @test*/
+    /**
+     * @test
+     */
     public function admin_can_see_edit_user_view()
-
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.edit',$user));
+        $response = $this->actingAs($user)->get(route('users.edit', $user));
 
         $response->assertSeeText('Edit')
             -> assertSeeText('Name')
@@ -77,7 +85,9 @@ class AdminTest extends TestCase
             ->assertViewIs('users.edit')
             ->assertOk();
     }
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function admin_can_update_a_user()
     {
@@ -85,7 +95,8 @@ class AdminTest extends TestCase
         $user = factory(User::class)->create();
         $admin = factory(User::class)->create();
 
-        $this->actingAs($admin)->put(route('users.update', $user), [
+        $this->actingAs($admin)->put(
+            route('users.update', $user), [
 
             'name' => 'Test Name',
             'last_name' => 'Test Last Name',
@@ -96,11 +107,13 @@ class AdminTest extends TestCase
             'email' => 'test@gmail.com',
             'status' => 'Enable'
 
-        ])
-             ->assertRedirect(route('users.show',$user))
-             ->assertSessionHasNoErrors();
+            ]
+        )
+            ->assertRedirect(route('users.show', $user))
+            ->assertSessionHasNoErrors();
 
-        $this->assertDatabasehas('users',[
+        $this->assertDatabasehas(
+            'users', [
             'name' => 'Test Name',
             'last_name' => 'Test Last Name',
             'id_type' => 'NIT',
@@ -109,20 +122,23 @@ class AdminTest extends TestCase
             'address' => 'Test User address',
             'email' => 'test@gmail.com',
             'status' => 'Enable'
-        ]);
+            ]
+        );
     }
 
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function admin_can_delete_a_user()
     {
         $user = factory(User::class)->create();
         $admin = factory(User::class)->create();
 
-        $this->actingAs($admin)->delete(route('users.destroy',$user))
+        $this->actingAs($admin)->delete(route('users.destroy', $user))
             ->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseMissing('users',['id'=>$user->id]);
+        $this->assertDatabaseMissing('users', ['id'=>$user->id]);
     }
 
 

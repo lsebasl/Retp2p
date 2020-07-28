@@ -22,8 +22,6 @@ class CheckStatus
                 return redirect('/')->with('error', 'Client Disable!');
 
         }
-
-
         return $next($request);
     }
 }

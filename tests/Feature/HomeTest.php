@@ -4,10 +4,11 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-
 class HomeTest extends TestCase
 {
-    /** @test*/
+    /**
+     * @test
+     */
 
     public function no_authenticated_user_cant_access_to_home_view()
     {

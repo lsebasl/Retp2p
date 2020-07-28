@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature;
 
 use App\Product;
@@ -7,55 +8,66 @@ use Illuminate\Filesystem\Cache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-
 class UsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantAccessToUsersIndex()
     {
         $response = $this->get(route('users.index'));
         $response->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantAccessToUsersShow()
     {
         $user=factory(User::class)->create();
 
-        $this->get(route('users.show',$user))
-             ->assertRedirect(route('login'));
+        $this->get(route('users.show', $user))
+            ->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantAccessToUsersEdit()
     {
         $user=factory(User::class)->create();
 
-        $this->get(route('users.edit',$user))
-             ->assertRedirect(route('login'));
+        $this->get(route('users.edit', $user))
+            ->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantAccessToUsersUpdate()
     {
         $user=factory(User::class)->create();
 
-        $this->put(route('users.update',$user))
-             ->assertRedirect(route('login'));
+        $this->put(route('users.update', $user))
+            ->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantAccessToUsersDelete()
     {
         $user=factory(User::class)->create();
 
-        $this->delete(route('users.destroy',$user))
-             ->assertRedirect(route('login'));
+        $this->delete(route('users.destroy', $user))
+            ->assertRedirect(route('login'));
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCanSeeLogin()
     {
 
@@ -64,7 +76,9 @@ class UsersTest extends TestCase
             ->assertSee('Password');
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCanSeeWelcome()
     {
 
@@ -72,12 +86,15 @@ class UsersTest extends TestCase
             ->assertSee('Project Store');
 
     }
-    /** @test */
+    /**
+     * @test
+     */
     public function NoAuthenticatedUserCantUpdateAClient()
     {
         $user = factory(User::class)->create();
 
-        $this->put(route('users.update', $user), [
+        $this->put(
+            route('users.update', $user), [
 
             'name' => 'Test Name',
             'last_name' => 'Test Last Name',
@@ -87,23 +104,26 @@ class UsersTest extends TestCase
             'address' => 'Test User address',
             'email' => 'test@gmail.com',
 
-        ])
+            ]
+        )
             ->assertRedirect(route('login'));
 
-        $this->assertDatabaseMissing('users',['id'=>$user->name]);
+        $this->assertDatabaseMissing('users', ['id'=>$user->name]);
 
 
     }
-    /** @test */
+    /**
+     * @test
+     */
 
     public function NoAuthenticatedUserCantsDeleteAUser()
     {
         $user = factory(User::class)->create();
 
-        $this->delete(route('users.destroy',$user))
+        $this->delete(route('users.destroy', $user))
             ->assertRedirect(route('login'));
 
-        $this->assertDatabasehas('users',['id'=>$user->id]);
+        $this->assertDatabasehas('users', ['id'=>$user->id]);
     }
 
 

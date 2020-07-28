@@ -24,13 +24,13 @@ class HeadphonesController extends Controller
     /**
      * Show the products in the store.
      *
-     * @param ProductsStoreSearchRequest $request
+     * @param  ProductsStoreSearchRequest $request
      * @return View
      */
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = $this->categoryRepository->getPaginated($request,'Accessories');
+        $products = $this->categoryRepository->getPaginated($request, 'Accessories');
 
         return view('store.headphones', compact('products'));
     }
@@ -38,7 +38,7 @@ class HeadphonesController extends Controller
     /**
      * Show a specific headphone product.
      *
-     * @param $id
+     * @param  $id
      * @return View
      */
     public function show($id):View
@@ -51,12 +51,12 @@ class HeadphonesController extends Controller
     /**
      * Show the products in the store searching by mark.
      *
-     * @param $sidebar
+     * @param  $sidebar
      * @return View
      */
     public function searchMark($sidebar):View
     {
-        $products = $this->categoryRepository->getSearchMark($sidebar,'Accessories');
+        $products = $this->categoryRepository->getSearchMark($sidebar, 'Accessories');
 
         return view('store.headphones', compact('products'));
     }
@@ -64,16 +64,13 @@ class HeadphonesController extends Controller
     /**
      * Show the products in the store searching by price.
      *
-     * @param $price
+     * @param  $price
      * @return View
      */
     public function searchPrice($price):View
     {
-        $products = $this->categoryRepository->getSearchPrice($price,'Accessories');
+        $products = $this->categoryRepository->getSearchPrice($price, 'Accessories');
 
         return view('store.headphones', compact('products'));
     }
-
-
-
 }

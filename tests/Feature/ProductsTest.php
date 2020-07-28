@@ -277,7 +277,7 @@ class ProductsTest extends TestCase
         $this->actingAs($user)->get('/smartphones?name=product1')
             ->assertStatus(200)
             ->assertSee($product1->name)
-            ->assertSee('smartphones')
+            ->assertSee('Smartphones')
             ->assertDontSee($product2->name);
 
 

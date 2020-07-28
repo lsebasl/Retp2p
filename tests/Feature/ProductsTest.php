@@ -344,21 +344,16 @@ class ProductsTest extends TestCase
     public function products_search_fails_when_a_search_item_is_not_valid(string $field, ?string $value)
     {
 
-
         $user = factory(User::class)->create();
 
         $filters = [
-            'filter' => [
                 $field=> $value
-             ]
         ];
 
         $response = $this->actingAs($user)
             ->get(route('products.index', $filters));
 
-        $response->assertStatus(200);
-
-        //$response->assertSessionHasErrors('filter.'.$field);
+        $response->assertSessionHasErrors($field);
 
     }
     /**

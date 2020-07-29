@@ -410,7 +410,6 @@ class ProductsTest extends TestCase
             ->assertRedirect(route('stocks.index'))
             ->assertStatus(302);
 
-
         $this->assertDatabaseHas(
             'products', [
 

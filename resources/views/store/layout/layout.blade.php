@@ -136,26 +136,26 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Mobiles</h6>
-                                        <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
+                                        <li><a href="{{ route('goods.category','Mobiles') }}">Mobiles</a></li>
 
                                     </ul>
                                 </div>
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Computers</h6>
-                                        <li><a href="{{ route('laptop.index') }}">Laptop</a></li>
+                                        <li><a href="{{ route('goods.category','Computers') }}">Computers</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Tv & Video</h6>
-                                        <li><a href="{{ route('television.index') }}">Televisions</a></li>
+                                        <li><a href="{{ route('goods.category','Tv & Video') }}">Televisions</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-2">
                                     <ul class="multi-column-dropdown">
                                         <h6>Accessories</h6>
-                                        <li><a href="{{ route('headphones.index') }}">headphones</a></li>
+                                        <li><a href="{{ route('goods.category','Accessories') }}">Accessories</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-4">
@@ -210,10 +210,10 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Category</h3>
                 <ul class="info">
-                    <li><a href="{{ route('laptop.index') }}">Laptop</a></li>
-                    <li><a href="{{ route('television.index') }}">Television</a></li>
-                    <li><a href="{{ route('smartphones.index') }}">Smartphones</a></li>
-                    <li><a href="{{ route('headphones.index') }}">Headphones</a></li>
+                    <li><a href="{{ route('goods.category','Mobiles') }}">Mobiles</a></li>
+                    <li><a href="{{ route('goods.category','Computers') }}">Computers</a></li>
+                    <li><a href="{{ route('goods.category','Tv & Video') }}">Tv & Video</a></li>
+                    <li><a href="{{ route('goods.category','Accessories') }}">Accessories</a></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">

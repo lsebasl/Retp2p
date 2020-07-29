@@ -10,7 +10,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ route('home.store') }}"><span class="glyphicon glyphicon-home"></span>Home</a> <i>/</i></li>
-                <li><a href="{{ route('smartphones.index') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>Smartphones</a></li>
+                <li><a href="{{ route('goods.index') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>Smartphones</a></li>
             </ul>
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="mobiles">
         <div class="container">
             <div class="w3ls_mobiles_grids">
-                @include('partials.__sidebar_smartphones')
+                @include('partials.__sidebar_goods')
                 {{--nav bar--}}
                 <div class="col-md-8 w3ls_mobiles_grid_right">
                     <div class="clearfix"> </div>
@@ -30,7 +30,7 @@
                         </div>
                         <form>
                             <div class="form-group">
-                                <button  href="{{ route('smartphones.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
+                                <button  href="{{ route('goods.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
                             </div>
                         </form>
 
@@ -46,7 +46,7 @@
                                              <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif
                                     </div>
-                                <h5><a href="{{route('store.show',$product)}}">{{$product->name}}</a></h5>
+                                <h5><a href="{{route('goods.show',$product)}}">{{$product->name}}</a></h5>
                                     <p> <i class="item_price">{{$product->mark}}</i></p>
                                     <div class="simpleCart_shelfItem">
                                     <p> <i class="item_price">$ {{$product->price}}</i></p>

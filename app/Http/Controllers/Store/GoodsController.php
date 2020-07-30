@@ -59,7 +59,7 @@ class GoodsController extends Controller
     {
         $product = $this->categoryRepository->getFindOrFail($id);
 
-        return view('goods.show', ['product' => $product]);
+        return view('store.show', ['product' => $product]);
     }
 
     /**

@@ -14,9 +14,11 @@ class CategoryRepository
     public function getPaginated($request)
     {
 
-        return Product::where('category', 'Mobiles')
-            ->where('status', 'enable')
+        return Product::where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
+            ->category($request->get('search-category'))
+            ->price($request->get('search-price'))
+            ->mark($request->get('search-mark'))
             ->price($request->get('price'))
             ->name($request->get('name'))
             ->mark($request->get('mark'))

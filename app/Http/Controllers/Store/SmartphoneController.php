@@ -6,7 +6,7 @@ use App\Helpers\Logs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsStoreSearchRequest;
 use App\Product;
-use App\Repositories\CategoryInterface;
+use App\Repositories\CategoryRepository;
 use Illuminate\View\View;
 
 
@@ -17,9 +17,9 @@ class SmartphoneController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryInterface $categoryRepository
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(CategoryInterface $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
@@ -33,7 +33,7 @@ class SmartphoneController extends Controller
     public function index(ProductsStoreSearchRequest $request):View
     {
 
-        $products = $this->categoryRepository->getPaginated($request, 'Mobiles');
+        $products = $this->categoryRepository->getPaginated($request);
 
         return view('store.smartphones', compact('products'));
     }

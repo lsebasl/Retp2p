@@ -146,19 +146,17 @@
                                         <li><a href="{{ route('goods.category','Computers') }}">Computers</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Tv & Video</h6>
                                         <li><a href="{{ route('goods.category','Tv & Video') }}">Televisions</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>Accessories</h6>
                                         <li><a href="{{ route('goods.category','Accessories') }}">Accessories</a></li>
                                     </ul>
-                                </div>
-                                <div class="col-sm-4">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

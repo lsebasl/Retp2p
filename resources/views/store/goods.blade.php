@@ -19,23 +19,23 @@
     <div class="mobiles">
         <div class="container">
             <div class="w3ls_mobiles_grids">
-                @include('partials.__sidebar_goods')
+                <form method='GET' action="{{ route('goods.index')}}" class="form-inline ">
+                    @include('partials.__sidebar_goods')
                 {{--nav bar--}}
-                <div class="col-md-8 w3ls_mobiles_grid_right">
-                    <div class="clearfix"> </div>
-                    <div class="w3ls_mobiles_grid_right_grid2">
-                        <div class="w3ls_mobiles_grid_right_grid2_left">
+                     <div class="col-md-8 w3ls_mobiles_grid_right">
+                        <div class="clearfix"> </div>
+                            <div class="w3ls_mobiles_grid_right_grid2">
+                                <div class="w3ls_mobiles_grid_right_grid2_left">
                             @include('partials.__alerts')
                             @include('partials.__search_store')
                         </div>
+                </form>
                         <form>
                             <div class="form-group">
                                 <button  href="{{ route('goods.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
                             </div>
                         </form>
-
                         <div class="clearfix"> </div>
-
                     </div>
                         @forelse($products as $product)
                         <div class="w3ls_mobiles_grid_right_grid3">

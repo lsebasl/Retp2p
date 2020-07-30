@@ -165,72 +165,14 @@ class ProductsTest extends TestCase
     /**
      * @test
      */
-    public function user_can_see_product_smartphone_view()
-    {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create(['category' => 'Mobiles']);
-
-        $response = $this->actingAs($user)->get(route('smartphones.index'));
-
-        $response->assertSee($product->name)
-            ->assertSee('Smartphones')
-            ->assertSee($product->image)
-            ->assertSee($product->Price)
-            ->assertStatus(200)
-            ->assertOk();
-
-    }
-
-    /**
-     * @test
-     */
-    public function user_can_see_product_laptop_view()
+    public function user_can_see_product_goods_view()
     {
         $user = factory(User::class)->create();
         $product = factory(Product::class)->create(['category' => 'Computers']);
 
-        $response = $this->actingAs($user)->get(route('laptop.index'));
+        $response = $this->actingAs($user)->get(route('goods.index'));
 
         $response->assertSee($product->name)
-            ->assertSee('Laptops')
-            ->assertSee($product->image)
-            ->assertSee($product->Price)
-            ->assertStatus(200)
-            ->assertOk();
-
-    }
-
-    /**
-     * @test
-     */
-    public function user_can_see_product_television_view()
-    {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create(['category' => 'Tv & Video']);
-
-        $response = $this->actingAs($user)->get(route('television.index'));
-
-        $response->assertSee($product->name)
-            ->assertSee('Television')
-            ->assertSee($product->image)
-            ->assertSee($product->Price)
-            ->assertStatus(200)
-            ->assertOk();
-
-    }
-
-    /**
-     * @test
-     */
-    public function user_can_see_product_headphones_view()
-    {
-        $user = factory(User::class)->create();
-        $product = factory(Product::class)->create(['category' => 'Accessories']);
-
-        $response = $this->actingAs($user)->get(route('headphones.index'));
-
-        $response->assertSee($product->name)
-            ->assertSee('Headphones')
             ->assertSee($product->image)
             ->assertSee($product->Price)
             ->assertStatus(200)
@@ -255,83 +197,49 @@ class ProductsTest extends TestCase
             ->assertOk();;
 
     }
-
     /**
+     * @param        string      $field
+     * @param        string|null $value
+     * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function show_smartphones_with_a_partial_search_by_name_product()
+    public function show_stocks_with_a_partial_search_by_price_product(string $field, ?string $value)
     {
 
         $user = factory(User::class)->create();
 
-        $product1 = factory(Product::class)->create([
-            'name' => 'product1',
-            'category'=>'Mobiles'
-        ]);
+        $filters = [
+            $field=> $value
+        ];
 
-        $product2 = factory(Product::class)->create([
-            'name' => 'product2',
-            'category'=>'Mobiles'
-        ]);
+        $response = $this->actingAs($user)
+            ->get(route('stocks.index', $filters));
 
-        $this->actingAs($user)->get('/smartphones?name=product1')
-            ->assertStatus(200)
-            ->assertSee($product1->name)
-            ->assertSee('Smartphones')
-            ->assertDontSee($product2->name);
-
+        $response->assertSessionDoesntHaveErrors($field)
+            ->assertStatus(200);
 
     }
 
     /**
+     * @param        string      $field
+     * @param        string|null $value
+     * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function show_smartphones_with_a_partial_search_by_mark_product()
+    public function show_products_with_a_partial_search_by_price_product(string $field, ?string $value)
     {
 
         $user = factory(User::class)->create();
 
-        $product1 = factory(Product::class)->create([
-            'mark' => 'mark1',
-            'category'=>'Mobiles'
-        ]);
+        $filters = [
+            $field=> $value
+        ];
 
-        $product2 = factory(Product::class)->create([
-            'mark' => 'mark2',
-            'category'=>'Mobiles'
-        ]);
+        $response = $this->actingAs($user)
+            ->get(route('products.index', $filters));
 
-        $this->actingAs($user)->get('/smartphones?name=mark1')
-            ->assertStatus(200)
-            ->assertSee('Smartphones')
-            ->assertSee($product1->mark)
-            ->assertDontSee($product2->mark);
-
-    }
-
-    /**
-     * @test
-     */
-    public function show_smartphones_with_a_partial_search_by_price_product()
-    {
-
-        $user = factory(User::class)->create();
-
-        $product1 = factory(Product::class)->create([
-            'price' => 1000,
-            'category'=>'Mobiles'
-        ]);
-
-        $product2 = factory(Product::class)->create([
-            'price' => 4000,
-            'category'=>'Mobiles'
-        ]);
-
-        $this->actingAs($user)->get('/smartphones?name=&mark=&price=3000')
-            ->assertStatus(200)
-            ->assertSee('Smartphones')
-            ->assertSee($product1->price)
-            ->assertDontSee($product2->price);
+        $response->assertSessionDoesntHaveErrors($field)
+                 ->assertStatus(200);
 
     }
 
@@ -356,6 +264,7 @@ class ProductsTest extends TestCase
         $response->assertSessionHasErrors($field);
 
     }
+
     /**
      * @test
      */
@@ -478,6 +387,22 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseEmpty('products');
 
+    }
+
+    /**
+     * @return array
+     */
+    public function ValidSearchItemsProvider(): array
+    {
+        return [
+            'Test name' => ['search-name', Str::random(29)],
+            'Test status Enable' => ['search-status', 'Enable'],
+            'Test status Disable' => ['search-status', 'Disable'],
+            'Test category Mobiles ' => ['search-category', 'Mobiles'],
+            'Test category Computers' => ['search-category', 'Computers'],
+            'Test category Tv & Video' => ['search-category', 'Tv & Video'],
+            'Test category Accessories' => ['search-category', 'Accessories'],
+        ];
     }
 
     /**

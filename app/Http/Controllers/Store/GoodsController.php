@@ -45,6 +45,7 @@ class GoodsController extends Controller
 
     protected function category($category, ProductsStoreSearchRequest $request):View
     {
+
         return (CategoryFactory::createCategory($category))->index($request);
     }
 
@@ -84,6 +85,6 @@ class GoodsController extends Controller
     {
         $products = $this->categoryRepository->getSearchPrice($price, 'Mobiles');
 
-        return view('store.smartphones', compact('products'));
+        return view('goods.brand', compact('products'));
     }
 }

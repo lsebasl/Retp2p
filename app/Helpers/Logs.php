@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -16,5 +17,4 @@ class Logs
 
         Log::info("Action performed $action $model by Admin:$admin");
     }
-
 }

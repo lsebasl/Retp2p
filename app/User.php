@@ -9,7 +9,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -80,15 +79,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param $query
      * @param $name
      */
-    public function scopeName( $query, $name)
+    public function scopeName($query, $name)
     {
-        if($name) {
+        if ($name) {
             return $query->where('name', 'LIKE', "%$name%");
         }
         return $query;
     }
-
-
 }
-
-

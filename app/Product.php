@@ -2,12 +2,9 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
-
 
 class Product extends Model
 {
@@ -34,7 +31,7 @@ class Product extends Model
      */
     public function invoices():BelongsToMany
     {
-        Return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class);
     }
     /**
      *
@@ -42,7 +39,7 @@ class Product extends Model
      */
     public function User():BelongsToMany
     {
-        Return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class);
     }
 
     /**
@@ -53,7 +50,6 @@ class Product extends Model
     public function getId(): ?string
     {
         return $this->getAttribute('id');
-
     }
     /**
      * Get category in a specific product
@@ -63,7 +59,6 @@ class Product extends Model
     public function getCategory(): ?string
     {
         return $this->getAttribute('category');
-
     }
 
     /**
@@ -97,11 +92,10 @@ class Product extends Model
      */
     public function scopeName(Builder $query, ? string $name):Builder
     {
-        if(null !== $name) {
+        if (null !== $name) {
             return $query->where('name', 'LIKE', "$name%");
         }
         return $query;
-
     }
 
     /**
@@ -113,11 +107,10 @@ class Product extends Model
      */
     public function scopeStatus(Builder $query, ? string $status):Builder
     {
-        if(null !== $status) {
+        if (null !== $status) {
             return $query->where('status', 'LIKE', "$status%");
         }
         return $query;
-
     }
 
     /**
@@ -130,11 +123,10 @@ class Product extends Model
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
 
-        if(null !== $mark) {
+        if (null !== $mark) {
             return $query->where('mark', 'LIKE', "$mark%");
         }
         return $query;
-
     }
 
     /**
@@ -146,25 +138,20 @@ class Product extends Model
      */
     public function scopePrice(Builder$query, ? string $price):Builder
     {
-        if($price == 5000) {
+        if ($price == 5000) {
             return $query->where('price', '<=', 5000);
-        }elseif ($price == 10000) {
+        } elseif ($price == 10000) {
             return $query->whereBetween('price', [5000,10000]);
-        }
-        elseif ($price == 20000) {
+        } elseif ($price == 20000) {
             return $query->whereBetween('price', [10000,20000]);
-        }
-        elseif ($price == 30000) {
+        } elseif ($price == 30000) {
             return $query->whereBetween('price', [20000,30000]);
-        }
-        elseif ($price == 31000) {
+        } elseif ($price == 31000) {
             return $query->where('price', '>', 30000);
-        }
-        elseif(null !== $price) {
+        } elseif (null !== $price) {
             return $query->where('price', '<=', $price);
         }
         return $query;
-
     }
 
     /**
@@ -177,7 +164,6 @@ class Product extends Model
     public function scopeSidebarPrice(Builder$query, ? string $price):Builder
     {
      //
-
     }
 
     /**
@@ -189,7 +175,7 @@ class Product extends Model
      */
     public function scopeCategory(Builder$query, ? string $category):Builder
     {
-        if(null !== $category) {
+        if (null !== $category) {
             return $query->where('category', 'LIKE', "$category%");
         }
         return $query;
@@ -204,12 +190,9 @@ class Product extends Model
      */
     public function scopeSearchByMark(Builder$query, ? string $sidebar):Builder
     {
-        if(null !== $sidebar) {
+        if (null !== $sidebar) {
             return $query->where('mark', '=', $sidebar);
         }
         return $query;
     }
-
-
 }
-

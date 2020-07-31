@@ -36,6 +36,5 @@ class OptimizeProductImage implements ShouldQueue
          $image->widen(600)->encode();
 
         Storage::put($event->product->image, (string) $image);
-
     }
 }

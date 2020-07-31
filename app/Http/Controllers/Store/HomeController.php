@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Store;
 
-use App\Http\Controllers\Controller;;
+use App\Http\Controllers\Controller;
+;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -14,8 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
-
     }
 
     /**

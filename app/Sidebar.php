@@ -10,6 +10,4 @@ class Sidebar extends Model
     protected $fillable = [
         'name' ,
     ];
-
-
 }

@@ -64,7 +64,7 @@ class MarkSeeder extends Seeder
         ]);
 
         factory(Mark::class)->create([
-            'name' => 'Sony Ericsson',
+            'name' => 'Sony',
         ]);
 
         factory(Mark::class)->create([

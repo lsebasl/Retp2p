@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Product;
-use Illuminate\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryRepository
 {
     /**
+     *returns the product according to the specific search in goods.index
+     *
      * @param  $request
-     * @param  $category
-     * @return mixed
+     * @return Product
      */
     public function getPaginated($request)
     {
-
         return Product::where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
             ->category($request->get('search-category'))
@@ -26,44 +27,26 @@ class CategoryRepository
     }
 
     /**
-     * @param  $sidebar
-     * @param  $category
-     * @return mixed
+     * return paginated in goods.index using a link in the store
+     *
+     * @param $category
      */
-    public function getSearchMark($sidebar, $category)
+    public function category($category)
     {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
+        return Product::where('status', 'enable')
+            ->where('category', $category)
             ->orderBy('created_at', request('sorted', 'DESC'))
-            ->SearchByMark($sidebar)
-            ->paginate(9);
-    }
-
-
-    /**
-     * @param  $price
-     * @param  $category
-     * @return mixed
-     */
-    public function getSearchPrice($price, $category)
-    {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
-            ->orderBy('created_at', request('sorted', 'DESC'))
-            ->SidebarPrice($price)
             ->paginate(9);
     }
 
     /**
+     * return product searching by id
+     *
      * @param  $id
-     * @return mixed
+     * @return Product
      */
-    public function getFindOrFail($id)
+    public function findById($id):Product
     {
         return Product::findOrfail($id);
     }
-
-
-
-
 }

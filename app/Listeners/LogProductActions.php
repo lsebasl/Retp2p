@@ -31,6 +31,5 @@ class LogProductActions implements ShouldQueue
         $author = $event->author;
 
         Log::info('product created', ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]);
-
     }
 }

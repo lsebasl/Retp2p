@@ -6,7 +6,6 @@ use App\Events\ProductCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-
 class AddAuthorToProduct implements ShouldQueue
 {
     /**

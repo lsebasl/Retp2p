@@ -14,8 +14,6 @@ class ProfileController extends Controller
      */
     public function __construct()
     {
-
-
     }
 
     /**

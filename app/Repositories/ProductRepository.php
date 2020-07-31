@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+
 class ProductRepository
 {
     /**
@@ -39,7 +40,7 @@ class ProductRepository
      * @param  $request
      * @return mixed
      */
-    public function SaveImage($product, $request)
+    public function saveImage($product, $request)
     {
         $product->fill($request->validated());
 
@@ -55,7 +56,7 @@ class ProductRepository
      * @param  $request
      * @return mixed
      */
-    public function Update($product, $request)
+    public function update($product, $request)
     {
         $product->update(array_filter($request->validated()));
 
@@ -66,7 +67,7 @@ class ProductRepository
      * @param  $product
      * @return bool
      */
-    public function DeleteImage($product)
+    public function deleteImage($product)
     {
         return Storage::delete($product->image);
     }
@@ -75,12 +76,10 @@ class ProductRepository
      * @param  $product
      * @return mixed
      */
-    public function Delete($product)
+    public function delete($product)
     {
         $product->delete();
 
         return $product;
     }
-
-
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 class ModelRepository
 {
 
@@ -40,5 +41,4 @@ class ModelRepository
     {
         return $model->delete();
     }
-
 }

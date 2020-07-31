@@ -29,8 +29,5 @@ class Client extends Model
         public function getFullName()
         {
             return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
-
         }
-
 }
-

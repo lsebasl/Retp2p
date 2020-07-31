@@ -23,9 +23,10 @@ class Mark extends Model
     public function getCacheMarks():Collection
     {
         return Cache::remember(
-            'marks', now()->addDay(), function () {
+            'marks',
+            now()->addDay(),
+            function () {
                 return $this->all();
-
             }
         );
     }

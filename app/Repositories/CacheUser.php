@@ -18,7 +18,8 @@ class CacheUser
         $key = "users.page." . request('page', 1);//users.page.1 default
 
         return Cache::tags('users')->rememberForever(
-            $key, function () use ($user) {
+            $key,
+            function () use ($user) {
 
                 return $this->modelRepository->getPaginated($user);
             }
@@ -27,21 +28,20 @@ class CacheUser
     public function cacheFindByModel(User $user)
     {
         return Cache::tags('users')->rememberForever(
-            "'user'.{$user}", function () use ($user) {
+            "'user'.{$user}",
+            function () use ($user) {
 
                     return $this->modelRepository->cacheFindByModel($user);
             }
         );
-
     }
-    public function update($request,$user)
+    public function update($request, $user)
     {
         $this->modelRepository->update($request, $user);
 
         Cache::tags('users')->flush();
 
         return $user;
-
     }
     public function delete($user)
     {
@@ -51,5 +51,4 @@ class CacheUser
 
         return $user;
     }
-
 }

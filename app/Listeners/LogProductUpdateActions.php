@@ -32,6 +32,5 @@ class LogProductUpdateActions implements ShouldQueue
         $author = $event->author;
 
         Log::info('product update', ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]);
-
     }
 }

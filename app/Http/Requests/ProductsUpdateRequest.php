@@ -39,7 +39,5 @@ class ProductsUpdateRequest extends FormRequest
             'status' => 'required|in:Enable,Disable',
 
         ];
-
-
     }
 }

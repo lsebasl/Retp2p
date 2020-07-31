@@ -6,7 +6,6 @@ use App\Http\View\Composers\MarkComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-
 class ViewServiceProvider extends ServiceProvider
 {
     /**
@@ -27,7 +26,8 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            ['products.create','product__form'], MarkComposer::class
+            ['products.create','product__form'],
+            MarkComposer::class
         );
     }
 }

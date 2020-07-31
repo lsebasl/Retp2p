@@ -27,5 +27,4 @@ class ProductSaveImage
     {
         $this->product = $product;
     }
-
 }

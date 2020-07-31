@@ -17,7 +17,7 @@ use App\Events\ProductUpdate;
 
 class ProductController extends Controller
 {
-    Protected $productRepository;
+    protected $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
@@ -105,16 +105,14 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
+            $this->productRepository->deleteImage($product);
 
-            $this->productRepository->DeleteImage($product);
-
-            $product = $this->productRepository->SaveImage($product, $request);
+            $product = $this->productRepository->saveImage($product, $request);
 
             ProductSaveImage::dispatch($product);
-
-        }else{
-            $product = $this->productRepository->Update($product, $request);
+        } else {
+            $product = $this->productRepository->update($product, $request);
         }
              ProductUpdate::dispatch($product, auth()->user());
 
@@ -133,11 +131,10 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'destroy');
 
-        $this->productRepository->DeleteImage($product);
+        $this->productRepository->deleteImage($product);
 
-        $this->productRepository->Delete($product);
+        $this->productRepository->delete($product);
 
         return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }
 }
-

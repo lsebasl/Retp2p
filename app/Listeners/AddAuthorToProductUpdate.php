@@ -7,7 +7,6 @@ use App\Events\ProductUpdate;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-
 class AddAuthorToProductUpdate implements ShouldQueue
 {
     /**

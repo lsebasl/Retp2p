@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Product;
 use Illuminate\View\View;
+
 class StockController extends Controller
 {
     public function __construct()

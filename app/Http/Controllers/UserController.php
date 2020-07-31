@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
 use App\Product;
@@ -9,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\User;
 use Illuminate\View\View;
-
 
 class UserController extends Controller
 {

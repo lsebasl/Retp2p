@@ -11,7 +11,7 @@ class Invoice extends Model
     /**
      * @return HasMany
      */
-    public Function products():HasMany
+    public function products():HasMany
     {
         return $this->hasMany(Product::class);
     }
@@ -32,4 +32,3 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
     }
 }
-

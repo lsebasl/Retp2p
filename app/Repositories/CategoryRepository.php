@@ -4,18 +4,21 @@ namespace App\Repositories;
 use App\Product;
 use Illuminate\View\View;
 
-class CategoryRepository implements CategoryInterface
+class CategoryRepository
 {
     /**
      * @param  $request
      * @param  $category
      * @return mixed
      */
-    public function getPaginated($request, $category)
+    public function getPaginated($request)
     {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
+
+        return Product::where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
+            ->category($request->get('search-category'))
+            ->price($request->get('search-price'))
+            ->mark($request->get('search-mark'))
             ->price($request->get('price'))
             ->name($request->get('name'))
             ->mark($request->get('mark'))
@@ -57,7 +60,7 @@ class CategoryRepository implements CategoryInterface
      */
     public function getFindOrFail($id)
     {
-        return  Product::findOrfail($id);
+        return Product::findOrfail($id);
     }
 
 

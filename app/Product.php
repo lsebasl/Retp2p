@@ -129,6 +129,7 @@ class Product extends Model
      */
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
+
         if(null !== $mark) {
             return $query->where('mark', 'LIKE', "$mark%");
         }
@@ -145,7 +146,21 @@ class Product extends Model
      */
     public function scopePrice(Builder$query, ? string $price):Builder
     {
-        if(null !== $price) {
+        if($price == 5000) {
+            return $query->where('price', '<=', 5000);
+        }elseif ($price == 10000) {
+            return $query->whereBetween('price', [5000,10000]);
+        }
+        elseif ($price == 20000) {
+            return $query->whereBetween('price', [10000,20000]);
+        }
+        elseif ($price == 30000) {
+            return $query->whereBetween('price', [20000,30000]);
+        }
+        elseif ($price == 31000) {
+            return $query->where('price', '>', 30000);
+        }
+        elseif(null !== $price) {
             return $query->where('price', '<=', $price);
         }
         return $query;
@@ -161,22 +176,7 @@ class Product extends Model
      */
     public function scopeSidebarPrice(Builder$query, ? string $price):Builder
     {
-
-        if($price == 5000) {
-            return $query->where('price', '<=', 5000);
-        }elseif ($price == 10000) {
-            return $query->whereBetween('price', [5000,10000]);
-        }
-        elseif ($price == 20000) {
-            return $query->whereBetween('price', [10000,20000]);
-        }
-        elseif ($price == 30000) {
-            return $query->whereBetween('price', [20000,30000]);
-        }
-        else {
-            return $query->where('price', '>', 30000);
-        }
-
+     //
 
     }
 

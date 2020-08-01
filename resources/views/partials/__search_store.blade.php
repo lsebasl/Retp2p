@@ -1,6 +1,4 @@
 
-
-
     <input type="search" class="form-control mr-sm-2 {{$errors->has('name') ? 'is-invalid' : '' }}" name="name" placeholder="Name..." value="{{ request()->input('name')}}">
     <input type="search" class="form-control mr-sm-2 {{$errors->has('mark') ? 'is-invalid' : '' }} " name="mark" placeholder="Mark..." value="{{ request()->input('mark')}}">
     <input type="search" class="form-control mr-sm-2 {{$errors->has('price') ? 'is-invalid' : '' }}" name="price" placeholder="Max Price..." value="{{ request()->input('price')}}">

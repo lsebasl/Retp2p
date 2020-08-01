@@ -23,10 +23,9 @@
             @includeWhen($errors->has('search-category'), 'partials.__invalid_feedback', ['feedback' => $errors->first('search-category')])
             <select class="mdl-textfield__input" name="search-category" id="search-category">
                 <option value=""></option>
-                <option value="Mobiles" {{'Mobiles' == request()->input('search-category') ? 'selected' : ''}}>{{__('Mobiles')}}</option>
-                <option value="Computers" {{'Computers' == request()->input('search-category') ? 'selected' : ''}}>{{__('Computers')}}</option>
-                <option value="Tv & Video" {{'Tv & Video' == request()->input('search-category') ? 'selected' : ''}}>{{__('Tv & Video')}}</option>
-                <option value="Accessories" {{'Accessories' == request()->input('search-category') ? 'selected' : ''}}>{{__('Accessories')}}</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->name }}" @if($category->name === request()->input('search-category')) selected @endif>{{$category->name}}</option>
+                @endforeach
             </select>
             <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
             <span class="mdl-textfield__error">Invalid Category</span>

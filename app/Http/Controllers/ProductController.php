@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Events\ProductCreated;
 use App\Events\ProductSaveImage;
 use App\Helpers\Logs;
@@ -44,11 +45,10 @@ class ProductController extends Controller
      */
     public function create():View
     {
-        $marks = Mark::all();
 
         $product = new Product();
 
-        return view('products.create', compact('product', 'marks'));
+        return view('products.create', compact('product'));
     }
 
     /**
@@ -91,9 +91,7 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'edit');
 
-        $marks = Mark::all();
-
-        return view('products.edit', compact('product', 'marks'));
+        return view('products.edit', compact('product', 'marks','categories'));
     }
 
     /**

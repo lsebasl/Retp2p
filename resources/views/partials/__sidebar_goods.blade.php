@@ -13,30 +13,14 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                         <div class="panel-body panel_text">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="search-category" name="search-category" value="Mobiles" {{'Mobiles' == request()->input('search-category') ? 'checked' : ''}}>
-                                <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category">
-                                    Mobiles
-                                </label>
-                            </div>
-                            <div class="form-check ">
-                                <input class="form-check-input" style="font-size: 95em" type="radio" id="search-category2" name="search-category" value="Computers" {{'Computers' == request()->input('search-category') ? 'checked' : ''}}>
-                                <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category2">
-                                    Computers
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="search-category3" name="search-category" value="Tv & Video" {{'Tv & Video' == request()->input('search-category') ? 'checked' : ''}}>
-                                <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category3">
-                                    Tv & Video
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="search-category4" name="search-category" value="Accessories" {{'Accessories' == request()->input('search-category') ? 'checked' : ''}}>
-                                <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category4">
-                                    Accessories
-                                </label>
-                            </div>
+                            @foreach($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="search-category.{{ $category->name }}" name="search-category" value="{{ $category->name }}" {{$category->name == request()->input('search-category') ? 'checked' : ''}}>
+                                    <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category.{{ $category->name }}">
+                                        {{ $category->name }}
+                                    </label>
+                                </div>
+                            @endforeach
                             <button class="form-control" style="color:darkblue; margin: 10px" >
                                 {{__('Search')}}
                             </button>

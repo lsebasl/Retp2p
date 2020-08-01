@@ -34,7 +34,7 @@ class GoodsController extends Controller
 
         $products = $this->categoryRepository->getPaginated($request);
 
-        return view('store.goods', compact('products', 'marks'));
+        return view('store.goods', compact('products'));
     }
 
     /**

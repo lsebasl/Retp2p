@@ -79,7 +79,7 @@ class ProductRepository
      * Delete a specific product it affects stocks, products and store.
      *
      * @param  $product
-     * @return mixed
+     * @return Product
      */
     public function deleteProduct($product):Product
     {

@@ -12,7 +12,7 @@ class MarkSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run():void
     {
         //cellphones
         factory(Mark::class)->create([
@@ -102,29 +102,6 @@ class MarkSeeder extends Seeder
         factory(Mark::class)->create([
             'name' => 'BenQ',
         ]);
-
-        //sidebar
-
-        factory(Sidebar::class)->create([
-            'name' => 'Huawei',
-        ]);
-
-        factory(Sidebar::class)->create([
-            'name' => 'Samsung',
-        ]);
-
-        factory(Sidebar::class)->create([
-            'name' => 'Apple',
-        ]);
-
-        factory(Sidebar::class)->create([
-            'name' => 'Xiaomi',
-        ]);
-
-        factory(Sidebar::class)->create([
-            'name' => 'Lg',
-        ]);
-
 
     }
 }

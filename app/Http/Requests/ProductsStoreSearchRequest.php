@@ -28,7 +28,7 @@ class ProductsStoreSearchRequest extends FormRequest
              'name' => 'bail|nullable|min:1|max:30',
              'mark' => 'bail|nullable|min:1|max:30|',
              'price' => 'bail|nullable|min:1|max:1000000|numeric',
-             'search-category' => 'bail|nullable|in:Mobiles,Computers,Tv & Video,Accessories',
+
 
         ];
     }

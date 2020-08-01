@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
@@ -14,7 +15,6 @@ class Product extends Model
     protected $fillable = [
         'barcode',
         'name',
-        'category',
         'model',
         'mark',
         'description',
@@ -22,6 +22,7 @@ class Product extends Model
         'price',
         'discount',
         'status',
+        'category',
     ];
 
     /**
@@ -32,6 +33,16 @@ class Product extends Model
     public function invoices():BelongsToMany
     {
         return $this->belongsToMany(Invoice::class);
+    }
+
+    /**
+     * Relationship one product belongs to one category
+     *
+     * @return BelongsTo
+     */
+    public function category():BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

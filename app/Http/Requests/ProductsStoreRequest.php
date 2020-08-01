@@ -26,7 +26,7 @@ class ProductsStoreRequest extends FormRequest
         return [
             'barcode' => 'required|min:3|max:30|unique:products,barcode',
             'name' => 'required|min:3|max:30',
-            'category' => 'required|in:Mobiles,Computers,Tv & Video,,Accessories',
+            'category' => 'required|in:Mobiles,Computers,Tv & Video,Accessories',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',

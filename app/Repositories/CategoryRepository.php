@@ -11,9 +11,9 @@ class CategoryRepository
      *returns the product according to the specific search in goods.index
      *
      * @param  $request
-     * @return Product
+     * @return LengthAwarePaginator
      */
-    public function getPaginated($request)
+    public function getPaginated($request):LengthAwarePaginator
     {
         return Product::where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
@@ -30,8 +30,9 @@ class CategoryRepository
      * return paginated in goods.index using a link in the store
      *
      * @param $category
+     * @return LengthAwarePaginator
      */
-    public function category($category)
+    public function category($category):LengthAwarePaginator
     {
         return Product::where('status', 'enable')
             ->where('category', $category)

@@ -203,7 +203,7 @@ class ProductsTest extends TestCase
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function show_stocks_with_a_partial_search_by_price_product(string $field, ?string $value)
+    public function stocks_search_success_when_a_search_item_is__valid(string $field, ?string $value)
     {
 
         $user = factory(User::class)->create();
@@ -226,7 +226,7 @@ class ProductsTest extends TestCase
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function show_products_with_a_partial_search_by_price_product(string $field, ?string $value)
+    public function products_search_success_when_a_search_item_is__valid(string $field, ?string $value)
     {
 
         $user = factory(User::class)->create();
@@ -240,6 +240,29 @@ class ProductsTest extends TestCase
 
         $response->assertSessionDoesntHaveErrors($field)
                  ->assertStatus(200);
+
+    }
+
+    /**
+     * @param        string      $field
+     * @param        string|null $value
+     * @dataProvider ValidSearchStoreItemsProvider
+     * @test
+     */
+    public function see_search_in_store_when_a_search_item_is_valid(string $field, ?string $value)
+    {
+
+        $user = factory(User::class)->create();
+
+        $filters = [
+            $field=> $value
+        ];
+
+        $response = $this->actingAs($user)
+            ->get(route('goods.index', $filters));
+
+        $response->assertSessionDoesntHaveErrors($field)
+            ->assertStatus(200);
 
     }
 
@@ -387,6 +410,22 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseEmpty('products');
 
+    }
+
+    /**
+     * @return array
+     */
+    public function ValidSearchStoreItemsProvider(): array
+    {
+        return [
+            'Test name' => ['name', Str::random(29)],
+            'Test mark' => ['mark', Str::random(29)],
+            'Test price' => ['price', '1000000'],
+            'Test category Mobiles ' => ['search-category', 'Mobiles'],
+            'Test category Computers' => ['search-category', 'Computers'],
+            'Test category Tv & Video' => ['search-category', 'Tv & Video'],
+            'Test category Accessories' => ['search-category', 'Accessories'],
+        ];
     }
 
     /**

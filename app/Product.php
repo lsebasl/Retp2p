@@ -25,7 +25,7 @@ class Product extends Model
     ];
 
     /**
-     * Relationship many invoices belong to many products
+     * Relationship many invoices belong to many products.
      *
      * @return BelongsToMany
      */
@@ -33,7 +33,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Invoice::class);
     }
+
     /**
+     * Relationship many invoices belong to many products.
      *
      * @return BelongsToMany
      */
@@ -43,7 +45,7 @@ class Product extends Model
     }
 
     /**
-     * Get id in a specific product
+     * Get id in a specific product.
      *
      * @return string|null
      */
@@ -51,8 +53,9 @@ class Product extends Model
     {
         return $this->getAttribute('id');
     }
+
     /**
-     * Get category in a specific product
+     * Get category in a specific product.
      *
      * @return string|null
      */
@@ -62,7 +65,7 @@ class Product extends Model
     }
 
     /**
-     * Get barcode in a specific product
+     * Get barcode in a specific product.
      *
      * @return string|null
      */
@@ -72,7 +75,7 @@ class Product extends Model
     }
 
     /**
-     * * Get the name in a specific product
+     * * Get the name in a specific product.
      *
      * @return string|null
      */
@@ -81,10 +84,8 @@ class Product extends Model
         return $this->getAttribute('name');
     }
 
-
-
     /**
-     * Query Scope Name
+     * Query Scope Name.
      *
      * @param  Builder     $query
      * @param  string|null $name
@@ -99,7 +100,7 @@ class Product extends Model
     }
 
     /**
-     * Query Scope Status
+     * Query Scope Status.
      *
      * @param  Builder $query
      * @param  $status
@@ -114,7 +115,7 @@ class Product extends Model
     }
 
     /**
-     * Query Scope Mark
+     * Query Scope Mark.
      *
      * @param  Builder $query
      * @param  $mark
@@ -130,7 +131,7 @@ class Product extends Model
     }
 
     /**
-     * Query Scope Mark
+     * Query Scope Price.
      *
      * @param  Builder     $query
      * @param  string|null $price
@@ -155,19 +156,7 @@ class Product extends Model
     }
 
     /**
-     * Query Scope Sidebar Price
-     *
-     * @param Builder $query
-     * @param string|null $price
-     * @return Builder
-     */
-    public function scopeSidebarPrice(Builder$query, ? string $price):Builder
-    {
-     //
-    }
-
-    /**
-     * Query Scope Category
+     * Query Scope Category.
      *
      * @param  Builder     $query
      * @param  string|null $category
@@ -182,7 +171,7 @@ class Product extends Model
     }
 
     /**
-     * Query Scope Category
+     * Query Scope SearchByMark.
      *
      * @param  Builder     $query
      * @param  string|null $sidebar

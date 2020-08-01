@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
-use App\Product;
 use App\Repositories\CacheUser;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\User;
 use Illuminate\View\View;
@@ -21,7 +19,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * List users after paginated.
      *
      * @param  User $user
      * @return View
@@ -34,7 +32,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the clients..
+     * Show a specific user
      *
      * @param  User $user
      * @return View

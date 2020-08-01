@@ -108,7 +108,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $this->productRepository->deleteImage($product);
 
-            $product = $this->productRepository->saveImage($product, $request);
+            $product = $this->productRepository->fillProduct($product, $request);
 
             ProductSaveImage::dispatch($product);
         } else {
@@ -133,7 +133,7 @@ class ProductController extends Controller
 
         $this->productRepository->deleteImage($product);
 
-        $this->productRepository->delete($product);
+        $this->productRepository->deleteProduct($product);
 
         return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }

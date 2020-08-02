@@ -27,8 +27,6 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
 
     Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
-    Route::get('/goods/brand/{brand}', 'Store\GoodsController@searchBrand')->name('goods.brand');
-    Route::get('/goods/price/{price}', 'Store\GoodsController@searchPrice')->name('goods.price');
     Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
     Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
 

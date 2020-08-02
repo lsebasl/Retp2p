@@ -2,12 +2,10 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
-
 
 class Product extends Model
 {
@@ -17,7 +15,6 @@ class Product extends Model
     protected $fillable = [
         'barcode',
         'name',
-        'category',
         'model',
         'mark',
         'description',
@@ -25,49 +22,118 @@ class Product extends Model
         'price',
         'discount',
         'status',
+        'category_id',
     ];
 
     /**
-     * Relationship many invoices belong to many products
+     * Relationship many invoices belong to many products.
      *
      * @return BelongsToMany
      */
     public function invoices():BelongsToMany
     {
-        Return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class);
     }
+
     /**
+     * Relationship one product belongs to one category.
+     *
+     * @return BelongsTo
+     */
+    public function category():BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Relationship many invoices belong to many products.
      *
      * @return BelongsToMany
      */
     public function User():BelongsToMany
     {
-        Return $this->belongsToMany(Invoice::class);
+        return $this->belongsToMany(Invoice::class);
     }
 
     /**
-     * Get id in a specific product
+     * Get id in a specific product.
      *
      * @return string|null
      */
     public function getId(): ?string
     {
         return $this->getAttribute('id');
-
     }
+
     /**
-     * Get category in a specific product
+     * Get category in a specific product.
      *
      * @return string|null
      */
     public function getCategory(): ?string
     {
-        return $this->getAttribute('category');
-
+        return $this->getAttribute('category_id');
     }
 
     /**
-     * Get barcode in a specific product
+     * Get description in a specific product.
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->getAttribute('description');
+    }
+
+    /**
+     * Get units in a specific product.
+     *
+     * @return string|null
+     */
+    public function getUnits(): ?string
+    {
+        return $this->getAttribute('units');
+    }
+    /**
+     * Get price in a specific product.
+     *
+     * @return string|null
+     */
+    public function getPrice()
+    {
+        return $this->getAttribute('price');
+    }
+    /**
+     * Get discount in a specific product.
+     *
+     * @return string|null
+     */
+    public function getDiscount()
+    {
+        return $this->getAttribute('discount');
+    }
+    /**
+     * Get status in a specific product.
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * Get model in a specific product.
+     *
+     * @return string|null
+     */
+    public function getModel()
+    {
+        return $this->getAttribute('model');
+    }
+
+    /**
+     * Get barcode in a specific product.
      *
      * @return string|null
      */
@@ -77,7 +143,7 @@ class Product extends Model
     }
 
     /**
-     * * Get the name in a specific product
+     * * Get the name in a specific product.
      *
      * @return string|null
      */
@@ -86,10 +152,8 @@ class Product extends Model
         return $this->getAttribute('name');
     }
 
-
-
     /**
-     * Query Scope Name
+     * Query Scope Name.
      *
      * @param  Builder     $query
      * @param  string|null $name
@@ -97,15 +161,14 @@ class Product extends Model
      */
     public function scopeName(Builder $query, ? string $name):Builder
     {
-        if(null !== $name) {
+        if (null !== $name) {
             return $query->where('name', 'LIKE', "$name%");
         }
         return $query;
-
     }
 
     /**
-     * Query Scope Status
+     * Query Scope Status.
      *
      * @param  Builder $query
      * @param  $status
@@ -113,15 +176,14 @@ class Product extends Model
      */
     public function scopeStatus(Builder $query, ? string $status):Builder
     {
-        if(null !== $status) {
+        if (null !== $status) {
             return $query->where('status', 'LIKE', "$status%");
         }
         return $query;
-
     }
 
     /**
-     * Query Scope Mark
+     * Query Scope Mark.
      *
      * @param  Builder $query
      * @param  $mark
@@ -130,15 +192,14 @@ class Product extends Model
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
 
-        if(null !== $mark) {
+        if (null !== $mark) {
             return $query->where('mark', 'LIKE', "$mark%");
         }
         return $query;
-
     }
 
     /**
-     * Query Scope Mark
+     * Query Scope Price.
      *
      * @param  Builder     $query
      * @param  string|null $price
@@ -146,57 +207,39 @@ class Product extends Model
      */
     public function scopePrice(Builder$query, ? string $price):Builder
     {
-        if($price == 5000) {
+        if ($price == 5000) {
             return $query->where('price', '<=', 5000);
-        }elseif ($price == 10000) {
+        } elseif ($price == 10000) {
             return $query->whereBetween('price', [5000,10000]);
-        }
-        elseif ($price == 20000) {
+        } elseif ($price == 20000) {
             return $query->whereBetween('price', [10000,20000]);
-        }
-        elseif ($price == 30000) {
+        } elseif ($price == 30000) {
             return $query->whereBetween('price', [20000,30000]);
-        }
-        elseif ($price == 31000) {
+        } elseif ($price == 31000) {
             return $query->where('price', '>', 30000);
-        }
-        elseif(null !== $price) {
+        } elseif (null !== $price) {
             return $query->where('price', '<=', $price);
         }
         return $query;
-
     }
 
     /**
-     * Query Scope Sidebar Price
-     *
-     * @param Builder $query
-     * @param string|null $price
-     * @return Builder
-     */
-    public function scopeSidebarPrice(Builder$query, ? string $price):Builder
-    {
-     //
-
-    }
-
-    /**
-     * Query Scope Category
+     * Query Scope Category.
      *
      * @param  Builder     $query
      * @param  string|null $category
      * @return Builder
      */
-    public function scopeCategory(Builder$query, ? string $category):Builder
+    public function scopeCategory(Builder$query, $category):Builder
     {
-        if(null !== $category) {
-            return $query->where('category', 'LIKE', "$category%");
+        if (null !== $category) {
+            return $query->where('category_id', 'LIKE', "$category%");
         }
         return $query;
     }
 
     /**
-     * Query Scope Category
+     * Query Scope SearchByMark.
      *
      * @param  Builder     $query
      * @param  string|null $sidebar
@@ -204,12 +247,9 @@ class Product extends Model
      */
     public function scopeSearchByMark(Builder$query, ? string $sidebar):Builder
     {
-        if(null !== $sidebar) {
+        if (null !== $sidebar) {
             return $query->where('mark', '=', $sidebar);
         }
         return $query;
     }
-
-
 }
-

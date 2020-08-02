@@ -1,23 +1,27 @@
 <?php
 
 namespace App\Repositories;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class ModelRepository
 {
 
     /**
      * @param  $model
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function getPaginated($model)
+    public function getPaginated($model):LengthAwarePaginator
     {
         return $model::orderBy('created_at', 'DESC')->paginate();
     }
 
     /**
      * @param  $model
-     * @return mixed
+     * @return Model
      */
-    public function cacheFindByModel($model)
+    public function cacheFindByModel($model):Model
     {
         return $model;
     }
@@ -25,20 +29,19 @@ class ModelRepository
     /**
      * @param  $request
      * @param  $model
-     * @return mixed
+     * @return bool
      */
-    public function update($request, $model)
+    public function update($request, $model):bool
     {
         return $model->update($request->validated());
     }
 
     /**
      * @param  $model
-     * @return mixed
+     * @return bool
      */
-    public function delete($model)
+    public function delete($model):bool
     {
         return $model->delete();
     }
-
 }

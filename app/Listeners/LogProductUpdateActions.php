@@ -26,12 +26,11 @@ class LogProductUpdateActions implements ShouldQueue
      * @param  ProductUpdate $event
      * @return void
      */
-    public function handle(ProductUpdate $event)
+    public function handle(ProductUpdate $event):void
     {
         $product = $event->product;
         $author = $event->author;
 
         Log::info('product update', ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]);
-
     }
 }

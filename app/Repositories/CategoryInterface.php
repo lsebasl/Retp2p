@@ -31,5 +31,4 @@ interface CategoryInterface
      * @return mixed
      */
     public function getFindOrFail($id);
-
 }

@@ -9,6 +9,8 @@ class Client extends Model
 {
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var string[]
      */
         protected $fillable = [
@@ -21,16 +23,23 @@ class Client extends Model
             'address',
         ];
 
-        public function invoices()
+        /**
+         * Client has many invoices.
+         *
+         * @return HasMany
+         */
+        public function invoices():hasmany
         {
             return $this->hasMany(Invoice::class);
         }
 
-        public function getFullName()
+        /**
+         * Obtain complete name in a user.
+         *
+         * @return string|null
+         */
+        public function getFullName():?string
         {
             return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
-
         }
-
 }
-

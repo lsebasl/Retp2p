@@ -10,7 +10,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ route('home.store') }}"><span class="glyphicon glyphicon-home"></span>Home</a> <i>/</i></li>
-                <li><a href="{{ route('goods.index') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>Smartphones</a></li>
+                <li><a href="{{ route('goods.index') }}"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span>Products</a></li>
             </ul>
         </div>
     </div>

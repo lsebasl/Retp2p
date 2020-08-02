@@ -133,31 +133,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
                         <ul class="dropdown-menu multi-column columns-3">
                             <div class="row">
+                                @foreach($categories as $category)
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
-                                        <h6>Mobiles</h6>
-                                        <li><a href="{{ route('goods.category','Mobiles') }}">Mobiles</a></li>
-
+                                        <h6>{{$category->name}}</h6>
+                                        <li><a href="{{ route('goods.category',$category->id)}}">{{$category->name}}</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Computers</h6>
-                                        <li><a href="{{ route('goods.category','Computers') }}">Computers</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Tv & Video</h6>
-                                        <li><a href="{{ route('goods.category','Tv & Video') }}">Televisions</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Accessories</h6>
-                                        <li><a href="{{ route('goods.category','Accessories') }}">Accessories</a></li>
-                                    </ul>
-                                </div>
+                                @endforeach
                                 <div class="clearfix"></div>
                             </div>
                         </ul>
@@ -208,10 +191,9 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Category</h3>
                 <ul class="info">
-                    <li><a href="{{ route('goods.category','Mobiles') }}">Mobiles</a></li>
-                    <li><a href="{{ route('goods.category','Computers') }}">Computers</a></li>
-                    <li><a href="{{ route('goods.category','Tv & Video') }}">Tv & Video</a></li>
-                    <li><a href="{{ route('goods.category','Accessories') }}">Accessories</a></li>
+                    @foreach($categories as $category)
+                    <li><a href="{{ route('goods.category',$category->id) }}">{{$category->name}}</a></li>
+                    @endforeach()
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">

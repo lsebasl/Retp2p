@@ -29,7 +29,7 @@ class ProductsUpdateRequest extends FormRequest
             'barcode' => ['required', 'min:3','max:30',
                 Rule::unique('products', 'barcode')->ignore($this->route('product'))],
             'name' => 'required|min:3|max:30',
-            'category' => 'required|in:Mobiles,Computers,Tv & Video,,Accessories',
+            'category_id' => 'required|bail|nullable|in:1,2,3,4|int',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',
@@ -39,7 +39,5 @@ class ProductsUpdateRequest extends FormRequest
             'status' => 'required|in:Enable,Disable',
 
         ];
-
-
     }
 }

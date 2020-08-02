@@ -9,14 +9,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Invoice extends Model
 {
     /**
+     * Many products has many invoices.
+     *
      * @return HasMany
      */
-    public Function products():HasMany
+    public function products():HasMany
     {
         return $this->hasMany(Product::class);
     }
 
     /**
+     * Relationship many invoices belong to client.
+     *
      * @return BelongsTo
      */
     public function clients():BelongsTo
@@ -25,6 +29,8 @@ class Invoice extends Model
     }
 
     /**
+     * Relationship many invoices belong to user.
+     *
      * @return BelongsTo
      */
     public function users():BelongsTo
@@ -32,4 +38,3 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
     }
 }
-

@@ -1,21 +1,25 @@
 <?php
 
 namespace App\Repositories;
-use App\Product;
-use Illuminate\View\View;
 
-class CategoryRepository implements CategoryInterface
+use App\Product;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+class CategoryRepository
 {
     /**
+     * returns the product according to the specific search in goods.index
+     *
      * @param  $request
-     * @param  $category
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function getPaginated($request, $category)
+    public function getPaginated($request):LengthAwarePaginator
     {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
+        return Product::where('status', 'enable')
             ->orderBy('created_at', request('sorted', 'DESC'))
+            ->category($request->get('search-category'))
+            ->price($request->get('search-price'))
+            ->mark($request->get('search-mark'))
             ->price($request->get('price'))
             ->name($request->get('name'))
             ->mark($request->get('mark'))
@@ -23,44 +27,27 @@ class CategoryRepository implements CategoryInterface
     }
 
     /**
-     * @param  $sidebar
+     * return paginated in goods.index using a link in the store
+     *
      * @param  $category
-     * @return mixed
+     * @return LengthAwarePaginator
      */
-    public function getSearchMark($sidebar, $category)
+    public function category($category):LengthAwarePaginator
     {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
+        return Product::where('status', 'enable')
+            ->where('category_id', $category)
             ->orderBy('created_at', request('sorted', 'DESC'))
-            ->SearchByMark($sidebar)
-            ->paginate(9);
-    }
-
-
-    /**
-     * @param  $price
-     * @param  $category
-     * @return mixed
-     */
-    public function getSearchPrice($price, $category)
-    {
-        return Product::where('category', $category)
-            ->where('status', 'enable')
-            ->orderBy('created_at', request('sorted', 'DESC'))
-            ->SidebarPrice($price)
             ->paginate(9);
     }
 
     /**
+     * return product searching by id
+     *
      * @param  $id
-     * @return mixed
+     * @return Product
      */
-    public function getFindOrFail($id)
+    public function findById($id):Product
     {
-        return  Product::findOrfail($id);
+        return Product::findOrfail($id);
     }
-
-
-
-
 }

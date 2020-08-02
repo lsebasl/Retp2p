@@ -30,5 +30,4 @@ class ProductCreated
         $this->product = $product;
         $this->author = $author;
     }
-
 }

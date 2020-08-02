@@ -20,7 +20,6 @@ class CheckStatus
     {
         if (Auth::user()->status == User::DISABLE_STATUS) {
                 return redirect('/')->with('error', 'Client Disable!');
-
         }
         return $next($request);
     }

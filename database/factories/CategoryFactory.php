@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
-use App\Mark;
+use App\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use App\Mark;
 |
 */
 
-$factory->define(Mark::class, function (Faker $faker) {
+$factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
     ];

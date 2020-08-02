@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsSearchRequest;
 use App\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\View\View;
+
 class StockController extends Controller
 {
-    public function __construct()
+    protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
     {
-        //
+        $this->productRepository = $productRepository;
     }
 
     /**
-     * Display a listing of the clients..
+     * Display a listing of the stock..
      *
      * @param  ProductsSearchRequest $request
      * @return View
@@ -21,11 +25,7 @@ class StockController extends Controller
 
     public function index(ProductsSearchRequest $request):View
     {
-        $product = Product::orderBy('created_at', request('sorted', 'DESC'))
-            ->name($request->get('search-name'))
-            ->category($request->get('search-category'))
-            ->status($request->get('search-status'))
-            ->paginate(20);
+        $product = $this->productRepository->getPaginated($request, 20);
 
         return view('stocks.index', ['products' => $product]);
     }

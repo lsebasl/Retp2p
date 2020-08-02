@@ -14,8 +14,6 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Listeners\OptimizeProductImage;
 
-
-
 class EventServiceProvider extends ServiceProvider
 {
     /**

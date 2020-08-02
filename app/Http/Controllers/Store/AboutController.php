@@ -14,8 +14,6 @@ class AboutController extends Controller
      */
     public function __construct()
     {
-
-
     }
 
     /**

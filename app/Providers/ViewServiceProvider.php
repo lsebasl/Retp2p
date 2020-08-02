@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\CategoryComposer;
 use App\Http\View\Composers\MarkComposer;
+use App\Mark;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -24,10 +25,48 @@ class ViewServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot():void
     {
         View::composer(
-            ['products.create','product__form'], MarkComposer::class
+            ['products.create','product__form'],
+            MarkComposer::class
+        );
+        View::composer(
+            ['products.create','product__form'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['products.edit','product__form'],
+            MarkComposer::class
+        );
+        View::composer(
+            ['products.edit','product__form'],
+            CategoryComposer::class
+
+        );
+        View::composer(
+            ['products.index','__search_in_products'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['products.index','__search_in_products'],
+            MarkComposer::class
+        );
+        View::composer(
+            ['store.goods','__search_products'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['store.layout.layout','__sidebar_goods'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['stocks.index','__form_search_products'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['stocks.index','__form_search_products'],
+            MarkComposer::class
         );
     }
 }

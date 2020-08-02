@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Events\ProductCreated;
 use App\Events\ProductSaveImage;
 use App\Helpers\Logs;
@@ -17,7 +18,7 @@ use App\Events\ProductUpdate;
 
 class ProductController extends Controller
 {
-    Protected $productRepository;
+    protected $productRepository;
 
     public function __construct(ProductRepository $productRepository)
     {
@@ -25,34 +26,32 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products like image gallery.
      *
      * @param  ProductsSearchRequest $request
      * @return View
      */
     public function index(ProductsSearchRequest $request):View
     {
-        $products = $this->productRepository->getPaginated($request);
+        $products = $this->productRepository->getPaginated($request, 8);
 
         return view('products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return View
      */
     public function create():View
     {
-        $marks = Mark::all();
-
         $product = new Product();
 
-        return view('products.create', compact('product', 'marks'));
+        return view('products.create', compact('product'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
      * @param  ProductsStoreRequest $request
      * @return RedirectResponse
@@ -69,7 +68,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
      * @param  Product $product
      * @return View
@@ -82,7 +81,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
      * @param  Product $product
      * @return View
@@ -91,13 +90,11 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'edit');
 
-        $marks = Mark::all();
-
-        return view('products.edit', compact('product', 'marks'));
+        return view('products.edit', compact('product'));
     }
 
     /**
-     *  Update the specified resource in storage.
+     *  Update the specified product in storage.
      *
      * @param  Product               $product
      * @param  ProductsUpdateRequest $request
@@ -105,24 +102,23 @@ class ProductController extends Controller
      */
     public function update(Product $product, ProductsUpdateRequest $request):RedirectResponse
     {
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
+            $this->productRepository->deleteImage($product);
 
-            $this->productRepository->DeleteImage($product);
-
-            $product = $this->productRepository->SaveImage($product, $request);
+            $product = $this->productRepository->fillProduct($product, $request);
 
             ProductSaveImage::dispatch($product);
-
-        }else{
-            $product = $this->productRepository->Update($product, $request);
+        } else {
+            $product = $this->productRepository->update($product, $request);
         }
-             ProductUpdate::dispatch($product, auth()->user());
+
+        ProductUpdate::dispatch($product, auth()->user());
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      *
      * @param  Product $product
      * @return RedirectResponse
@@ -133,11 +129,10 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'destroy');
 
-        $this->productRepository->DeleteImage($product);
+        $this->productRepository->deleteImage($product);
 
-        $this->productRepository->Delete($product);
+        $this->productRepository->deleteProduct($product);
 
         return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }
 }
-

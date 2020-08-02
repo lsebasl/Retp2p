@@ -9,7 +9,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -43,6 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     *  Get name in a specific user.
+     *
      * @return string
      */
     public function getName():string
@@ -51,6 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get last name in a specific user.
+     *
      * @return string
      */
     public function getLastName():string
@@ -59,6 +62,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get complete name in a specific user.
+     *
      * @return string
      */
     public function getFullName():string
@@ -74,21 +79,4 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Invoice::class);
     }
 
-    /**
-     * Scope
-     *
-     * @param $query
-     * @param $name
-     */
-    public function scopeName( $query, $name)
-    {
-        if($name) {
-            return $query->where('name', 'LIKE', "%$name%");
-        }
-        return $query;
-    }
-
-
 }
-
-

@@ -15,12 +15,14 @@
                                     <small>{{$product->category->name}}</small>
                                     <small>{{$product->status}}</small>
                                 </div>
+                                <form method="get" action="{{route('products.edit',$product)}}">
                                 <div class="mdl-card__actions mdl-card--border">
                                     {{$product->name}}
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" >
-                                        <i class="zmdi zmdi-more"></i>
-                                    </button>
+                                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" >
+                                            <i class="zmdi zmdi-more"></i>
+                                        </button>
                                 </div>
+                                </form>
                             </div>
 
                             @empty

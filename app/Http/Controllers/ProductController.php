@@ -26,7 +26,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products like image gallery.
      *
      * @param  ProductsSearchRequest $request
      * @return View
@@ -39,7 +39,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return View
      */
@@ -51,7 +51,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
      * @param  ProductsStoreRequest $request
      * @return RedirectResponse
@@ -68,7 +68,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
      * @param  Product $product
      * @return View
@@ -81,7 +81,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
      * @param  Product $product
      * @return View
@@ -94,7 +94,7 @@ class ProductController extends Controller
     }
 
     /**
-     *  Update the specified resource in storage.
+     *  Update the specified product in storage.
      *
      * @param  Product               $product
      * @param  ProductsUpdateRequest $request
@@ -118,7 +118,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product from storage.
      *
      * @param  Product $product
      * @return RedirectResponse

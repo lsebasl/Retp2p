@@ -36,7 +36,7 @@ class Product extends Model
     }
 
     /**
-     * Relationship one product belongs to one category
+     * Relationship one product belongs to one category.
      *
      * @return BelongsTo
      */
@@ -76,7 +76,7 @@ class Product extends Model
     }
 
     /**
-     * Get category in a specific product.
+     * Get description in a specific product.
      *
      * @return string|null
      */
@@ -86,7 +86,7 @@ class Product extends Model
     }
 
     /**
-     * Get category in a specific product.
+     * Get units in a specific product.
      *
      * @return string|null
      */
@@ -95,7 +95,7 @@ class Product extends Model
         return $this->getAttribute('units');
     }
     /**
-     * Get category in a specific product.
+     * Get price in a specific product.
      *
      * @return string|null
      */
@@ -104,7 +104,7 @@ class Product extends Model
         return $this->getAttribute('price');
     }
     /**
-     * Get category in a specific product.
+     * Get discount in a specific product.
      *
      * @return string|null
      */
@@ -113,7 +113,7 @@ class Product extends Model
         return $this->getAttribute('discount');
     }
     /**
-     * Get category in a specific product.
+     * Get status in a specific product.
      *
      * @return string|null
      */
@@ -123,7 +123,7 @@ class Product extends Model
     }
 
     /**
-     * Get category in a specific product.
+     * Get model in a specific product.
      *
      * @return string|null
      */

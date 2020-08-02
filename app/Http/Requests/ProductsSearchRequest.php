@@ -27,7 +27,12 @@ class ProductsSearchRequest extends FormRequest
         return [
              'search-name' => 'bail|nullable|min:1|max:30',
              'search-status' => 'bail|nullable|in:Enable,Disable',
-             'search-category' => 'bail|nullable|in:1,2,3,4|int',
+             'search-category' => 'bail|nullable|exists:categories,id|int',
+             'search-mark' => 'bail|nullable|exists:marks,name',
+
+
+
+
 
         ];
     }

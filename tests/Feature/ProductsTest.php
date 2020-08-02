@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Category;
+use App\Mark;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -243,6 +244,17 @@ class ProductsTest extends TestCase
 
         $user = factory(User::class)->create();
 
+        factory(Category::class)->create(['id'=>1,
+        'name'=>'Mobiles']);
+        factory(Category::class)->create(['id'=>2,
+            'name'=>'Computers']);
+        factory(Category::class)->create(['id'=>3,
+            'name'=>'Tv & Video']);
+        factory(Category::class)->create(['id'=>4,
+            'name'=>'Accessories']);
+        factory(Mark::class)->create(['id'=>1,
+            'name'=>'Huawei']);
+
         $filters = [
             $field=> $value
         ];
@@ -265,6 +277,17 @@ class ProductsTest extends TestCase
     {
 
         $user = factory(User::class)->create();
+
+        factory(Category::class)->create(['id'=>1,
+            'name'=>'Mobiles']);
+        factory(Category::class)->create(['id'=>2,
+            'name'=>'Computers']);
+        factory(Category::class)->create(['id'=>3,
+            'name'=>'Tv & Video']);
+        factory(Category::class)->create(['id'=>4,
+            'name'=>'Accessories']);
+        factory(Mark::class)->create(['id'=>1,
+            'name'=>'Huawei']);
 
         $filters = [
             $field=> $value
@@ -289,6 +312,17 @@ class ProductsTest extends TestCase
 
         $user = factory(User::class)->create();
 
+        factory(Category::class)->create(['id'=>1,
+            'name'=>'Mobiles']);
+        factory(Category::class)->create(['id'=>2,
+            'name'=>'Computers']);
+        factory(Category::class)->create(['id'=>3,
+            'name'=>'Tv & Video']);
+        factory(Category::class)->create(['id'=>4,
+            'name'=>'Accessories']);
+        factory(Mark::class)->create(['id'=>1,
+            'name'=>'Huawei']);
+
         $filters = [
             $field=> $value
         ];
@@ -309,7 +343,6 @@ class ProductsTest extends TestCase
      */
     public function products_search_fails_when_a_search_item_is_not_valid(string $field, ?string $value)
     {
-
         $user = factory(User::class)->create();
 
         $filters = [
@@ -490,6 +523,14 @@ class ProductsTest extends TestCase
             'Test category Computers' => ['search-category', 2],
             'Test category Tv & Video' => ['search-category', 3],
             'Test category Accessories' => ['search-category', 4],
+            'Test mark Huawei' => ['search-mark','Huawei'],
+            /*'Test mark Samsung' => ['search-mark','Samsung'],
+            'Test mark Xiaomi' => ['search-mark','Xiaomi'],
+            'Test mark Lg' => ['search-mark','Lg'],
+            'Test mark Microsoft' => ['search-mark','Microsoft'],
+            'Test mark HTC' => ['search-mark','HTC'],
+            'Test mark Gigabyte' => ['search-mark','Gigabyte'],
+            'Test mark BenQ' => ['search-mark','BenQ'],*/
         ];
     }
 

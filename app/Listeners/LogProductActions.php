@@ -25,7 +25,7 @@ class LogProductActions implements ShouldQueue
      * @param  ProductCreated $event
      * @return void
      */
-    public function handle(ProductCreated $event)
+    public function handle(ProductCreated $event):void
     {
         $product = $event->product;
         $author = $event->author;

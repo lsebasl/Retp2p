@@ -16,7 +16,7 @@ class Mark extends Model
     ];
 
     /**
-     * Obtain cache marks
+     * Obtain cache marks.
      *
      * @return Collection
      */

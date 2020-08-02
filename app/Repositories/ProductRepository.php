@@ -20,6 +20,7 @@ class ProductRepository
         return Product::orderBy('created_at', request('sorted', 'DESC'))
             ->name($request->get('search-name'))
             ->category($request->get('search-category'))
+            ->mark($request->get('search-mark'))
             ->status($request->get('search-status'))
             ->paginate($pages);
     }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,6 +15,8 @@ use Illuminate\Http\UploadedFile;
 class ProductsTest extends TestCase
 {
     use RefreshDatabase;
+
+
 
     /**
      * @test
@@ -44,7 +47,7 @@ class ProductsTest extends TestCase
         $this->post(
             'products', ['name' => '',
             'barcode' => '70024411 ',
-            'category' => 'Mobiles',
+            'category_id' => 1,
             'model' => 'p123',
             'mark' => 'Huawei',
             'description' => 'Verde',
@@ -64,7 +67,14 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_view_product_show()
     {
-        $product = factory(Product::class)->create();
+        $category = factory(Category::class)->create([
+            'name' => 'Computers'
+        ]);
+
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
+
 
         $this->get(route('products.show', $product))
             ->assertRedirect(route('login'));
@@ -76,9 +86,15 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_view_product_edit()
     {
-        $Product = factory(Product::class)->create();
+        $category = factory(Category::class)->create([
+            'name' => 'Computers'
+        ]);
 
-        $this->get(route('products.edit', $Product))
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
+
+        $this->get(route('products.edit', $product))
             ->assertRedirect(route('login'));
 
     }
@@ -88,9 +104,15 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_product_update()
     {
-        $Product = factory(Product::class)->create();
+        $category = factory(Category::class)->create([
+            'name' => 'Computers'
+        ]);
 
-        $this->put(route('products.update', $Product))
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
+
+        $this->put(route('products.update', $product))
             ->assertRedirect(route('login'));
 
     }
@@ -100,7 +122,13 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_product_delete()
     {
-        $product = factory(Product::class)->create();
+        $category = factory(Category::class)->create([
+            'name' => 'Computers'
+        ]);
+
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
 
         $this->delete(route('products.destroy', $product))
             ->assertRedirect(route('login'));
@@ -139,7 +167,7 @@ class ProductsTest extends TestCase
             ->assertOk()
             ->assertSee($product->Units)
             ->assertSee($product->status)
-            ->assertSee($product->category);
+            ->assertSee($product->category->name);
     }
 
 
@@ -168,7 +196,14 @@ class ProductsTest extends TestCase
     public function user_can_see_product_goods_view()
     {
         $user = factory(User::class)->create();
-        $product = factory(Product::class)->create(['category' => 'Computers']);
+
+        $category = factory(Category::class)->create([
+            'name' => 'Computers'
+        ]);
+
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
 
         $response = $this->actingAs($user)->get(route('goods.index'));
 
@@ -199,11 +234,11 @@ class ProductsTest extends TestCase
     }
     /**
      * @param        string      $field
-     * @param        string|null $value
+     * @param                    $value
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function stocks_search_success_when_a_search_item_is__valid(string $field, ?string $value)
+    public function stocks_search_success_when_a_search_item_is__valid(string $field, $value)
     {
 
         $user = factory(User::class)->create();
@@ -222,11 +257,11 @@ class ProductsTest extends TestCase
 
     /**
      * @param        string      $field
-     * @param        string|null $value
+     * @param                     $value
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
-    public function products_search_success_when_a_search_item_is__valid(string $field, ?string $value)
+    public function products_search_success_when_a_search_item_is__valid(string $field, $value)
     {
 
         $user = factory(User::class)->create();
@@ -249,7 +284,7 @@ class ProductsTest extends TestCase
      * @dataProvider ValidSearchStoreItemsProvider
      * @test
      */
-    public function see_search_in_store_when_a_search_item_is_valid(string $field, ?string $value)
+    public function see_search_in_store_when_a_search_item_is_valid(string $field, $value)
     {
 
         $user = factory(User::class)->create();
@@ -290,11 +325,19 @@ class ProductsTest extends TestCase
 
     /**
      * @test
+     *
      */
     public function admin_can_update_a_product()
     {
         $user = factory(User::class)->create();
-        $product = factory(Product::class)->create();
+
+        $category = factory(Category::class)->create([
+            'id' => '2'
+        ]);
+
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
 
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
@@ -311,7 +354,7 @@ class ProductsTest extends TestCase
                 'image' => ('images/' . $file->hashName()),
                 'barcode' => '70440244123',
                 'name' => 'Huawei',
-                'category' => 'Computers',
+                'category_id' => 2,
                 'model' => 'p123',
                 'mark' => 'Huawei',
                 'description' => 'Verde',
@@ -332,31 +375,37 @@ class ProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
+        $category = factory(Category::class)->create([
+            'id' => '2'
+        ]);
+
+        $product = factory(Product::class)->create([
+            'category_id' => $category->getId(),
+        ]);
+
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
 
         Event::fake();
 
-        $this->actingAs($user)
+         $this->actingAs($user)
             ->post(route('products.store'), $this->getValidData($file))
             ->assertRedirect(route('stocks.index'))
             ->assertStatus(302);
 
         $this->assertDatabaseHas(
             'products', [
-
-            'image' => ('images/' . $file->hashName()),
-            'barcode' => '70440244123',
-            'name' => 'Huawei',
-            'category' => 'Computers',
-            'model' => 'p123',
-            'mark' => 'Huawei',
-            'description' => 'Verde',
-            'units' => '5',
-            'price' => '200',
-            'discount' => '10',
-            'status' => 'Enable',
-
+                'image' => ('images/' . $file->hashName()),
+                'barcode' => '70440244123',
+                'name' => 'Huawei',
+                'category_id' => 2,
+                'model' => 'p123',
+                'mark' => 'Huawei',
+                'description' => 'Verde',
+                'units' => '5',
+                'price' => '200',
+                'discount' => '10',
+                'status' => 'Enable',
             ]
         );
 
@@ -381,7 +430,7 @@ class ProductsTest extends TestCase
             'image' => $file,
             'barcode' => '70440244123',
             'name' => 'Huawei',
-            'category' => 'Computers',
+            'category_id' => 2,
             'model' => 'p123',
             'mark' => 'Huawei',
             'description' => 'Verde',
@@ -421,10 +470,10 @@ class ProductsTest extends TestCase
             'Test name' => ['name', Str::random(29)],
             'Test mark' => ['mark', Str::random(29)],
             'Test price' => ['price', '1000000'],
-            'Test category Mobiles ' => ['search-category', 'Mobiles'],
-            'Test category Computers' => ['search-category', 'Computers'],
-            'Test category Tv & Video' => ['search-category', 'Tv & Video'],
-            'Test category Accessories' => ['search-category', 'Accessories'],
+            'Test category Mobiles ' => ['search-category', 1],
+            'Test category Computers' => ['search-category', 2],
+            'Test category Tv & Video' => ['search-category', 3],
+            'Test category Accessories' => ['search-category', 4],
         ];
     }
 
@@ -437,10 +486,10 @@ class ProductsTest extends TestCase
             'Test name' => ['search-name', Str::random(29)],
             'Test status Enable' => ['search-status', 'Enable'],
             'Test status Disable' => ['search-status', 'Disable'],
-            'Test category Mobiles ' => ['search-category', 'Mobiles'],
-            'Test category Computers' => ['search-category', 'Computers'],
-            'Test category Tv & Video' => ['search-category', 'Tv & Video'],
-            'Test category Accessories' => ['search-category', 'Accessories'],
+            'Test category Mobiles ' => ['search-category', 1],
+            'Test category Computers' => ['search-category', 2],
+            'Test category Tv & Video' => ['search-category', 3],
+            'Test category Accessories' => ['search-category', 4],
         ];
     }
 
@@ -468,9 +517,9 @@ class ProductsTest extends TestCase
             'Test name is required' => ['name',null],
             'Test name is too short' => ['name','n'],
             'Test name is too long' => ['name',Str::random(81)],
-            'Test category is required' => ['category',null],
-            'Test category is short' => ['category','c'],
-            'Test category is long' => ['category',Str::random(81)],
+            'Test category is required' => ['category_id',null],
+            'Test category is short' => ['category_id','c'],
+            'Test category is long' => ['category_id',Str::random(81)],
             'Test model is required' => ['model',null],
             'Test model is short' => ['model','m'],
             'Test model is long' => ['model',Str::random(81)],
@@ -498,7 +547,7 @@ class ProductsTest extends TestCase
             'image' => $file,
             'barcode' => '70440244123',
             'name' => 'Huawei',
-            'category' => 'Computers',
+            'category_id' => 2,
             'model' => 'p123',
             'mark' => 'Huawei',
             'description' => 'Verde',

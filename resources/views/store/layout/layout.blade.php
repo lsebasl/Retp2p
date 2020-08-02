@@ -137,7 +137,7 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <h6>{{$category->name}}</h6>
-                                        <li><a href="{{ route('goods.category',$category->name)}}">{{$category->name}}</a></li>
+                                        <li><a href="{{ route('goods.category',$category->id)}}">{{$category->name}}</a></li>
                                     </ul>
                                 </div>
                                 @endforeach
@@ -192,7 +192,7 @@
                 <h3>Category</h3>
                 <ul class="info">
                     @foreach($categories as $category)
-                    <li><a href="{{ route('goods.category',$category->name) }}">{{$category->name}}</a></li>
+                    <li><a href="{{ route('goods.category',$category->id) }}">{{$category->name}}</a></li>
                     @endforeach()
                 </ul>
             </div>

@@ -13,15 +13,15 @@
             <label class="mdl-textfield__label" for="name">{{__('Name')}}</label>
             <span class="mdl-textfield__error">Invalid Name</span>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('category') ? 'is-invalid' : '' }}">
-            @includeWhen($errors->has('category'), 'partials.__invalid_feedback', ['feedback' => $errors->first('category')])
-            <select class="mdl-textfield__input" name="category" id="category"  >
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('category_id') ? 'is-invalid' : '' }}">
+            @includeWhen($errors->has('category_id'), 'partials.__invalid_feedback', ['feedback' => $errors->first('category_id')])
+            <select class="mdl-textfield__input" type="category_id" name="category_id" id="category_id"  >
                 <option value=""></option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->name }}" @if($category->name === old('category', $product->category)) selected @endif>{{$category->name}}</option>
+                    <option value="{{ $category->id }}" @if($category->id == old('category_id', $product->category_id)) selected @endif>{{$category->name}}</option>
                 @endforeach
             </select>
-            <label class="mdl-textfield__label" for="category">{{__('Select Category')}}</label>
+            <label class="mdl-textfield__label" for="category_id">{{__('Select Category')}}</label>
             <span class="mdl-textfield__error">Invalid Category</span>
         </div>
         <h5 class="text-condensedLight">Units and Price</h5>

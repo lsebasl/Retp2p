@@ -22,7 +22,7 @@ class Product extends Model
         'price',
         'discount',
         'status',
-        'category',
+        'category_id',
     ];
 
     /**
@@ -72,7 +72,64 @@ class Product extends Model
      */
     public function getCategory(): ?string
     {
-        return $this->getAttribute('category');
+        return $this->getAttribute('category_id');
+    }
+
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->getAttribute('description');
+    }
+
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getUnits(): ?string
+    {
+        return $this->getAttribute('units');
+    }
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getPrice()
+    {
+        return $this->getAttribute('price');
+    }
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getDiscount()
+    {
+        return $this->getAttribute('discount');
+    }
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->getAttribute('status');
+    }
+
+    /**
+     * Get category in a specific product.
+     *
+     * @return string|null
+     */
+    public function getModel()
+    {
+        return $this->getAttribute('model');
     }
 
     /**
@@ -173,10 +230,10 @@ class Product extends Model
      * @param  string|null $category
      * @return Builder
      */
-    public function scopeCategory(Builder$query, ? string $category):Builder
+    public function scopeCategory(Builder$query, $category):Builder
     {
         if (null !== $category) {
-            return $query->where('category', 'LIKE', "$category%");
+            return $query->where('category_id', 'LIKE', "$category%");
         }
         return $query;
     }

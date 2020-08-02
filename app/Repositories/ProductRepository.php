@@ -12,15 +12,16 @@ class ProductRepository
      *Returns the product according to the specific search in product.index.
      *
      * @param  $request
+     * @param $pages
      * @return LengthAwarePaginator
      */
-    public function getPaginated($request):LengthAwarePaginator
+    public function getPaginated($request,$pages):LengthAwarePaginator
     {
         return Product::orderBy('created_at', request('sorted', 'DESC'))
             ->name($request->get('search-name'))
             ->category($request->get('search-category'))
             ->status($request->get('search-status'))
-            ->paginate(8);
+            ->paginate($pages);
     }
 
     /**

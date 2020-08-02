@@ -43,7 +43,7 @@ class ViewServiceProvider extends ServiceProvider
             CategoryComposer::class
         );
         View::composer(
-            ['products.index','__search_products'],
+            ['products.index','__search_in_products'],
             CategoryComposer::class
         );
         View::composer(
@@ -55,7 +55,7 @@ class ViewServiceProvider extends ServiceProvider
             CategoryComposer::class
         );
         View::composer(
-            ['stocks.index','__search_products'],
+            ['stocks.index','__form_search_products'],
             CategoryComposer::class
         );
     }

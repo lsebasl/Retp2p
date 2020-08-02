@@ -15,8 +15,8 @@
                         <div class="panel-body panel_text">
                             @foreach($categories as $category)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="search-category.{{ $category->name }}" name="search-category" value="{{ $category->name }}" {{$category->name == request()->input('search-category') ? 'checked' : ''}}>
-                                    <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category.{{ $category->name }}">
+                                    <input class="form-check-input" type="radio" id="search-category.{{ $category->id }}" name="search-category" value="{{ $category->id }}" {{$category->id == request()->input('search-category') ? 'checked' : ''}}>
+                                    <label class="form-check-label" style="font-size: .95em; margin:5px;font-weight: normal" for="search-category.{{ $category->id }}">
                                         {{ $category->name }}
                                     </label>
                                 </div>

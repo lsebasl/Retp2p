@@ -61,6 +61,7 @@ class GoodsController extends Controller
     {
         $product = $this->categoryRepository->findById($id);
 
+
         return view('store.show', ['product' => $product]);
     }
 }

@@ -27,7 +27,7 @@ class ProductsSearchRequest extends FormRequest
         return [
              'search-name' => 'bail|nullable|min:1|max:30',
              'search-status' => 'bail|nullable|in:Enable,Disable',
-             'search-category' => 'bail|nullable|in:Mobiles,Computers,Tv & Video,Accessories',
+             'search-category' => 'bail|nullable|in:1,2,3,4|int',
 
         ];
     }

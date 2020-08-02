@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use phpDocumentor\Reflection\Types\Integer;
 
 class ProductsStoreRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class ProductsStoreRequest extends FormRequest
         return [
             'barcode' => 'required|min:3|max:30|unique:products,barcode',
             'name' => 'required|min:3|max:30',
-            'category' => 'required|in:Mobiles,Computers,Tv & Video,Accessories',
+            'category_id' => 'required|bail|nullable|in:1,2,3,4|int',
             'model' => 'required|min:2|max:30',
             'mark' => 'required|min:2|max:30',
             'description' => 'required|min:3|max:20',

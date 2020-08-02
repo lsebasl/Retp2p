@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\facades\Cache;
 
 class Category extends Model
@@ -14,6 +15,16 @@ class Category extends Model
     protected $fillable = [
         'name' ,
     ];
+
+    /**
+     * Relationship many invoices belong to many products.
+     *
+     * @return BelongsToMany
+     */
+    public function category():BelongsToMany
+    {
+        return $this->belongsToMany(Product::class);
+    }
 
     /**
      * Obtain cache marks
@@ -29,5 +40,10 @@ class Category extends Model
                 return $this->all();
             }
         );
+    }
+
+    public function getId()
+    {
+        return $this->getAttribute('id');
     }
 }

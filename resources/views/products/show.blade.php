@@ -23,7 +23,7 @@
                         </tr>
                         <tr>
                             <td class="mdl-data-table__cell--non-numeric">Category</td>
-                            <td>{{$product->category}}</td>
+                            <td>{{$product->category->name}}</td>
                         </tr>
                         <tr>
                             <td class="mdl-data-table__cell--non-numeric">Model</td>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="mdl-card__supporting-text">
                             <small>{{$product->units}}</small><br>
-                            <small>{{$product->category}}</small>
+                            <small>{{$product->category->name}}</small>
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
                             {{$product->name}}

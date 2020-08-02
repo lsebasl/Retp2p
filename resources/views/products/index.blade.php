@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="mdl-card__supporting-text">
                                     <small>{{$product->units}} units</small><br>
-                                    <small>{{$product->category}}</small>
+                                    <small>{{$product->category->name}}</small>
                                     <small>{{$product->status}}</small>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
@@ -33,7 +33,7 @@
                     </div>
         <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
             @include('partials.__alerts')
-            @include('partials.__search_products')</small><br>
+            @include('partials.__search_in_products')</small><br>
         </div>
     </div>
 

@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('barcode')->unique();
             $table->string('name');
             $table->string('model');
-            $table->string('category');
             $table->string('mark');
             $table->string('description');
             $table->integer('units');

@@ -28,12 +28,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  ProductsSearchRequest $request
+     * @param ProductsSearchRequest $request
      * @return View
      */
     public function index(ProductsSearchRequest $request):View
     {
-        $products = $this->productRepository->getPaginated($request);
+        $products = $this->productRepository->getPaginated($request,8);
 
         return view('products.index', compact('products'));
     }
@@ -45,7 +45,6 @@ class ProductController extends Controller
      */
     public function create():View
     {
-
         $product = new Product();
 
         return view('products.create', compact('product'));
@@ -91,7 +90,7 @@ class ProductController extends Controller
     {
         Logs::AuditLogger($product, 'edit');
 
-        return view('products.edit', compact('product', 'marks','categories'));
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -112,7 +111,8 @@ class ProductController extends Controller
         } else {
             $product = $this->productRepository->update($product, $request);
         }
-             ProductUpdate::dispatch($product, auth()->user());
+
+        ProductUpdate::dispatch($product, auth()->user());
 
         return redirect()->route('products.show', $product)->with('success', 'Client Has Been Updated!');
     }

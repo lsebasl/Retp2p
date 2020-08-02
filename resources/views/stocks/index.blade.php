@@ -34,7 +34,7 @@
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric">{{$product->name}}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{$product->barcode}}</td>
-                    <td class="mdl-data-table__cell--non-numeric">{{$product->category}}</td>
+                    <td class="mdl-data-table__cell--non-numeric">{{$product->category->name}}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{$product->mark}}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{$product->units}}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{$product->price}}</td>
@@ -67,7 +67,7 @@
         </div>
         <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
             @include('partials.__alerts')
-            @include('partials.__search_products')</small><br>
+            @include('partials.__search_in_stocks')</small><br>
         </div>
     </div>
 

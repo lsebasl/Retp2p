@@ -23,22 +23,22 @@ class Client extends Model
             'address',
         ];
 
-    /**
-     * Client has many invoices.
-     *
-     * @return HasMany
-     */
-    public function invoices():hasmany
+        /**
+         * Client has many invoices.
+         *
+         * @return HasMany
+         */
+        public function invoices():hasmany
         {
             return $this->hasMany(Invoice::class);
         }
 
-    /**
-     * Obtain complete name in a user.
-     *
-     * @return string|null
-     */
-    public function getFullName():?string
+        /**
+         * Obtain complete name in a user.
+         *
+         * @return string|null
+         */
+        public function getFullName():?string
         {
             return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
         }

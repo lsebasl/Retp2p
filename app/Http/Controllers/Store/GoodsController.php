@@ -26,7 +26,7 @@ class GoodsController extends Controller
     /**
      * Show view after validated and filter the product on store.
      *
-     * @param ProductsStoreSearchRequest $request
+     * @param  ProductsStoreSearchRequest $request
      * @return View
      */
     public function index(ProductsStoreSearchRequest $request):View
@@ -40,7 +40,7 @@ class GoodsController extends Controller
     /**
      * Show view after choose a specif category.
      *
-     * @param $category
+     * @param  $category
      * @return View
      */
     protected function category($category):View

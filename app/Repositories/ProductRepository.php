@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class ProductRepository
 {
     /**
-     *Returns the product according to the specific search in product.index.
+     * Returns the product according to the specific search in product.index.
      *
      * @param  $request
-     * @param $pages
+     * @param  $pages
      * @return LengthAwarePaginator
      */
     public function getPaginated($request,$pages):LengthAwarePaginator
@@ -92,11 +92,11 @@ class ProductRepository
     /**
      * Save a image in storage/app/images.
      *
-     * @param $request
-     * @param $product
+     * @param  $request
+     * @param  $product
      * @return Product
      */
-    public function saveImage($request, $product):Product
+    private function saveImage($request, $product):Product
     {
         $product->image = $request->file('image')->store('images');
 

@@ -25,7 +25,7 @@ class StockController extends Controller
 
     public function index(ProductsSearchRequest $request):View
     {
-        $product = $this->productRepository->getPaginated($request,20);
+        $product = $this->productRepository->getPaginated($request, 20);
 
         return view('stocks.index', ['products' => $product]);
     }

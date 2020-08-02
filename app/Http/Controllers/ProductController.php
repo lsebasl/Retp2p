@@ -28,12 +28,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ProductsSearchRequest $request
+     * @param  ProductsSearchRequest $request
      * @return View
      */
     public function index(ProductsSearchRequest $request):View
     {
-        $products = $this->productRepository->getPaginated($request,8);
+        $products = $this->productRepository->getPaginated($request, 8);
 
         return view('products.index', compact('products'));
     }

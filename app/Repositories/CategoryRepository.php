@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class CategoryRepository
 {
     /**
-     *returns the product according to the specific search in goods.index
+     * returns the product according to the specific search in goods.index
      *
      * @param  $request
      * @return LengthAwarePaginator
@@ -29,7 +29,7 @@ class CategoryRepository
     /**
      * return paginated in goods.index using a link in the store
      *
-     * @param $category
+     * @param  $category
      * @return LengthAwarePaginator
      */
     public function category($category):LengthAwarePaginator

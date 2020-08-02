@@ -16,7 +16,7 @@ class CacheUser
     }
 
     /**
-     * @param User $user
+     * @param  User $user
      * @return LengthAwarePaginator
      */
     public function getPaginated(User $user):LengthAwarePaginator
@@ -33,7 +33,7 @@ class CacheUser
     }
 
     /**
-     * @param User $user
+     * @param  User $user
      * @return User
      */
     public function cacheFindByModel(User $user):User
@@ -48,8 +48,8 @@ class CacheUser
     }
 
     /**
-     * @param $request
-     * @param $user
+     * @param  $request
+     * @param  $user
      * @return User
      */
     public function update($request, $user):User
@@ -63,7 +63,7 @@ class CacheUser
 
     /**
      *
-     * @param $user
+     * @param  $user
      * @return User
      */
     public function delete($user):User

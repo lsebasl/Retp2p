@@ -16,6 +16,8 @@ class CacheUser
     }
 
     /**
+     * put cache to products list
+     *
      * @param  User $user
      * @return LengthAwarePaginator
      */
@@ -33,6 +35,8 @@ class CacheUser
     }
 
     /**
+     * put cache to product show
+     *
      * @param  User $user
      * @return User
      */

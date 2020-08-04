@@ -22,11 +22,11 @@ class ProductSeeder extends Seeder
         ]);
         factory(Product::class,50)->create([
             'category_id' => 3,
-            'image' => 'images/buxDsQM6ss4cFlEzQCdokjPa4sD4GSvsLpDRepgj.jpeg',
+            'image' => 'images/75a6kBzZe0EiNbEPQQigOn7PaTz1eClJGEDI109P.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 4,
-            'image' => 'images/ugEE5BRFvbeu8QEkjIjE4GN1VJritD0BOomZs4S0.jpeg',
+            'image' => 'images/4ktCEMSoiveO1HqWguluHe92bARYculdU0pkLYYR.jpeg',
         ]);
     }
 }

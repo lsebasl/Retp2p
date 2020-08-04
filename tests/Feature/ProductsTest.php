@@ -68,13 +68,17 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_view_product_show()
     {
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'name' => 'Computers'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
 
         $this->get(route('products.show', $product))
@@ -87,13 +91,17 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_view_product_edit()
     {
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'name' => 'Computers'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         $this->get(route('products.edit', $product))
             ->assertRedirect(route('login'));
@@ -105,13 +113,17 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_product_update()
     {
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'name' => 'Computers'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         $this->put(route('products.update', $product))
             ->assertRedirect(route('login'));
@@ -123,13 +135,17 @@ class ProductsTest extends TestCase
      */
     public function no_authenticated_user_cant_access_to_product_delete()
     {
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'name' => 'Computers'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         $this->delete(route('products.destroy', $product))
             ->assertRedirect(route('login'));
@@ -198,13 +214,17 @@ class ProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'name' => 'Computers'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         $response = $this->actingAs($user)->get(route('goods.index'));
 
@@ -234,8 +254,8 @@ class ProductsTest extends TestCase
 
     }
     /**
-     * @param        string      $field
-     * @param                    $value
+     * @param        string $field
+     * @param        $value
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
@@ -244,16 +264,26 @@ class ProductsTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        factory(Category::class)->create(['id'=>1,
-        'name'=>'Mobiles']);
-        factory(Category::class)->create(['id'=>2,
-            'name'=>'Computers']);
-        factory(Category::class)->create(['id'=>3,
-            'name'=>'Tv & Video']);
-        factory(Category::class)->create(['id'=>4,
-            'name'=>'Accessories']);
-        factory(Mark::class)->create(['id'=>1,
-            'name'=>'Huawei']);
+        factory(Category::class)->create(
+            ['id'=>1,
+            'name'=>'Mobiles']
+        );
+        factory(Category::class)->create(
+            ['id'=>2,
+            'name'=>'Computers']
+        );
+        factory(Category::class)->create(
+            ['id'=>3,
+            'name'=>'Tv & Video']
+        );
+        factory(Category::class)->create(
+            ['id'=>4,
+            'name'=>'Accessories']
+        );
+        factory(Mark::class)->create(
+            ['id'=>1,
+            'name'=>'Huawei']
+        );
 
         $filters = [
             $field=> $value
@@ -268,8 +298,8 @@ class ProductsTest extends TestCase
     }
 
     /**
-     * @param        string      $field
-     * @param                     $value
+     * @param        string $field
+     * @param        $value
      * @dataProvider ValidSearchItemsProvider
      * @test
      */
@@ -278,16 +308,26 @@ class ProductsTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        factory(Category::class)->create(['id'=>1,
-            'name'=>'Mobiles']);
-        factory(Category::class)->create(['id'=>2,
-            'name'=>'Computers']);
-        factory(Category::class)->create(['id'=>3,
-            'name'=>'Tv & Video']);
-        factory(Category::class)->create(['id'=>4,
-            'name'=>'Accessories']);
-        factory(Mark::class)->create(['id'=>1,
-            'name'=>'Huawei']);
+        factory(Category::class)->create(
+            ['id'=>1,
+            'name'=>'Mobiles']
+        );
+        factory(Category::class)->create(
+            ['id'=>2,
+            'name'=>'Computers']
+        );
+        factory(Category::class)->create(
+            ['id'=>3,
+            'name'=>'Tv & Video']
+        );
+        factory(Category::class)->create(
+            ['id'=>4,
+            'name'=>'Accessories']
+        );
+        factory(Mark::class)->create(
+            ['id'=>1,
+            'name'=>'Huawei']
+        );
 
         $filters = [
             $field=> $value
@@ -297,7 +337,7 @@ class ProductsTest extends TestCase
             ->get(route('products.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
-                 ->assertStatus(200);
+            ->assertStatus(200);
 
     }
 
@@ -312,16 +352,26 @@ class ProductsTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        factory(Category::class)->create(['id'=>1,
-            'name'=>'Mobiles']);
-        factory(Category::class)->create(['id'=>2,
-            'name'=>'Computers']);
-        factory(Category::class)->create(['id'=>3,
-            'name'=>'Tv & Video']);
-        factory(Category::class)->create(['id'=>4,
-            'name'=>'Accessories']);
-        factory(Mark::class)->create(['id'=>1,
-            'name'=>'Huawei']);
+        factory(Category::class)->create(
+            ['id'=>1,
+            'name'=>'Mobiles']
+        );
+        factory(Category::class)->create(
+            ['id'=>2,
+            'name'=>'Computers']
+        );
+        factory(Category::class)->create(
+            ['id'=>3,
+            'name'=>'Tv & Video']
+        );
+        factory(Category::class)->create(
+            ['id'=>4,
+            'name'=>'Accessories']
+        );
+        factory(Mark::class)->create(
+            ['id'=>1,
+            'name'=>'Huawei']
+        );
 
         $filters = [
             $field=> $value
@@ -358,19 +408,22 @@ class ProductsTest extends TestCase
 
     /**
      * @test
-     *
      */
     public function admin_can_update_a_product()
     {
         $user = factory(User::class)->create();
 
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'id' => '2'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
@@ -378,8 +431,8 @@ class ProductsTest extends TestCase
         Event::fake();
 
         $this->actingAs($user)
-            ->put(route('products.update',$product), $this->getValidData($file))
-            ->assertRedirect(route('products.show',$product));
+            ->put(route('products.update', $product), $this->getValidData($file))
+            ->assertRedirect(route('products.show', $product));
 
 
         $this->assertDatabaseHas(
@@ -408,13 +461,17 @@ class ProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $category = factory(Category::class)->create([
+        $category = factory(Category::class)->create(
+            [
             'id' => '2'
-        ]);
+            ]
+        );
 
-        $product = factory(Product::class)->create([
+        $product = factory(Product::class)->create(
+            [
             'category_id' => $category->getId(),
-        ]);
+            ]
+        );
 
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
@@ -422,9 +479,9 @@ class ProductsTest extends TestCase
         Event::fake();
 
          $this->actingAs($user)
-            ->post(route('products.store'), $this->getValidData($file))
-            ->assertRedirect(route('stocks.index'))
-            ->assertStatus(302);
+             ->post(route('products.store'), $this->getValidData($file))
+             ->assertRedirect(route('stocks.index'))
+             ->assertStatus(302);
 
         $this->assertDatabaseHas(
             'products', [

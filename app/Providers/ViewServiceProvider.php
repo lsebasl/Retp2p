@@ -42,7 +42,6 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['products.edit','product__form'],
             CategoryComposer::class
-
         );
         View::composer(
             ['products.index','__search_in_products'],

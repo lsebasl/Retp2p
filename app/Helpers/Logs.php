@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Log;
 class Logs
 {
     /**
-     * @param $model
-     * @param $action
+     * @param  $model
+     * @param  $action
      * @return void
      */
     public static function AuditLogger($model, $action):void

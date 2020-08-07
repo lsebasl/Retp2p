@@ -4,5 +4,7 @@
     "/js/store/all.js": "/js/store/all.js",
     "/js/store/minicart.js": "/js/store/minicart.js",
     "/css/admin/all.css": "/css/admin/all.css",
-    "/css/store/all.css": "/css/store/all.css"
+    "/css/store/all.css": "/css/store/all.css",
+    "/css/checkout/all.css": "/css/checkout/all.css",
+    "/js/checkout/all.js": "/js/checkout/all.js"
 }

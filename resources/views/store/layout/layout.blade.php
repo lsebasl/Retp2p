@@ -70,7 +70,13 @@
         </div>
     </div>
 </div>
-
+<div class="cart cart box_1">
+    <form action="{{route('checkout.index')}}" method="GET" class="last">
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="display" value="1" />
+        <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+    </form>
+</div>
 <!-- header -->
 @guest()
     {{--<a href="{{ route('login') }}">Login</a>"boton no login" --}}
@@ -109,8 +115,6 @@
 
 @endguest
 
-
-
 <!-- //header -->
 <!-- navigation -->
 <div class="navigation">
@@ -145,6 +149,7 @@
                             </div>
                         </ul>
                     </li>
+                    <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
                     <li><a href="{{ route('store.about') }}">About Us</a></li>
                     <li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                         <ul class="dropdown-menu">

@@ -58,5 +58,20 @@ mix.styles(['public/css/store/bootstrap.css',
     'public/css/store/style.css',
 ],'public/css/store/all.css');
 
+mix.styles([
+    'public/css/checkout/style.css',
+],'public/css/checkout/all.css');
+
+mix.scripts(['public/js/checkout/classie.js',
+    'public/js/checkout/imagezoom.js',
+    'public/js/checkout/jquery.flexslider.js',
+    'public/js/checkout/jquery.min.js',
+    'public/js/checkout/main.js',
+    'public/js/checkout/memenu.js',
+    'public/js/checkout/responsiveslides.min.js',
+    'public/js/checkout/simpleCart.min.js',
+    'public/js/checkout/uisearch.js',
+],'public/js/checkout/all.js');
+
 
 

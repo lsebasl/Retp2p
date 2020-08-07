@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Http\View\Composers\CategoryComposer;
 use App\Http\View\Composers\MarkComposer;
-use App\Mark;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

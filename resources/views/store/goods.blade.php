@@ -14,7 +14,9 @@
             </ul>
         </div>
     </div>
+
     <!-- //breadcrumbs -->
+
     {{--nav bar--}}
     <div class="mobiles">
         <div class="container">
@@ -46,11 +48,11 @@
                                              <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif
                                     </div>
-                                <h5><a href="{{route('goods.show',$product)}}">{{$product->name}}</a></h5>
+                                <h5><a href="">{{$product->name}}</a></h5>
                                     <p> <i class="item_price">{{$product->mark}}</i></p>
                                     <div class="simpleCart_shelfItem">
                                     <p> <i class="item_price">$ {{$product->price}}</i></p>
-                                    <form action="#" method="post">
+                                    <form action="" method="GET">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
                                         <input type="hidden" name="w3ls_item" value={{$product->name}} />

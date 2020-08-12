@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('barcode')->unique();
             $table->string('name');
+            $table->string('cart')->nullable();
             $table->string('model');
             $table->string('mark');
             $table->string('description');

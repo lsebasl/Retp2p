@@ -32,6 +32,7 @@
                             @include('partials.__search_store')
                         </div>
                 </form>
+
                         <form>
                             <div class="form-group">
                                 <button  href="{{ route('goods.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
@@ -52,11 +53,11 @@
                                     <p> <i class="item_price">{{$product->mark}}</i></p>
                                     <div class="simpleCart_shelfItem">
                                     <p> <i class="item_price">$ {{$product->price}}</i></p>
-                                    <form action="" method="GET">
+                                    <form action="" method="get">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value={{$product->name}} />
-                                        <input type="hidden" name="amount" value={{$product->price}}/>
+                                        <input type="hidden" name="w3ls_item" value={{$product->name}}>
+                                        <input type="hidden" name="amount" value={{$product->price}}>
                                         <button type="submit" class="w3ls-cart">Add to cart</button>
                                     </form>
                                 </div>

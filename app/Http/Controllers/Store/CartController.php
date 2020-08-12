@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Store;
 
+use App\Cart;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CartStoreRequest;
 use App\Product;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller
@@ -16,21 +19,47 @@ class CartController extends Controller
      */
     public function __construct()
     {
-        if(!\Session::has('cart'))\Session::put('cart',array());
+       //
     }
 
     /**
      * Show the view checkout in the store.
      *
+     * @param CartStoreRequest $request
      * @return View
      */
-    public function show()
+    public function show(CartStoreRequest $request)
     {
-        return \Session::get('cart');
+
+        $user = Auth::user()->id;
+        $cart = $request->all();
+
+        Cart::truncate();
+
+        unset($cart['cmd'],$cart['bn'],$cart['upload']);
+
+        $totalItems = count($cart)/3;
+
+        for($i = 1;$i<=$totalItems;$i++){
+            Cart::create([
+                'name' => $request->get('w3ls_item_'.$i),
+                'quantity' => $request->get('quantity_'.$i),
+                'price' => $request->get('amount_'.$i),
+                'user_id' => $user,
+            ]);
+        }
+        $carts = Cart::where('user_id',$user)->get();
+
+
+       return view('store.cart',compact('carts'));
+
     }
 
-    public function add(Product $product)
+
+    public function add(Request $request,Product $product)
     {
+        dd($request);
+
         $cart = \Session::get('cart');
         $product->units = 1;
         $cart[$product->slug] = $product;

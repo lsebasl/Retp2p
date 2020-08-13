@@ -31,16 +31,19 @@
             </script>
             @foreach($carts as $item)
             <div class="cart-header">
-                <div class="close1"> </div>
+                <form method="POST" action="{{route('cart.destroy',$item->id)}}">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="close1"></button>
+                </form>
                 <div class="cart-sec simpleCart_shelfItem">
                     <div class="cart-item cyc">
-                        <img src="" class="img-responsive" alt=""/>
+                        <img src="/storage/{{$item->product->image}}" alt="product-image" class="img-responsive">
                     </div>
                     <div class="cart-item-info">
-                        <h3><a href="#">{{$item->name}}(XS R034)</a><span>Mark No: </span></h3>
+                        <h3><a href="#">{{$item->product->name}}({{$item->product->model}})</a><span>Mark: {{$item->product->mark}} </span></h3>
                         <ul class="qty">
-                            <li><p>price {{$item->price}} : </p></li>
-                            <li><p>Qty : {{$item->quantity}}</p></li>
+                            <li><p>price {{$item->product->price}} : </p></li>
+                            <li><p>Qty : {{$item->quantity}} : available {{($item->product->units) - ($item->quantity)}} </p></li>
                         </ul>
 
                         <div class="delivery">

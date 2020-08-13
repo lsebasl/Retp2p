@@ -38,34 +38,33 @@ class CartController extends Controller
 
         unset($cart['cmd'],$cart['bn'],$cart['upload']);
 
-        $totalItems = count($cart)/3;
+        $totalItems = count($cart)/4;
 
         for($i = 1;$i<=$totalItems;$i++){
             Cart::create([
-                'name' => $request->get('w3ls_item_'.$i),
                 'quantity' => $request->get('quantity_'.$i),
-                'price' => $request->get('amount_'.$i),
+                'product_id' => $request->get('id_'.$i),
                 'user_id' => $user,
             ]);
         }
-        $carts = Cart::where('user_id',$user)->get();
-
+        $carts = Cart::where('user_id',$user)->with('product')->get();
 
        return view('store.cart',compact('carts'));
 
     }
 
-
-    public function add(Request $request,Product $product)
+    public function destroy($id)
     {
-        dd($request);
+        $user = Auth::user()->id;
 
-        $cart = \Session::get('cart');
-        $product->units = 1;
-        $cart[$product->slug] = $product;
-        \Session::put('cart',$cart);
+        $cart = Cart::findOrfail($id);
 
-        return redirect()->route('cart.show');
+        $cart->delete($id);
+
+        $carts = Cart::where('user_id',$user)->with('product')->get();
+
+        return view('store.cart',compact('carts'));
+
     }
 
 

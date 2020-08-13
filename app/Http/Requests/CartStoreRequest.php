@@ -24,8 +24,10 @@ class CartStoreRequest extends FormRequest
      */
     public function rules():array
     {
+
         return [
-             //
+            'quantity' => '',
+
         ];
     }
 }

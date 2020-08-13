@@ -17,8 +17,8 @@ class ProductsStoreRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
+    /**0
+     * Get the validation rules th0  at apply to the request.
      *
      * @return array
      */

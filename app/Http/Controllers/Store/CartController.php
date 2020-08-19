@@ -25,10 +25,25 @@ class CartController extends Controller
     /**
      * Show the view checkout in the store.
      *
-     * @param CartStoreRequest $request
      * @return View
      */
-    public function show(CartStoreRequest $request)
+    public function show()
+    {
+        $user = Auth::user()->id;
+
+        $carts = Cart::where('user_id',$user)->with('product')->get();
+
+        return view('store.cart',compact('carts'))->with('success', 'Cart Has Benn Updated   !');
+
+    }
+
+    /**
+     * Show the view checkout in the store.
+     *
+     * @param CartStoreRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function add(CartStoreRequest $request)
     {
 
         $user = Auth::user()->id;
@@ -47,9 +62,10 @@ class CartController extends Controller
                 'user_id' => $user,
             ]);
         }
-        $carts = Cart::where('user_id',$user)->with('product')->get();
 
-       return view('store.cart',compact('carts'));
+       // $carts = Cart::where('user_id',$user)->with('product')->get();
+
+       return redirect(route('cart.show'))->with('success', 'Products Has Been added!');
 
     }
 
@@ -61,9 +77,9 @@ class CartController extends Controller
 
         $cart->delete($id);
 
-        $carts = Cart::where('user_id',$user)->with('product')->get();
+       // $carts = Cart::where('user_id',$user)->with('product')->get();
 
-        return view('store.cart',compact('carts'));
+        return redirect(route('cart.show'))->with('success', 'Product Has Been Deleted!');
 
     }
 

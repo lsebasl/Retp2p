@@ -101,7 +101,6 @@
                         </li>
                     @endif
                 @else
-
                     <a class="dropdown-item" href="{{ route('logout') }}" style="color: white; text-decoration-line: none"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -111,7 +110,6 @@
                         @csrf
                     </form>
                         <i class="zmdi zmdi-power"></i>
-
 
                 @endguest
 

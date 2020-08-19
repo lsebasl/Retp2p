@@ -16,6 +16,7 @@
 <body>
 
 <!-- grow -->
+@include('partials.__alerts')
 <div class="container">
     <div class="check">
         <h1>My Shopping Bag (2)</h1>

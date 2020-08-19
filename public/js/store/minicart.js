@@ -2071,7 +2071,7 @@
 
                         parent: (typeof document !== 'undefined') ? document.body : null,
 
-                        action: 'cart',
+                        action: 'cart/add',
 
                         target: '',
 
@@ -2082,7 +2082,7 @@
                         styles: '',
 
                         strings: {
-                            button: 'Shop More',
+                            button: 'Go Checkout',
                             subtotal: 'Subtotal:',
                             discount: 'Discount:',
                             empty: 'Your shopping cart is empty'

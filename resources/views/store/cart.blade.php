@@ -20,6 +20,7 @@
 <div class="container">
     <div class="check">
         <h1>My Shopping Bag (2)</h1>
+
         <div class="col-md-9 cart-items">
 
             <script>$(document).ready(function(c) {
@@ -43,10 +44,16 @@
                     <div class="cart-item-info">
                         <h3><a href="#">{{$item->product->name}}({{$item->product->model}})</a><span>Mark: {{$item->product->mark}} </span></h3>
                         <ul class="qty">
-                            <li><p>price {{$item->product->price}} : </p></li>
-                            <li><p>Qty : {{$item->quantity}} : available {{($item->product->units) - ($item->quantity)}} </p></li>
+                            <li><p>price {{number_format($item->product->price,0,'.',',')}} : </p></li>
+                            <li><p>Qty : <select href="{{route('cart.update',$item)}}" class="custom-select custom-select-sm">
+                                        <option selected>{{$item->quantity}}</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select> : available {{($item->product->units) - ($item->quantity)}}
+                                </p>
+                            </li>
                         </ul>
-
                         <div class="delivery">
                             <p>Service Charges : Rs.100.00</p>
                             <span>Delivered in 2-3 business days</span>
@@ -67,24 +74,25 @@
             </script>
                  </div>
         <div class="col-md-3 cart-total">
-            <a class="continue" href="#">Continue to basket</a>
+            <a class="continue" href="#">Click To Confirm</a>
             <div class="price-details">
                 <h3>Price Details</h3>
-                <span>Total</span>
-                <span class="total1">6200.00</span>
-                <span>Discount</span>
-                <span class="total1">---</span>
-                <span>Delivery Charges</span>
-                <span class="total1">150.00</span>
+                <span>Total price</span>
+                <span class="total1">{{number_format($totalIva['value'],0,'.',',')}}</span>
+                <span>-Discount</span>
+                <span class="total1">{{number_format($totalIva['discount'],0,'.',',')}}</span>
+                <span>Subtotal</span>
+                <span class="total1">{{number_format($totalIva['subtotal'],0,'.',',')}}</span>
+                <span>+Iva</span>
+                <span class="total1">{{number_format($totalIva['iva'],0   ,'.',',')}}</span>
+
                 <div class="clearfix"></div>
             </div>
             <ul class="total_price">
                 <li class="last_price"> <h4>TOTAL</h4></li>
-                <li class="last_price"><span>6350.00</span></li>
+                <li class="last_price"><span>{{number_format($totalIva['total'],2,'.',',')}}</span></li>
                 <div class="clearfix"> </div>
             </ul>
-
-
             <div class="clearfix"></div>
             <a class="order" href="#">Place Order</a>
             <div class="total-item">
@@ -98,6 +106,7 @@
         <div class="clearfix"> </div>
     </div>
 </div>
+
 
 
 <!--//content-->

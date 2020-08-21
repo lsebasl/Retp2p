@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Cart extends Model
 {
     protected $fillable = [
-        'quantity','user_id','product_id'
+        'quantity','user_id','product_id','price','subtotal'
     ];
 
     /**
@@ -31,5 +31,16 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Relationship a shopping cart has many products.
+     *
+     *
+     */
+    public function sumPrice()
+    {
+       //
+    }
+
 
 }

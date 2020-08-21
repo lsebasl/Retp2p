@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->integer('units');
             $table->integer('price');
-            $table->string('discount');
+            $table->decimal('discount');
             $table->enum('status',['Enable','Disable',]);
             $table->timestamps();
         });

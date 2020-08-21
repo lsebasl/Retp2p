@@ -23,9 +23,6 @@ Route::get('/home-store','Store\HomeController@index')->name('home.store');
 Route::middleware(['auth','user.status','verified'])->group(function () {
 
 //project routes
-    Route::bind('product', function($slug){
-        return App\Product::where('slug')->first();
-    });
 
     Route::get('/about', 'Store\AboutController@index')->name('store.about');
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');

@@ -30,8 +30,8 @@ class EventServiceProvider extends ServiceProvider
             AddAuthorToProduct::class,
         ],
         ProductUpdate::class =>[
-            LoogProductUpdateActions::class,
-            AddAuthorToPrductUpdate::class,
+            LogProductUpdateActions::class,
+            AddAuthorToProductUpdate::class,
         ],
         ProductSaveImage::class =>[
             OptimizeProductImage::class,

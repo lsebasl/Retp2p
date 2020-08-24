@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CartStoreRequest extends FormRequest
+class CartUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,7 @@ class CartStoreRequest extends FormRequest
     {
 
         return [
-            'quantity' => '',
-
+            'quantity' => 'bail|nullable|min:1|max:1000|numeric',
         ];
     }
 }

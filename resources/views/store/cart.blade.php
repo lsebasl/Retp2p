@@ -44,19 +44,18 @@
                     <div class="cart-item-info">
                         <h3><a href="#">{{$item->product->name}}({{$item->product->model}})</a><span>Mark: {{$item->product->mark}} </span></h3>
                         <ul class="qty">
-                            <li><p>price {{number_format($item->product->price,0,'.',',')}} : </p></li>
-                            <li><p>Qty : <select href="{{route('cart.update',$item)}}" class="custom-select custom-select-sm">
-                                        <option selected>{{$item->quantity}}</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select> : available {{($item->product->units) - ($item->quantity)}}
-                                </p>
+                            <li><p style="font-size: 15px">price {{number_format($item->product->price,0,'.',',')}} </p></li>
+                            <li><p>Qty</p>
+                                <form method="POST" action="{{ route('cart.update',$item->id)}}">
+                                    @csrf @method('PUT')
+                                    <input type="number" class="textfield-input" name = "quantity" id ="quantity" data-js="ui-dropdown-quantity-textfield-input" min="1" max="{{$item->product->units}}" maxlength="3" placeholder="{{$item->quantity}}">
+                                    <button style="background-color: #3c43a4" class="btn btn-primary" type="submit">Confirm</button>
+                                </form>
                             </li>
                         </ul>
                         <div class="delivery">
-                            <p>Service Charges : Rs.100.00</p>
-                            <span>Delivered in 2-3 business days</span>
+                            <p>Available Units {{($item->product->units) - ($item->quantity)}}</p>
+                            <span>Discount {{(number_format($item->product->discount*100))}}%</span>
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -96,7 +95,7 @@
             <div class="clearfix"></div>
             <a class="order" href="#">Place Order</a>
             <div class="total-item">
-                <h3>OPTIONS</h3>
+                <h3>Delivered in 2-3 business days</h3>
                 <h4>COUPONS</h4>
                 <a class="cpns" href="#">Apply Coupons</a>
                 <p><a href="#">Log In</a> to use accounts - linked coupons</p>
@@ -106,8 +105,6 @@
         <div class="clearfix"> </div>
     </div>
 </div>
-
-
 
 <!--//content-->
 <

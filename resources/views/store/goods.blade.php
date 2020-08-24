@@ -53,7 +53,7 @@
                                 <h5 style="margin: 0;"><a href="{{route('goods.show',$product)}}">{{$product->name}}</a></h5>
                                     <p> <i class="item_price">{{$product->mark}}</i></p>
                                     <div class="simpleCart_shelfItem">
-                                    <p> <i class="item_price">$ {{$product->price}}</i></p>
+                                    <p> <i class="item_price">$ {{number_format($product->price,0,'.',',')}}</i></p>
                                     <form action="" method="get">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />

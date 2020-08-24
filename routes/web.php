@@ -28,7 +28,7 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
     Route::get('/cart/add','Store\CartController@add')->name('cart.add');
     Route::get('/cart/show', 'Store\CartController@show')->name('cart.show');
-    Route::put('/cart/update', 'Store\Cart\Controller@update')->name('cart.update');
+    Route::put('/cart/update/{item}', 'Store\CartController@update')->name('cart.update');
     Route::delete('/cart/delete/{item}', 'Store\CartController@destroy')->name('cart.destroy');
 
     Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');

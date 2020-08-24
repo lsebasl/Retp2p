@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Store;
 
 use App\Cart;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CartStoreRequest;
+use App\Http\Requests\CartUpdateRequest;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,10 +43,10 @@ class CartController extends Controller
     /**
      * Show the view checkout in the store.
      *
-     * @param CartStoreRequest $request
+     * @param CartUpdateRequest $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function add(CartStoreRequest $request)
+    public function add(CartUpdateRequest $request)
     {
 
         $user = Auth::user()->id;
@@ -57,7 +57,6 @@ class CartController extends Controller
         unset($cart['cmd'],$cart['bn'],$cart['upload']);
 
         $totalItems = count($cart)/4;
-
 
         for($i = 1;$i<=$totalItems;$i++){
 
@@ -88,14 +87,26 @@ class CartController extends Controller
 
     }
 
-    public function update($request, Cart $cart)
+    /**
+     * @param $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(CartUpdateRequest $request, $id)
     {
+        $cart = Cart::where('id',$id)->first();
 
-        dd($request);
+        $discount = Product::where('id',$cart->product_id)->get('discount');
 
-       $cart->update($request);
+        $discount = $discount['0']->discount;
 
-        return redirect()->route('users.show')->with('success', 'Shopping Cart Has Been Updated!');
+        $subtotal = $cart->price * (1-$discount) * $request->get('quantity');
+
+        $update = array_merge($request->validated(), ['subtotal' => $subtotal ]);
+
+        $cart->update($update);
+
+        return redirect()->route('cart.show')->with('success', 'Shopping Cart Has Been Updated!');
     }
 
     public function destroy($id)

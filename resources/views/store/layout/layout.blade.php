@@ -70,7 +70,13 @@
         </div>
     </div>
 </div>
-
+<div class="cart cart box_1">
+    <form action="{{route('cart.show')}}" method="GET" class="last">
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="display" value="1" />
+        <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+    </form>
+</div>
 <!-- header -->
 @guest()
     {{--<a href="{{ route('login') }}">Login</a>"boton no login" --}}
@@ -109,8 +115,6 @@
 
 @endguest
 
-
-
 <!-- //header -->
 <!-- navigation -->
 <div class="navigation">
@@ -129,22 +133,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home.store') }}" class="act">Home</a></li>
                     <!-- Mega Menu -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
-                        <ul class="dropdown-menu multi-column columns-3">
-                            <div class="row">
-                                @foreach($categories as $category)
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>{{$category->name}}</h6>
-                                        <li><a href="{{ route('goods.category',$category->id)}}">{{$category->name}}</a></li>
-                                    </ul>
-                                </div>
-                                @endforeach
-                                <div class="clearfix"></div>
-                            </div>
-                        </ul>
-                    </li>
+
+                    <li><a href="{{ route('goods.index') }}">Products</a></li>
+                    <li><a href="{{ route('cart.show') }}">Checkout</a></li>
                     <li><a href="{{ route('store.about') }}">About Us</a></li>
                     <li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                         <ul class="dropdown-menu">

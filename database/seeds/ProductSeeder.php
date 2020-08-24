@@ -14,11 +14,11 @@ class ProductSeeder extends Seeder
     {
         factory(Product::class,50)->create([
             'category_id' => 1,
-            'image' => 'images/xwOr8OuQj4ghB6bcIMe13StdfTxhFyCllMqqnNdK.jpeg',
+            'image' => 'images/VfXxmkvJYvtlyYMEfLwPjGC5dueEYM1CLlYGKEoG.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 2,
-            'image' => 'images/hevM5gobDtC3exIikBHYiOHwo7Pe9JGfpS0W7l4O.jpeg',
+            'image' => 'images/0gvEYujTKeRDEnltHEgVbN7ISptzTenVOj1RdiQF.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 3,

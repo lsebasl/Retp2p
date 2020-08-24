@@ -14,7 +14,9 @@
             </ul>
         </div>
     </div>
+
     <!-- //breadcrumbs -->
+
     {{--nav bar--}}
     <div class="mobiles">
         <div class="container">
@@ -30,6 +32,7 @@
                             @include('partials.__search_store')
                         </div>
                 </form>
+
                         <form>
                             <div class="form-group">
                                 <button  href="{{ route('goods.index')}}" class="btn btn-primary" type="submit" style="margin-left:2px"><i class="glyphicon glyphicon-refresh"></i></button>
@@ -42,19 +45,21 @@
                             <div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
                                 <div class="agile_ecommerce_tab_left mobiles_grid">
                                     <div class="" style="height: 250px; object-fit:cover; ">
+                                        <p> <i class="item_price">Units <span class="badge badge-pill badge-light">{{$product->units}}</span></i></p>
                                         @if($product->image)
                                              <img src="/storage/{{$product->image}}" alt="product-image" class="img-responsive">
                                         @endif
                                     </div>
-                                <h5><a href="{{route('goods.show',$product)}}">{{$product->name}}</a></h5>
+                                <h5 style="margin: 0;"><a href="{{route('goods.show',$product)}}">{{$product->name}}</a></h5>
                                     <p> <i class="item_price">{{$product->mark}}</i></p>
                                     <div class="simpleCart_shelfItem">
-                                    <p> <i class="item_price">$ {{$product->price}}</i></p>
-                                    <form action="#" method="post">
+                                    <p> <i class="item_price">$ {{number_format($product->price,0,'.',',')}}</i></p>
+                                    <form action="" method="get">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value={{$product->name}} />
-                                        <input type="hidden" name="amount" value={{$product->price}}/>
+                                        <input type="hidden" name="w3ls_item" value={{$product->name}}>
+                                        <input type="hidden" name="amount" value={{$product->price}}>
+                                        <input type="hidden" name="id" value={{$product->id}}>
                                         <button type="submit" class="w3ls-cart">Add to cart</button>
                                     </form>
                                 </div>

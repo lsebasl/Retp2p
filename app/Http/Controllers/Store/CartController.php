@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use App\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartUpdateRequest;
+use App\Invoice;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,7 @@ class CartController extends Controller
         unset($cart['cmd'],$cart['bn'],$cart['upload']);
 
         $totalItems = count($cart)/4;
+
 
         for($i = 1;$i<=$totalItems;$i++){
 

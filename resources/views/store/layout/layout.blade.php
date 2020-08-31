@@ -140,6 +140,7 @@
                     <li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('store.profile') }}">View Profile</a></li>
+                            <li><a href="{{ route('payment.history') }}">payment history</a></li>
                             <li><a class="header" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">

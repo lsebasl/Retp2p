@@ -4,18 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Invoice extends Model
 {
+    protected $fillable = [
+        'users_id',
+        'expedition_date',
+        'expiration_date',
+        'subtotal',
+        'Vat',
+        'total',
+        'product_id',
+        'quantity',
+    ];
+
     /**
      * Many products has many invoices.
      *
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function products():HasMany
+    public function products():BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('product_id','quantity');
     }
 
     /**
@@ -36,5 +48,15 @@ class Invoice extends Model
     public function users():BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relation between invoices and Payment Attempts
+     *
+     * @return BelongsToMany
+     */
+    public function PaymentAttempt():BelongsToMany
+    {
+        return $this->belongsToMany(PaymentAttempt::class)->withPivot('requestId', 'processUrl', 'status');
     }
 }

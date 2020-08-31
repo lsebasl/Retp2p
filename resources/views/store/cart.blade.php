@@ -73,7 +73,7 @@
             </script>
                  </div>
         <div class="col-md-3 cart-total">
-            <a class="continue" href="#">Click To Confirm</a>
+            <a class="continue" href="{{route('invoices.create')}}">Click To Confirm</a>
             <div class="price-details">
                 <h3>Price Details</h3>
                 <span>Total price</span>
@@ -93,7 +93,11 @@
                 <div class="clearfix"> </div>
             </ul>
             <div class="clearfix"></div>
-            <a class="order" href="#">Place Order</a>
+            <form action="{{ route('payment.attempt') }}" method="POST">
+                @csrf
+                    <button type="submit" class="btn btn-success" >{{__('Make payment')}}</button>
+            </form>
+            <a class="order" href="{{route('invoices.create')}}">Place Order</a>
             <div class="total-item">
                 <h3>Delivered in 2-3 business days</h3>
                 <h4>COUPONS</h4>

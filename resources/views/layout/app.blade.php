@@ -271,7 +271,7 @@
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
                         <li class="full-width">
-                            <a href="company.html" class="full-width">
+                            <a href="{{route('invoices.index')}}" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-view-list"></i>
                                 </div>

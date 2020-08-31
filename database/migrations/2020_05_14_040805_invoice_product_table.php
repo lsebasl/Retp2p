@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class InvoicesProductsTable extends Migration
+class InvoiceProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class InvoicesProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices_products', function (Blueprint $table) {
+        Schema::create('invoice_product', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('product_id');
+            $table->integer('quantity');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->unsignedBigInteger('invoice_id');

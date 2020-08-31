@@ -20,9 +20,14 @@ Route::get('/verify', function () {
 
 Route::get('/home-store','Store\HomeController@index')->name('home.store');
 
+
+
 Route::middleware(['auth','user.status','verified'])->group(function () {
 
-//project routes
+//project routes+
+
+    Route::get('/payment', 'PaymentAttemptController@paymentAttempt')->name('payment.attempt');
+    Route::get('/payment/history', 'PaymentAttemptController@history')->name('payment.history');
 
     Route::get('/about', 'Store\AboutController@index')->name('store.about');
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');

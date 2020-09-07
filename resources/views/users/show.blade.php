@@ -40,6 +40,10 @@
                             <td>{{$user->address}}</td>
                         </tr>
                         <tr>
+                            <td class="mdl-data-table__cell--non-numeric">User Role</td>
+                            <td>{{$user->role}}</td>
+                        </tr>
+                        <tr>
                             <td class="mdl-data-table__cell--non-numeric">User Status</td>
                             <td>{{$user->status}}</td>
                         </tr>

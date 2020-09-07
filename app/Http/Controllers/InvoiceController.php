@@ -74,8 +74,6 @@ class InvoiceController extends Controller
 
          };
 
-        Cart::truncate();
-
          return redirect(route('payment.attempt'))->with('success','The Invoice has Been Created Click On Place Order to continue');
 
     }

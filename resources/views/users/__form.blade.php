@@ -46,6 +46,15 @@
     @includeWhen($errors->has('address'),'partials.__invalid_feedback', ['feedback' => $errors->first('address')])
 </div>
 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <select class="mdl-textfield__input" name="role" id="role" required>
+        <option value="" ></option>
+        <option value="Admin" {{ old('role',$user->role)=='Admin' ? 'selected' : '' }}>{{__('Admin')}}</option>
+        <option value="User" {{ old('role',$user->role)=='User' ? 'selected' : '' }}>{{__('User')}}</option>
+    </select>
+    <label class="mdl-textfield__label" for="role">{{__('User Role')}}</label>
+    <span class="mdl-textfield__error">Invalid role</span>
+</div>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <select class="mdl-textfield__input" name="status" id="status" required>
         <option value="" ></option>
         <option value="Enable" {{ old('status',$user->status)=='Enable' ? 'selected' : '' }}>{{__('Enable')}}</option>

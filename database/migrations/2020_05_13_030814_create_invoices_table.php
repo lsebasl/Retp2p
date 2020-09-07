@@ -17,7 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('id');
             $table->date('expedition_date');
             $table->date('expiration_date');
-            $table->date('receipt_date')->nullable();
+            $table->date('payment_date')->nullable();
             $table->string('payment_method')->nullable();
             $table->decimal('subtotal');
             $table->decimal('VAT');

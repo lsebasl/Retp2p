@@ -34,7 +34,7 @@
                                     </div>
                                     <li class="full-width divider-menu-h"></li>
                                 @empty
-                                    <li>{{__('No hay usuarios registrados')}}</li>
+                                    <li>{{__('There are not Clients in the Register')}}</li>
                                 @endforelse
                             </div>
                         </div>

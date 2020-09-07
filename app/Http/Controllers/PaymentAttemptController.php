@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LogInvoiceEvent;
 use App\Invoice;
 use App\PaymentAttempt;
 use Dnetix\Redirection\PlacetoPay;
@@ -30,8 +31,9 @@ class PaymentAttemptController extends Controller
             'status' => $response->status()->status(),
         ]);
 
-        $paymentAttempt->save();
+        $response1 = $response->status()->status();
 
+        $paymentAttempt->save();
 
         $paymentAttempts = PaymentAttempt::with(['invoice'=>function ($query) {
             $user = Auth::user()->id;
@@ -39,10 +41,17 @@ class PaymentAttemptController extends Controller
         }])->orderBy('created_at', request('sorted', 'DESC'))->get();
 
 
-        return view('store.history',['paymentAttempts' => $paymentAttempts]);
+        return view('store.history',['paymentAttempts' => $paymentAttempts])->with('success',"The payment has been $response1");
 
     }
-    public function show(Invoice $invoice,PaymentAttempt $paymentAttempt, PlacetoPay $placetopay)
+
+    /**
+     * @param Invoice $invoice
+     * @param PaymentAttempt $paymentAttempt
+     * @param PlacetoPay $placetopay
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
+     */
+    public function show(Invoice $invoice, PaymentAttempt $paymentAttempt, PlacetoPay $placetopay)
 
     {
         $response = $placetopay->query('366493');
@@ -71,19 +80,33 @@ class PaymentAttemptController extends Controller
 
         $invoice = Invoice::where('users_id',$user)->get()->last();
 
+        if ($invoice->total == 0) {
+            event(new LogInvoiceEvent(
+                'info',
+                'Tried to pay without select products',
+                [
+                    'invoice id' => $invoice->id,
+                    'ip Address' => $request->ip(),
+                    'userAgent' => $request->header('User-Agent'),
+                    'By User' => Auth::user()->name
+                ]
+            ));
+            return redirect()->route('cart.show', $invoice)->with('error','You tried to pay without select products');
+        }
+
         $reference = $invoice->id;
 
         $requestP = [
             "locale" => "es_CO",
             "buyer" => [
-                "name" => $invoice->users->name,
-                "surname" => $invoice->users->last_name,
-                "email" => $invoice->users->email,
-                "documentType" => $invoice->users->id_type,
-                "document" => $invoice->users->identification,
-                "mobile" => $invoice->users->phone,
-                "address" => [
-                    "street" => $invoice->users->address,
+                'name' => $invoice->users->name,
+                'surname' => $invoice->users->last_name,
+                'email' => $invoice->users->email,
+                'documentType' => $invoice->users->id_type,
+                'document' => $invoice->users->identification,
+                'mobile' => $invoice->users->phone,
+                'address' => [
+                    'street' => $invoice->users->address,
                 ]
             ],
 
@@ -119,9 +142,20 @@ class PaymentAttemptController extends Controller
             ]);
 
             return redirect()->away($response->processUrl());
-        } else {
-            $response->status()->message();
         }
+        event(new LogInvoiceEvent(
+            'info',
+            $response->status()->message(),
+            [
+                'invoice id' => $invoice->id,
+                'ip Address' => $request->ip(),
+                'userAgent' => $request->header('User-Agent'),
+                'By User' => Auth::user()->name
+            ]
+        ));
+        return redirect()->route('invoice.show')
+        ->with($response->status()->message());
+
 
      }
 }

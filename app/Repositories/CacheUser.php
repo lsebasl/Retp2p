@@ -25,6 +25,8 @@ class CacheUser
     {
         $key = "users.page." . request('page', 1);//users.page.1 default
 
+        Cache::tags('users')->flush();
+
         return Cache::tags('users')->rememberForever(
             $key,
             function () use ($user) {

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -15,12 +16,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     const ENABLE_STATUS = 'Enable';
     const DISABLE_STATUS = 'Disable';
+    const ADMIN_ROLE = 'Admin';
+    const USER_ROLE = 'User';
 
     /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name','last_name', 'email', 'password','id_type','identification','phone','address','status'
+        'name','last_name', 'email', 'password',
+        'id_type','identification','phone',
+        'address','status', 'role',
     ];
 
     /**
@@ -77,6 +82,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function invoices():HasMany
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function authUser()
+    {
+        return Auth::user()->id;
     }
 
 }

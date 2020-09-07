@@ -48,7 +48,7 @@
                             <li><p>Qty</p>
                                 <form method="POST" action="{{ route('cart.update',$item->id)}}">
                                     @csrf @method('PUT')
-                                    <input type="number" class="textfield-input" name = "quantity" id ="quantity" data-js="ui-dropdown-quantity-textfield-input" min="1" max="{{$item->product->units}}" maxlength="3" placeholder="{{$item->quantity}}">
+                                    <input type="number" class="textfield-input" name = "quantity" id ="quantity" data-js="ui-dropdown-quantity-textfield-input" min="1" max="{{$item->product->units}}" maxlength="3" value="{{$item->quantity}}" >
                                     <button style="background-color: #3c43a4" class="btn btn-primary" type="submit">Confirm</button>
                                 </form>
                             </li>

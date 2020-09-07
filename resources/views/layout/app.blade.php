@@ -88,7 +88,6 @@
             <ul class="list-unstyle">
                 <li class="btn-Notification" id="notifications">
                     <i class="zmdi zmdi-notifications"></i>
-                    <!-- <i class="zmdi zmdi-notifications-active btn-Notification" id="notifications"></i> -->
                     <div class="mdl-tooltip" for="notifications">Notifications</div>
                 </li>
                 @guest
@@ -112,7 +111,6 @@
                         <i class="zmdi zmdi-power"></i>
 
                 @endguest
-
                 <li class="text-condensedLight noLink" ><small> {{ ucfirst(Auth::user()->name) }}</small></li>
                 <li class="noLink">
                     <figure>
@@ -135,10 +133,10 @@
                 <img src="{{ asset('assets/img/avatar-male.png') }}" alt="Avatar" class="img-responsive">
             </div>
             <figcaption class="navLateral-body-cr hide-on-tablet">
-					<span>
-						Full Name Admin<br>
-						<small>Admin</small>
-					</span>
+           <span><small>
+                    {{ ucfirst(Auth::user()->getFullName()) }}
+                        <br>{{ Auth::user()->role }}
+              </small></span>
             </figcaption>
         </figure>
 
@@ -148,7 +146,7 @@
         <nav class="full-width">
             <ul class="full-width list-unstyle menu-principal">
                 <li class="full-width">
-                    <a href="home   " class="full-width">
+                    <a href="{{ route('home') }}" class="full-width">
                         <div class="navLateral-body-cl">
                             <i class="zmdi zmdi-view-dashboard"></i>
                         </div>

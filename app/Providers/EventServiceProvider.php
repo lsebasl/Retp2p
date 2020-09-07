@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\LogInvoiceEvent;
 use App\Events\ProductCreated;
 use App\Events\ProductUpdate;
 use App\Events\ProductSaveImage;
 use App\Listeners\AddAuthorToProduct;
 use App\Listeners\AddAuthorToProductUpdate;
+use App\Listeners\LogInvoiceListener;
 use App\Listeners\LogProductActions;
 use App\Listeners\LogProductUpdateActions;
 use Illuminate\Auth\Events\Registered;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ProductSaveImage::class =>[
             OptimizeProductImage::class,
+        ],
+        LogInvoiceEvent::class => [
+            logInvoiceListener::class,
         ],
     ];
 

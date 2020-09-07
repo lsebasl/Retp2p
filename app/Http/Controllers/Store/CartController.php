@@ -7,21 +7,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CartUpdateRequest;
 use App\Invoice;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
-
+        protected  $user;
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-     //
+        $this->user = $user;
     }
 
     /**
@@ -29,11 +30,10 @@ class CartController extends Controller
      *
      * @return View
      */
-    public function show()
+    public function show():View
     {
-        $user = Auth::user()->id;
 
-        $carts = Cart::where('user_id',$user)->with('product')->get();
+        $carts = Cart::where('user_id',$this->user->authUser())->with('product')->get();
 
         $totalIva = $this->totalPrice();
 
@@ -50,10 +50,9 @@ class CartController extends Controller
     public function add(CartUpdateRequest $request)
     {
 
-        $user = Auth::user()->id;
         $cart = $request->all();
-
-        Cart::truncate();
+        
+        Cart::truncate()->where('user_id',$this->user->authUser());
 
         unset($cart['cmd'],$cart['bn'],$cart['upload']);
 
@@ -77,7 +76,7 @@ class CartController extends Controller
             Cart::create([
                 'quantity' => $quantity,
                 'product_id' => $productId ,
-                'user_id' => $user,
+                'user_id' => $this->user->authUser(),
                 'price' => $price,
                 'subtotal' => $subtotal,
             ]);
@@ -127,11 +126,10 @@ class CartController extends Controller
 
     public function totalPrice()
     {
-        $user = Auth::user()->id;
 
-        $value = Cart::where('user_id',$user)->sum('price');
+        $value = Cart::where('user_id',$this->user->authUser())->sum('price');
 
-        $subtotal = Cart::where('user_id',$user)->sum('subtotal');
+        $subtotal = Cart::where('user_id',$this->user->authUser())->sum('subtotal');
 
         $discount = $value - $subtotal;
 

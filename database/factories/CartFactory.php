@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Cart;
+use App\Product;
 use Faker\Generator as Faker;
 
 
@@ -20,8 +21,9 @@ use Faker\Generator as Faker;
 $factory->define(Cart::class, function (Faker $faker) {
     return [
         'quantity' => $faker->numberBetween(1-10),
-        'product_id' => $faker->numberBetween(1-99),
+        'product_id' => \factory(Product::class),
         'price' => $faker->numberBetween(1000-20000),
+        'user_id' => $faker->numberBetween(1),
         'subtotal' => $faker->numberBetween(1000-20000)
     ];
 });

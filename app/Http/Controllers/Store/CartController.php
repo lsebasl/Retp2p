@@ -8,7 +8,10 @@ use App\Http\Requests\CartUpdateRequest;
 use App\Invoice;
 use App\Product;
 use App\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -45,14 +48,16 @@ class CartController extends Controller
      * Show the view checkout in the store.
      *
      * @param CartUpdateRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
      */
     public function add(CartUpdateRequest $request)
     {
 
+        $this->destroyAll();
+
         $cart = $request->all();
-        
-        Cart::truncate()->where('user_id',$this->user->authUser());
+
+       /*Cart::truncate()->where('user_id',$this->user->authUser());*/
 
         unset($cart['cmd'],$cart['bn'],$cart['upload']);
 
@@ -85,13 +90,12 @@ class CartController extends Controller
        // $carts = Cart::where('user_id',$user)->with('product')->get();
 
        return redirect(route('cart.show'))->with('success', 'Products Has Been added!');
-
     }
 
     /**
      * @param $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(CartUpdateRequest $request, $id)
     {
@@ -145,8 +149,16 @@ class CartController extends Controller
             'value' => $value,
         ];
 
+
     }
+    public function destroyAll()
+    {
+        $cart = Cart::where('user_id',$this->user->authUser())->get('id');
 
+        $cart->each(function ($item){
+           $item->delete($item->id);
+        });
 
+    }
 
 }

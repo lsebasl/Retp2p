@@ -7,9 +7,6 @@ use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CheckoutTest extends TestCase
@@ -19,7 +16,7 @@ class CheckoutTest extends TestCase
     /**
      * @test
      */
-    public function no_authenticated_user_cant_access_to_home_view()
+    public function no_authenticated_user_cant_access_to_checkout_view()
     {
         $this->get(route('cart.show'))
             ->assertRedirect(route('login'));
@@ -59,6 +56,7 @@ class CheckoutTest extends TestCase
             'price' => $product->price,
             'subtotal' => '7954.8',
         ]);
+
     }
         /**
          * @test
@@ -66,10 +64,16 @@ class CheckoutTest extends TestCase
         public function client_authenticated_can_see_the_shopping_bag()
     {
         $user = factory(User::class)->create();
-        $cart = factory(Cart::class)->create();
-        $product = factory(Product::class)->create(['id' => '166','price' => '11364','discount'=>0.3]);
+        $product = factory(Product::class)->create(['id' => '166', 'price' => '11364', 'discount' => 0.1]);
+        $cart = factory(Cart::class)->create(['user_id' => $user->id,'product_id' => $product->id,'price' => $product->price]);
 
         $response =  $this->actingAs($user)->get(route('cart.show'));
+
+        $response->assertsee('My Shopping Bag')
+                 ->assertsee('Qty')
+                 ->assertSee($product->mark)
+                 ->assertSee('11,364')
+                 ->assertSee('11,36');
 
     }
 

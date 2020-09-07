@@ -9,6 +9,7 @@ use Tests\TestCase;
 
 class HomeStoreTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * @test
      */

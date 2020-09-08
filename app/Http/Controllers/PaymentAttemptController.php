@@ -20,6 +20,9 @@ class PaymentAttemptController extends Controller
      */
     public function history(PlacetoPay $placetopay):View
     {
+       //$response = $placetopay->query('369860');
+        //dd($response);
+
         $paymentAttempt = PaymentAttempt::with(['invoice'=>function ($query) {
             $user = Auth::user()->id;
             $query->where('users_id', $user);
@@ -54,7 +57,9 @@ class PaymentAttemptController extends Controller
     public function show(Invoice $invoice, PaymentAttempt $paymentAttempt, PlacetoPay $placetopay)
 
     {
-        $response = $placetopay->query('366493');
+        $response = $placetopay->query('369856');
+
+        dd($response);
 
         $paymentAttempt->update([
             'status' => $response->status()->status(),

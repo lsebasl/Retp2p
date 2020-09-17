@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->date('expiration_date');
             $table->date('payment_date')->nullable();
             $table->string('payment_method')->nullable();
+            $table->string('status')->default('pending');
             $table->decimal('subtotal');
             $table->decimal('VAT');
             $table->decimal('total');

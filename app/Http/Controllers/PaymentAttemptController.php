@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\LogInvoiceEvent;
 use App\Invoice;
+use App\Observers\Units;
 use App\PaymentAttempt;
 use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Http\Request;
@@ -16,12 +17,15 @@ class PaymentAttemptController extends Controller
      * Show the about us in the store.
      *
      * @param PlacetoPay $placetopay
+     * @param Invoice $invoice
      * @return View
      */
     public function history(PlacetoPay $placetopay):View
     {
        //$response = $placetopay->query('369860');
         //dd($response);
+
+
 
         $paymentAttempt = PaymentAttempt::with(['invoice'=>function ($query) {
             $user = Auth::user()->id;
@@ -37,6 +41,20 @@ class PaymentAttemptController extends Controller
         $response1 = $response->status()->status();
 
         $paymentAttempt->save();
+
+        $invoice = Invoice::where('id',$paymentAttempt->invoice_id)->first();
+
+        if ($paymentAttempt->status === 'APPROVED') {
+            $invoice->update([
+                'status' => 'paid',
+           ]);
+
+            $invoice->attach(new Units());
+
+            $invoice->notify();
+
+        }
+
 
         $paymentAttempts = PaymentAttempt::with(['invoice'=>function ($query) {
             $user = Auth::user()->id;
@@ -85,7 +103,7 @@ class PaymentAttemptController extends Controller
 
         $invoice = Invoice::where('users_id',$user)->get()->last();
 
-        if ($invoice->total == 0) {
+        if ($invoice->total === 0) {
             event(new LogInvoiceEvent(
                 'info',
                 'Tried to pay without select products',

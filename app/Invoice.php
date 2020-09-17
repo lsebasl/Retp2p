@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SplObserver;
 
-class Invoice extends Model
+class Invoice extends Model implements \SplSubject
 {
+    private $observers = [];
+
     protected $fillable = [
         'users_id',
         'expedition_date',
@@ -18,6 +21,7 @@ class Invoice extends Model
         'total',
         'product_id',
         'quantity',
+        'status'
     ];
 
     /**
@@ -58,5 +62,33 @@ class Invoice extends Model
     public function PaymentAttempt():BelongsToMany
     {
         return $this->belongsToMany(PaymentAttempt::class)->withPivot('requestId', 'processUrl', 'status');
+    }
+
+    /**
+     * Add observer to the model
+     *
+     * @param SplObserver $observer
+     * @return array
+     */
+    public function attach(\SplObserver $observer)
+    {
+        $this->observers[] = $observer;
+    }
+
+    /**
+     * @param SplObserver $observer
+     */
+    public function detach(\SplObserver $observer)
+    {
+        $key = array_search($observer,$this->observers, true);
+        if($key){
+            unset($this->observers[$key]);
+        }
+    }
+
+    public function notify()
+    {
+        foreach ($this->observers as $observer)
+            $observer->update($this);
     }
 }

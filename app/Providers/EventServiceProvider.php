@@ -39,7 +39,7 @@ class EventServiceProvider extends ServiceProvider
             OptimizeProductImage::class,
         ],
         LogInvoiceEvent::class => [
-            logInvoiceListener::class,
+            LogInvoiceListener::class,
         ],
     ];
 

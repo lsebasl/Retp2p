@@ -7,6 +7,7 @@ use App\Invoice;
 use App\Observers\Units;
 use App\PaymentAttempt;
 use Dnetix\Redirection\PlacetoPay;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -16,53 +17,17 @@ class PaymentAttemptController extends Controller
     /**
      * Show the about us in the store.
      *
-     * @param PlacetoPay $placetopay
-     * @param Invoice $invoice
+     * @param PaymentAttempt $paymentAttempts
      * @return View
      */
-    public function history(PlacetoPay $placetopay):View
+    public function history():View
     {
-       //$response = $placetopay->query('369860');
-        //dd($response);
-
-
-
-        $paymentAttempt = PaymentAttempt::with(['invoice'=>function ($query) {
-            $user = Auth::user()->id;
-            $query->where('users_id', $user);
-        }])->get()->last();
-
-        $response = $placetopay->query($paymentAttempt->requestId);
-
-        $paymentAttempt->update([
-            'status' => $response->status()->status(),
-        ]);
-
-        $response1 = $response->status()->status();
-
-        $paymentAttempt->save();
-
-        $invoice = Invoice::where('id',$paymentAttempt->invoice_id)->first();
-
-        if ($paymentAttempt->status === 'APPROVED') {
-            $invoice->update([
-                'status' => 'paid',
-           ]);
-
-            $invoice->attach(new Units());
-
-            $invoice->notify();
-
-        }
-
-
         $paymentAttempts = PaymentAttempt::with(['invoice'=>function ($query) {
             $user = Auth::user()->id;
             $query->where('users_id', $user);
         }])->orderBy('created_at', request('sorted', 'DESC'))->get();
 
-
-        return view('store.history',['paymentAttempts' => $paymentAttempts])->with('success',"The payment has been $response1");
+        return view('store.history',['paymentAttempts' => $paymentAttempts]);
 
     }
 
@@ -76,8 +41,7 @@ class PaymentAttemptController extends Controller
 
     {
         $response = $placetopay->query('369856');
-
-        dd($response);
+        
 
         $paymentAttempt->update([
             'status' => $response->status()->status(),
@@ -101,11 +65,11 @@ class PaymentAttemptController extends Controller
     {
         $user = Auth::user()->id;
 
-        $invoice = Invoice::where('users_id',$user)->get()->last();
+        $invoice = Invoice::where('users_id', $user)->get()->last();
 
         if ($invoice->total === 0) {
             event(new LogInvoiceEvent(
-                'info',
+                'Error',
                 'Tried to pay without select products',
                 [
                     'invoice id' => $invoice->id,
@@ -114,7 +78,7 @@ class PaymentAttemptController extends Controller
                     'By User' => Auth::user()->name
                 ]
             ));
-            return redirect()->route('cart.show', $invoice)->with('error','You tried to pay without select products');
+            return redirect()->route('cart.show', $invoice)->with('error', 'You tried to pay without select products');
         }
 
         $reference = $invoice->id;
@@ -137,11 +101,11 @@ class PaymentAttemptController extends Controller
                 'reference' => strval($reference),
                 'amount' => [
                     'currency' => 'COP',
-                    'total' =>$invoice->total,
+                    'total' => $invoice->total,
                 ],
             ],
             'expiration' => date('c', strtotime('+1 hour')),
-            'returnUrl' => route('payment.history'),//route('payment.callback', $invoice),
+            'returnUrl' => route('payment.callback'),//route('payment.callback', $invoice),
             'ipAddress' => $request->ip(),
             'userAgent' => $request->header('User-Agent'),
         ];
@@ -176,9 +140,47 @@ class PaymentAttemptController extends Controller
                 'By User' => Auth::user()->name
             ]
         ));
-        return redirect()->route('invoice.show')
-        ->with($response->status()->message());
+
+    }
 
 
-     }
+    /**
+     *
+     *
+     * @param PlacetoPay $placetopay
+     * @return RedirectResponse
+     */
+    public function callback(PlacetoPay $placetopay):RedirectResponse
+    {
+
+        $paymentAttempt = PaymentAttempt::with(['invoice'=>function ($query) {
+            $user = Auth::user()->id;
+            $query->where('users_id', $user);
+        }])->get()->last();
+
+        $response = $placetopay->query($paymentAttempt->requestId);
+
+        $paymentAttempt->update([
+            'status' => $response->status()->status(),
+        ]);
+
+        $paymentAttempt->save();
+
+        $invoice = Invoice::where('id',$paymentAttempt->invoice_id)->first();
+
+        if ($paymentAttempt->status === 'APPROVED') {
+            $invoice->update([
+                'status' => 'paid',
+            ]);
+
+            $invoice->attach(new Units());
+
+            $invoice->notify();
+
+        }
+
+        return redirect(route('payment.history'));
+
+    }
+
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Invoice;
-use App\Product;
+use App\Repositories\CartRepository;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,27 +13,27 @@ use Illuminate\View\View;
 
 class InvoiceController extends Controller
 {
+    protected $cartRepository;
 
-
-    public function __construct(PaymentAttemptController $paymentAttempt)
+    public function __construct(PaymentAttemptController $paymentAttempt,CartRepository $cartRepository)
     {
-        //
+        $this->cartRepository = $cartRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * List the invoice paginated.
      *
      * @return View
      */
     public function index()
     {
-        $invoices = Invoice::orderBy('created_at', request('sorted', 'DESC'))->paginate(20);
+        $invoices = $this->cartRepository->getPaginate(20);
 
         return view('invoices.index', ['invoices' => $invoices]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create invoice and fill invoice product.
      *
      * @return RedirectResponse
      */
@@ -57,6 +57,7 @@ class InvoiceController extends Controller
             'users_id' => $userId,
             'expedition_date' => $creationDate,
             'expiration_date' => $expirationDate,
+            'status' => 'Pending',
             'subtotal' => $subtotal,
             'Vat' => $vat,
             'total' => $total,
@@ -72,7 +73,7 @@ class InvoiceController extends Controller
                 'quantity' => $quantity,
             ]);
 
-         };
+         }
 
          return redirect(route('payment.attempt'))->with('success','The Invoice has Been Created Click On Place Order to continue');
 

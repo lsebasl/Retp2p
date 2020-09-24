@@ -27,17 +27,17 @@ class LogInvoiceListener
      */
     public function handle(LogInvoiceEvent $event)
     {
-        if ($event->type == 'info') {
+        if ($event->type === 'info') {
             Log::info($event->message, [
                 'option' => $event->option
                 ]);
         }
-        if ($event->type == 'error') {
+        if ($event->type === 'error') {
             Log::info($event->message, [
                 'option' => $event->option
             ]);
         }
-        if ($event->type == 'alert') {
+        if ($event->type === 'alert') {
             Log::info($event->message, [
                 'option' => $event->option
             ]);

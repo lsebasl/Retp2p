@@ -28,6 +28,7 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
     Route::get('/payment', 'PaymentAttemptController@paymentAttempt')->name('payment.attempt');
     Route::get('/payment/history', 'PaymentAttemptController@history')->name('payment.history');
+    Route::get('/payment/callback', 'PaymentAttemptController@callback')->name('payment.callback');
 
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
     Route::post('/cart/add','Store\CartController@add')->name('cart.add');

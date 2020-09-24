@@ -68,17 +68,21 @@ class Invoice extends Model implements \SplSubject
      * Add observer to the model
      *
      * @param SplObserver $observer
-     * @return array
+     * @return void
      */
-    public function attach(\SplObserver $observer)
+    public function attach(\SplObserver $observer):void
     {
         $this->observers[] = $observer;
     }
 
+
     /**
+     * Delete observer to the model
+     *
      * @param SplObserver $observer
+     * @return void
      */
-    public function detach(\SplObserver $observer)
+    public function detach(\SplObserver $observer):void
     {
         $key = array_search($observer,$this->observers, true);
         if($key){
@@ -86,7 +90,12 @@ class Invoice extends Model implements \SplSubject
         }
     }
 
-    public function notify()
+    /**
+     * Notify to observer for generate an update
+     *
+     * @return void
+     */
+    public function notify():void
     {
         foreach ($this->observers as $observer)
             $observer->update($this);

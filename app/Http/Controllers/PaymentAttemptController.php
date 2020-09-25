@@ -17,7 +17,6 @@ class PaymentAttemptController extends Controller
     /**
      * Show the about us in the store.
      *
-     * @param PaymentAttempt $paymentAttempts
      * @return View
      */
     public function history():View
@@ -41,7 +40,7 @@ class PaymentAttemptController extends Controller
 
     {
         $response = $placetopay->query('369856');
-        
+
 
         $paymentAttempt->update([
             'status' => $response->status()->status(),
@@ -61,6 +60,11 @@ class PaymentAttemptController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param PlacetoPay $placeToPay
+     * @throws \Dnetix\Redirection\Exceptions\PlacetoPayException
+     */
     public function paymentAttempt(Request $request, PlacetoPay $placeToPay)
     {
         $user = Auth::user()->id;

@@ -56,7 +56,7 @@
                                     <div class="simpleCart_shelfItem">
                                     <p> <i class="item_price">$ {{number_format($product->price,0,'.',',')}}</i></p>
                                     <form action="" method="post">
-                                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="_token" id="token" value="">
                                         <input type="hidden" name="cmd" value="_cart" />
                                         <input type="hidden" name="add" value="1" />
                                         <input type="hidden" name="w3ls_item" value={{$product->name}}>

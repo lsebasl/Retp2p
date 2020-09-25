@@ -46,7 +46,7 @@ class CheckoutTest extends TestCase
         $user = factory(User::class)->create();
         $product = factory(Product::class)->create(['id' => '166', 'price' => '11364', 'discount' => 0.3]);
 
-        $response = $this->actingAs($user)->get('/cart/add?quantity_1=1&w3ls_item_1=Power&id_1=166&amount_1=11364&cmd=_cart&upload=1&bn=sbmincart_AddToCart_WPS_US')
+        $response = $this->actingAs($user)->post('/cart/add?quantity_1=1&w3ls_item_1=Power&id_1=166&amount_1=11364&cmd=_cart&upload=1&bn=sbmincart_AddToCart_WPS_US')
             ->assertRedirect(route('cart.show'));
 
         $this->assertDatabaseHas('carts', [
@@ -67,7 +67,7 @@ class CheckoutTest extends TestCase
         $product = factory(Product::class)->create(['id' => '166', 'price' => '11364', 'discount' => 0.1]);
         $cart = factory(Cart::class)->create(['user_id' => $user->id,'product_id' => $product->id,'price' => $product->price]);
 
-        $response =  $this->actingAs($user)->get(route('cart.show'));
+        $response =  $this->actingAs($user)->post(route('cart.show'));
 
         $response->assertsee('My Shopping Bag')
                  ->assertsee('Qty')

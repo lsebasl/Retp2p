@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\CategoryInterface;
 use App\Repositories\CategoryRepository;
+use Dnetix\Redirection\PlacetoPay;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(PlacetoPay::class,function(){
+            return new PlacetoPay(config('services.placetopay'));
+        });
     }
 
     /**

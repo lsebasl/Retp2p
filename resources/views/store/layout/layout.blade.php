@@ -14,6 +14,7 @@
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <!-- //web fonts -->
     <!-- start-smooth-scrolling -->
+
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
@@ -33,7 +34,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;</button>
-                <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+                <h4 class="modal-title" id="myModalLabel">Login or Register</h4>
             </div>
             <div class="modal-body modal-body-sub">
                 <div class="row">
@@ -79,23 +80,22 @@
 </div>
 <!-- header -->
 @guest()
-    {{--<a href="{{ route('login') }}">Login</a>"boton no login" --}}
     <div class="top-right links" style="">
         <div class="header" id="home1">
             <div class="container">
                 <div class="w3l_login">
-                    <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#myModal88" title="Login o Register"><span class="glyphicon glyphicon-user" aria-hidden="true"><h5>Login</h5></span></a>
                 </div>
                 <div class="w3l_logo">
-                    <h1><a href="{{ route('login') }}">Project Store<span>Your project. Your story.</span></a></h1>
+                    <h1><a href="{{ route('home.store') }}">Project Store<span>Your project. Your story.</span></a></h1>
                 </div>
-            {{--  <a href="{{ route('register') }}">Register</a>"boton register--}}
           </div>
           @else
-          <div class="container" id="home1">
-                  <h2><small>Hola {{ ucfirst(Auth::user()->name) }}</small></h2>
-                  <h5>your account is {{ ucfirst(Auth::user()->status) }}</small></h5>
-                  <a class="header" href="{{ route('logout') }}"
+                <div class="container" id="home1">
+                    <h2><small>Hola {{ ucfirst(Auth::user()->name) }}</small></h2>
+                    <h5><small>your account is {{ ucfirst(Auth::user()->status) }}</small></h5>
+                    <h5><small>It role is {{ ucfirst(Auth::user()->role) }}</small></h5>
+                 <a class="header" href="{{ route('logout') }}"
                  onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
                   {{ __('Logout') }}
@@ -140,6 +140,7 @@
                     <li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('store.profile') }}">View Profile</a></li>
+                            <li><a href="{{ route('payment.history') }}">payment history</a></li>
                             <li><a class="header" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">

@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\LogInvoiceEvent;
 use App\Events\ProductCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,6 +31,12 @@ class LogProductActions implements ShouldQueue
         $product = $event->product;
         $author = $event->author;
 
-        Log::info('product created', ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]);
+        event(new LogInvoiceEvent(
+            'error',
+            'Tried to pay without select products',
+            ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]
+        ));
+
+        //Log::info('product created', ['product' => $product->toArray(), 'author' => $author->toArray(), 'date' => now()]);
     }
 }

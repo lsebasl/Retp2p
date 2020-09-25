@@ -66,5 +66,9 @@ class ViewServiceProvider extends ServiceProvider
             ['stocks.index','__form_search_products'],
             MarkComposer::class
         );
+        View::composer(
+            ['payment.history','__form_search_history'],
+            CategoryComposer::class
+        );
     }
 }

@@ -4,18 +4,34 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SplObserver;
 
-class Invoice extends Model
+class Invoice extends Model implements \SplSubject
 {
+    private $observers = [];
+
+    protected $fillable = [
+        'users_id',
+        'expedition_date',
+        'expiration_date',
+        'subtotal',
+        'Vat',
+        'total',
+        'product_id',
+        'quantity',
+        'status'
+    ];
+
     /**
      * Many products has many invoices.
      *
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function products():HasMany
+    public function products():BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('product_id','quantity');
     }
 
     /**
@@ -36,5 +52,52 @@ class Invoice extends Model
     public function users():BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relation between invoices and Payment Attempts
+     *
+     * @return BelongsToMany
+     */
+    public function PaymentAttempt():BelongsToMany
+    {
+        return $this->belongsToMany(PaymentAttempt::class)->withPivot('requestId', 'processUrl', 'status');
+    }
+
+    /**
+     * Add observer to the model
+     *
+     * @param SplObserver $observer
+     * @return void
+     */
+    public function attach(\SplObserver $observer):void
+    {
+        $this->observers[] = $observer;
+    }
+
+
+    /**
+     * Delete observer to the model
+     *
+     * @param SplObserver $observer
+     * @return void
+     */
+    public function detach(\SplObserver $observer):void
+    {
+        $key = array_search($observer,$this->observers, true);
+        if($key){
+            unset($this->observers[$key]);
+        }
+    }
+
+    /**
+     * Notify to observer for generate an update
+     *
+     * @return void
+     */
+    public function notify():void
+    {
+        foreach ($this->observers as $observer)
+            $observer->update($this);
     }
 }

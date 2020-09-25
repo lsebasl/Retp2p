@@ -105,4 +105,27 @@ class ProductRepository
 
         return $product;
     }
+
+    /**
+     * Obtain a specif price searching by the product id.
+     *
+     * @param $productId
+     * @return mixed
+     */
+    public function getPrice($productId):int
+    {
+        return  Product::where('id', $productId)->first()->price;
+
+    }
+
+    /**
+     * Obtain a specif discount searching by the product id.
+     *
+     * @param $productId
+     * @return mixed
+     */
+    public function getDiscount($productId)
+    {
+        return  Product::where('id', $productId)->first()->discount;
+    }
 }

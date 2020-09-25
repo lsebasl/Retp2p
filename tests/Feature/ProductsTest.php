@@ -17,8 +17,6 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
-
-
     /**
      * @test
      */
@@ -59,7 +57,6 @@ class ProductsTest extends TestCase
         );
 
         $this->assertDatabaseEmpty('products');
-
 
     }
 

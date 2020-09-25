@@ -5,11 +5,10 @@
             <div class="full-width header-well-icon">
                 <i class="zmdi zmdi-accounts"></i>
             </div>
-            <div class="full-width header-well-text" style="position: initial">
-                <p class="text-condensedLight">
-                    list of registered users. use eye to see details, pencil to edit and trash to remove
-                </p>
-            </div>
+            <div class="full-width header-well-text">
+                <p class="text-condensedLight">List of registered users.
+                    <br>Use eye to see details, pencil to edit and trash to remove</p>
+               </div>
         </section>
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
         <div class="mdl-tabs__tab-bar">

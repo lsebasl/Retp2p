@@ -19,7 +19,7 @@ class AdminTest extends TestCase
     public function admin_can_see_home_view()
     {
 
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(['role' => USER::ADMIN_ROLE]);
 
         $response = $this->actingAs($user)->get(route('home'));
 

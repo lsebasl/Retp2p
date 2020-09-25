@@ -3,14 +3,6 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-//DB::listen(function ($query){
-    //var_dump($query->sql);
-//});
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 Auth::routes(["verify" => true]);
 
@@ -18,22 +10,33 @@ Route::get('/verify', function () {
     return view('auth.verify');
 });
 
+//Free access to public
+Route::get('/','Store\HomeController@index')->name('home.store');
 Route::get('/home-store','Store\HomeController@index')->name('home.store');
+Route::get('/about', 'Store\AboutController@index')->name('store.about');
+
+Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
+Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
+Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
+
 
 Route::middleware(['auth','user.status','verified'])->group(function () {
 
-//project routes
+   //project routes
 
-    Route::get('/about', 'Store\AboutController@index')->name('store.about');
+    //User Routes
+
+    Route::get('/payment', 'PaymentAttemptController@paymentAttempt')->name('payment.attempt');
+    Route::get('/payment/history', 'PaymentAttemptController@history')->name('payment.history');
+    Route::get('/payment/callback', 'PaymentAttemptController@callback')->name('payment.callback');
+
     Route::get('/profile', 'Store\ProfileController@index')->name('store.profile');
-    Route::get('/cart/add','Store\CartController@add')->name('cart.add');
+    Route::post('/cart/add','Store\CartController@add')->name('cart.add');
     Route::get('/cart/show', 'Store\CartController@show')->name('cart.show');
     Route::put('/cart/update/{item}', 'Store\CartController@update')->name('cart.update');
     Route::delete('/cart/delete/{item}', 'Store\CartController@destroy')->name('cart.destroy');
 
-    Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
-    Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
-    Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
+    //Admin Routes
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -71,14 +74,13 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
     Route::get('/stocks', 'StockController@index')->name('stocks.index');
 
-
 });
 
-//Routes Store
+    //Routes Layout
 
-Route::get('/layout', function () {
+    Route::get('/layout', function () {
     return view('store.layout.layout');
-});
+    });
 
 
 

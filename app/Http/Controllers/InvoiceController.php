@@ -62,7 +62,8 @@ class InvoiceController extends Controller
             'Vat' => $vat,
             'total' => $total,
 
-        ]);
+       ]);
+
 
          foreach ($details as $detail){
 

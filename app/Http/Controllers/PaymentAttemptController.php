@@ -31,36 +31,6 @@ class PaymentAttemptController extends Controller
     }
 
     /**
-     * @param Invoice $invoice
-     * @param PaymentAttempt $paymentAttempt
-     * @param PlacetoPay $placetopay
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|View
-     */
-    public function show(Invoice $invoice, PaymentAttempt $paymentAttempt, PlacetoPay $placetopay)
-
-    {
-        $response = $placetopay->query('369856');
-
-
-        $paymentAttempt->update([
-            'status' => $response->status()->status(),
-        ]);
-        if ($paymentAttempt->status == 'APPROVED') {
-            $invoice->update([
-                'paid_at' => Carbon::now(),
-                ''
-            ]);
-
-        }
-        return view("invoices.payments.show", [
-            'invoice' => $invoice,
-            'paymentAttempt' => $paymentAttempt,
-            'response' => $response
-        ]);
-    }
-
-
-    /**
      * @param Request $request
      * @param PlacetoPay $placeToPay
      * @throws \Dnetix\Redirection\Exceptions\PlacetoPayException

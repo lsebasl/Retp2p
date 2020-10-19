@@ -36,7 +36,7 @@ class Units implements \SplObserver
                 'product_name' => $product->name
             ];
 
-            if ($newQuantity <= '10' & $newQuantity >= '1' ){
+            if ($newQuantity <= '10' & $newQuantity >= '0' ){
 
                 event(new LogInvoiceEvent(
                     'alert',
@@ -44,7 +44,9 @@ class Units implements \SplObserver
                     $details
                 ));
 
+
                 Mail::to(config('mail.to.stock'))->send(new SendNotificationStock($details));
+
             }
 
             if ($newQuantity <= '0'){

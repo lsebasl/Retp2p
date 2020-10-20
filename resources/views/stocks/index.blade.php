@@ -68,7 +68,10 @@
         <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
             @include('partials.__alerts')
             @include('partials.__search_in_stocks')</small><br>
+            @include('partials.__filter_in_export')</small><br>
         </div>
     </div>
+
+
 
 @endsection

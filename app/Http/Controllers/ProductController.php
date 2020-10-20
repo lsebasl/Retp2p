@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Events\ProductCreated;
 use App\Events\ProductSaveImage;
+use App\Exports\ProductsExport;
 use App\Helpers\Logs;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
@@ -13,8 +14,10 @@ use App\Mark;
 use App\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Events\ProductUpdate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -134,5 +137,17 @@ class ProductController extends Controller
         $this->productRepository->deleteProduct($product);
 
         return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
+    }
+
+
+    public function export(Request $request)
+    {
+        $product = Product::name($request->get('search-name'))
+            ->category($request->get('search-category'))
+            ->mark($request->get('search-mark'))
+            ->status($request->get('search-status'));
+
+        return (new ProductsExport($product))->download('invoices.xlsx');
+
     }
 }

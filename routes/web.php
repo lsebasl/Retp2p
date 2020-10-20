@@ -24,6 +24,10 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
    //project routes
 
+    //Export Routes
+
+    Route::get('/export','ProductController@export')->name('export');
+
     //User Routes
 
     Route::get('/payment', 'PaymentAttemptController@paymentAttempt')->name('payment.attempt');

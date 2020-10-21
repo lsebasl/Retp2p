@@ -72,6 +72,19 @@
         </div>
     </div>
 
+    <div class="mdl-dialog__content">
+           Select File To Import
+    </div>
+    <form method=POST action="{{ route('import')}}" enctype="multipart/form-data">
+        @csrf
+        <div class="mdl-textfield mdl-js-textfield ">
+            <input type="file" name="file" id="file" >
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored " style="margin-left:2px">
+            {{__('Save')}}
+        </button>
+    </form>
 
 
 @endsection
+

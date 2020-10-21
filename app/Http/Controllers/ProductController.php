@@ -10,6 +10,7 @@ use App\Helpers\Logs;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
+use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
 use App\Repositories\ProductRepository;
@@ -147,7 +148,16 @@ class ProductController extends Controller
             ->mark($request->get('search-mark'))
             ->status($request->get('search-status'));
 
-        return (new ProductsExport($product))->download('invoices.xlsx');
+        return (new ProductsExport($product))->download('products.xlsx');
 
     }
+
+    public function import(Request $request)
+    {
+        Excel::import(new ProductsImport, $request->file('file'));
+
+        return redirect(route('stocks.index'))->with('success', 'All good!');
+    }
+
+
 }

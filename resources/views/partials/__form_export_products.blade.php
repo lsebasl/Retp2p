@@ -6,7 +6,7 @@
             <option value="Enable" {{'Enable' == request()->input('search-status') ? 'selected' : ''}}>{{__('Enable')}}</option>
             <option value="Disable" {{'Disable' == request()->input('search-status') ? 'selected' : ''}}>{{__('Disable')}}</option>
         </select>
-        <label class="mdl-textfield__label" for="category">{{__('Select Status')}}</label>
+        <label class="mdl-textfield__label" for="category">{{__('Select Status To Export')}}</label>
         <span class="mdl-textfield__error">Invalid Category</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('search-category') ? 'is-invalid' : '' }}">
@@ -17,7 +17,7 @@
                 <option value="{{ $category->id }}" {{" $category->id" ==  request()->input('search-category') ? 'selected' : ''}}>{{$category->name}}</option>
             @endforeach
         </select>
-        <label class="mdl-textfield__label" for="search-category">{{__('Select Category')}}</label>
+        <label class="mdl-textfield__label" for="search-category">{{__('Select Category To Export')}}</label>
         <span class="mdl-textfield__error">Invalid Category</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label {{$errors->has('search-mark') ? 'is-invalid' : '' }}">
@@ -28,10 +28,10 @@
                 <option value="{{ $mark->name }}" {{ $mark->name ==  request()->input('search-mark') ? 'selected' : ''}}>{{$mark->name}}</option>
             @endforeach
         </select>
-        <label class="mdl-textfield__label" for="search-mark">{{__('Select Mark')}}</label>
+        <label class="mdl-textfield__label" for="search-mark">{{__('Select Mark To Export')}}</label>
         <span class="mdl-textfield__error">Invalid Mark</span>
     </div>
        <p class="text-center"></p>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" >
-        {{__('Search')}}
+        {{__('Export Products')}}
     </button>

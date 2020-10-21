@@ -27,6 +27,7 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     //Export Routes
 
     Route::get('/export','ProductController@export')->name('export');
+    Route::post('/import','ProductController@import')->name('import');
 
     //User Routes
 

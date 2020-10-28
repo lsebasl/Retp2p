@@ -9,10 +9,12 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     const ENABLE_STATUS = 'Enable';
     const DISABLE_STATUS = 'Disable';

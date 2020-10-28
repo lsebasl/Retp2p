@@ -34,7 +34,7 @@ class Category extends Model
     public function getCacheCategory():Collection
     {
         return Cache::remember(
-            'category',
+            'categories',
             now()->addDay(),
             function () {
                 return $this->all();

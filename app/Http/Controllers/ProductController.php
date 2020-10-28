@@ -73,7 +73,7 @@ class ProductController extends Controller
      * @param  Product $product
      * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product):View
     {
         Logs::AuditLogger($product, 'show');
 
@@ -84,7 +84,8 @@ class ProductController extends Controller
      * Show the form for editing the specified product.
      *
      * @param  Product $product
-     * @return View
+     * @return V
+     * iew
      */
     public function edit(Product $product):View
     {

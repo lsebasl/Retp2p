@@ -26,7 +26,6 @@ class UserController extends Controller
      */
     public function index(User $user): View
     {
-
         $users = $this->cacheUser->getPaginated($user);
 
         return view('users.index', ['users' => $users]);

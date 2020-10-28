@@ -3,11 +3,13 @@
 namespace Tests\Feature;
 
 use App\Category;
+use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -546,6 +548,28 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseEmpty('products');
 
+    }
+
+    /**
+     * @test
+     */
+    public function user_can_import_users()
+    {
+        Excel::fake();
+
+        $this->actingAs($this->givenUser())
+            ->get('/import');
+
+        Excel::assertImported('filename.xlsx', 'diskName');
+
+        Excel::assertImported('filename.xlsx', 'diskName', function(ProductsImport $import) {
+            return true;
+        });
+
+        // When passing the callback as 2nd param, the disk will be the default disk.
+        Excel::assertImported('filename.xlsx', function(ProductsImport $import) {
+            return true;
+        });
     }
 
     /**

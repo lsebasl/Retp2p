@@ -14,8 +14,12 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        Permission::create(['name' => 'roles.index', 'description' => 'Access to see roles lists']);
+        Permission::create(['name' => 'roles.create', 'description' => 'Access to form create roles']);
+        Permission::create(['name' => 'roles.destroy','description' => 'Access to delete roles']);
+        Permission::create(['name' => 'roles.show','description' => 'Access to see a specific roles']);
+        Permission::create(['name' => 'roles.edit','description' => 'Access to edit roles']);
 
-        Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
 
         Permission::create(['name' => 'users.index', 'description' => 'Access to see users list']);
         Permission::create(['name' => 'users.destroy','description' => 'Access to see delete users']);
@@ -71,6 +75,11 @@ class PermissionSeeder extends Seeder
             'products.destroy',
             'products.show',
             'products.edit',
+            'roles.index',
+            'roles.create',
+            'roles.destroy',
+            'roles.show',
+            'roles.edit',
             'clients.index',
             'clients.create',
             'clients.destroy',

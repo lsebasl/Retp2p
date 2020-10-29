@@ -24,13 +24,13 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     //project routes
     //roles Routes
 
-    Route::get('/roles','RoleController@index')->name('roles.index');
-    Route::get('/roles/create', 'RoleController@create')->name('roles.create');
-    Route::post('/roles/store', 'RoleController@store')->name('roles.store');
-    Route::put('/roles/{role}', 'RoleController@update')->name('roles.update');
-    Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy');
-    Route::get('/roles/{role}/show', 'RoleController@show')->name('roles.show');
-    Route::get('/roles/{role}/edit', 'RoleController@edit')->name('roles.edit');
+    Route::get('/roles','RoleController@index')->name('roles.index')->middleware('permission:roles.index');
+    Route::get('/roles/create', 'RoleController@create')->name('roles.create')->middleware('permission:roles.create');
+    Route::post('/roles/store', 'RoleController@store')->name('roles.store')->middleware('permission:roles.create');
+    Route::put('/roles/{role}', 'RoleController@update')->name('roles.update')->middleware('permission:roles.edit');
+    Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy')->middleware('permission:roles.destroy');
+    Route::get('/roles/{role}/show', 'RoleController@show')->name('roles.show')->middleware('permission:export');
+    Route::get('/roles/{role}/edit', 'RoleController@edit')->name('roles.edit')->middleware('permission:roles.edit');
 
     //Export Routes
 

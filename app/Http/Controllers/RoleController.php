@@ -112,12 +112,11 @@ class RoleController extends Controller
      *
      * @param Request $request
      * @param $id
-     * @param Role $role
      * @return void
      */
-    public function update(Request $request, $id,Role $role)
+    public function update(Request $request, $id)
     {
-        Logs::AuditLogger($role, 'store');
+       Logs::AuditLogger('Role', 'store');
 
         $role = $this->roleRepository->findOrFail($id);
 

@@ -36,7 +36,7 @@
                                             </span>
                                     <a class="mdl-list__item-secondary-action" href="{{route('roles.show', $role)}}"><i class="zmdi zmdi-eye" style= "color : #6574C4; width: 30px; font-size: 25px"></i></a>
                                     <a class="mdl-list__item-secondary-action" href="{{route('roles.edit', $role)}}"><i class="zmdi zmdi-edit" style= "color : #6574C4; width: 30px; font-size: 25px"></i></a>
-                                    <form method="POST" action="{{route('users.destroy',$role)}}">
+                                    <form method="POST" action="{{route('roles.destroy',$role)}}">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="mdl-list__item-secondary-action" style="border: none; background-color:white"><i class="zmdi zmdi-delete" style= "color : #BD2765; width: 20px; font-size: 25px"></i></button>
                                     </form>

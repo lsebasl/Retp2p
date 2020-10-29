@@ -21,8 +21,9 @@
         @foreach($permissions as $permission)
             <div class = "mdl-cell mdl-cell--4-col">
                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-                    <input type="checkbox" id="permission" name="permission[]" value="{{ old('$permission', '$permission->id') }}" class="mdl-checkbox__input"
+                    <input type="checkbox" id="permission" name="permission[]" value="{{ old('permission', $permission->id) }}" class="mdl-checkbox__input"
                     @isset($role->id)
+
                         @if($role->permissions->contains($permission->id))  checked = checked @endif
                     @endisset()>
                     <span class="mdl-checkbox__label">{{$permission->name}}</span>

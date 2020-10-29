@@ -4,8 +4,10 @@ namespace App\Repositories;
 
 use App\Cart;
 use App\Product;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
@@ -25,6 +27,15 @@ class RoleRepository
 
     /**
      *
+     * @return mixed
+     */
+    public function getPermissions()
+    {
+        return  Permission::get();
+    }
+
+    /**
+     *
      * @param $id
      * @return mixed
      */
@@ -34,63 +45,32 @@ class RoleRepository
     }
 
     /**
-     * Store a validated product.
      *
-     * @param  $request
-     * @return Product
-     */
-    public function store($request):Product
-    {
-
-    }
-
-    /**
-     * Fill product using product request validated.
-     *
-     * @param  $product
-     * @param  $request
+     * @param Request $request
+     * @param Role $role
      * @return mixed
      */
-    public function fillProduct($product, $request):Product
+    public function updateNameDescription(Request $request,Role $role)
     {
+        $role->name = $request->input('name');
+
+        $role->description = $request->input('description');
+
+        $role->save();
+
+        return $role;
 
     }
 
-    /**
-     * Fill product using product request validated.
-     *
-     * @param  $product
-     * @param  $request
-     * @return mixed
-     */
-    public function update($product, $request):Product
+    public function createNameDescription(Request $request,$role)
     {
+        $role = Role::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        return $role;
 
     }
-
-    /**
-     * Delete a image in storage/app/images.
-     *
-     * @param  $product
-     * @return bool
-     */
-    public function deleteImage($product):bool
-    {
-
-    }
-
-    /**
-     * Delete a specific product it affects stocks, products and store.
-     *
-     * @param  $product
-     * @return Product
-     */
-    public function deleteProduct($product):Product
-    {
-
-    }
-
-
-
 
 }

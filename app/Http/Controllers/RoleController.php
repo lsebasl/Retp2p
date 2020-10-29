@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Logs;
 use App\Http\Requests\RolesSearchRequest;
+use App\Repositories\cacheRoles;
 use App\Repositories\RoleRepository;
 use App\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -16,7 +19,7 @@ class RoleController extends Controller
 
     protected $roleRepository;
 
-    public function __construct(RoleRepository $roleRepository)
+    public function __construct(RoleRepository $roleRepository, cacheRoles $cacheRole)
     {
         $this->roleRepository = $roleRepository;
     }
@@ -42,9 +45,9 @@ class RoleController extends Controller
      */
     public function create(Role $role):View
     {
-        //Logs::AuditLogger($user, 'edit');
+        Logs::AuditLogger($role, 'edit');
 
-        $permissions = Permission::get();
+        $permissions = $this->roleRepository->getPermissions();
 
         return view('roles.create', compact('role','permissions'));
     }
@@ -53,20 +56,18 @@ class RoleController extends Controller
      * Store a newly created role in storage.
      *
      * @param Request $request
+     * @param Role $role
      * @return RedirectResponse
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request,Role $role):RedirectResponse
     {
+        Logs::AuditLogger($role, 'store');
 
-        $role = Role::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-        ]);
+        $role = $this->roleRepository->createNameDescription($request,$role);
 
         $role->syncPermissions($request->input('permission'));
 
-
-        return redirect('roles.index')->with('Success','Role Has Benn Created');
+        return redirect(route('roles.index'))->with('success', 'Role Has Been Created!');
 
     }
 
@@ -78,8 +79,6 @@ class RoleController extends Controller
      */
     public function show($id):View
     {
-        // Logs::AuditLogger($user, 'show');
-
         $role = $this->roleRepository->findOrFail($id);
 
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
@@ -89,35 +88,62 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Show a specific user
      *
-     * @param  UserUpdateRequest $request
-     * @param  User              $user
-     * @return RedirectResponse
+     * @param $id
+     * @return View
      */
-    public function update(UserUpdateRequest $request, User $user):RedirectResponse
+    public function edit($id):View
     {
-        Logs::AuditLogger($user, 'update');
+        $role = $this->roleRepository->findOrFail($id);
 
-        $this->cacheUser->update($request, $user);
+        $permissions = $this->roleRepository->getPermissions();
 
-        return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+
+        return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Update a specific roles and create a Log.
      *
-     * @param  User $user
+     * @param Request $request
+     * @param $id
+     * @param Role $role
+     * @return void
+     */
+    public function update(Request $request, $id,Role $role)
+    {
+        Logs::AuditLogger($role, 'store');
+
+        $role = $this->roleRepository->findOrFail($id);
+
+        $role = $this->roleRepository->updateNameDescription($request,$role);
+
+        $role->syncPermissions($request->input('permission'));
+
+        return redirect()->route('roles.index')->withSuccess(__('Role updated sucessfully'));
+
+    }
+
+
+    /**
+     * Delete a specific roles and create a Log.
+     *
+     * @param Role $role
      * @return RedirectResponse
      * @throws \Exception
      */
-    public function destroy(User $user):RedirectResponse
+    public function destroy(Role $role):RedirectResponse
     {
-        Logs::AuditLogger($user, 'delete');
+        Logs::AuditLogger($role, 'delete');
 
-        $this->cacheUser->delete($user);
+        $role->delete();
 
-        return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
+        return redirect()->route('roles.index')->with('success', 'Role Has Been Deleted!');
     }
 
 }

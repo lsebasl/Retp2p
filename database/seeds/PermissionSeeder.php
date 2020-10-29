@@ -14,6 +14,9 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+
+        Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
+
         Permission::create(['name' => 'users.index', 'description' => 'Access to see users list']);
         Permission::create(['name' => 'users.destroy','description' => 'Access to see delete users']);
         Permission::create(['name' => 'users.show','description' => 'Access to see a specific user']);
@@ -103,6 +106,7 @@ class PermissionSeeder extends Seeder
             'cart.show',
             'cart.update',
             'cart.destroy',
+
         ]);
 
         $stock = Role::create(['name' => 'StockManager','description' => 'Allows the user access manage products.']);

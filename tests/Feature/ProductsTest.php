@@ -584,9 +584,8 @@ class ProductsTest extends TestCase
     public function admin_can_delete_a_product()
     {
         $product = factory(Product::class)->create();
-        $admin = factory(User::class)->create();
 
-        $this->actingAs($admin)->delete(route('products.destroy', $product))
+        $this->actingAs($this->user)->delete(route('products.destroy', $product))
             ->assertRedirect(route('stocks.index'));
 
         $this->assertDatabaseEmpty('products');

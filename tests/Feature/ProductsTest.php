@@ -10,6 +10,8 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,6 +20,51 @@ use Illuminate\Http\UploadedFile;
 class ProductsTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+
+        Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
+        Permission::create(['name' => 'products.index', 'description' => 'Access to see products lists']);
+        Permission::create(['name' => 'products.create', 'description' => 'Access to create products']);
+        Permission::create(['name' => 'products.destroy','description' => 'Access to delete products']);
+        Permission::create(['name' => 'products.show','description' => 'Access to see a specific product']);
+        Permission::create(['name' => 'products.edit','description' => 'Access to edit products']);
+        Permission::create(['name' => 'stocks.index','description' => 'Access to see inventory']);
+        Permission::create(['name' => 'invoices.index','description' => 'Access to see invoices']);
+        Permission::create(['name' => 'invoices.create','description' => 'Access to create invoices']);
+        Permission::create(['name' => 'invoices.destroy','description' => 'Access to eliminate invoices']);
+        Permission::create(['name' => 'invoices.show','description' => 'Access to see a specific invoices']);
+        Permission::create(['name' => 'invoices.edit','description' => 'Access to edit invoices']);
+
+        $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
+        $admin->givePermissionTo([
+            'home',
+            'products.index',
+            'products.create',
+            'products.destroy',
+            'products.show',
+            'products.edit',
+            'stocks.index',
+            'invoices.index',
+            'invoices.create',
+            'invoices.destroy',
+            'invoices.show',
+            'invoices.edit',
+
+        ]);
+
+        $this->user = factory(User::class)->create(['role' => 'Admin']);
+        $this->user->assignRole('Admin');
+
+    }
 
     /**
      * @test
@@ -156,9 +203,8 @@ class ProductsTest extends TestCase
      */
     public function it_show_if_product_list_is_empty()
     {
-        $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('products.index'))
+        $this->actingAs($this->user)->get(route('products.index'))
             ->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
@@ -171,9 +217,8 @@ class ProductsTest extends TestCase
     public function admin_can_see_product_list_view()
     {
         $product = factory(Product::class)->create();
-        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('products.index'));
+        $response = $this->actingAs($this->user)->get(route('products.index'));
 
         $response->assertSee('Status')
             -> assertSee('Search')
@@ -192,10 +237,10 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_product_stocks_view()
     {
-        $user = factory(User::class)->create();
+
         $product = factory(Product::class)->create();
 
-        $response = $this->actingAs($user)->get(route('stocks.index'));
+        $response = $this->actingAs($this->user)->get(route('stocks.index'));
 
         $response->assertSee($product->name)
             ->assertSee($product->Barcode)
@@ -225,7 +270,7 @@ class ProductsTest extends TestCase
             ]
         );
 
-        $response = $this->actingAs($user)->get(route('goods.index'));
+        $response = $this->actingAs($this->user)->get(route('goods.index'));
 
         $response->assertSee($product->name)
             ->assertSee($product->image)
@@ -240,9 +285,8 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_create_products_form()
     {
-        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('products.create'));
+        $response = $this->actingAs($this->user)->get(route('products.create'));
 
         $response->assertSee('barcode')
             ->assertSee('name')
@@ -252,6 +296,7 @@ class ProductsTest extends TestCase
             ->assertOk();;
 
     }
+
     /**
      * @param        string $field
      * @param        $value
@@ -288,7 +333,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('stocks.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -332,7 +377,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('products.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -376,7 +421,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('goods.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -398,7 +443,7 @@ class ProductsTest extends TestCase
                 $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('products.index', $filters));
 
         $response->assertSessionHasErrors($field);
@@ -429,7 +474,7 @@ class ProductsTest extends TestCase
 
         Event::fake();
 
-        $this->actingAs($user)
+        $this->actingAs($this->user)
             ->put(route('products.update', $product), $this->getValidData($file))
             ->assertRedirect(route('products.show', $product));
 
@@ -458,7 +503,6 @@ class ProductsTest extends TestCase
      */
     public function admin_can_store_a_product()
     {
-        $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create(
             [
@@ -477,7 +521,7 @@ class ProductsTest extends TestCase
 
         Event::fake();
 
-         $this->actingAs($user)
+         $this->actingAs($this->user)
              ->post(route('products.store'), $this->getValidData($file))
              ->assertRedirect(route('stocks.index'))
              ->assertStatus(302);
@@ -507,13 +551,12 @@ class ProductsTest extends TestCase
      */
     public function admin_cant_store_a_incomplete_product_form()
     {
-        $user = factory(User::class)->create();
 
         Storage::fake('image');
 
         $file = uploadedfile::fake()->image('product.jpg');
 
-        $response =$this->actingAs($user)->post(
+        $response =$this->actingAs($this->user)->post(
             route('products.store'), [
 
             'image' => $file,

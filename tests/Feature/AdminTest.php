@@ -6,6 +6,8 @@ use App\Product;
 use App\User;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
@@ -13,18 +15,159 @@ class AdminTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @var User
+     */
+    private $user;
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+
+        Permission::create(['name' => 'users.index', 'description' => 'Access to see users list']);
+        Permission::create(['name' => 'users.destroy','description' => 'Access to see delete users']);
+        Permission::create(['name' => 'users.show','description' => 'Access to see a specific user']);
+        Permission::create(['name' => 'users.edit','description' =>'Access to edit users']);
+        Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
+
+        $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
+        $admin->givePermissionTo([
+            'users.index',
+            'users.destroy',
+            'users.show',
+            'users.edit',
+            'home'
+
+        ]);
+
+        $this->user = factory(User::class)->create(['role' => 'Admin']);
+        $this->user->assignRole('Admin');
+
+    }
+
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantAccessToUsersIndex()
+    {
+        $response = $this->get(route('users.index'));
+        $response->assertRedirect(route('login'));
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantAccessToUsersShow()
+    {
+        $user=factory(User::class)->create();
+
+        $this->get(route('users.show', $user))
+            ->assertRedirect(route('login'));
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantAccessToUsersEdit()
+    {
+        $user=factory(User::class)->create();
+
+        $this->get(route('users.edit', $user))
+            ->assertRedirect(route('login'));
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantAccessToUsersUpdate()
+    {
+        $user=factory(User::class)->create();
+
+        $this->put(route('users.update', $user))
+            ->assertRedirect(route('login'));
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantAccessToUsersDelete()
+    {
+        $user=factory(User::class)->create();
+
+        $this->delete(route('users.destroy', $user))
+            ->assertRedirect(route('login'));
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCanSeeLogin()
+    {
+
+        $this->get(route('login'))
+            ->assertSee('Sign in with your Account')
+            ->assertSee('Password');
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCanSeeWelcome()
+    {
+
+        $this->get('/')
+            ->assertSee('Project Store');
+
+    }
+    /**
+     * @test
+     */
+    public function NoAuthenticatedUserCantUpdateAClient()
+    {
+        $user = factory(User::class)->create();
+
+        $this->put(
+            route('users.update', $user), [
+
+                'name' => 'Test Name',
+                'last_name' => 'Test Last Name',
+                'id_type' => 'NIT',
+                'identification' => 'Test User last Name',
+                'phone' => '3172798026',
+                'address' => 'Test User address',
+                'email' => 'test@gmail.com',
+
+            ]
+        )
+            ->assertRedirect(route('login'));
+
+        $this->assertDatabaseMissing('users', ['id'=>$user->name]);
+
+
+    }
+    /**
      * @test
      */
 
+    public function NoAuthenticatedUserCantsDeleteAUser()
+    {
+        $user = factory(User::class)->create();
+
+        $this->delete(route('users.destroy', $user))
+            ->assertRedirect(route('login'));
+
+        $this->assertDatabasehas('users', ['id'=>$user->id]);
+    }
+
+    /**
+     * @test
+     */
     public function admin_can_see_home_view()
     {
-
-        $user = factory(User::class)->create(['role' => USER::ADMIN_ROLE]);
-
-        $response = $this->actingAs($user)->get(route('home'));
+        $response = $this->actingAs($this->user)->get(route('home'));
 
         $response->assertSee('logout')
-            -> assertSee('RESPONSIVE')
+            ->assertSee('RESPONSIVE')
             ->assertViewIs('home')
             ->assertOk();
     }
@@ -38,15 +181,15 @@ class AdminTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.index'));
+        $response = $this->actingAs($this->user)->get(route('users.index'));
 
         $response->assertSee('List')
             ->assertSee('User')
             ->assertViewIs('users.index')
-            ->assertSee($user->name)
+            ->assertSee($this->user->name)
             ->assertOk();
         $responseUser= $response->getOriginalContent()['users'];
-        $this->assertEquals($user->id, $responseUser->first()->id);
+        $this->assertEquals($this->user->id, $responseUser->first()->id);
     }
 
     /**
@@ -58,7 +201,7 @@ class AdminTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.show', $user));
+        $response = $this->actingAs($this->user)->get(route('users.show', $user));
 
         $response->assertSee('User')
             -> assertSee('Name')
@@ -77,7 +220,7 @@ class AdminTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('users.edit', $user));
+        $response = $this->actingAs($this->user)->get(route('users.edit', $user));
 
         $response->assertSeeText('Edit')
             -> assertSeeText('Name')
@@ -88,14 +231,12 @@ class AdminTest extends TestCase
     /**
      * @test
      */
-
     public function admin_can_update_a_user()
     {
 
         $user = factory(User::class)->create();
-        $admin = factory(User::class)->create();
 
-        $this->actingAs($admin)->put(
+        $this->actingAs($this->user)->put(
             route('users.update', $user), [
 
             'name' => 'Test Name',
@@ -107,9 +248,7 @@ class AdminTest extends TestCase
             'email' => 'test@gmail.com',
             'status' => 'Enable'
 
-            ]
-        )
-            ->assertRedirect(route('users.show', $user))
+            ])->assertRedirect(route('users.show', $user))
             ->assertSessionHasNoErrors();
 
         $this->assertDatabasehas(
@@ -129,16 +268,14 @@ class AdminTest extends TestCase
     /**
      * @test
      */
-
     public function admin_can_delete_a_user()
     {
-        $user = factory(User::class)->create();
-        $admin = factory(User::class)->create();
+        $user = factory(User::class)->create(['id' => '20']);
 
-        $this->actingAs($admin)->delete(route('users.destroy', $user))
+        $this->actingAs($this->user)->delete(route('users.destroy', $user))
             ->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseMissing('users', ['id'=>$user->id]);
+        $this->assertDatabaseMissing('users', ['id'=>'20']);
     }
 
 

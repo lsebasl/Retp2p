@@ -14,11 +14,19 @@ use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
 use App\Repositories\ProductRepository;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Session\SessionManager;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use App\Events\ProductUpdate;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\ValidationException;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ProductController extends Controller
 {
@@ -126,7 +134,7 @@ class ProductController extends Controller
      *
      * @param  Product $product
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
 
     public function destroy(Product $product):RedirectResponse
@@ -141,6 +149,10 @@ class ProductController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return Response|BinaryFileResponse
+     */
     public function export(Request $request)
     {
         $product = Product::name($request->get('search-name'))
@@ -152,11 +164,53 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * Import products with validation.
+     *
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
     public function import(Request $request)
     {
-        Excel::import(new ProductsImport, $request->file('file'));
+        try {
+            Excel::import(new ProductsImport, $request->file('file'));
 
-        return redirect(route('stocks.index'))->with('success', 'All good!');
+            return redirect(route('stocks.index'))->with('success', 'All good!');
+
+
+        } catch (ValidationException $e){
+
+           return $this->displayErrors($e);
+        }
+
+    }
+
+    /**
+     * Create message of each error when import and redirect to stocks.
+     *
+     * @param $e
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function displayErrors($e):RedirectResponse
+    {
+
+        $message = '';
+        foreach ($e->failures() as $fail){
+
+          $fail->row();
+          $fail->attribute();
+          $fail->errors();
+          $fail->values();
+
+          $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . '<br>';
+
+        }
+
+        Session::flash('Validation Message', 'Error found in : <br>' . $message);
+
+        return redirect(route('stocks.index'))->with('error', 'Fail!!');
+
+
     }
 
 

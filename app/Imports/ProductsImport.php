@@ -5,33 +5,61 @@ namespace App\Imports;
 use App\Product;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class ProductsImport implements ToModel
+class ProductsImport implements ToModel, WithHeadingRow,WithValidation,WithBatchInserts
 {
     /**
      * @param array $row
      *
      * @return Product|null
      */
-    public function model(array $row)
+    public function model(array $row):Product
     {
+
         return new Product([
-            'image'       => $row[1],
-            'barcode'     => $row[2],
-            'name'        => $row[3],
-            'model'       => $row[4],
-            'mark'        => $row[5],
-            'description' => $row[6],
-            'units'       => $row[7],
-            'price'       => $row[8],
-            'discount'    => $row[9],
-            'status'      => $row[10],
-            'created_at'  => $row[11],
-            'updated_at'  => $row[12],
-            'created_by'  => $row[13],
-            'updated_by'  => $row[14],
-            'category_id' => $row[15 ],
+            'image' => $row['image'],
+            'barcode' => $row['barcode'],
+            'name' => $row['name'],
+            'model' => $row['model'],
+            'mark' => $row['mark'],
+            'description' => $row['description'],
+            'units' => $row['units'],
+            'price' => $row['price'],
+            'discount' => $row['discount'],
+            'status' => $row['status'],
+            'created_at'  => $row['created_at'],
+            'updated_at'  => $row['updated_at'],
+            'created_by'  => $row['created_by'],
+            'updated_by'  => $row['updated_by'],
+            'category_id' => $row['category_id'],
 
         ]);
     }
+
+    public function batchSize(): int
+    {
+        return 100;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'image' =>'required',
+            'barcode' => ['required', 'min:3','max:30',],
+            'name' => 'required|min:3|max:30',
+            'category_id' => 'required|in:1,2,3,4|int',
+            'model' => 'required|min:2|max:30',
+            'mark' => 'required|min:2|max:30',
+            'description' => 'required|min:3|max:50',
+            'units' => 'required|Integer|min:1|max:10000000',
+            'price' => 'required|numeric|min:0|max:100000000',
+            'discount' => 'required|numeric|min:0|max:100',
+            'status' => 'required|in:Enable,Disable',
+
+        ];
+    }
+
 }

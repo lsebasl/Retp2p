@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Session\SessionManager;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use App\Events\ProductUpdate;
@@ -177,6 +178,8 @@ class ProductController extends Controller
 
             return redirect(route('stocks.index'))->with('success', 'All good!');
 
+            //Excel::import(new ProductsImport, $request->file('file'));
+            
 
         } catch (ValidationException $e){
 
@@ -210,6 +213,13 @@ class ProductController extends Controller
 
         return redirect(route('stocks.index'))->with('error', 'Fail!!');
 
+
+    }
+
+    public function keyExist($val)
+    {
+
+        return Product::where('id',$val['id'])->first();
 
     }
 

@@ -14,19 +14,19 @@ class ProductSeeder extends Seeder
     {
         factory(Product::class,50)->create([
             'category_id' => 1,
-            'image' => 'images/VfXxmkvJYvtlyYMEfLwPjGC5dueEYM1CLlYGKEoG.jpeg',
+            'image' => 'images/hOh8cxP8G80mcO9aohbgrHAi5Rf4p4RdKFh1bAzj.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 2,
-            'image' => 'images/0gvEYujTKeRDEnltHEgVbN7ISptzTenVOj1RdiQF.jpeg',
+            'image' => 'images/9WPLXBPKQgg1OStJ5a4uAX73XdrgMBvvSeOSzgvP.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 3,
-            'image' => 'images/75a6kBzZe0EiNbEPQQigOn7PaTz1eClJGEDI109P.jpeg',
+            'image' => 'images/hOh8cxP8G80mcO9aohbgrHAi5Rf4p4RdKFh1bAzj.jpeg',
         ]);
         factory(Product::class,50)->create([
             'category_id' => 4,
-            'image' => 'images/4ktCEMSoiveO1HqWguluHe92bARYculdU0pkLYYR.jpeg',
+            'image' => 'images/hOh8cxP8G80mcO9aohbgrHAi5Rf4p4RdKFh1bAzj.jpeg',
         ]);
     }
 }

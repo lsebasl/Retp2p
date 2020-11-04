@@ -30,7 +30,7 @@ class SendNotificationStock extends Mailable
      */
     public function build()
     {
-        return $this->from('stock@projecstore.com')
+        return $this->from(config('mail.from.stock'))
             ->subject('Alert Stock')
             ->markdown('emails.notifications');
     }

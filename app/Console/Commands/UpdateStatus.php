@@ -49,9 +49,9 @@ class UpdateStatus extends Command
 
             $response = $placetopay->query($paymentAttempt->requestId);
 
-            $paymentAttempt->update([
-                'status' => $response->status()->status(),
-            ]);
+                $paymentAttempt->update([
+                    'status' => $response->status()->status(),
+                ]);
         });
 
     }

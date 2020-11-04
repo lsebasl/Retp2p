@@ -33,12 +33,12 @@ class LogInvoiceListener
                 ]);
         }
         if ($event->type === 'error') {
-            Log::info($event->message, [
+            Log::error($event->message, [
                 'option' => $event->option
             ]);
         }
         if ($event->type === 'alert') {
-            Log::info($event->message, [
+            Log::alert($event->message, [
                 'option' => $event->option
             ]);
         }

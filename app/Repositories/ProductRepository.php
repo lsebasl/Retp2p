@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 
 class ProductRepository
 {
@@ -99,9 +101,9 @@ class ProductRepository
      */
     private function saveImage($request, $product):Product
     {
-        $product->image = $request->file('image')->store('images');
+       $product->image = $request->file('image')->store('images');
 
-        $product->save();
+       $product->save();
 
         return $product;
     }

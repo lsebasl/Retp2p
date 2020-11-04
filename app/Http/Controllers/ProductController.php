@@ -179,7 +179,7 @@ class ProductController extends Controller
             return redirect(route('stocks.index'))->with('success', 'All good!');
 
             //Excel::import(new ProductsImport, $request->file('file'));
-            
+
 
         } catch (ValidationException $e){
 
@@ -205,13 +205,13 @@ class ProductController extends Controller
           $fail->errors();
           $fail->values();
 
-          $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . '<br>';
+          $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];'<br>';
 
         }
 
         Session::flash('Validation Message', 'Error found in : <br>' . $message);
 
-        return redirect(route('stocks.index'))->with('error', 'Fail!!');
+        return redirect(route('stocks.index'))->with('error', 'Fail!!' );
 
 
     }

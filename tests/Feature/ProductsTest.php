@@ -3,11 +3,14 @@
 namespace Tests\Feature;
 
 use App\Category;
+use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -547,6 +550,50 @@ class ProductsTest extends TestCase
         $this->assertDatabaseEmpty('products');
 
     }
+
+    /**
+     * @test
+     */
+    public function admin_can_export_products_list()
+    {
+
+        $admin = factory(User::class)->create();
+
+        Excel::fake();
+
+        $this->actingAs($admin)
+            ->get(route('export'));
+
+        Excel::assertDownloaded('products.xlsx');
+
+    }
+
+/*
+    /**
+     * @test
+     */
+    /*
+    public function admin_can_import_products_list()
+    {
+
+        Excel::fake();
+
+        Storage::fake('diskName');
+
+        $file = UploadedFile::fake()->create('diskName.xlsx');
+
+        $admin = factory(User::class)->create();
+
+        $this->actingAs($admin)
+            ->get(route('import'), ['borrowers' => $file]);
+
+
+        Excel::assertImported('diskName.xlsx', 'diskName', function(ProductsImport $import) {
+            return true;
+        });
+
+    }
+*/
 
     /**
      * @return array

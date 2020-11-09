@@ -8,8 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\StoreRequest;
 use App\Http\Requests\Products\UpdateRequest;
 use App\Http\Requests\ProductsStoreRequest;
+use App\Http\Requests\ProductsUpdateRequest;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use App\Traits\ApiResponse;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -26,11 +30,13 @@ class ProductController extends Controller
 
     public function store(ProductsStoreRequest $request, Product $product, StoreProductAction $action)
     {
+
         return $action->execute($product, $request);
+
+
     }
 
-
-    public function update(UpdateRequest $request, Product $product, UpdateProductAction $action)
+    public function update(ProductsUpdateRequest $request, Product $product, UpdateProductAction $action)
     {
         return $action->execute($product, $request);
     }

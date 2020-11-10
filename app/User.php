@@ -3,6 +3,7 @@
 namespace App;
 
 use http\QueryString;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     const ENABLE_STATUS = 'Enable';
     const DISABLE_STATUS = 'Disable';

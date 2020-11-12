@@ -60,7 +60,6 @@ class ProductsTest extends TestCase
         );
 
         $this->assertDatabaseEmpty('products');
-
     }
 
     /**
@@ -413,17 +412,9 @@ class ProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $category = factory(Category::class)->create(
-            [
-            'id' => '2'
-            ]
-        );
+        $category = factory(Category::class)->create(['id' => '2']);
 
-        $product = factory(Product::class)->create(
-            [
-            'category_id' => $category->getId(),
-            ]
-        );
+        $product = factory(Product::class)->create(['category_id' => $category->getId(),]);
 
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');

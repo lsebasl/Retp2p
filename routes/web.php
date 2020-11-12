@@ -11,14 +11,13 @@ Route::get('/verify', function () {
 });
 
 //Free access to public
-Route::get('/','Store\HomeController@index')->name('home.store');
-Route::get('/home-store','Store\HomeController@index')->name('home.store');
-Route::get('/about', 'Store\AboutController@index')->name('store.about');
+    Route::get('/','Store\HomeController@index')->name('home.store');
+    Route::get('/home-store','Store\HomeController@index')->name('home.store');
+    Route::get('/about', 'Store\AboutController@index')->name('store.about');
 
-Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
-Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
-Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
-
+    Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
+    Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
+    Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
 
 Route::middleware(['auth','user.status','verified'])->group(function () {
 

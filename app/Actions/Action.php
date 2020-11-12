@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Action implements ActionContract
 {
-    public function execute(Model $model, Request $request)
+    /**
+     * @param Model $model
+     * @param Request $request
+     * @return Model|mixed
+     */
+    public function execute(Model $model, Request $request):Model
     {
         return $this->storeModel($model, $request);
     }

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class UpdateProductAction extends Action
 {
+    /**
+     * * Create the data to store a product.
+     *
+     * @param Model $product
+     * @param Request $request
+     * @return Model
+     */
     public function storeModel(Model $product, Request $request): Model
     {
         $product->barcode = $request->input('barcode');

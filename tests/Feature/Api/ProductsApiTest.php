@@ -18,15 +18,10 @@ class ProductsApiTest extends TestCase
     /**
      * @test
      */
-    public function no_authenticated_api_admin_cannot_products_list()
+    public function no_authenticated_api_admin_cannot_access_to_products_list()
     {
 
         $user = factory(User::class)->create(['role' => User::ADMIN_ROLE]);
-
-        Passport::actingAs(
-            $user,
-            ['client-credentials']
-        );
 
         $this->actingAs($user,'api');
 
@@ -34,7 +29,7 @@ class ProductsApiTest extends TestCase
 
         $response = $this->json('GET','/api/products');
 
-        $response->assertRedirect('login');
+        $response->assertStatus(401);
 
     }
 

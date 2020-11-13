@@ -23,6 +23,11 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
    //project routes
 
+    //Report Routes
+
+    Route::get('/report/product','ReportController@index')->name('report.index');
+    Route::get('/report/product/all','ReportController@all')->name('products.all');
+
     //Export Routes
 
     Route::get('/export','ProductController@export')->name('export');

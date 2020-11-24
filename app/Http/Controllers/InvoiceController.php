@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class InvoiceController extends Controller
@@ -45,15 +46,16 @@ class InvoiceController extends Controller
 
         $expirationDate = $creationDate->addMonth();
 
-        $details = Cart::where('user_id',$userId)->get();
+        $details = Cart::where('user_id', $userId)->get();
 
-        $subtotal = Cart::where('user_id',$userId)->sum('subtotal');
+        $subtotal = Cart::where('user_id', $userId)->sum('subtotal');
 
         $vat = $subtotal *0.19;
 
         $total = $subtotal + $vat;
 
-        $invoice = Invoice::create([
+        $invoice = Invoice::create(
+            [
             'users_id' => $userId,
             'expedition_date' => $creationDate,
             'expiration_date' => $expirationDate,
@@ -62,21 +64,26 @@ class InvoiceController extends Controller
             'Vat' => $vat,
             'total' => $total,
 
-       ]);
+            ]
+        );
 
 
-         foreach ($details as $detail){
+        foreach ($details as $detail){
 
             $productId = $detail->product_id;
             $quantity = $detail->quantity;
-            $invoice->products()->attach($productId,[
+            $total = $detail->subtotal;
+            $invoice->products()->attach(
+                $productId, [
                 'product_id' =>$productId,
                 'quantity' => $quantity,
-            ]);
+                'total_by_product' => $total,
+                ]
+            );
 
-         }
+        }
 
-             return redirect(route('payment.attempt'))->with('success','The Invoice has Been Created Click On Place Order to continue');
+             return redirect(route('payment.attempt'))->with('success', 'The Invoice has Been Created Click On Place Order to continue');
 
     }
 
@@ -86,7 +93,7 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function report()
     {
         //
     }

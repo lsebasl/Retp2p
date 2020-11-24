@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 interface ActionContract
 {
     /**
-     * @param Model $model
-     * @param Request $request
+     * @param  Model   $model
+     * @param  Request $request
      * @return mixed
      */
     public function execute(Model $model, Request $request):Model;

@@ -40,7 +40,7 @@ class Product extends Model
      */
     public function invoices():BelongsToMany
     {
-        return $this->belongsToMany(Invoice::class)->withPivot('product_id','quantity');
+        return $this->belongsToMany(Invoice::class)->withPivot('product_id', 'quantity');
     }
 
     /**
@@ -270,4 +270,5 @@ class Product extends Model
         }
         return $query;
     }
+
 }

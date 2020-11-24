@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
+use App\Exports\UsersExport;
 use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
+use App\Product;
 use App\Repositories\CacheUser;
 use Illuminate\Http\RedirectResponse;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -92,5 +96,18 @@ class UserController extends Controller
         $this->cacheUser->delete($user);
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
+    }
+
+    /**
+     * @param  Request $request
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export(Request $request)
+    {
+        $users = User::status($request->get('status'))
+            ->client($request->get('client'));
+
+        return (new UsersExport($users))->download('users.xlsx');
+
     }
 }

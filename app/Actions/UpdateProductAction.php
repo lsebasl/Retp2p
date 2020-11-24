@@ -10,8 +10,8 @@ class UpdateProductAction extends Action
     /**
      * * Create the data to store a product.
      *
-     * @param Model $product
-     * @param Request $request
+     * @param  Model   $product
+     * @param  Request $request
      * @return Model
      */
     public function storeModel(Model $product, Request $request): Model

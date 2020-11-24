@@ -23,8 +23,8 @@ class CartController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param User $user
-     * @param CartRepository $cartRepository
+     * @param User              $user
+     * @param CartRepository    $cartRepository
      * @param ProductRepository $productRepository
      */
     public function __construct(User $user,CartRepository $cartRepository,ProductRepository $productRepository)
@@ -46,14 +46,14 @@ class CartController extends Controller
 
         $totalIva = $this->totalPrice($carts);
 
-        return view('store.cart',compact('carts','totalIva'))->with('success', 'Cart Has Benn Updated   !');
+        return view('store.cart', compact('carts', 'totalIva'))->with('success', 'Cart Has Benn Updated   !');
 
     }
 
     /**
      * Add products to checkout, store totals and redirect to checkout view.
      *
-     * @param CartUpdateRequest $request
+     * @param  CartUpdateRequest $request
      * @return Application|RedirectResponse|Redirector
      */
     public function add(CartUpdateRequest $request):RedirectResponse
@@ -63,7 +63,7 @@ class CartController extends Controller
 
         $cart = $request->all();
 
-        unset($cart['cmd'],$cart['bn'],$cart['upload']);
+        unset($cart['cmd'], $cart['bn'], $cart['upload']);
 
         $totalItems = count($cart)/4;
 
@@ -79,22 +79,24 @@ class CartController extends Controller
 
             $subtotal = $price * (1 - $discount) * $quantity;
 
-            Cart::create([
+            Cart::create(
+                [
                 'quantity' => $quantity,
                 'product_id' => $productId,
                 'user_id' => $this->user->authUser(),
                 'price' => $price,
                 'subtotal' => $subtotal,
-            ]);
+                ]
+            );
         }
-       return redirect(route('cart.show'))->with('success', 'Products Has Been added!');
+        return redirect(route('cart.show'))->with('success', 'Products Has Been added!');
     }
 
     /**
      * Update the quantity in the checkout.
      *
-     * @param CartUpdateRequest $request
-     * @param $id
+     * @param  CartUpdateRequest $request
+     * @param  $id
      * @return RedirectResponse
      */
     public function update(CartUpdateRequest $request, $id):RedirectResponse
@@ -115,7 +117,7 @@ class CartController extends Controller
     /**
      * Eliminate a specific element in the checkout
      *
-     * @param $id
+     * @param  $id
      * @return Application|RedirectResponse|Redirector
      */
     public function destroy($id)
@@ -131,7 +133,7 @@ class CartController extends Controller
     /**
      * Generate all the concepts to pay in the checkout.
      *
-     * @param $cart
+     * @param  $cart
      * @return array
      */
     public function totalPrice($cart):array
@@ -162,15 +164,17 @@ class CartController extends Controller
     /**
      * Destroy all elements in the checkout
      *
-     *@return void
+     * @return void
      */
     public function destroyAll():void
     {
         $cart = $this->cartRepository->getCart();
 
-        $cart->each(function ($item){
-           $item->delete($item->id);
-        });
+        $cart->each(
+            function ($item) {
+                $item->delete($item->id);
+            }
+        );
 
     }
 
@@ -178,32 +182,34 @@ class CartController extends Controller
     /**
      * Give the subtotal with and without discount
      *
-     * @param $cart
+     * @param  $cart
      * @return array
      */
     public function getSubtotal($cart):array
     {
-        $subtotal = $cart->map(function ($cart) {
+        $subtotal = $cart->map(
+            function ($cart) {
 
-            $price = $this->productRepository->getPrice($cart->product_id);
+                $price = $this->productRepository->getPrice($cart->product_id);
 
-            $subtotalNoDiscount = $price * $cart->quantity;
+                $subtotalNoDiscount = $price * $cart->quantity;
 
-            $discount = $this->productRepository->getDiscount($cart->product_id);
+                $discount = $this->productRepository->getDiscount($cart->product_id);
 
-            $subtotal = $subtotalNoDiscount * (1 - $discount);
+                $subtotal = $subtotalNoDiscount * (1 - $discount);
 
-            return [
+                return [
                 'subtotal' =>  $subtotal,
                 'subtotalNoDiscount' => $subtotalNoDiscount
-            ];
+                ];
 
-        });
+            }
+        );
 
-      return [
+        return [
            'subtotal' => $subtotal->sum('subtotal'),
            'subtotalNoDiscount' => $subtotal->sum('subtotalNoDiscount'),
-      ];
+        ];
 
     }
 

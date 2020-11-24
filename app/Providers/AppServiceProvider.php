@@ -16,9 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(PlacetoPay::class,function(){
-            return new PlacetoPay(config('services.placetopay'));
-        });
+        $this->app->singleton(
+            PlacetoPay::class, function () {
+                return new PlacetoPay(config('services.placetopay'));
+            }
+        );
     }
 
     /**

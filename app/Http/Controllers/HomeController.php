@@ -28,7 +28,8 @@ class HomeController extends Controller
     {
         //solo el administrador habilitado puede hacer mantenimiento
         if (Auth::user()->role==User::ADMIN_ROLE
-            && Auth::user()->status==User::ENABLE_STATUS){
+            && Auth::user()->status==User::ENABLE_STATUS
+        ) {
             return view('home');
         }
         //todo usuario puede ver la tienda

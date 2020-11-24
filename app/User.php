@@ -2,14 +2,15 @@
 
 namespace App;
 
-use http\QueryString;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -92,5 +93,56 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Auth::user()->id;
     }
+
+
+    /**
+     * @param Builder $query
+     * @param string|null $status
+     * @return Builder
+     */
+    public function scopeStatus(Builder $query, ? string $status):Builder
+    {
+        if (null !== $status) {
+            return $query->where('status', $status);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope to filter invoices by expedition date
+     *
+     * @param Builder $query
+     * @param string|null $initialDate
+     * @param string|null $finalDate
+     */
+    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate):Builder
+    {
+
+        $initialDate = Carbon::parse($initialDate);
+
+        $finalDate = Carbon::parse($finalDate);
+
+        if ($initialDate && $finalDate) {
+            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param Builder $query
+     * @param string|null $status
+     * @return Builder
+     */
+    public function scopeClient(Builder $query, ? string $client):Builder
+    {
+
+       //
+    }
+
+
+
+
+
 
 }

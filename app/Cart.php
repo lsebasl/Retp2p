@@ -34,12 +34,10 @@ class Cart extends Model
 
     /**
      * Relationship a shopping cart has many products.
-     *
-     *
      */
     public function sumPrice()
     {
-       //
+        //
     }
 
 

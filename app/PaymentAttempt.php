@@ -19,6 +19,7 @@ class PaymentAttempt extends Model
 
     /**
      * Relation between Payment Attempts and Invoices
+     *
      * @return BelongsTo
      */
     public function Invoice():BelongsTo

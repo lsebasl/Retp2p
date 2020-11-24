@@ -23,6 +23,8 @@ class InvoiceProductTable extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
 
+            $table->integer('total_by_product');
+
             $table->timestamps();
         });
     }

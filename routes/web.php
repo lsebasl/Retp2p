@@ -25,8 +25,9 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
     //Report Routes
 
-    Route::get('/report/product','ReportController@index')->name('report.index');
-    Route::get('/report/product/all','ReportController@all')->name('products.all');
+    Route::get('/report','ReportController@index')->name('report.index');
+    Route::get('/report/show','ReportController@show')->name('report.show');
+    Route::get('/report/export/user','UserController@export')->name('users.export');
 
     //Export Routes
 

@@ -13,7 +13,6 @@ class StockByCategory implements MetricsContract
      */
     public function read(array $filters)
     {
-
         return DB::table('products')
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->whereBetween(
@@ -22,5 +21,5 @@ class StockByCategory implements MetricsContract
                     $filters['finalDate']]
             )->select(DB::raw("categories.name as DATA, sum(units) as LABEL"))->groupBy('DATA')->get();
     }
-//concat(products.id, products.name) as DATA
+
 }

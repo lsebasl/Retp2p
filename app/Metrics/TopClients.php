@@ -22,7 +22,7 @@ class TopClients implements MetricsContract
                     $filters['finalDate']]
             )->limit(7)
             ->select(DB::raw('UCASE(concat(users.name," ",users.last_name)) AS DATA,
-SUM(invoices.total) AS LABEL'))->groupBy('DATA')
+                SUM(invoices.total) AS LABEL'))->groupBy('DATA')
         ->orderBy('DATA')
         ->get();
 

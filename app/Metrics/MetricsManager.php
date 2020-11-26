@@ -5,10 +5,10 @@ namespace App\Metrics;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class MetricsManager
+class MetricsManager implements MetricsContract
 {
     /**
-     * @var MetricContract 
+     * @var MetricContract
      */
     private $behaviour;
 

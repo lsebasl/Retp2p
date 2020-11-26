@@ -5,7 +5,7 @@
 
   feather.replace();
 //Leer DATA
-alert(typeChart)
+alert(reportType)
   // Graphs
   var ctx = document.getElementById('myChart')
   // eslint-disable-next-line no-unused-vars
@@ -13,9 +13,9 @@ alert(typeChart)
   var myChart = new Chart(ctx, {
       type: typeChart,
       data: {
-          labels: etiquetas,
+          labels: ejeX,
           datasets: [{
-              label: '# of Votes',
+              label: reportType,
               data: ejeY,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',

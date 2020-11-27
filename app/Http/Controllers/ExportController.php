@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProductsExport;
+use App\Exports\ReportsExport;
+use App\Reports\ReportManager;
+use App\Reports\ReportProducts;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends Controller
 {
 
-    public function export()
+
+    public function export(Request $request)
     {
-        return Excel::download(new ProductsExport(), 'products.xlsx');
+
+        $exportType = $request->input('exportType');
+
+        $report = config('reports.' . $exportType) ?? abort(404);
+
+        $export = (new ReportManager(new $report()))->export($request);
+
+        return (new ReportsExport($export))->download('report.xlsx');
+
+
     }
 }

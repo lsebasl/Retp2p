@@ -12,7 +12,6 @@ class UsersExport implements FromQuery,WithHeadings
 {
     use Exportable;
 
-
     private $user;
 
     public function __construct($user)

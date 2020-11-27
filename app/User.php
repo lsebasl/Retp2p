@@ -115,9 +115,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param string|null $initialDate
      * @param string|null $finalDate
      */
-    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate):Builder
+    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
     {
-
         $initialDate = Carbon::parse($initialDate);
 
         $finalDate = Carbon::parse($finalDate);
@@ -131,13 +130,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * @param Builder $query
-     * @param string|null $status
+     * @param string|null $idType
      * @return Builder
      */
-    public function scopeClient(Builder $query, ? string $client):Builder
+    public function scopeIdType(Builder $query, ? string $idType)
     {
+        if (null !== $idType) {
+            return $query->where('id_type', $idType);
+        }
+        return $query;
 
-       //
     }
 
 

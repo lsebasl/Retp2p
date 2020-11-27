@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -268,6 +269,26 @@ class Product extends Model
         if (null !== $sidebar) {
             return $query->where('mark', '=', $sidebar);
         }
+        return $query;
+    }
+
+    /**
+     * Scope to filter invoices by expedition date
+     *
+     * @param Builder $query
+     * @param string|null $initialDate
+     * @param string|null $finalDate
+     */
+    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    {
+        $initialDate = Carbon::parse($initialDate);
+
+        $finalDate = Carbon::parse($finalDate);
+
+        if ($initialDate && $finalDate) {
+            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+        }
+
         return $query;
     }
 

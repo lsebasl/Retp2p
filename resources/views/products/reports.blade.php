@@ -154,10 +154,10 @@
                     @csrf
                     <div class="form-group">
                         <label for="reportType">Report Type</label>
-                        <select id="reportType" class="form-control" name="reportType">
+                        <select id="reportType" class="form-control" name="report">
                             <option selected>Choose...</option>
-                            @foreach(\App\Constants\reportTypes::toArray() as $reportKey => $reportType)
-                                <option value="{{$reportType}}" @if($reportType === old('reportType') )selected @endif>{{$reportKey}}</option>
+                            @foreach(\App\Constants\reportTypes::toArray() as $reportKey => $report)
+                                <option value="{{$report}}" @if($report === old('report') )selected @endif>{{$reportKey}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -201,7 +201,6 @@
             </div>
             <div class="modal-body">
                 <form method='GET' action="{{ route('users.export')}}">
-                    @csrf
                     <div class="form-group">
                         <label for="status">Report By Status</label>
                         <select id="status" class="form-control" name="status">
@@ -231,6 +230,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-secondary" style="background-color:#bd2765;border-bottom-color: #0b0b0b">See Report</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="users"></label>
+                        <input class="form-control" type="hidden" name="exportType" value="exportUsers" id="exportUsers">
                     </div>
                 </form>
             </div>
@@ -241,52 +244,7 @@
 
 <!-- Modal Export Users Report-->
 
-<div class="modal fade" id="exportUsersReport" tabindex="-1" aria-labelledby="exportUsersReport" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exportReportLabel">Export Report</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method='GET' action="{{ route('users.export')}}">
-                    <div class="form-group">
-                        <label for="status">Report By Status</label>
-                        <select id="status" class="form-control" name="status">
-                            <option value=""></option>
-                            @foreach(\App\Constants\status::toArray() as $statusKey => $status)
-                                <option value="{{$status}}" @if($status === old('$status',$status) )selected @endif>{{$status}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Report By ID Type</label>
-                        <select id="status" class="form-control" name="idType">
-                            <option value=""></option>
-                            @foreach(\App\Constants\idTypes::toArray() as $idKey => $idType)
-                                <option value="{{$idType}}" @if($idType === old('idType',$idType) )selected @endif>{{$idType}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="initialDate">Initial Date</label>
-                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate">
-                    </div>
-                    <div class="form-group">
-                        <label for="finalDate">Final date</label>
-                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-secondary" style="background-color:#bd2765;border-bottom-color: #0b0b0b">See Report</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <!-- Modal Export Product Report-->
@@ -340,6 +298,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-secondary" style="background-color:#bd2765;border-bottom-color: #0b0b0b">See Report</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="product"></label>
+                        <input class="form-control" type="hidden" name="exportType" value="exportProduct" id="exportProduct">
                     </div>
                 </form>
             </div>

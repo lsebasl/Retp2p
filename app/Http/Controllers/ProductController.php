@@ -181,7 +181,7 @@ class ProductController extends Controller
             //Excel::import(new ProductsImport, $request->file('file'));
 
 
-        } catch (ValidationException $e){
+        } catch (ValidationException $e){//general un log
 
             return $this->displayErrors($e);
         }

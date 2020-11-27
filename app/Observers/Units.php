@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Mail;
 use SplSubject;
 
 class Units implements \SplObserver
-
 {
 
     /**
-     *Updates available units in inventory
+     * Updates available units in inventory
      *
      * @param SplSubject $subject
      */
@@ -23,42 +22,48 @@ class Units implements \SplObserver
 
         $invoice = $subject->products;
 
-        $invoice->each(function ($product){
+        $invoice->each(
+            function ($product) {
 
-            $newQuantity  = $product->units - $product->pivot->quantity;
+                $newQuantity  = $product->units - $product->pivot->quantity;
 
-            $product = Product::where('id',$product->id)->first();
+                $product = Product::where('id', $product->id)->first();
 
-            $product->update(['units' => $newQuantity]);
+                $product->update(['units' => $newQuantity]);
 
-            $details = [
+                $details = [
                 'product_id' => $product->id,
                 'product_name' => $product->name
-            ];
+                ];
 
-            if ($newQuantity <= '10' & $newQuantity >= '0' ){
+                if ($newQuantity <= '10' & $newQuantity >= '0' ) {
 
-                event(new LogInvoiceEvent(
-                    'alert',
-                    'there are less than 10 units in inventory',
-                    $details
-                ));
+                    event(
+                        new LogInvoiceEvent(
+                            'alert',
+                            'there are less than 10 units in inventory',
+                            $details
+                        )
+                    );
 
 
-                Mail::to(config('mail.to.stock'))->send(new SendNotificationStock($details));
+                    Mail::to(config('mail.to.stock'))->send(new SendNotificationStock($details));
 
+                }
+
+                if ($newQuantity <= '0') {
+
+                    event(
+                        new LogInvoiceEvent(
+                            'alert',
+                            'there are not stock',
+                            $details
+                        )
+                    );
+
+                    $product->update(['status' => 'Disable']);
+                }
             }
-
-            if ($newQuantity <= '0'){
-
-                event(new LogInvoiceEvent(
-                    'alert',
-                    'there are not stock',
-                    $details
-                ));
-
-                $product->update(['status' => 'Disable']);
-            }
-        });
+        );
     }
 }

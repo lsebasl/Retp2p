@@ -46,12 +46,12 @@ class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,O
     /**
      * Build array with the rows for export.
      *
-     * @param array $row
+     * @param  array $row
      * @return array
      */
     public function buildModel(array $row):array
     {
-       return [
+        return [
             'image' => $row['image'],
             'barcode' => $row['barcode'],
             'name' => $row['name'],
@@ -72,7 +72,7 @@ class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,O
     }
 
     /**
-     * @param Row $row
+     * @param  Row $row
      * @return Model
      */
     public function onRow(Row $row)
@@ -83,9 +83,11 @@ class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,O
         $barcode = null;
 
         if ($row['barcode']) {
-             Product::updateOrCreate([
+            Product::updateOrCreate(
+                [
                 'barcode' => $row['barcode'],
-            ], $this->buildModel($row));
+                 ], $this->buildModel($row)
+            );
 
         }
     }

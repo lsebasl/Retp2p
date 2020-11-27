@@ -101,9 +101,9 @@ class ProductRepository
      */
     private function saveImage($request, $product):Product
     {
-       $product->image = $request->file('image')->store('images');
+        $product->image = $request->file('image')->store('images');
 
-       $product->save();
+        $product->save();
 
         return $product;
     }
@@ -111,7 +111,7 @@ class ProductRepository
     /**
      * Obtain a specif price searching by the product id.
      *
-     * @param $productId
+     * @param  $productId
      * @return mixed
      */
     public function getPrice($productId):int
@@ -123,7 +123,7 @@ class ProductRepository
     /**
      * Obtain a specif discount searching by the product id.
      *
-     * @param $productId
+     * @param  $productId
      * @return mixed
      */
     public function getDiscount($productId)

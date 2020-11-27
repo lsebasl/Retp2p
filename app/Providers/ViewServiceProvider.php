@@ -35,6 +35,14 @@ class ViewServiceProvider extends ServiceProvider
             CategoryComposer::class
         );
         View::composer(
+            ['products.reports'],
+            CategoryComposer::class
+        );
+        View::composer(
+            ['products.reports'],
+            MarkComposer::class
+        );
+        View::composer(
             ['products.edit','product__form'],
             MarkComposer::class
         );

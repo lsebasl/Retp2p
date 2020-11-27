@@ -36,23 +36,27 @@ class UpdateStatus extends Command
     /**
      * Execute the console command.
      *
-     * @param PlacetoPay $placetopay
+     * @param  PlacetoPay $placetopay
      * @return void
      */
     public function handle(PlacetoPay $placetopay)
     {
         $createdAt = Carbon::now()->subMinutes('7');
 
-        $pending = PaymentAttempt::where('created_at' , '<=', $createdAt)->where('status','PENDING')->get();
+        $pending = PaymentAttempt::where('created_at', '<=', $createdAt)->where('status', 'PENDING')->get();
 
-        $pending->each(function(PaymentAttempt $paymentAttempt)use($placetopay){
+        $pending->each(
+            function (PaymentAttempt $paymentAttempt) use ($placetopay) {
 
-            $response = $placetopay->query($paymentAttempt->requestId);
+                $response = $placetopay->query($paymentAttempt->requestId);
 
-                $paymentAttempt->update([
+                $paymentAttempt->update(
+                    [
                     'status' => $response->status()->status(),
-                ]);
-        });
+                    ]
+                );
+            }
+        );
 
     }
 }

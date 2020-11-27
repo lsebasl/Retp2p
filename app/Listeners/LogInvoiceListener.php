@@ -22,25 +22,31 @@ class LogInvoiceListener
     /**
      * Handle the event.
      *
-     * @param LogInvoiceEvent $event
+     * @param  LogInvoiceEvent $event
      * @return void
      */
     public function handle(LogInvoiceEvent $event)
     {
         if ($event->type === 'info') {
-            Log::info($event->message, [
+            Log::info(
+                $event->message, [
                 'option' => $event->option
-                ]);
+                ]
+            );
         }
         if ($event->type === 'error') {
-            Log::error($event->message, [
+            Log::error(
+                $event->message, [
                 'option' => $event->option
-            ]);
+                ]
+            );
         }
         if ($event->type === 'alert') {
-            Log::alert($event->message, [
+            Log::alert(
+                $event->message, [
                 'option' => $event->option
-            ]);
+                ]
+            );
         }
     }
 }

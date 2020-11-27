@@ -151,7 +151,7 @@ class ProductController extends Controller
 
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return Response|BinaryFileResponse
      */
     public function export(Request $request)
@@ -168,7 +168,7 @@ class ProductController extends Controller
     /**
      * Import products with validation.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return Application|RedirectResponse|Redirector
      */
     public function import(Request $request)
@@ -181,9 +181,9 @@ class ProductController extends Controller
             //Excel::import(new ProductsImport, $request->file('file'));
 
 
-        } catch (ValidationException $e){
+        } catch (ValidationException $e){//general un log
 
-           return $this->displayErrors($e);
+            return $this->displayErrors($e);
         }
 
     }
@@ -191,7 +191,7 @@ class ProductController extends Controller
     /**
      * Create message of each error when import and redirect to stocks.
      *
-     * @param $e
+     * @param  $e
      * @return Application|RedirectResponse|Redirector
      */
     public function displayErrors($e):RedirectResponse
@@ -200,18 +200,18 @@ class ProductController extends Controller
         $message = '';
         foreach ($e->failures() as $fail){
 
-          $fail->row();
-          $fail->attribute();
-          $fail->errors();
-          $fail->values();
+            $fail->row();
+            $fail->attribute();
+            $fail->errors();
+            $fail->values();
 
-          $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];'<br>';
+            $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];'<br>';
 
         }
 
         Session::flash('Validation Message', 'Error found in : <br>' . $message);
 
-        return redirect(route('stocks.index'))->with('error', 'Fail!!' );
+        return redirect(route('stocks.index'))->with('error', 'Fail!!');
 
 
     }
@@ -219,7 +219,7 @@ class ProductController extends Controller
     public function keyExist($val)
     {
 
-        return Product::where('id',$val['id'])->first();
+        return Product::where('id', $val['id'])->first();
 
     }
 

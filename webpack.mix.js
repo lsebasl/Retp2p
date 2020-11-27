@@ -36,11 +36,6 @@ mix.scripts([
 
 ], 'public/js/store/all.js');
 
-mix.scripts([
-    'resources/js/store/minicart.js',
-], 'public/js/store/minicart.js');
-
-
 mix.styles(['public/css/admin/normalize.css',
     'public/css/admin/material.min.css',
     'public/css/admin/main.css',

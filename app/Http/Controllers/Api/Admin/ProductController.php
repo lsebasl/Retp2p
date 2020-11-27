@@ -21,7 +21,7 @@ class ProductController extends Controller
 {
 
     /**
-     *list of the products using api postman.
+     * list of the products using api postman.
      *
      * @return ProductResource
      */
@@ -33,9 +33,9 @@ class ProductController extends Controller
     /**
      * Execute model product with validation and request for create a product since api.
      *
-     * @param ProductsStoreRequest $request
-     * @param Product $product
-     * @param StoreProductAction $action
+     * @param  ProductsStoreRequest $request
+     * @param  Product              $product
+     * @param  StoreProductAction   $action
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function store(ProductsStoreRequest $request, Product $product, StoreProductAction $action):Model
@@ -49,9 +49,9 @@ class ProductController extends Controller
     /**
      * Execute model product with validation and request for update a product since api.
      *
-     * @param ProductsUpdateRequest $request
-     * @param Product $product
-     * @param UpdateProductAction $action
+     * @param  ProductsUpdateRequest $request
+     * @param  Product               $product
+     * @param  UpdateProductAction   $action
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function update(ProductsUpdateRequest $request, Product $product, UpdateProductAction $action):Model
@@ -62,7 +62,7 @@ class ProductController extends Controller
     /**
      * Return a specific product in api.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return Model
      */
     public function show(Product $product):Model
@@ -73,7 +73,7 @@ class ProductController extends Controller
     /**
      * Delete a specific product since api.
      *
-     * @param Product $product
+     * @param  Product $product
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */

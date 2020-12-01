@@ -1,48 +1,36 @@
 @extends('layout.report')
 @section('content')
+
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item" >
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="{{ route('home') }}">
                                 <span data-feather="home"></span>
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
-                                Orders
+                            <a class="nav-link" href="{{ route('users.index') }}">
+                                <span data-feather="users"></span>
+                                users
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('products.index') }}">
                                 <span data-feather="shopping-cart"></span>
                                 Products
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="users"></span>
-                                Customers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="bar-chart-2"></span>
-                                Reports
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('stocks.index') }}">
                                 <span data-feather="layers"></span>
-                                Integrations
+                                Stock
                             </a>
                         </li>
                     </ul>
-
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -50,30 +38,14 @@
                         </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
+                        @foreach(\App\Constants\exportTypes::toArray() as $exportKey => $exportType)
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{asset('storage/'.$exportType.'.xlsx')}}">
                                 <span data-feather="file-text"></span>
-                                Current month
+                                {{$exportKey}}
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Last quarter
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Social engagement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Year-end sale
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </nav>
@@ -89,15 +61,15 @@
                                 Export Products Report</button>
                         </div>
                         <div class="btn-group mr-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exportReport">
-                                Export Custom Reports</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exportSellsReport">
+                                Export Sells Reports</button>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#createReport">
                             Chart Report
                         </button>
                     </div>
                 </div>
-
+                @include('partials.__alerts')
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
                 @section('scripts')
@@ -116,6 +88,8 @@
                 @endsection
 
                 <h2>Section title</h2>
+               <notification></notification>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -124,19 +98,20 @@
                             <th>DATA</th>
                         </tr>
                         </thead>
-                        {{--@foreach($result as $item)
+                        @foreach($result as $item)
                         <tbody>
                         <tr>
                             <td>{{$item->DATA}}</td>
                             <td>{{$item->LABEL}}</td>
                         </tr>
-                        @endforeach--}}
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </main>
         </div>
     </div>
+
 @endsection
 
 <!-- Modal Chart-->
@@ -154,10 +129,10 @@
                     @csrf
                     <div class="form-group">
                         <label for="reportType">Report Type</label>
-                        <select id="reportType" class="form-control" name="report">
+                        <select id="reportType" class="form-control" name="reportType">
                             <option selected>Choose...</option>
-                            @foreach(\App\Constants\reportTypes::toArray() as $reportKey => $report)
-                                <option value="{{$report}}" @if($report === old('report') )selected @endif>{{$reportKey}}</option>
+                            @foreach(\App\Constants\reportTypes::toArray() as $reportKey => $reportType))
+                                <option value="{{$reportType}}" @if($reportType) === old('reportType') )selected @endif>{{$reportKey}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -242,11 +217,6 @@
 </div>
 
 
-<!-- Modal Export Users Report-->
-
-
-
-
 <!-- Modal Export Product Report-->
 
 <div class="modal fade" id="exportProductsReport" tabindex="-1" aria-labelledby="exportProductsReport" aria-hidden="true">
@@ -271,10 +241,10 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Report By Category</label>
-                        <select id="status" class="form-control" name="categories">
+                        <select id="status" class="form-control" name="category">
                             <option value=""></option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" @if($category->id == old('categories')) selected @endif>{{$category->name}}</option>
+                                <option value="{{ $category->id }}" @if($category->id == old('category')) selected @endif>{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -301,7 +271,69 @@
                     </div>
                     <div class="form-group">
                         <label for="product"></label>
-                        <input class="form-control" type="hidden" name="exportType" value="exportProduct" id="exportProduct">
+                        <input class="form-control" type="hidden" name="exportType" value="exportProducts" id="exportProducts">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Export Sells Report-->
+
+<div class="modal fade" id="exportSellsReport" tabindex="-1" aria-labelledby="exportSellsReport" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exportProductsLabel">SellsReport</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method='GET' action="{{ route('sells.export')}}">
+                    <div class="form-group">
+                        <label for="status">Report By Sells</label>
+                        <select id="status" class="form-control" name="status">
+                            <option value=""></option>
+                            @foreach(\App\Constants\InvoicesStatus::toArray() as $statusKey => $status)
+                                <option value="{{$status}}" @if($status === old('$status') )selected @endif>{{$status}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Report By Category</label>
+                        <select id="status" class="form-control" name="category">
+                            <option value=""></option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" @if($category->id == old('category')) selected @endif>{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Report By Mark</label>
+                        <select id="status" class="form-control" name="mark">
+                            <option value=""></option>
+                            @foreach($marks as $mark)
+                                <option value="{{$mark->name}}" @if($mark->name === old('mark') )selected @endif>{{$mark->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="initialDate">Initial Date</label>
+                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="finalDate">Final date</label>
+                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary" style="background-color:#bd2765;border-bottom-color: #0b0b0b">See Report</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="exportSells"></label>
+                        <input class="form-control" type="hidden" name="exportType" value="exportSells" id="exportSells">
                     </div>
                 </form>
             </div>

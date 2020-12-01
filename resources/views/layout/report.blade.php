@@ -12,9 +12,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <div id="app"></div>
+    <script src="{{ mix('js/app.js') }}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
     <!-- Bootstrap core CSS -->
+
     <link href="{{ asset('/css/reports/dashboard.css') }}" rel="stylesheet">
+
+
 
     <style>
         .bd-placeholder-img {
@@ -37,22 +43,21 @@
     @yield('scripts')
 </head>
 <body>
-
-
-
-<div style="background-color: #3F51B5">
-    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" >
-        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 display-1" style="background-color: #3F51B5;font-size:25px;height: 45px" href="#">Project Store</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-</div>
+<div id="app">
+    <div style="background-color: #3F51B5">
+        <ul class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" >
+            <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 display-1" style="background-color: #3F51B5;font-size:25px;height: 45px" href="#">Project Store</a>
+                <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                 </button>
+        </ul>
+    </div>
 
 @yield('content')
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="{{ asset('/js/reports/dashboard.js') }}"></script></body>
+    </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="{{ asset('/js/reports/dashboard.js') }}"></script></body>
 </html>

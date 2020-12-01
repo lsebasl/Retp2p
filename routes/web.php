@@ -10,6 +10,14 @@ Route::get('/verify', function () {
     return view('auth.verify');
 });
 
+//Jobs Routes
+
+Route::get('job',function () {
+    dispatch(new App\Jobs\ExportReport());
+
+    return 'listo';
+});
+
 //Free access to public
     Route::get('/','Store\HomeController@index')->name('home.store');
     Route::get('/home-store','Store\HomeController@index')->name('home.store');
@@ -29,6 +37,7 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
     Route::get('/report/show','MetricsController@show')->name('report.show');
     Route::get('/report/export/user','ExportController@export')->name('users.export');
     Route::get('/report/export/product','ExportController@export')->name('products.export');
+    Route::get('/report/export/sells','ExportController@export')->name('sells.export');
 
     //Export Routes
 

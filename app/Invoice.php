@@ -2,11 +2,11 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use SplObserver;
 
 class Invoice extends Model implements \SplSubject
@@ -106,14 +106,19 @@ class Invoice extends Model implements \SplSubject
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param  Builder     $query
-     * @param  string|null $date
-     * @return Builder|\Illuminate\Database\Query\Builder
+     * @param Builder $query
+     * @param string|null $initialDate
+     * @param string|null $finalDate
+     * @return Builder|Builder
      */
-    public function scopeCreatedDate(Builder $query, ?string $date)
+    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
     {
-        if ($date) {
-            return $query->whereDate('created_at', $date);
+        $initialDate = Carbon::parse($initialDate);
+
+        $finalDate = Carbon::parse($finalDate);
+
+        if ($initialDate && $finalDate) {
+            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
         }
 
         return $query;
@@ -130,6 +135,15 @@ class Invoice extends Model implements \SplSubject
     {
         if (null !== $status) {
             return $query->where('status', $status);
+        }
+        return $query;
+    }
+
+    public function scopeMark(Builder$query, ? string $mark):Builder
+    {
+
+        if (null !== $mark) {
+            return $query->where('mark', 'LIKE', "$mark%");
         }
         return $query;
     }

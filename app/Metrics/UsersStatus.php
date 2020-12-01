@@ -2,10 +2,6 @@
 
 namespace App\Metrics;
 
-use App\Invoice;
-use App\Product;
-use App\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UsersStatus implements MetricsContract

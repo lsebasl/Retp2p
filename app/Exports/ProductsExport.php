@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\InteractsWithQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -13,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class ProductsExport implements FromQuery, WithHeadings,WithColumnFormatting
 {
-    use Exportable;
+    use Exportable, InteractsWithQueue, Queueable;
 
     private $products;
 

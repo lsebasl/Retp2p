@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 use SplObserver;
 
 class Invoice extends Model implements \SplSubject
@@ -31,7 +32,7 @@ class Invoice extends Model implements \SplSubject
      */
     public function products():BelongsToMany
     {
-        return $this->belongsToMany(Product::class)->withPivot('product_id','quantity');
+        return $this->belongsToMany(Product::class)->withPivot('product_id', 'quantity');
     }
 
     /**
@@ -67,7 +68,7 @@ class Invoice extends Model implements \SplSubject
     /**
      * Add observer to the model
      *
-     * @param SplObserver $observer
+     * @param  SplObserver $observer
      * @return void
      */
     public function attach(\SplObserver $observer):void
@@ -79,13 +80,13 @@ class Invoice extends Model implements \SplSubject
     /**
      * Delete observer to the model
      *
-     * @param SplObserver $observer
+     * @param  SplObserver $observer
      * @return void
      */
     public function detach(\SplObserver $observer):void
     {
-        $key = array_search($observer,$this->observers, true);
-        if($key){
+        $key = array_search($observer, $this->observers, true);
+        if($key) {
             unset($this->observers[$key]);
         }
     }
@@ -97,7 +98,53 @@ class Invoice extends Model implements \SplSubject
      */
     public function notify():void
     {
-        foreach ($this->observers as $observer)
+        foreach ($this->observers as $observer) {
             $observer->update($this);
+        }
+    }
+
+    /**
+     * Scope to filter invoices by expedition date
+     *
+     * @param Builder $query
+     * @param string|null $initialDate
+     * @param string|null $finalDate
+     * @return Builder|Builder
+     */
+    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    {
+        $initialDate = Carbon::parse($initialDate);
+
+        $finalDate = Carbon::parse($finalDate);
+
+        if ($initialDate && $finalDate) {
+            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Query Scope Status.
+     *
+     * @param  Builder     $query
+     * @param  string|null $status
+     * @return Builder
+     */
+    public function scopeStatus(Builder $query, ? string $status):Builder
+    {
+        if (null !== $status) {
+            return $query->where('status', $status);
+        }
+        return $query;
+    }
+
+    public function scopeMark(Builder$query, ? string $mark):Builder
+    {
+
+        if (null !== $mark) {
+            return $query->where('mark', 'LIKE', "$mark%");
+        }
+        return $query;
     }
 }

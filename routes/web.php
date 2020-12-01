@@ -9,15 +9,22 @@ Route::get('/verify', function () {
     return view('auth.verify');
 });
 
+//Jobs Routes
+
+Route::get('job',function () {
+    dispatch(new App\Jobs\ExportReport());
+
+    return 'listo';
+});
+
 //Free access to public
-Route::get('/','Store\HomeController@index')->name('home.store');
-Route::get('/home-store','Store\HomeController@index')->name('home.store');
-Route::get('/about', 'Store\AboutController@index')->name('store.about');
+    Route::get('/','Store\HomeController@index')->name('home.store');
+    Route::get('/home-store','Store\HomeController@index')->name('home.store');
+    Route::get('/about', 'Store\AboutController@index')->name('store.about');
 
-Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
-Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
-Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
-
+    Route::get('/goods', 'Store\GoodsController@index')->name('goods.index');
+    Route::get('/goods/category/{category}', 'Store\GoodsController@category')->name('goods.category');
+    Route::get('/goods/show/{show}', 'Store\GoodsController@show')->name('goods.show');
 
 Route::middleware(['auth','user.status','verified'])->group(function () {
 
@@ -36,6 +43,19 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
     Route::get('/export','ProductController@export')->name('export')->middleware('permission:export');
     Route::post('/import','ProductController@import')->name('import')->middleware('permission:import');
+
+    //Report Routes
+
+    Route::get('/report','MetricsController@index')->name('report.index');
+    Route::get('/report/show','MetricsController@show')->name('report.show');
+    Route::get('/report/export/user','ExportController@export')->name('users.export');
+    Route::get('/report/export/product','ExportController@export')->name('products.export');
+    Route::get('/report/export/sells','ExportController@export')->name('sells.export');
+
+    //Export Routes
+
+    Route::get('/export','ProductController@export')->name('export');
+    Route::post('/import','ProductController@import')->name('import');
 
     //User Routes
 

@@ -37,6 +37,7 @@
             @include('partials.__alerts')
             @include('partials.__search_in_products')</small><br>
         </div>
+
     </div>
 
     </section>

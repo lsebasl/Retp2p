@@ -26,7 +26,7 @@ class CartRepository
      */
     public function getProduct():Collection
     {
-        return Cart::where('user_id',$this->user->authUser())->with('product')->get();
+        return Cart::where('user_id', $this->user->authUser())->with('product')->get();
     }
 
     /**
@@ -36,12 +36,12 @@ class CartRepository
      */
     public function getCart():Collection
     {
-        return Cart::where('user_id',$this->user->authUser())->get();
+        return Cart::where('user_id', $this->user->authUser())->get();
     }
 
     /**
      *
-     * @param $id
+     * @param  $id
      * @return mixed
      */
     public function findOrFail($id)
@@ -52,7 +52,7 @@ class CartRepository
     /**
      * Obtain the Invoice paginated
      *
-     * @param $pages
+     * @param  $pages
      * @return mixed
      */
     public function getPaginate($pages):LengthAwarePaginator

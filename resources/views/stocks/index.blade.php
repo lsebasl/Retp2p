@@ -68,7 +68,27 @@
         <div class="mdl-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-shadow--2dp">
             @include('partials.__alerts')
             @include('partials.__search_in_stocks')</small><br>
+            @include('partials.__filter_in_export')</small><br>
         </div>
     </div>
 
+    <div class="mdl-dialog__content">
+           Select File To Import
+    </div>
+    <form method=POST action="{{ route('import')}}" enctype="multipart/form-data">
+        @csrf
+        <div class="mdl-textfield mdl-js-textfield ">
+            <input type="file" {{$errors->has('file') ? 'is-invalid' : '' }} name="file" id="file">
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored " style="margin-left:2px">
+            {{__('Save')}}
+        </button>
+
+        @includeWhen($errors->has('file'), 'partials.__invalid_feedback', ['feedback' => $errors->first('file')])
+    </form>
+    @if(\Illuminate\Support\Facades\Session::has('Validation Message'))
+        <div style="color: #dc3545; width: 100%; margin-top: .25rem; font-size: 80%">{!! \Illuminate\Support\Facades\Session::get('Validation Message') !!}</div>
+    @endif
+
 @endsection
+

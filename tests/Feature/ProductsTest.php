@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Category;
+
+use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
@@ -106,7 +108,6 @@ class ProductsTest extends TestCase
         );
 
         $this->assertDatabaseEmpty('products');
-
     }
 
     /**
@@ -457,17 +458,9 @@ class ProductsTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $category = factory(Category::class)->create(
-            [
-            'id' => '2'
-            ]
-        );
+        $category = factory(Category::class)->create(['id' => '2']);
 
-        $product = factory(Product::class)->create(
-            [
-            'category_id' => $category->getId(),
-            ]
-        );
+        $product = factory(Product::class)->create(['category_id' => $category->getId(),]);
 
         Storage::fake('image');
         $file = uploadedfile::fake()->image('product.jpg');
@@ -595,6 +588,7 @@ class ProductsTest extends TestCase
     /**
      * @test
      */
+
     public function user_can_import_users()
     {
         Excel::fake();
@@ -613,6 +607,21 @@ class ProductsTest extends TestCase
             return true;
         });
     }
+
+    public function admin_can_export_products_list()
+    {
+
+        $admin = factory(User::class)->create();
+
+        Excel::fake();
+
+        $this->actingAs($admin)
+            ->get(route('export'));
+
+        Excel::assertDownloaded('products.xlsx');
+
+    }
+    
 
     /**
      * @return array

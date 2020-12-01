@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
+use App\Exports\UsersExport;
 use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
+use App\Product;
 use App\Repositories\CacheUser;
 use Illuminate\Http\RedirectResponse;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UserController extends Controller

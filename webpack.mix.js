@@ -10,6 +10,9 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.js('resources/assets/js/app.js', 'public/js')
+
+
 mix.styles(['public/css/admin/app.css',
     ],'public/css/admin/all2.css');
 
@@ -25,8 +28,8 @@ mix.scripts([
     'resources/js/store/jquery.min.js',
     'resources/js/store/jquery.countdown.js',
     'resources/js/store/jquery.flexisel.js',
-    'resources/js/store/jquery.jquery.flexslider.js',
-    'resources/js/store/jquery.jquery.magnific-popup.js',
+    'resources/js/store/jquery.flexslider.js',
+    'resources/js/store/jquery.magnific-popup.js',
     'resources/js/store/jquery.wmuSlider.js',
     'resources/js/store/minicart.js',
     'resources/js/store/easyResponsiveTabs.js',
@@ -35,11 +38,6 @@ mix.scripts([
     'resources/js/store/bootstrap-3.1.1.min.js',
 
 ], 'public/js/store/all.js');
-
-mix.scripts([
-    'resources/js/store/minicart.js',
-], 'public/js/store/minicart.js');
-
 
 mix.styles(['public/css/admin/normalize.css',
     'public/css/admin/material.min.css',
@@ -61,6 +59,9 @@ mix.styles(['public/css/store/bootstrap.css',
 mix.styles([
     'public/css/checkout/style.css',
 ],'public/css/checkout/all.css');
+
+mix.scripts(['resources/js/store/minicart.js',
+],'public/js/store/minicart.js');
 
 mix.scripts(['public/js/checkout/classie.js',
     'public/js/checkout/imagezoom.js',

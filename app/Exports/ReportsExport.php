@@ -8,6 +8,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -31,42 +32,43 @@ class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
 
     }
 
+    /**
+     * Confirm pending data to serialized.
+     *
+     * @return array
+     */
     public function __sleep()
     {
         return[];
     }
 
-    public function __wakeup()
+    /**
+     *Re-establish database connections that may have been lost during serialization.
+     *
+     * @return Collection
+     */
+    public function __wakeup():Collection
     {
-    //   Storage::disk()->delete('actualTable.txt');
         return  $this->collection();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder|Builder
-     */
-    public function collection()
-    {
-     //   $var=DB::select('select name from users');
-      //  dd($var[0]);
 
+    /**
+     * Return collection to export.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function collection():Collection
+    {
         return $this->report;
     }
-    /*
-    public function table()
-    {
-        $describe='describe '.$this->table;
-        $array=DB::select($describe);
-        $result= array();
-        foreach ($array as $elem){
-            array_push($result, $elem->Field);
-        };
-        return  $result;
-    }*/
 
 
     /**
+     * Create arrays depending of the model to export.
+     *
      * @return array
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function headings(): array
     {

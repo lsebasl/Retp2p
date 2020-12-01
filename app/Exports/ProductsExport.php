@@ -4,6 +4,7 @@ namespace App\Exports;
 
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Queue\InteractsWithQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -24,7 +25,12 @@ class ProductsExport implements FromQuery, WithHeadings,WithColumnFormatting
         $this->products = $products;
     }
 
-    public function query()
+    /**
+     * Retorn query to products for export.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query():\Illuminate\Database\Eloquent\Builder
     {
         return $this->products;
     }

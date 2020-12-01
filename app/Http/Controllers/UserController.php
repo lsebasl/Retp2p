@@ -97,17 +97,4 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
     }
-
-    /**
-     * @param  Request $request
-     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    public function export(Request $request)
-    {
-        $users = User::status($request->get('status'))
-            ->client($request->get('client'));
-
-        return (new UsersExport($users))->download('users.xlsx');
-
-    }
 }

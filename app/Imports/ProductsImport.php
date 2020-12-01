@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Row;
 
 class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,OnEachRow
 {
-
+//general log de los errores de validacion.
     public function batchSize(): int
     {
         return 100;

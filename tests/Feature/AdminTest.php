@@ -31,6 +31,7 @@ class AdminTest extends TestCase
         Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
+        $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
         $admin->givePermissionTo([
             'users.index',
             'users.destroy',
@@ -198,19 +199,17 @@ class AdminTest extends TestCase
 
     public function admin_can_see_show_user()
     {
-
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($this->user)->get(route('users.show', $user));
+        $user->assignRole('Admin');
+
+        $response = $this->actingAs($user)->get(route('users.show', $user));
 
         $response->assertSee('User')
             -> assertSee('Name')
             ->assertViewIs('users.show')
-            -> assertSee($user->name)
+            ->assertSee($user->name)
             ->assertOk();
-
-        $this->assertDatabaseHas('users', ['name' => $user->name]);
-
 
     }
     /**
@@ -220,7 +219,9 @@ class AdminTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($this->user)->get(route('users.edit', $user));
+        $user->assignRole('Admin');
+
+        $response = $this->actingAs($user)->get(route('users.edit', $user));
 
         $response->assertSeeText('Edit')
             -> assertSeeText('Name')

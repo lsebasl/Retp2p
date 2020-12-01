@@ -10,6 +10,7 @@ use App\Mark;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
@@ -17,7 +18,7 @@ use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
+
 
 class ProductsTest extends TestCase
 {
@@ -45,10 +46,14 @@ class ProductsTest extends TestCase
         Permission::create(['name' => 'invoices.destroy','description' => 'Access to eliminate invoices']);
         Permission::create(['name' => 'invoices.show','description' => 'Access to see a specific invoices']);
         Permission::create(['name' => 'invoices.edit','description' => 'Access to edit invoices']);
+        Permission::create(['name' => 'export','description' => 'Access to export excel products']);
+        Permission::create(['name' => 'import','description' => 'Access to import excel products']);
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
         $admin->givePermissionTo([
             'home',
+            'import',
+            'export',
             'products.index',
             'products.create',
             'products.destroy',
@@ -588,24 +593,27 @@ class ProductsTest extends TestCase
     /**
      * @test
      */
-
-    public function user_can_import_users()
+    public function user_can_import_products()
     {
-        Excel::fake();
+        $category = factory(Category::class)->create(
+            [
+                'id' => '2'
+            ]
+        );
 
-        $this->actingAs($this->givenUser())
-            ->get('/import');
+        $importFile = $this->getUploadedFile('file.xlsx');
 
-        Excel::assertImported('filename.xlsx', 'diskName');
+        $response = $this->actingAs($this->user)->post(route('import'), ['file' => $importFile]);
 
-        Excel::assertImported('filename.xlsx', 'diskName', function(ProductsImport $import) {
-            return true;
-        });
+        $response->assertRedirect(route('stocks.index'));
 
-        // When passing the callback as 2nd param, the disk will be the default disk.
-        Excel::assertImported('filename.xlsx', function(ProductsImport $import) {
-            return true;
-        });
+    }
+
+    public function getUploadedFile(string $fileName):UploadedFile
+    {
+        $filePath = base_path('tests/stubs/' . $fileName);
+
+        return new UploadedFile($filePath, 'file.xlsx', null, null, true);
     }
 
     public function admin_can_export_products_list()
@@ -621,7 +629,7 @@ class ProductsTest extends TestCase
         Excel::assertDownloaded('products.xlsx');
 
     }
-    
+
 
     /**
      * @return array

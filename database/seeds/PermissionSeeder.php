@@ -163,7 +163,125 @@ class PermissionSeeder extends Seeder
         $sellsUser = User::find(4);
         $sellsUser->assignRole('SellsManager');
 
+        //assign Sells Role to user 5
+        $Clients = User::find(5);
+        $Clients->assignRole('Client');
 
+        //assign Sells Role to user 6
+        $Clients = User::find(6);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 7
+        $Clients = User::find(7);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 8
+        $Clients = User::find(8);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 9
+        $Clients = User::find(9);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 10
+        $Clients = User::find(10);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 11
+        $Clients = User::find(11);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(12);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(13);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(14);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(15);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(16);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(17);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(18);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(19);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(20);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(21);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(22);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(23);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(24);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(25);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(26);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(27);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(28);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(29);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(30);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(31);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(32);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(33);
+        $Clients->assignRole('Client');
+
+        //assign Sells Role to user 12
+        $Clients = User::find(34);
+        $Clients->assignRole('Client');
 
     }
 }

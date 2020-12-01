@@ -22,7 +22,9 @@ class RoleRepository
      */
     public function getPaginated($request, $pages):LengthAwarePaginator
     {
-        return Role::orderBy('created_at', request('sorted', 'ASC'))->name($request->get('name'))->paginate($pages);
+        return Role::orderBy('created_at', request('sorted', 'ASC'))->paginate($pages);
+
+        //->name($request->get('name'))
     }
 
     /**

@@ -148,6 +148,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    /**
+     * Query Scope Name.
+     *
+     * @param  Builder     $query
+     * @param  string|null $name
+     * @return Builder
+     */
+    public function scopeName(Builder $query, ? string $name):Builder
+    {
+        if (null !== $name) {
+            return $query->where('name', 'LIKE', "$name%");
+        }
+        return $query;
+    }
+
 
 
 

@@ -20,7 +20,6 @@ class ReportProducts implements ReportContract
             ->createdDate($request->get('initialDate'),$request->get('finalDate'))
             ->mark($request->get('mark'))
             ->category($request->get('category'))->get();
-
     }
 
 }

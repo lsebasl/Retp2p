@@ -102,7 +102,7 @@ class StocksTest extends TestCase
             $this->actingAs($this->user)->get(route('stocks.index'));
 
             $this->get(route('stocks.index'))
-                //->assertStatus(200)
+                ->assertStatus(200)
                 ->assertSee('Stock Empty')
                 ->assertOk();
     }

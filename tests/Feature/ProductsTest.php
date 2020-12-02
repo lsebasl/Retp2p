@@ -265,7 +265,7 @@ class ProductsTest extends TestCase
     {
 
         $this->actingAs($this->user)->get(route('products.index'))
-            //->assertStatus(200)
+            ->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
 
@@ -345,7 +345,7 @@ class ProductsTest extends TestCase
         $response->assertSee($product->name)
             ->assertSee($product->image)
             ->assertSee($product->Price)
-            //->assertStatus(200)
+            ->assertStatus(200)
             ->assertOk();
 
     }
@@ -362,8 +362,9 @@ class ProductsTest extends TestCase
             ->assertSee('name')
             ->assertSee('status')
             ->assertSee('price')
+            ->assertStatus(200)
             ->assertOk();
-        //->assertStatus(200)
+
 
     }
 
@@ -406,8 +407,8 @@ class ProductsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->get(route('stocks.index', $filters));
 
-        $response->assertSessionDoesntHaveErrors($field);
-          //  ->assertStatus(200);
+        $response->assertSessionDoesntHaveErrors($field)
+            ->assertStatus(200);
 
     }
 
@@ -450,8 +451,8 @@ class ProductsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->get(route('products.index', $filters));
 
-        $response->assertSessionDoesntHaveErrors($field);
-         //   ->assertStatus(200);
+        $response->assertSessionDoesntHaveErrors($field)
+            ->assertStatus(200);
 
     }
 
@@ -494,8 +495,8 @@ class ProductsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->get(route('goods.index', $filters));
 
-        $response->assertSessionDoesntHaveErrors($field);
-            //->assertStatus(200);
+        $response->assertSessionDoesntHaveErrors($field)
+            ->assertStatus(200);
 
     }
 

@@ -14,6 +14,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
+
 class CheckoutTest extends TestCase
 {
     use RefreshDatabase;
@@ -134,7 +135,7 @@ class CheckoutTest extends TestCase
         $response->assertSee('My Shopping Bag')
             ->assertSee('Price Details')
             ->assertSee('logout')
-            //->assertStatus(200)
+            ->assertStatus(200)
             ->assertOk();
     }
 

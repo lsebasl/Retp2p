@@ -21,9 +21,11 @@ install:
   composer install
 
 before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction --no-suggest
+  - cp .env.travis .env
   - php artisan key:generate
   - php artisan migrate
-  - composer dump-autoload
-  - php artisan passport:install
+  - php artisan passport:keys
 
 script: vendor/phpunit/phpunit/phpunit

@@ -20,4 +20,10 @@ before_install:
 install:
   composer install
 
+before_script:
+  - php artisan key:generate
+  - php artisan migrate
+  - composer dump-autoload
+  - php artisan passport:install
+
 script: vendor/phpunit/phpunit/phpunit

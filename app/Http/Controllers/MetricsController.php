@@ -3,18 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Metrics\MetricsManager;
-use App\Metrics\SellsByCategory;
-use App\Metrics\SellsByProduct;
-use App\Metrics\SellsByStatus;
-use App\Metrics\StockByCategory;
-use App\Metrics\TopClients;
-use App\Metrics\IdType;
-use App\Metrics\UsersStatus;
-use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 
@@ -39,10 +29,12 @@ class MetricsController extends Controller
     }
 
     /**
+     * Create chart with using defined param.
+     *
      * @param  Request $request
      * @return View
      */
-    public function show(Request $request)
+    public function show(Request $request):View
     {
         $typeChart = $request->input('typeChart');
 

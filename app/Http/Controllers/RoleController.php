@@ -6,7 +6,7 @@ use App\Helpers\Logs;
 use App\Http\Requests\RolesSearchRequest;
 use App\Repositories\cacheRoles;
 use App\Repositories\RoleRepository;
-use App\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +30,7 @@ class RoleController extends Controller
      * @param RolesSearchRequest $request
      * @return View
      */
-    public function index(RolesSearchRequest $request)
+    public function index(RolesSearchRequest $request):View
     {
         $roles = $this->roleRepository->getPaginated($request,10);
 
@@ -134,7 +134,7 @@ class RoleController extends Controller
      *
      * @param Role $role
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Role $role):RedirectResponse
     {

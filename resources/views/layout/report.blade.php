@@ -13,7 +13,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <div id="app"></div>
-    <script src="{{ mix('js/app.js') }}" ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
     <!-- Bootstrap core CSS -->

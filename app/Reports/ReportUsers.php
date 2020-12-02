@@ -2,17 +2,18 @@
 
 namespace App\Reports;
 
-use App\Exports\UsersExport;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+
 
 class ReportUsers implements ReportContract
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return Collection
      */
-    public function export(Request $request)
+    public function export(Request $request):Collection
     {
         return User::status($request->get('status'))
             ->CreatedDate($request->get('initialDate'),$request->get('finalDate'))

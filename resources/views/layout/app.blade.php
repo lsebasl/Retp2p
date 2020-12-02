@@ -304,40 +304,7 @@
                         @endcan
                     </ul>
                     @endcan
-                <li class="full-width divider-menu-h"></li>
-                <li class="full-width">
-                    <a href="#!" class="full-width btn-subMenu">
-                        <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-receipt"></i>
-                        </div>
-                        <div class="navLateral-body-cr hide-on-tablet">
-                            {{__('INVOICES')}}
-                        </div>
-                        <span class="zmdi zmdi-chevron-left"></span>
-                    </a>
-                    <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a href="{{route('invoices.index')}}" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-view-list"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Invoice List')}}
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="providers.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-plus"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Create New Invoice')}}
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    @can('stocks.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="{{ route('stocks.index') }}" class="full-width">
@@ -349,6 +316,8 @@
                         </div>
                     </a>
                 </li>
+                    @endcan
+                    @can('report.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="{{ route('report.index') }}" class="full-width">
@@ -360,6 +329,7 @@
                         </div>
                     </a>
                 </li>
+                    @endcan
             </ul>
         </nav>
     </div>

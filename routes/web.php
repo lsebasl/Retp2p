@@ -46,11 +46,11 @@ Route::middleware(['auth','user.status','verified'])->group(function () {
 
     //Report Routes
 
-    Route::get('/report','MetricsController@index')->name('report.index');
-    Route::get('/report/show','MetricsController@show')->name('report.show');
-    Route::get('/report/export/user','ExportController@export')->name('users.export');
-    Route::get('/report/export/product','ExportController@export')->name('products.export');
-    Route::get('/report/export/sells','ExportController@export')->name('sells.export');
+    Route::get('/report','MetricsController@index')->name('report.index')->middleware('permission:report.index');
+    Route::get('/report/show','MetricsController@show')->name('report.show')->middleware('permission:report.show');
+    Route::get('/report/export/user','ExportController@export')->name('users.export')->middleware('permission:users.export');
+    Route::get('/report/export/product','ExportController@export')->name('products.export')->middleware('permission:products.export');
+    Route::get('/report/export/sells','ExportController@export')->name('sells.export')->middleware('permission:sells.export');
 
     //Export Routes
 

@@ -61,11 +61,22 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'cart.update','description' => 'Access to update shopping cart']);
         Permission::create(['name' => 'cart.destroy','description' => 'Access to delete shopping cart']);
 
+        Permission::create(['name' => 'report.index','description' => 'Access see report systems view']);
+        Permission::create(['name' => 'report.show','description' => 'Access to create systems reports']);
+        Permission::create(['name' => 'users.export','description' => 'Access to export users systems reports']);
+        Permission::create(['name' => 'products.export','description' => 'Access to export products systems reports']);
+        Permission::create(['name' => 'sells.export','description' => 'Access to export sells systems reports']);
+
         Role::truncate();
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
 
         $admin->givePermissionTo([
+            'report.index',
+            'report.show',
+            'users.export',
+            'products.export',
+            'sells.export',
             'users.index',
             'users.destroy',
             'users.show',

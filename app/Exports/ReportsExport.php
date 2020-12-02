@@ -3,19 +3,17 @@
 namespace App\Exports;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+
 
 
 class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
@@ -33,7 +31,7 @@ class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
     }
 
     /**
-     * Confirm pending data to serialized.
+     * Confirming pending data behind serialize.
      *
      * @return array
      */
@@ -43,32 +41,31 @@ class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
     }
 
     /**
-     *Re-establish database connections that may have been lost during serialization.
-     *
-     * @return Collection
-     */
-    public function __wakeup():Collection
-    {
-        return  $this->collection();
-    }
-
-
-    /**
-     * Return collection to export.
+     *reestablish database connections that may have been lost during serialization
      *
      * @return \Illuminate\Support\Collection
      */
-    public function collection():Collection
+    public function __wakeup()
+    {
+        return  $this->collection();
+    }
+    
+    /**
+     *
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function collection()
     {
         return $this->report;
     }
 
 
     /**
-     * Create arrays depending of the model to export.
+     * Create heading in the table exported.
      *
      * @return array
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function headings(): array
     {
@@ -82,7 +79,7 @@ class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
 
             foreach ($array as $elem){
                 array_push($result, $elem->Field);
-            };
+            }
 
             return $result;
 

@@ -2,17 +2,16 @@
 
 namespace App\Reports;
 
-
-use App\Exports\ReportsExport;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ReportProducts implements ReportContract
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Http\Response|mixed|BinaryFileResponse
+     * @return Response|mixed|BinaryFileResponse
      */
     public function export(Request $request)
     {

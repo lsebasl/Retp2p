@@ -134,7 +134,7 @@ class CheckoutTest extends TestCase
         $response->assertSee('My Shopping Bag')
             ->assertSee('Price Details')
             ->assertSee('logout')
-            ->assertStatus(200)
+            //->assertStatus(200)
             ->assertOk();
     }
 

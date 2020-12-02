@@ -316,7 +316,7 @@ class ProductsTest extends TestCase
             ->assertSee($product->Barcode)
             ->assertSee($product->Units)
             ->assertSee($product->Price)
-            //->assertStatus(200)
+            ->assertStatus(200)
             ->assertOk();
 
     }
@@ -358,12 +358,14 @@ class ProductsTest extends TestCase
 
         $response = $this->actingAs($this->user)->get(route('products.create'));
 
+        dd($response);
+
         $response->assertSee('barcode')
             ->assertSee('name')
             ->assertSee('status')
             ->assertSee('price')
-            //->assertStatus(200)
-            ->assertOk();;
+            ->assertOk();
+        //->assertStatus(200)
 
     }
 

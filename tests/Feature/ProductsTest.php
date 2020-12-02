@@ -265,7 +265,7 @@ class ProductsTest extends TestCase
     {
 
         $this->actingAs($this->user)->get(route('products.index'))
-            ->assertStatus(200)
+            //->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
 
@@ -276,7 +276,17 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_product_list_view()
     {
-        $product = factory(Product::class)->create();
+        $category = factory(Category::class)->create(
+            [
+                'name' => 'Computers'
+            ]
+        );
+
+        $product = factory(Product::class)->create(
+            [
+                'category_id' => $category->getId(),
+            ]
+        );
 
         $response = $this->actingAs($this->user)->get(route('products.index'));
 

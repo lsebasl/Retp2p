@@ -19,8 +19,7 @@ before_install:
 
 install:
   composer install
-
-
-
+  composer require laravel/passport
+  composer require spatie/laravel-permission
 
 script: vendor/phpunit/phpunit/phpunit

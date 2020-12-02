@@ -127,6 +127,7 @@ class CheckoutTest extends TestCase
      */
     public function client_authenticated_can_see_product_checkout_view()
     {
+        $this->withoutExceptionHandling();
 
         $response = $this->actingAs($this->user)->get(route('cart.show'));
 

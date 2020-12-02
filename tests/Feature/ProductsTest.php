@@ -358,8 +358,6 @@ class ProductsTest extends TestCase
 
         $response = $this->actingAs($this->user)->get(route('products.create'));
 
-        dd($response);
-
         $response->assertSee('barcode')
             ->assertSee('name')
             ->assertSee('status')

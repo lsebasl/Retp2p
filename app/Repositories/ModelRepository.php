@@ -10,7 +10,7 @@ class ModelRepository
 {
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @param  $model
      * @return LengthAwarePaginator
      */

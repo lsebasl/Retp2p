@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class SellsByProduct implements MetricsContract
 {
     /**
-     * @param  array $filters
+     * @param array $filters
      */
     public function read(array $filters)
     {
@@ -24,7 +24,7 @@ class SellsByProduct implements MetricsContract
             )
             ->where('invoices.status', 'Paid')
             ->limit(7)
-        ->select(DB::raw("concat(products.id, products.name) as DATA,  sum(total_by_product) as LABEL"))
+            ->select(DB::raw("concat(products.id, products.name) as DATA,  sum(total_by_product) as LABEL"))
             ->groupBy('DATA')
             ->get());
     }

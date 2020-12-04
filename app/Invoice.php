@@ -106,9 +106,9 @@ class Invoice extends Model implements \SplSubject
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder $query
-     * @param string|null $initialDate
-     * @param string|null $finalDate
+     * @param  Builder     $query
+     * @param  string|null $initialDate
+     * @param  string|null $finalDate
      * @return Builder|Builder
      */
     public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)

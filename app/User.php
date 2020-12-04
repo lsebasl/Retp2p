@@ -99,8 +99,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     /**
-     * @param Builder $query
-     * @param string|null $status
+     * @param  Builder     $query
+     * @param  string|null $status
      * @return Builder
      */
     public function scopeStatus(Builder $query, ? string $status):Builder
@@ -114,7 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder $query
+     * @param Builder     $query
      * @param string|null $initialDate
      * @param string|null $finalDate
      */
@@ -132,8 +132,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param Builder $query
-     * @param string|null $idType
+     * @param  Builder     $query
+     * @param  string|null $idType
      * @return Builder
      */
     public function scopeIdType(Builder $query, ? string $idType)

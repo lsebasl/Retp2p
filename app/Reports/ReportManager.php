@@ -24,7 +24,7 @@ class ReportManager implements ReportContract
     }
 
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return Model|mixed
      */
     public function export(Request $request)

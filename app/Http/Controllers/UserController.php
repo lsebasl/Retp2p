@@ -27,8 +27,8 @@ class UserController extends Controller
     /**
      * List users after paginated.
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request $request
+     * @param  User    $user
      * @return View
      */
     public function index(Request $request, User $user): View

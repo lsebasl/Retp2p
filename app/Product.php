@@ -272,7 +272,7 @@ class Product extends Model
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder $query
+     * @param Builder     $query
      * @param string|null $initialDate
      * @param string|null $finalDate
      */

@@ -19,7 +19,7 @@ class cacheRoles
     /**
      * put cache to products list
      *
-     * @param Role $role
+     * @param  Role $role
      * @return LengthAwarePaginator
      */
     public function getPaginated(Role $role):LengthAwarePaginator

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class ReportSells implements ReportContract
 {
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return \Illuminate\Http\Response|mixed|BinaryFileResponse
      */
     public function export(Request $request)

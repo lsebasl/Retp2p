@@ -28,7 +28,7 @@ class RoleController extends Controller
     /**
      * List roles after paginated.
      *
-     * @param RolesSearchRequest $request
+     * @param  RolesSearchRequest $request
      * @return View
      */
     public function index(RolesSearchRequest $request):View
@@ -41,7 +41,7 @@ class RoleController extends Controller
     /**
      * Create the view to create roles.
      *
-     * @param Role $role
+     * @param  Role $role
      * @return View
      */
     public function create(Role $role):View
@@ -56,8 +56,8 @@ class RoleController extends Controller
     /**
      * Store a newly created role in storage.
      *
-     * @param Request $request
-     * @param Role $role
+     * @param  Request $request
+     * @param  Role    $role
      * @return RedirectResponse
      */
     public function store(RolesCreateRequest $request, Role $role):RedirectResponse
@@ -74,7 +74,7 @@ class RoleController extends Controller
     /**
      * Show a specific user
      *
-     * @param $id
+     * @param  $id
      * @return View
      */
     public function show($id):View
@@ -90,7 +90,7 @@ class RoleController extends Controller
     /**
      * Show a specific user
      *
-     * @param $id
+     * @param  $id
      * @return View
      */
     public function edit($id):View
@@ -110,8 +110,8 @@ class RoleController extends Controller
     /**
      * Update a specific roles and create a Log.
      *
-     * @param RolesUpdateRequest $request
-     * @param $id
+     * @param  RolesUpdateRequest $request
+     * @param  $id
      * @return RedirectResponse
      */
     public function update(RolesUpdateRequest $request, $id):RedirectResponse
@@ -131,7 +131,7 @@ class RoleController extends Controller
     /**
      * Delete a specific roles and create a Log.
      *
-     * @param Role $role
+     * @param  Role $role
      * @return RedirectResponse
      * @throws Exception
      */

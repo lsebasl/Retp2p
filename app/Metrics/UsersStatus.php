@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class UsersStatus implements MetricsContract
 {
     /**
-     * @param  array $filters
+     * @param array $filters
      */
     public function read(array $filters)
     {

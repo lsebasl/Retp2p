@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 interface ReportContract
 {
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return mixed
      */
     public function export(Request $request);

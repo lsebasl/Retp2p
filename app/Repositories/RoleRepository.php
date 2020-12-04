@@ -37,7 +37,7 @@ class RoleRepository
 
     /**
      *
-     * @param $id
+     * @param  $id
      * @return mixed
      */
     public function findOrFail($id)
@@ -47,8 +47,8 @@ class RoleRepository
 
     /**
      *
-     * @param Request $request
-     * @param Role $role
+     * @param  Request $request
+     * @param  Role    $role
      * @return mixed
      */
     public function updateNameDescription(Request $request, Role $role)
@@ -64,10 +64,12 @@ class RoleRepository
 
     public function createNameDescription(Request $request, $role)
     {
-        $role = Role::create([
+        $role = Role::create(
+            [
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-        ]);
+            ]
+        );
 
         return $role;
     }

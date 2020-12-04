@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class SellsByStatus implements MetricsContract
 {
     /**
-     * @param  array $filters
+     * @param array $filters
      */
     public function read(array $filters)
     {

@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 class ReportUsers implements ReportContract
 {
     /**
-     * @param Request $request
+     * @param  Request $request
      * @return Collection
      */
     public function export(Request $request):Collection

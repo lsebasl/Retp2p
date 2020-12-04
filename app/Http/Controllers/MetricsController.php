@@ -14,7 +14,7 @@ class MetricsController extends Controller
     /**
      * Display a listing of the stock..
      *
-     * @param Request $request
+     * @param  Request $request
      * @return View
      */
     public function index(Request $request):View
@@ -29,7 +29,7 @@ class MetricsController extends Controller
     /**
      * Create chart with using defined param.
      *
-     * @param MetricsRequest $request
+     * @param  MetricsRequest $request
      * @return View
      */
     public function show(MetricsRequest $request):View

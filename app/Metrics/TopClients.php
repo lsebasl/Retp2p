@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class TopClients implements MetricsContract
 {
     /**
-     * @param  array $filters
+     * @param array $filters
      */
     public function read(array $filters)
     {
@@ -21,9 +21,13 @@ class TopClients implements MetricsContract
                 [$filters['initialDate'],
                     $filters['finalDate']]
             )->limit(7)
-            ->select(DB::raw('UCASE(concat(users.name," ",users.last_name)) AS DATA,
-                SUM(invoices.total) AS LABEL'))->groupBy('DATA')
-        ->orderBy('DATA')
-        ->get();
+            ->select(
+                DB::raw(
+                    'UCASE(concat(users.name," ",users.last_name)) AS DATA,
+                SUM(invoices.total) AS LABEL'
+                )
+            )->groupBy('DATA')
+            ->orderBy('DATA')
+            ->get();
     }
 }

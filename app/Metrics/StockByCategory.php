@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class StockByCategory implements MetricsContract
 {
     /**
-     * @param  array $filters
+     * @param array $filters
      */
     public function read(array $filters)
     {

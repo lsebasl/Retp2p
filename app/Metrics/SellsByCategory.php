@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class SellsByCategory implements MetricsContract
 {
     /**
-     * @param array $filters
+     * @param  array $filters
      * @return \Illuminate\Support\Collection
      */
     public function read(array $filters)

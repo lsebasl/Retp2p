@@ -169,7 +169,7 @@ class ProductController extends Controller
     /**
      * Import products with validation.
      *
-     * @param ImportRequest $request
+     * @param  ImportRequest $request
      * @return Application|RedirectResponse|Redirector
      */
     public function import(ImportRequest $request)

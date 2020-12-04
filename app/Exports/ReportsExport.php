@@ -38,7 +38,7 @@ class ReportsExport implements FromCollection, WithHeadings, ShouldQueue
     }
 
     /**
-     *reestablish database connections that may have been lost during serialization
+     * reestablish database connections that may have been lost during serialization
      *
      * @return \Illuminate\Support\Collection
      */
@@ -66,18 +66,20 @@ class ReportsExport implements FromCollection, WithHeadings, ShouldQueue
      */
     public function headings(): array
     {
-        return value(function () {
-            $actualTable=Storage::disk()->get('actualTable.txt');
+        return value(
+            function () {
+                $actualTable=Storage::disk()->get('actualTable.txt');
 
-            $result= [];
+                $result= [];
 
-            $array=DB::select('describe '.$actualTable);
+                $array=DB::select('describe '.$actualTable);
 
-            foreach ($array as $elem) {
-                array_push($result, $elem->Field);
+                foreach ($array as $elem) {
+                    array_push($result, $elem->Field);
+                }
+
+                return $result;
             }
-
-            return $result;
-        });
+        );
     }
 }

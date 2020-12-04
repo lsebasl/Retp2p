@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-
 class RoleRepository
 {
     /**
@@ -52,7 +51,7 @@ class RoleRepository
      * @param Role $role
      * @return mixed
      */
-    public function updateNameDescription(Request $request,Role $role)
+    public function updateNameDescription(Request $request, Role $role)
     {
         $role->name = $request->input('name');
 
@@ -61,10 +60,9 @@ class RoleRepository
         $role->save();
 
         return $role;
-
     }
 
-    public function createNameDescription(Request $request,$role)
+    public function createNameDescription(Request $request, $role)
     {
         $role = Role::create([
             'name' => $request->input('name'),
@@ -72,7 +70,5 @@ class RoleRepository
         ]);
 
         return $role;
-
     }
-
 }

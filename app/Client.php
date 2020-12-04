@@ -13,7 +13,7 @@ class Client extends Model
      *
      * @var string[]
      */
-        protected $fillable = [
+    protected $fillable = [
             'name',
             'last_name',
             'id_type',
@@ -23,23 +23,23 @@ class Client extends Model
             'address',
         ];
 
-        /**
-         * Client has many invoices.
-         *
-         * @return HasMany
-         */
-        public function invoices():hasmany
-        {
-            return $this->hasMany(Invoice::class);
-        }
+    /**
+     * Client has many invoices.
+     *
+     * @return HasMany
+     */
+    public function invoices():hasmany
+    {
+        return $this->hasMany(Invoice::class);
+    }
 
-        /**
-         * Obtain complete name in a user.
-         *
-         * @return string|null
-         */
-        public function getFullName():?string
-        {
-            return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
-        }
+    /**
+     * Obtain complete name in a user.
+     *
+     * @return string|null
+     */
+    public function getFullName():?string
+    {
+        return ucfirst($this->name) . ' ' . ucfirst($this->last_name);
+    }
 }

@@ -31,7 +31,6 @@ class GoodsController extends Controller
      */
     public function index(ProductsStoreSearchRequest $request):View
     {
-
         $products = $this->categoryRepository->getPaginated($request);
 
         return view('store.goods', compact('products'));
@@ -45,7 +44,6 @@ class GoodsController extends Controller
      */
     protected function category($category):View
     {
-
         $products = $this->categoryRepository->category($category);
 
         return view('store.goods', compact('products'));

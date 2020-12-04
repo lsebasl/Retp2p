@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
-
-
 class MetricsController extends Controller
 {
 
@@ -25,8 +23,7 @@ class MetricsController extends Controller
 
         $result = DB::table('invoices')->select(DB::raw("users_id as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
 
-        return view('products.reports', compact('result','typeChart'));
-
+        return view('products.reports', compact('result', 'typeChart'));
     }
 
     /**
@@ -37,7 +34,6 @@ class MetricsController extends Controller
      */
     public function show(MetricsRequest $request):View
     {
-
         $typeChart = $request->input('typeChart');
 
         $reportType = $request->input('reportType');
@@ -46,6 +42,6 @@ class MetricsController extends Controller
 
         $result = (new MetricsManager(new $metric()))->read($request->all());
 
-        return view('products.reports', compact('result','typeChart','reportType'));
+        return view('products.reports', compact('result', 'typeChart', 'reportType'));
     }
 }

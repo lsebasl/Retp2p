@@ -12,11 +12,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
-
-
 class User extends Authenticatable implements MustVerifyEmail
 {
-
     use Notifiable;
     use HasRoles;
     use HasApiTokens;
@@ -121,14 +118,14 @@ class User extends Authenticatable implements MustVerifyEmail
      * @param string|null $initialDate
      * @param string|null $finalDate
      */
-    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)
     {
         $initialDate = Carbon::parse($initialDate);
 
         $finalDate = Carbon::parse($finalDate);
 
         if ($initialDate && $finalDate) {
-            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+            return $query->whereBetween('created_at', [$initialDate,$finalDate]);
         }
 
         return $query;
@@ -145,7 +142,6 @@ class User extends Authenticatable implements MustVerifyEmail
             return $query->where('id_type', $idType);
         }
         return $query;
-
     }
 
     /**
@@ -162,10 +158,4 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $query;
     }
-
-
-
-
-
-
 }

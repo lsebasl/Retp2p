@@ -25,7 +25,5 @@ class TopClients implements MetricsContract
                 SUM(invoices.total) AS LABEL'))->groupBy('DATA')
         ->orderBy('DATA')
         ->get();
-
     }
-
 }

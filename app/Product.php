@@ -11,10 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
-
 class Product extends Model
 {
-
     use HasApiTokens,Notifiable;
 
     /**
@@ -210,7 +208,6 @@ class Product extends Model
      */
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
-
         if (null !== $mark) {
             return $query->where('mark', 'LIKE', "$mark%");
         }
@@ -279,17 +276,16 @@ class Product extends Model
      * @param string|null $initialDate
      * @param string|null $finalDate
      */
-    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)
     {
         $initialDate = Carbon::parse($initialDate);
 
         $finalDate = Carbon::parse($finalDate);
 
         if ($initialDate && $finalDate) {
-            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+            return $query->whereBetween('created_at', [$initialDate,$finalDate]);
         }
 
         return $query;
     }
-
 }

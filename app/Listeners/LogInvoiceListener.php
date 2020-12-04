@@ -29,21 +29,24 @@ class LogInvoiceListener
     {
         if ($event->type === 'info') {
             Log::info(
-                $event->message, [
+                $event->message,
+                [
                 'option' => $event->option
                 ]
             );
         }
         if ($event->type === 'error') {
             Log::error(
-                $event->message, [
+                $event->message,
+                [
                 'option' => $event->option
                 ]
             );
         }
         if ($event->type === 'alert') {
             Log::alert(
-                $event->message, [
+                $event->message,
+                [
                 'option' => $event->option
                 ]
             );

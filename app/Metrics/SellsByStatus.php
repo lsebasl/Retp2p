@@ -19,7 +19,5 @@ class SellsByStatus implements MetricsContract
                     $filters['finalDate']]
             )
             ->select(DB::raw("invoices.status as DATA,  count(*) as LABEL"))->groupBy('DATA')->get();
-
     }
-
 }

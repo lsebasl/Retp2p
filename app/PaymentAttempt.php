@@ -2,10 +2,8 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 
 class PaymentAttempt extends Model
 {
@@ -26,6 +24,4 @@ class PaymentAttempt extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
-
-
 }

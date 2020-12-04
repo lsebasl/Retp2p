@@ -11,10 +11,9 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Row;
 
-
-class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,OnEachRow
+class ProductsImport implements WithHeadingRow, WithValidation, WithBatchInserts, OnEachRow
 {
-//general log de los errores de validacion.
+    //general log de los errores de validacion.
     public function batchSize(): int
     {
         return 100;
@@ -68,7 +67,6 @@ class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,O
             'updated_by'  => $row['updated_by'],
             'category_id' => $row['category_id'],
         ];
-
     }
 
     /**
@@ -86,10 +84,9 @@ class ProductsImport implements WithHeadingRow,WithValidation,WithBatchInserts,O
             Product::updateOrCreate(
                 [
                 'barcode' => $row['barcode'],
-                 ], $this->buildModel($row)
+                 ],
+                $this->buildModel($row)
             );
-
         }
     }
-
 }

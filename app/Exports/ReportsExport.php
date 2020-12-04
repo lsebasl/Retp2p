@@ -14,20 +14,17 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-
-
-class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
+class ReportsExport implements FromCollection, WithHeadings, ShouldQueue
 {
     use Exportable, Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
 
     protected $report;
     protected $table;
 
-    public function __construct($report,$table)
+    public function __construct($report, $table)
     {
         $this->report = $report;
         $this->table = $table;
-
     }
 
     /**
@@ -69,21 +66,18 @@ class ReportsExport implements FromCollection,WithHeadings,ShouldQueue
      */
     public function headings(): array
     {
-        return value(function() {
-
+        return value(function () {
             $actualTable=Storage::disk()->get('actualTable.txt');
 
             $result= [];
 
             $array=DB::select('describe '.$actualTable);
 
-            foreach ($array as $elem){
+            foreach ($array as $elem) {
                 array_push($result, $elem->Field);
             }
 
             return $result;
-
         });
-
     }
 }

@@ -164,7 +164,6 @@ class ProductController extends Controller
             ->status($request->get('search-status'));
 
         return (new ProductsExport($product))->download('products.xlsx');
-
     }
 
     /**
@@ -181,13 +180,10 @@ class ProductController extends Controller
             return redirect(route('stocks.index'))->with('success', 'All good!');
 
             //Excel::import(new ProductsImport, $request->file('file'));
-
-
-        } catch (ValidationException $e){//general un log
+        } catch (ValidationException $e) {//general un log
 
             return $this->displayErrors($e);
         }
-
     }
 
     /**
@@ -198,32 +194,24 @@ class ProductController extends Controller
      */
     public function displayErrors($e):RedirectResponse
     {
-
         $message = '';
-        foreach ($e->failures() as $fail){
-
+        foreach ($e->failures() as $fail) {
             $fail->row();
             $fail->attribute();
             $fail->errors();
             $fail->values();
 
-            $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];'<br>';
-
+            $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];
+            '<br>';
         }
 
         Session::flash('Validation Message', 'Error found in : <br>' . $message);
 
         return redirect(route('stocks.index'))->with('error', 'Fail!!');
-
-
     }
 
     public function keyExist($val)
     {
-
         return Product::where('id', $val['id'])->first();
-
     }
-
-
 }

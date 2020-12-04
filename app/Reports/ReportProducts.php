@@ -16,9 +16,8 @@ class ReportProducts implements ReportContract
     public function export(Request $request)
     {
         return Product::status($request->get('status'))
-            ->createdDate($request->get('initialDate'),$request->get('finalDate'))
+            ->createdDate($request->get('initialDate'), $request->get('finalDate'))
             ->mark($request->get('mark'))
             ->category($request->get('category'))->get();
     }
-
 }

@@ -31,9 +31,9 @@ class UserController extends Controller
      * @param User $user
      * @return View
      */
-    public function index(Request $request,User $user): View
+    public function index(Request $request, User $user): View
     {
-        $users = $this->modelRepository->getPaginated($request,$user);
+        $users = $this->modelRepository->getPaginated($request, $user);
 
         return view('users.index', ['users' => $users]);
     }
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $this->modelRepository->findByModel($roles);
 
-        return view('users.show', ['user'=> $user],['roles' => $roles]);
+        return view('users.show', ['user'=> $user], ['roles' => $roles]);
     }
 
     /**
@@ -69,7 +69,7 @@ class UserController extends Controller
 
         $this->modelRepository->findByModel($user);
 
-        return view('users.edit', ['user' => $user],['roles' => $roles ]);
+        return view('users.edit', ['user' => $user], ['roles' => $roles ]);
     }
 
     /**

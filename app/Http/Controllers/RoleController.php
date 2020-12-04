@@ -18,7 +18,6 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-
     protected $roleRepository;
 
     public function __construct(RoleRepository $roleRepository, cacheRoles $cacheRole)
@@ -34,7 +33,7 @@ class RoleController extends Controller
      */
     public function index(RolesSearchRequest $request):View
     {
-        $roles = $this->roleRepository->getPaginated($request,10);
+        $roles = $this->roleRepository->getPaginated($request, 10);
 
         return view('roles.index', compact('roles'));
     }
@@ -47,12 +46,11 @@ class RoleController extends Controller
      */
     public function create(Role $role):View
     {
-
         Logs::AuditLogger($role, 'edit');
 
         $permissions = $this->roleRepository->getPermissions();
 
-        return view('roles.create', compact('role','permissions'));
+        return view('roles.create', compact('role', 'permissions'));
     }
 
     /**
@@ -64,15 +62,13 @@ class RoleController extends Controller
      */
     public function store(RolesCreateRequest $request, Role $role):RedirectResponse
     {
-
         Logs::AuditLogger($role, 'store');
 
-        $role = $this->roleRepository->createNameDescription($request,$role);
+        $role = $this->roleRepository->createNameDescription($request, $role);
 
         $role->syncPermissions($request->input('permission'));
 
         return redirect(route('roles.index'))->with('success', 'Role Has Been Created!');
-
     }
 
     /**
@@ -85,10 +81,10 @@ class RoleController extends Controller
     {
         $role = $this->roleRepository->findOrFail($id);
 
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)->get();
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+            ->where("role_has_permissions.role_id", $id)->get();
 
-        return view('roles.show', compact('role','rolePermissions'));
+        return view('roles.show', compact('role', 'rolePermissions'));
     }
 
     /**
@@ -120,17 +116,15 @@ class RoleController extends Controller
      */
     public function update(RolesUpdateRequest $request, $id):RedirectResponse
     {
-
-       Logs::AuditLogger('Role', 'store');
+        Logs::AuditLogger('Role', 'store');
 
         $role = $this->roleRepository->findOrFail($id);
 
-        $role = $this->roleRepository->updateNameDescription($request,$role);
+        $role = $this->roleRepository->updateNameDescription($request, $role);
 
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')->withSuccess(__('Role updated sucessfully'));
-
     }
 
 
@@ -149,7 +143,4 @@ class RoleController extends Controller
 
         return redirect()->route('roles.index')->with('success', 'Role Has Been Deleted!');
     }
-
 }
-
-

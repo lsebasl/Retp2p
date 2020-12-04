@@ -31,11 +31,8 @@ class cacheRoles
         return Cache::tags('roles')->rememberForever(
             $key,
             function () use ($role) {
-
                 return $this->roleRepository->getPaginated($role);
             }
         );
     }
-
-
 }

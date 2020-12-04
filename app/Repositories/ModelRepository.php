@@ -14,7 +14,7 @@ class ModelRepository
      * @param  $model
      * @return LengthAwarePaginator
      */
-    public function getPaginated(Request $request,$model):LengthAwarePaginator
+    public function getPaginated(Request $request, $model):LengthAwarePaginator
     {
         return $model::orderBy('created_at', 'DESC')->name($request->get('name'))->paginate();
     }

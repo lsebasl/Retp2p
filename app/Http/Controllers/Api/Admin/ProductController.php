@@ -13,7 +13,6 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
-
 class ProductController extends Controller
 {
 
@@ -37,10 +36,7 @@ class ProductController extends Controller
      */
     public function store(ProductsStoreRequest $request, Product $product, StoreProductAction $action):Model
     {
-
         return $action->execute($product, $request);
-
-
     }
 
     /**
@@ -80,5 +76,4 @@ class ProductController extends Controller
 
         return response()->json(__('The Product was successfully deleted'));
     }
-
 }

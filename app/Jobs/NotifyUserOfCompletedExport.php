@@ -17,7 +17,7 @@ class NotifyUserOfCompletedExport implements ShouldQueue
     public $filePath;
     public $user;
 
-    public function __construct($filePath,$user)
+    public function __construct($filePath, $user)
     {
         $this->user = $user;
         $this->filePath = $filePath;

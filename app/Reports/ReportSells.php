@@ -15,7 +15,7 @@ class ReportSells implements ReportContract
      */
     public function export(Request $request)
     {
-        $invoices = Invoice::CreatedDate($request->get('initialDate'),$request->get('finalDate'))
+        $invoices = Invoice::CreatedDate($request->get('initialDate'), $request->get('finalDate'))
             ->status($request->get('status'))->get();
         return $invoices;
 
@@ -33,10 +33,5 @@ class ReportSells implements ReportContract
             ->get();
 
         dd($ventas);*/
-
-
-
-
     }
-
 }

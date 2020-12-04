@@ -29,6 +29,6 @@ class ReportManager implements ReportContract
      */
     public function export(Request $request)
     {
-       return $this->excelReport->export($request);
+        return $this->excelReport->export($request);
     }
 }

@@ -50,5 +50,4 @@ class LogPaymentEvent
     {
         return new PrivateChannel('channel-name');
     }
-
 }

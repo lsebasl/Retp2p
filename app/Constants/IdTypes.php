@@ -10,5 +10,4 @@ class IdTypes extends Enum
     public const FOREIGN_ID = 'Foreign ID';
     public const NIT = 'NIT';
     public const PASSPORT = 'Passport';
-
 }

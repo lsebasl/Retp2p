@@ -28,7 +28,6 @@ class CacheUser
         return Cache::tags('users')->rememberForever(
             $key,
             function () use ($user) {
-
                 return $this->modelRepository->getPaginated($user);
             }
         );
@@ -45,8 +44,7 @@ class CacheUser
         return Cache::tags('users')->rememberForever(
             "'user'.{$user}",
             function () use ($user) {
-
-                    return $this->modelRepository->cacheFindByModel($user);
+                return $this->modelRepository->cacheFindByModel($user);
             }
         );
     }

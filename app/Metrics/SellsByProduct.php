@@ -22,12 +22,10 @@ class SellsByProduct implements MetricsContract
                 [$filters['initialDate'],
                     $filters['finalDate']]
             )
-            ->where('invoices.status','Paid')
+            ->where('invoices.status', 'Paid')
             ->limit(7)
         ->select(DB::raw("concat(products.id, products.name) as DATA,  sum(total_by_product) as LABEL"))
             ->groupBy('DATA')
             ->get());
-
     }
-
 }

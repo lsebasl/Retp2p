@@ -38,5 +38,4 @@ class HomeController extends Controller
         //Todo usuario diferente al administrador habilitado puede ver la tienda
         return view('store.home');
     }
-
 }

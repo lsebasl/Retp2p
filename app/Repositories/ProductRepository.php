@@ -17,7 +17,7 @@ class ProductRepository
      * @param  $pages
      * @return LengthAwarePaginator
      */
-    public function getPaginated($request,$pages):LengthAwarePaginator
+    public function getPaginated($request, $pages):LengthAwarePaginator
     {
         return Product::orderBy('created_at', request('sorted', 'DESC'))
             ->name($request->get('search-name'))
@@ -117,7 +117,6 @@ class ProductRepository
     public function getPrice($productId):int
     {
         return  Product::where('id', $productId)->first()->price;
-
     }
 
     /**

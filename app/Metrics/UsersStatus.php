@@ -19,5 +19,4 @@ class UsersStatus implements MetricsContract
             )
             ->select(DB::raw("users.status as DATA,  count(*) as LABEL"))->groupBy('DATA')->get();
     }
-
 }

@@ -31,9 +31,9 @@ class OptimizeProductImage implements ShouldQueue
      */
     public function handle(ProductSaveImage $event):void
     {
-         $image= Image::make(Storage::get($event->product->image));
+        $image= Image::make(Storage::get($event->product->image));
 
-         $image->widen(600)->encode();
+        $image->widen(600)->encode();
 
         Storage::put($event->product->image, (string) $image);
     }

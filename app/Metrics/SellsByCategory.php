@@ -24,7 +24,7 @@ class SellsByCategory implements MetricsContract
                 [$filters['initialDate'],
                 $filters['finalDate']]
             )
-            ->where('invoices.status','Paid')
+            ->where('invoices.status', 'Paid')
             ->select(DB::raw("categories.name as DATA,  sum(total_by_product) as LABEL"))->groupBy('category_id')->get();
     }
 }

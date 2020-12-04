@@ -16,7 +16,7 @@ class InvoiceController extends Controller
 {
     protected $cartRepository;
 
-    public function __construct(PaymentAttemptController $paymentAttempt,CartRepository $cartRepository)
+    public function __construct(PaymentAttemptController $paymentAttempt, CartRepository $cartRepository)
     {
         $this->cartRepository = $cartRepository;
     }
@@ -68,23 +68,21 @@ class InvoiceController extends Controller
         );
 
 
-        foreach ($details as $detail){
-
+        foreach ($details as $detail) {
             $productId = $detail->product_id;
             $quantity = $detail->quantity;
             $total = $detail->subtotal;
             $invoice->products()->attach(
-                $productId, [
+                $productId,
+                [
                 'product_id' =>$productId,
                 'quantity' => $quantity,
                 'total_by_product' => $total,
                 ]
             );
-
         }
 
-             return redirect(route('payment.attempt'))->with('success', 'The Invoice has Been Created Click On Place Order to continue');
-
+        return redirect(route('payment.attempt'))->with('success', 'The Invoice has Been Created Click On Place Order to continue');
     }
 
     /**

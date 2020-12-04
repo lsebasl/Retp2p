@@ -18,7 +18,7 @@ class ProductsStoreRequest extends FormRequest
     }
 
     /**
-     * 
+     *
      * 0
      * Get the validation rules th0  at apply to the request.
      *

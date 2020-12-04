@@ -5,7 +5,6 @@ namespace App\Metrics;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 
-
 class StockByCategory implements MetricsContract
 {
     /**
@@ -21,5 +20,4 @@ class StockByCategory implements MetricsContract
                     $filters['finalDate']]
             )->select(DB::raw("categories.name as DATA, sum(units) as LABEL"))->groupBy('DATA')->get();
     }
-
 }

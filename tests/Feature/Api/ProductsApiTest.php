@@ -15,11 +15,13 @@ class ProductsApiTest extends TestCase
 {
     use RefreshDatabase;
 
- 
+    /**
+     * @test
+     */
     public function no_authenticated_api_admin_cannot_access_to_products_list()
     {
 
-        $user = factory(User::class)->create(['role' => User::USER_ROLE]);
+        $user = factory(User::class)->create(['role' => User::ADMIN_ROLE]);
 
         $product =  factory(Product::class)->create();
 

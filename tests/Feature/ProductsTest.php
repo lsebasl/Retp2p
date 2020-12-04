@@ -655,35 +655,8 @@ class ProductsTest extends TestCase
 
     }
 
-    /**
-     * @test
-     */
-    public function user_can_import_products()
-    {
-        $category = factory(Category::class)->create(
-            [
-                'id' => '2'
-            ]
-        );
-
-        $importFile = $this->getUploadedFile('file.xlsx');
-
-        $response = $this->actingAs($this->user)->post(route('import'), ['file' => $importFile]);
-
-        $response->assertRedirect(route('stocks.index'));
-
-    }
-
-    public function getUploadedFile(string $fileName):UploadedFile
-    {
-        $filePath = base_path('tests/stubs/' . $fileName);
-
-        return new UploadedFile($filePath, 'file.xlsx', null, null, true);
-    }
-
     public function admin_can_export_products_list()
     {
-
         $admin = factory(User::class)->create();
 
         Excel::fake();

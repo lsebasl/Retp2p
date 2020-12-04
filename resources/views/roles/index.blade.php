@@ -6,8 +6,8 @@
             <i class="zmdi zmdi-accounts"></i>
         </div>
         <div class="full-width header-well-text">
-            <p class="text-condensedLight">List of registered roles.
-                <br>Use eye to see details, pencil to edit and trash to remove</p>
+            <p class="text-condensedLight" >List of registered roles.
+                <br >Use eye to see details, pencil to edit and trash to remove</p>
         </div>
     </section>
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -19,7 +19,7 @@
                 <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
                     <div class="full-width panel mdl-shadow--2dp">
                         <div class="full-width panel-tittle bg-success text-center tittles">
-                            {{__('roles List')}}
+                            {{__('Roles List')}}
                         </div>
 
                         {{--add search form--}}

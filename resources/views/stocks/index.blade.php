@@ -77,13 +77,12 @@
     </div>
     <form method=POST action="{{ route('import')}}" enctype="multipart/form-data">
         @csrf
-        <div class="mdl-textfield mdl-js-textfield ">
-            <input type="file" {{$errors->has('file') ? 'is-invalid' : '' }} name="file" id="file">
+        <div class="mdl-textfield mdl-js-textfield {{$errors->has('file') ? 'is-invalid' : '' }}">
+            <input type="file"  name="file" id="file">
         </div>
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored " style="margin-left:2px">
             {{__('Save')}}
         </button>
-
         @includeWhen($errors->has('file'), 'partials.__invalid_feedback', ['feedback' => $errors->first('file')])
     </form>
     @if(\Illuminate\Support\Facades\Session::has('Validation Message'))

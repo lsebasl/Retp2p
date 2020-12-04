@@ -5,12 +5,13 @@
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
                 <div class="full-width panel mdl-shadow--2dp">
                     <div class="full-width panel-tittle bg-primary text-center tittles">
-                        New client
+                        New Role
                     </div>
                     <div class="full-width panel-content">
                         <form action="{{route('roles.store')}}" method="POST">
                             @csrf
-                            <h5 class="text-condensedLight"><b>Data client</b></h5>
+                            <h5 class="text-condensedLight"><b>Data Role</b></h5>
+                            @include('partials.__alerts')
                             @include('roles.__form')
 
                             <p class="text-center">

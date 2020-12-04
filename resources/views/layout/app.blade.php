@@ -174,7 +174,7 @@
                                         <i class="zmdi zmdi-accounts"></i>
                                     </div>
                                     <div class="navLateral-body-cr hide-on-tablet">
-                                        {{__('User List')}}
+                                        {{__('Role List')}}
                                     </div>
                                 </a>
                             </li>

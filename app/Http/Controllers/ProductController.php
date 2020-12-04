@@ -7,6 +7,7 @@ use App\Events\ProductCreated;
 use App\Events\ProductSaveImage;
 use App\Exports\ProductsExport;
 use App\Helpers\Logs;
+use App\Http\Requests\ImportRequest;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
@@ -169,10 +170,10 @@ class ProductController extends Controller
     /**
      * Import products with validation.
      *
-     * @param  Request $request
+     * @param ImportRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function import(Request $request)
+    public function import(ImportRequest $request)
     {
         try {
             Excel::import(new ProductsImport, $request->file('file'));

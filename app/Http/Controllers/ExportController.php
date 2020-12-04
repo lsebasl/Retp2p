@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ReportsExport;
+use App\Http\Requests\ReportRequest;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Reports\ReportManager;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class ExportController extends Controller
 {
 
 
-    public function export(Request $request)
+    public function export(ReportRequest $request)
     {
 
         $exportType = $request->input('exportType');

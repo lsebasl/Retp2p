@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MetricsRequest;
 use App\Metrics\MetricsManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,11 +32,12 @@ class MetricsController extends Controller
     /**
      * Create chart with using defined param.
      *
-     * @param  Request $request
+     * @param MetricsRequest $request
      * @return View
      */
-    public function show(Request $request):View
+    public function show(MetricsRequest $request):View
     {
+
         $typeChart = $request->input('typeChart');
 
         $reportType = $request->input('reportType');

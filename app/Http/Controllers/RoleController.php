@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Logs;
+use App\Http\Requests\RolesCreateRequest;
 use App\Http\Requests\RolesSearchRequest;
+use App\Http\Requests\RolesUpdateRequest;
 use App\Repositories\cacheRoles;
 use App\Repositories\RoleRepository;
 use Exception;
@@ -45,6 +47,7 @@ class RoleController extends Controller
      */
     public function create(Role $role):View
     {
+
         Logs::AuditLogger($role, 'edit');
 
         $permissions = $this->roleRepository->getPermissions();
@@ -59,8 +62,9 @@ class RoleController extends Controller
      * @param Role $role
      * @return RedirectResponse
      */
-    public function store(Request $request,Role $role):RedirectResponse
+    public function store(RolesCreateRequest $request, Role $role):RedirectResponse
     {
+
         Logs::AuditLogger($role, 'store');
 
         $role = $this->roleRepository->createNameDescription($request,$role);
@@ -110,12 +114,13 @@ class RoleController extends Controller
     /**
      * Update a specific roles and create a Log.
      *
-     * @param Request $request
+     * @param RolesUpdateRequest $request
      * @param $id
-     * @return void
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(RolesUpdateRequest $request, $id):RedirectResponse
     {
+
        Logs::AuditLogger('Role', 'store');
 
         $role = $this->roleRepository->findOrFail($id);

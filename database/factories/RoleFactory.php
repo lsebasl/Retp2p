@@ -2,11 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Invoice;
-use App\Product;
-use App\User;
 use Faker\Generator as Faker;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +15,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Invoice::class, function (Faker $faker) {
+$factory->define(\Spatie\Permission\Models\Role::class, function (Faker $faker) {
     return [
-        'expedition_date' => $faker->date(),
-        'expiration_date' => $faker->date(),
-        'status' => $faker->randomElement(['Paid','Rejected','Pending']),
-        'subtotal' => $faker->numberBetween(50,1000),
-        'VAT' => 2000,
-        'total' => $faker->numberBetween(1000,2000),
-        'users_id' => factory(User::class),
+        'name' => $faker->name,
+        'description' => $faker->firstName,
     ];
 });
 

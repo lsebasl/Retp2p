@@ -34,7 +34,6 @@
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Saved reports</span>
                         <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                            <span data-feather="plus-circle"></span>
                         </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
@@ -129,8 +128,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="reportType">Report Type</label>
-                        <select id="reportType" class="form-control" name="reportType">
-                            <option selected>Choose...</option>
+                        <select id="reportType" class="form-control" name="reportType" required>
+                            <option></option>
                             @foreach(\App\Constants\reportTypes::toArray() as $reportKey => $reportType))
                                 <option value="{{$reportType}}" @if($reportType) === old('reportType') )selected @endif>{{$reportKey}}</option>
                             @endforeach
@@ -138,8 +137,8 @@
                     </div>
                     <div class="form-group">
                         <label for="typeChart">Chart Type</label>
-                        <select id="typeChart" class="form-control" name="typeChart">
-                            <option selected>Choose...</option>
+                        <select id="typeChart" class="form-control" name="typeChart" required>
+                            <option></option>
                             @foreach(\App\Constants\chartTypes::toArray() as $chartKey => $chartType)
                                 <option value="{{$chartType}}" @if($chartType === old('typeChart') )selected @endif>{{$chartType}}</option>
                             @endforeach
@@ -147,11 +146,11 @@
                     </div>
                     <div class="form-group">
                         <label for="initialDate">Initial Date</label>
-                        <input class="form-control" type="date" name="initialDate" value="{{ old('initialDate') }}" id="initialDate">
+                        <input class="form-control" type="date" name="initialDate" value="{{ old('initialDate') }}" id="initialDate" required>
                     </div>
                     <div class="form-group">
                         <label for="finalDate">Final date</label>
-                        <input class="form-control" type="date" name="finalDate" value="{{ old('finalDate') }}" id="finalDate" >
+                        <input class="form-control" type="date" name="finalDate" value="{{ old('finalDate') }}" id="finalDate" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -169,7 +168,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exportReportLabel">Export Report</h5>
+                <h5 class="modal-title" id="exportReportLabel">Export Report User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -181,7 +180,7 @@
                         <select id="status" class="form-control" name="status">
                             <option value=""></option>
                             @foreach(\App\Constants\status::toArray() as $statusKey => $status)
-                                <option value="{{$status}}" @if($status === old('$status',$status) )selected @endif>{{$status}}</option>
+                                <option value="{{$status}}" @if($status === old('$status') )selected @endif>{{$status}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -190,17 +189,17 @@
                         <select id="status" class="form-control" name="idType">
                             <option value=""></option>
                             @foreach(\App\Constants\idTypes::toArray() as $idKey => $idType)
-                                <option value="{{$idType}}" @if($idType === old('idType',$idType) )selected @endif>{{$idType}}</option>
+                                <option value="{{$idType}}" @if($idType === old('idType') )selected @endif>{{$idType}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="initialDate">Initial Date</label>
-                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate">
+                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate" required>
                     </div>
                     <div class="form-group">
                         <label for="finalDate">Final date</label>
-                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate">
+                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -259,11 +258,11 @@
                     </div>
                     <div class="form-group">
                         <label for="initialDate">Initial Date</label>
-                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate">
+                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate" required>
                     </div>
                     <div class="form-group">
                         <label for="finalDate">Final date</label>
-                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate">
+                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -302,30 +301,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="status">Report By Category</label>
-                        <select id="status" class="form-control" name="category">
-                            <option value=""></option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" @if($category->id == old('category')) selected @endif>{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Report By Mark</label>
-                        <select id="status" class="form-control" name="mark">
-                            <option value=""></option>
-                            @foreach($marks as $mark)
-                                <option value="{{$mark->name}}" @if($mark->name === old('mark') )selected @endif>{{$mark->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="initialDate">Initial Date</label>
-                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate">
+                        <input class="form-control" type="date" name="initialDate" value="" id="initialDate" required>
                     </div>
                     <div class="form-group">
                         <label for="finalDate">Final date</label>
-                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate">
+                        <input class="form-control" type="date" name="finalDate" value="" id="finalDate" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

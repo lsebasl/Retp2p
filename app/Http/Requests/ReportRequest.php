@@ -24,10 +24,10 @@ class ReportRequest extends FormRequest
     public function rules():array
     {
         return [
-            'category' => 'in:1,2,3,4|int',
+            'category' => 'in:1,2,3,4|int|bail|nullable',
             'mark' => 'min:2|max:30',
-            'status' => 'in:Enable,Disable',
-            'idType' => 'in:Card ID,Foreign ID,NIT,Passport',
+            'status' => 'in:Enable,Disable,Paid,Pending,Rejected|bail|nullable',
+            'idType' => 'in:Card ID,Foreign ID,NIT,Passport|bail|nullable',
             'exportType' => 'required|in:exportUsers,exportProducts,exportSells',
             'initialDate' => 'required|min:1|max:30',
             'finalDate' => 'required|min:1|max:30',

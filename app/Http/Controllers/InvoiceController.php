@@ -84,5 +84,4 @@ class InvoiceController extends Controller
 
         return redirect(route('payment.attempt'))->with('success', 'The Invoice has Been Created Click On Place Order to continue');
     }
-
 }

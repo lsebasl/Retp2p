@@ -17,10 +17,7 @@ class ReportSells implements ReportContract
      */
     public function export(Request $request):Collection
     {
-
         return  Invoice::createdDate($request->get('initialDate'), $request->get('finalDate'))
             ->status($request->get('status'))->get();
-
-
     }
 }

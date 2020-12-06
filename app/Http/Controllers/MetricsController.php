@@ -29,7 +29,7 @@ class MetricsController extends Controller
 
         $result = DB::table('invoices')->select(DB::raw("status as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
 
-        return view('products.reports', compact('result', 'typeChart','tittle','ejeX','ejeY'));
+        return view('products.reports', compact('result', 'typeChart', 'tittle', 'ejeX', 'ejeY'));
     }
 
     /**
@@ -40,7 +40,6 @@ class MetricsController extends Controller
      */
     public function show(MetricsRequest $request):View
     {
-
         $typeChart = $request->input('typeChart');
 
         $reportType = $request->input('reportType');
@@ -55,6 +54,6 @@ class MetricsController extends Controller
 
         $result = (new MetricsManager(new $metric()))->read($request->all());
 
-        return view('products.reports', compact('result', 'typeChart', 'tittle','ejeX','ejeY'));
+        return view('products.reports', compact('result', 'typeChart', 'tittle', 'ejeX', 'ejeY'));
     }
 }

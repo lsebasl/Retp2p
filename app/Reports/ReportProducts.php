@@ -4,7 +4,9 @@ namespace App\Reports;
 
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;;
+use Illuminate\Support\Collection;
+
+;
 
 class ReportProducts implements ReportContract
 {

@@ -19,7 +19,6 @@ class ExportController extends Controller
      */
     public function export(ReportRequest $request):RedirectResponse
     {
-
         $exportType = $request->input('exportType');
 
         $report = config('reports.' . $exportType) ?? abort(404);

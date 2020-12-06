@@ -2,21 +2,43 @@
 
 return [
         'sellByCategory' =>
-            \App\Metrics\SellsByCategory::class,
+            ['class'=>\App\Metrics\SellsByCategory::class,
+                'tittle'=>'Sells By Category',
+                'ejeX' => 'Category',
+                'ejeY' => 'Sells'
+            ],
 
         'sellByStatus' =>
-             \App\Metrics\SellsByStatus::class,
+            ['class'=>\App\Metrics\SellsByStatus::class,
+                'tittle'=>'Sells By Status',
+                'ejeX' => 'Status',
+                'ejeY' => 'Sells'
+
+            ],
 
         'sellByProduct' =>
-            \App\Metrics\SellsByProduct::class,
+            ['class'=>\App\Metrics\SellsByProduct::class,
+                'tittle'=>'Sells By Product',
+                'ejeX' => 'Product',
+                'ejeY' => 'Sells'],
 
         'stockByCategory' =>
-         \App\Metrics\StockByCategory::class,
+            ['class'=>\App\Metrics\StockByCategory::class,
+             'tittle'=>'Stock By Category',
+            'ejeX' => 'Category',
+                'ejeY' => 'Stock'],
 
         'usersStatus' =>
-           \App\Metrics\UsersStatus::class,
+            ['class'=> \App\Metrics\UsersStatus::class,
+            'tittle'=>'User Status',
+                 'ejeX' => 'Status',
+                'ejeY' => 'Users'],
 
         'topClient' =>
-         \App\Metrics\TopClients::class,
+            ['class'=> \App\Metrics\TopClients::class,
+                'tittle'=>'Best Buyers',
+                    'ejeX' => 'Clients',
+                    'ejeY' => 'Buys'
+            ],
 
 ];

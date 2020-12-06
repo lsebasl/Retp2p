@@ -2,13 +2,16 @@
 
 namespace App\Metrics;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 interface MetricsContract
 {
+
     /**
-     * @param  array $filters
-     * @return mixed
+     * Interface to implement method read in metrics manager.
+     *
+     * @param array $filters
+     * @return Collection
      */
-    public function read(array $filters);
+    public function read(array $filters):Collection;
 }

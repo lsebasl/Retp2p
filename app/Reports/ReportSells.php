@@ -4,34 +4,23 @@ namespace App\Reports;
 
 use App\Invoice;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Collection;
 
 class ReportSells implements ReportContract
 {
+
     /**
-     * @param  Request $request
-     * @return \Illuminate\Http\Response|mixed|BinaryFileResponse
+     * Create as sells collection to export using date and invoices status filters.
+     *
+     * @param Request $request
+     * @return Collection
      */
-    public function export(Request $request)
+    public function export(Request $request):Collection
     {
-        $invoices = Invoice::CreatedDate($request->get('initialDate'), $request->get('finalDate'))
+
+        return  Invoice::createdDate($request->get('initialDate'), $request->get('finalDate'))
             ->status($request->get('status'))->get();
-        return $invoices;
 
-        /*$ventas = DB::table('invoices')
-            ->join('invoice_product', 'invoices.id', '=', 'invoice_product.invoice_id')
-            ->join('products', 'invoice_product.product_id', '=', 'products.id')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->whereBetween(
-                'invoices.created_at',
-                [$request->get('initialDate'),
-                $request->get('finalDate')]
-            )
-            ->where('invoices.status',$request->get('status'))
-            ->where('products.category_id',$request->get('category'))
-            ->get();
 
-        dd($ventas);*/
     }
 }

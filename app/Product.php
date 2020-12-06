@@ -272,9 +272,10 @@ class Product extends Model
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder     $query
+     * @param Builder $query
      * @param string|null $initialDate
      * @param string|null $finalDate
+     * @return Builder
      */
     public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)
     {

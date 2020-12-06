@@ -2,15 +2,18 @@
 
 namespace App\Metrics;
 
-use App\Product;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class StockByCategory implements MetricsContract
 {
     /**
+     * Create collection of stock by category filter by date and category name.
+     *
      * @param array $filters
+     * @return Collection|mixed
      */
-    public function read(array $filters)
+    public function read(array $filters):Collection
     {
         return DB::table('products')
             ->join('categories', 'categories.id', '=', 'products.category_id')

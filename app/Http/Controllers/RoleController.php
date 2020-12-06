@@ -10,7 +10,6 @@ use App\Repositories\cacheRoles;
 use App\Repositories\RoleRepository;
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
@@ -56,8 +55,8 @@ class RoleController extends Controller
     /**
      * Store a newly created role in storage.
      *
-     * @param  Request $request
-     * @param  Role    $role
+     * @param RolesCreateRequest $request
+     * @param Role $role
      * @return RedirectResponse
      */
     public function store(RolesCreateRequest $request, Role $role):RedirectResponse

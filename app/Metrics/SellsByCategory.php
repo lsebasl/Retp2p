@@ -2,18 +2,19 @@
 
 namespace App\Metrics;
 
-use App\Invoice;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class SellsByCategory implements MetricsContract
 {
+
     /**
-     * @param  array $filters
-     * @return \Illuminate\Support\Collection
+     * Create collection of sells by category filter by date,category and status.
+     *
+     * @param array $filters
+     * @return Collection
      */
-    public function read(array $filters)
+    public function read(array $filters):Collection
     {
         return DB::table('invoices')
             ->join('invoice_product', 'invoices.id', '=', 'invoice_product.invoice_id')

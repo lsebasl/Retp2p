@@ -2,14 +2,18 @@
 
 namespace App\Metrics;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class UsersStatus implements MetricsContract
 {
     /**
+     * Create collection of user by filter by date and status.
+     *
      * @param array $filters
+     * @return Collection|mixed
      */
-    public function read(array $filters)
+    public function read(array $filters):Collection
     {
         return DB::table('users')
             ->whereBetween(

@@ -37,6 +37,8 @@ class ProductsUpdateRequest extends FormRequest
             'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
 
+
+
         ];
     }
 }

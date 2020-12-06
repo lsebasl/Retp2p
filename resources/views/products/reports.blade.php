@@ -78,7 +78,7 @@
                         var ejeY = new Array();
                         const result = @json($result ?? '');
                         const typeChart = @json($typeChart ?? '');
-                        const reportType = @json($reportType ?? '');
+                        const reportType = @json($tittle ?? '');
                         result.forEach(function(data){
                             ejeX.push(data.DATA);
                             ejeY.push(data.LABEL);
@@ -93,8 +93,8 @@
                     <table class="table table-striped table-sm">
                         <thead>
                         <tr>
-                            <th>LABEL</th>
-                            <th>DATA</th>
+                            <th>{{$ejeX}}</th>
+                            <th>{{$ejeY}}</th>
                         </tr>
                         </thead>
                         @foreach($result as $item)
@@ -222,7 +222,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exportProductsLabel">Export Report</h5>
+                <h5 class="modal-title" id="exportProductsLabel">Export Report Products</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -284,7 +284,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exportProductsLabel">SellsReport</h5>
+                <h5 class="modal-title" id="exportSellsReports">SellsReport</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

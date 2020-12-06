@@ -13,13 +13,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <div id="app"></div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-
-    <!-- Bootstrap core CSS -->
 
     <link href="{{ asset('/css/reports/dashboard.css') }}" rel="stylesheet">
-
-
 
     <style>
         .bd-placeholder-img {
@@ -38,7 +33,7 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="{{ asset('/js/reports/dashboard.js') }}" rel="stylesheet">
+    <link href="{{ mix('/js/reports/dashboard.js') }}" rel="stylesheet">
     @yield('scripts')
 </head>
 <body>

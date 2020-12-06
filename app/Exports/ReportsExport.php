@@ -46,9 +46,9 @@ class ReportsExport implements FromCollection, WithHeadings, ShouldQueue
     {
         return  $this->collection();
     }
-    
+
     /**
-     *
+     *Return a collection to export.
      *
      * @return \Illuminate\Support\Collection
      */

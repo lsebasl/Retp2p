@@ -23,7 +23,7 @@ class ProductsExport implements FromQuery, WithHeadings, WithColumnFormatting
     }
 
     /**
-     * Retorn query to products for export.
+     * Return query to products for export.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

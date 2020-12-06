@@ -6,5 +6,6 @@
     "/css/store/all.css": "/css/store/all.css",
     "/css/checkout/all.css": "/css/checkout/all.css",
     "/js/store/minicart.js": "/js/store/minicart.js",
+    "/js/reports/dashboard.js": "/js/reports/dashboard.js",
     "/js/checkout/all.js": "/js/checkout/all.js"
 }

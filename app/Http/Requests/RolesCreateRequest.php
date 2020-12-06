@@ -21,7 +21,7 @@ class RolesCreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
              'name' => 'bail|nullable|required|min:3|max:50|unique:roles,name',

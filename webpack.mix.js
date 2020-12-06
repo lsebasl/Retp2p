@@ -58,8 +58,15 @@ mix.styles([
     'public/css/checkout/style.css',
 ],'public/css/checkout/all.css');
 
+
 mix.scripts(['resources/js/store/minicart.js',
 ],'public/js/store/minicart.js');
+
+mix.scripts(['resources/js/reports/dashboard.js',
+],'public/js/reports/dashboard.js');
+
+mix.styles(['public/css/admin/normalize.css',
+],'public/css/admin/all.css');
 
 mix.scripts(['public/js/checkout/classie.js',
     'public/js/checkout/imagezoom.js',

@@ -21,9 +21,15 @@ class MetricsController extends Controller
     {
         $typeChart = 'bar';
 
-        $result = DB::table('invoices')->select(DB::raw("users_id as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
+        $tittle = 'Sells By Status';
 
-        return view('products.reports', compact('result', 'typeChart'));
+        $ejeX = 'Invoices Status';
+
+        $ejeY = 'Total';
+
+        $result = DB::table('invoices')->select(DB::raw("status as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
+
+        return view('products.reports', compact('result', 'typeChart','tittle','ejeX','ejeY'));
     }
 
     /**

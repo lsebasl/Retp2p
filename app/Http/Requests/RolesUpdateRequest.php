@@ -22,7 +22,7 @@ class RolesUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         return [
             'name' => 'bail|required|min:3|max:50',Rule::unique('products', 'barcode')->ignore($this->route('product')),

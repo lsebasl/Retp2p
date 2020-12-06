@@ -11,7 +11,7 @@ class SellsByProduct implements MetricsContract
     /**
      * Create collection of invoices by product filter by date,invoice status.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection
      */
     public function read(array $filters):Collection

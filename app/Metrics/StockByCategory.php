@@ -10,7 +10,7 @@ class StockByCategory implements MetricsContract
     /**
      * Create collection of stock by category filter by date and category name.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection|mixed
      */
     public function read(array $filters):Collection

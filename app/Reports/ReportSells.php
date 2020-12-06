@@ -12,7 +12,7 @@ class ReportSells implements ReportContract
     /**
      * Create as sells collection to export using date and invoices status filters.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return Collection
      */
     public function export(Request $request):Collection

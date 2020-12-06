@@ -11,7 +11,7 @@ class SellsByCategory implements MetricsContract
     /**
      * Create collection of sells by category filter by date,category and status.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection
      */
     public function read(array $filters):Collection

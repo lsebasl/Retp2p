@@ -10,7 +10,7 @@ class TopClients implements MetricsContract
     /**
      * Create collection the best 7 client in the store, filter by date.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection|mixed
      */
     public function read(array $filters):Collection

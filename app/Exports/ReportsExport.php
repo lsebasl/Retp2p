@@ -48,7 +48,7 @@ class ReportsExport implements FromCollection, WithHeadings, ShouldQueue
     }
 
     /**
-     *Return a collection to export.
+     * Return a collection to export.
      *
      * @return \Illuminate\Support\Collection
      */

@@ -55,8 +55,8 @@ class RoleController extends Controller
     /**
      * Store a newly created role in storage.
      *
-     * @param RolesCreateRequest $request
-     * @param Role $role
+     * @param  RolesCreateRequest $request
+     * @param  Role               $role
      * @return RedirectResponse
      */
     public function store(RolesCreateRequest $request, Role $role):RedirectResponse

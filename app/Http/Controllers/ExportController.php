@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class ExportController extends Controller
 {
     /**
-     * @param ReportRequest $request
+     * @param  ReportRequest $request
      * @return RedirectResponse
      */
     public function export(ReportRequest $request):RedirectResponse

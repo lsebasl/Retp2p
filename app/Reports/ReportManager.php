@@ -26,7 +26,7 @@ class ReportManager implements ReportContract
     /**
      * Export collection depends of a report type.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return Collection
      */
     public function export(Request $request):Collection

@@ -10,7 +10,7 @@ class UsersStatus implements MetricsContract
     /**
      * Create collection of user by filter by date and status.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection|mixed
      */
     public function read(array $filters):Collection

@@ -11,7 +11,7 @@ class SellsByStatus implements MetricsContract
     /**
      * Create collection of invoices by status filter by date,invoice status.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection|mixed
      */
     public function read(array $filters):Collection

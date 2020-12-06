@@ -14,7 +14,7 @@ class ReportProducts implements ReportContract
     /**
      * Create a product collection to export using category,mark and date filters.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return Collection
      */
     public function export(Request $request):Collection

@@ -26,7 +26,7 @@ class MetricsManager implements MetricsContract
     /**
      * Read the a behavior depending of a specific collection.
      *
-     * @param array $filters
+     * @param  array $filters
      * @return Collection
      */
     public function read(array $filters):Collection

@@ -34,7 +34,7 @@ class ExportController extends Controller
 
             $filePath = asset('storage/'.$exportType.'.xlsx');
 
-            (new ReportsExport($export, $report['tabl']))->store($exportType.'.xlsx')
+            (new ReportsExport($export, $report['table']))->store($exportType.'.xlsx')
                 ->chain([new NotifyUserOfCompletedExport($filePath, auth()->user())]);
 
             return back()->with('success', 'Report Has Been Downloaded Wait Notification In Your E-mail!');

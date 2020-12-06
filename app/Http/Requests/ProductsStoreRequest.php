@@ -36,6 +36,7 @@ class ProductsStoreRequest extends FormRequest
             'price' => 'required|numeric|min:0|max:100000000',
             'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
+            'image' => 'required'
 
         ];
     }

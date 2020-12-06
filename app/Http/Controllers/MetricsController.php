@@ -34,14 +34,21 @@ class MetricsController extends Controller
      */
     public function show(MetricsRequest $request):View
     {
+
         $typeChart = $request->input('typeChart');
 
         $reportType = $request->input('reportType');
 
-        $metric = config('metrics.' . $reportType) ?? abort(404);
+        $tittle= config('metrics.' . $reportType.'.tittle');
+
+        $ejeX= config('metrics.' . $reportType.'.ejeX');
+
+        $ejeY= config('metrics.' . $reportType.'.ejeY');
+
+        $metric = config('metrics.' . $reportType.'.class') ?? abort(404);
 
         $result = (new MetricsManager(new $metric()))->read($request->all());
 
-        return view('products.reports', compact('result', 'typeChart', 'reportType'));
+        return view('products.reports', compact('result', 'typeChart', 'tittle','ejeX','ejeY'));
     }
 }

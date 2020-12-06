@@ -6,14 +6,20 @@ use App\Exports\ReportsExport;
 use App\Http\Requests\ReportRequest;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Reports\ReportManager;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ExportController extends Controller
 {
-    public function export(ReportRequest $request)
+    /**
+     * @param ReportRequest $request
+     * @return RedirectResponse
+     */
+    public function export(ReportRequest $request):RedirectResponse
     {
+
         $exportType = $request->input('exportType');
 
         $report = config('reports.' . $exportType) ?? abort(404);

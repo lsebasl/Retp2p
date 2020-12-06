@@ -295,7 +295,7 @@
                         <label for="status">Report By Sells</label>
                         <select id="status" class="form-control" name="status">
                             <option value=""></option>
-                            @foreach(\App\Constants\InvoicesStatus::toArray() as $statusKey => $status)
+                            @foreach(\App\Constants\invoicesStatus::toArray() as $statusKey => $status)
                                 <option value="{{$status}}" @if($status === old('$status') )selected @endif>{{$status}}</option>
                             @endforeach
                         </select>

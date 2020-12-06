@@ -12,12 +12,11 @@ class MetricsController extends Controller
 {
 
     /**
-     * Display a listing of the stock..
+     * Show ..
      *
-     * @param  Request $request
      * @return View
      */
-    public function index(Request $request):View
+    public function index():View
     {
         $typeChart = 'bar';
 

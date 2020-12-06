@@ -18,4 +18,15 @@ class Logs
 
         Log::info("Action performed $action $model by Admin:$admin");
     }
+
+    /**
+     * @param $message
+     * @param array $options
+     * @return void
+     */
+    public static function errorLogger($message,$options=[]):void
+    {
+        Log::error("Action fail in $message",$options);
+    }
+
 }

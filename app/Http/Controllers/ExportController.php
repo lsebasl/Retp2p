@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GeneralLogEvent;
 use App\Exports\ReportsExport;
+use App\Helpers\Logs;
 use App\Http\Requests\ReportRequest;
 use App\Jobs\NotifyUserOfCompletedExport;
 use App\Reports\ReportManager;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,13 +28,33 @@ class ExportController extends Controller
 
         Storage::disk()->put('actualTable.txt', config('reports.' .$exportType)['table']);
 
-        $export = (new ReportManager(new $report['behaviour']))->export($request);
+        try {
 
-        $filePath = asset('storage/'.$exportType.'.xlsx');
+            $export = (new ReportManager(new $report['behaviour']))->export($request);
 
-        (new ReportsExport($export, $report['table']))->store($exportType.'.xlsx')
-            ->chain([new NotifyUserOfCompletedExport($filePath, auth()->user())]);
+            $filePath = asset('storage/'.$exportType.'.xlsx');
 
-        return back()->with('success', 'Report Has Been Downloaded Wait Notification In Your E-mail!');
+            (new ReportsExport($export, $report['tabl']))->store($exportType.'.xlsx')
+                ->chain([new NotifyUserOfCompletedExport($filePath, auth()->user())]);
+
+            return back()->with('success', 'Report Has Been Downloaded Wait Notification In Your E-mail!');
+
+        } catch (Exception $e) {
+
+            $message = 'download report'. " " . $e->getMessage();
+
+            $options=[
+                'exportType' => $exportType,
+                'user' => auth()->user()->id,
+            ];
+
+            Logs::errorLogger($message,$options);
+
+            return back()->with('error', 'Report Has not Been Downloaded');
+
+        }
+
+
+
     }
 }

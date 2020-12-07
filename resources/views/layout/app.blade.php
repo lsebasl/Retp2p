@@ -155,6 +155,7 @@
                         </div>
                     </a>
                 </li>
+                @can('roles.index')
                     <li class="full-width divider-menu-h"></li>
                     <li class="full-width">
                         <a href="#!" class="full-width btn-subMenu">
@@ -190,6 +191,7 @@
                             </li>
                         </ul>
                     </li>
+                @endcan
                 @can('users.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">

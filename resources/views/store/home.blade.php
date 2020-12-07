@@ -36,13 +36,6 @@
                                 <h5><a href="single.html">Mobile Phone1</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$380</span> <i class="item_price">$350</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Mobile Phone1" />
-                                        <input type="hidden" name="amount" value="350.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -52,13 +45,6 @@
                                 <h5><a href="single.html">Mobile Phone2</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$330</span> <i class="item_price">$302</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Mobile Phone2" />
-                                        <input type="hidden" name="amount" value="302.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -68,13 +54,6 @@
                                 <h5><a href="single.html">Mobile Phone3</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$250</span> <i class="item_price">$245</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Mobile Phone3" />
-                                        <input type="hidden" name="amount" value="245.00"/>
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="clearfix"> </div>
@@ -91,13 +70,6 @@
                                 <h5><a href="single.html">Speakers</a></h5>
                                 <p><span>$320</span> <i class="item_price">$250</i></p>
                                 <div class="simpleCart_shelfItem">
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Speakers" />
-                                        <input type="hidden" name="amount" value="250.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -107,13 +79,6 @@
                                 <h5><a href="single.html">Headphones</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$180</span> <i class="item_price">$150</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Headphones" />
-                                        <input type="hidden" name="amount" value="150.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -123,13 +88,6 @@
                                 <h5><a href="single.html">Audio Player</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$220</span> <i class="item_price">$180</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Audio Player" />
-                                        <input type="hidden" name="amount" value="180.00"/>
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="clearfix"> </div>
@@ -146,13 +104,6 @@
                                 <h5><a href="single.html">Laptop</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$880</span> <i class="item_price">$850</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Laptop" />
-                                        <input type="hidden" name="amount" value="850.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -162,13 +113,6 @@
                                 <h5><a href="single.html">Notebook</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$290</span> <i class="item_price">$280</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Notebook" />
-                                        <input type="hidden" name="amount" value="280.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="clearfix"> </div>
@@ -186,13 +130,6 @@
                                 <h5><a href="single.html">Speakers</a></h5>
                                 <div class="simpleCart_shelfItem">
                                     <p><span>$950</span> <i class="item_price">$820</i></p>
-                                    <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="w3ls_item" value="Speakers" />
-                                        <input type="hidden" name="amount" value="820.00" />
-                                        <button type="submit" class="w3ls-cart">Add to cart</button>
-                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-4 agile_ecommerce_tab_left">
@@ -261,13 +198,6 @@
                     <h5><a href="single.html">Laptops</a></h5>
                     <div class="simpleCart_shelfItem">
                         <p><span>$520</span> <i class="item_price">$500</i></p>
-                        <form action="#" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="w3ls_item" value="Red Laptop">
-                            <input type="hidden" name="amount" value="500.00">
-                            <button type="submit" class="w3ls-cart">Add to cart</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -279,13 +209,6 @@
                     <h5><a href="single.html">Black Phone</a></h5>
                     <div class="simpleCart_shelfItem">
                         <p><span>$380</span> <i class="item_price">$370</i></p>
-                        <form action="#" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="w3ls_item" value="Black Phone">
-                            <input type="hidden" name="amount" value="370.00">
-                            <button type="submit" class="w3ls-cart">Add to cart</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -297,13 +220,6 @@
                     <h5><a href="single.html">Tv & Video</a></h5>
                     <div class="simpleCart_shelfItem">
                         <p><span>$150</span> <i class="item_price">$100</i></p>
-                        <form action="#" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="w3ls_item" value="Kids Toy">
-                            <input type="hidden" name="amount" value="100.00">
-                            <button type="submit" class="w3ls-cart">Add to cart</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -315,13 +231,6 @@
                     <h5><a href="single.html">Induction Stove</a></h5>
                     <div class="simpleCart_shelfItem">
                         <p><span>$280</span> <i class="item_price">$250</i></p>
-                        <form action="#" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="w3ls_item" value="Induction Stove">
-                            <input type="hidden" name="amount" value="250.00">
-                            <button type="submit" class="w3ls-cart">Add to cart</button>
-                        </form>
                     </div>
                 </div>
             </div>

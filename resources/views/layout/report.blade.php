@@ -39,8 +39,8 @@
 <body>
 <div id="app">
     <div style="background-color: #3F51B5">
-        <ul class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" >
-            <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 display-1" style="background-color: #3F51B5;font-size:25px;height: 45px" href="#">Project Store</a>
+        <ul class="navbar navbar-dark sticky-top flex-md-nowrap p-0" >
+            <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 display-1" style="font-family: OswaldLight; background-color: #3F51B5;font-size:25px;height: 45px" href="#">Project Store</a>
                 <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                  </button>

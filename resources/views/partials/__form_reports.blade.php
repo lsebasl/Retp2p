@@ -58,18 +58,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exportUsersReport">
+            <div class="modal-body flex">
+                <div class="">
+                <div class="form-group d-flex justify-content-center">
+                    <button type="button" class="btn btn-lg " style="background: #3F51B5; color: #fff; box-shadow:0 2px 2px 0 rgba(0,0,0, .14),0 3px 1px -2px rgba(0,0,0, .2),0 1px 5px 0 rgba(0,0,0, .12); width: 15rem" data-toggle="modal" data-target="#exportUsersReport">
                         Export Users Report</button>
                 </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exportProductsReport">
+                <div class="form-group d-flex justify-content-center">
+                    <button type="button" class="btn btn-lg  " style="background: #3F51B5; color: #fff; box-shadow:0 2px 2px 0 rgba(0,0,0, .14),0 3px 1px -2px rgba(0,0,0, .2),0 1px 5px 0 rgba(0,0,0, .12); width: 15rem" data-toggle="modal" data-target="#exportProductsReport">
                         Export Products Report</button>
                 </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exportSellsReport">
+                <div class="form-group d-flex justify-content-center">
+                    <button type="button" class="btn btn-lg " style="background: #3F51B5; color: #fff; box-shadow:0 2px 2px 0 rgba(0,0,0, .14),0 3px 1px -2px rgba(0,0,0, .2),0 1px 5px 0 rgba(0,0,0, .12); width: 15rem" data-toggle="modal" data-target="#exportSellsReport">
                         Export Sells Reports</button>
+                </div>
                 </div>
             </div>
         </div>

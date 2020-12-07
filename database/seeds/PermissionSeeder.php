@@ -126,6 +126,11 @@ class PermissionSeeder extends Seeder
             'cart.show',
             'cart.update',
             'cart.destroy',
+            'invoices.index',
+            'invoices.create',
+            'invoices.show',
+            'invoices.edit',
+            'invoices.destroy',
 
         ]);
 

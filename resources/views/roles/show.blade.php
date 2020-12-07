@@ -6,7 +6,7 @@
     <div class="mdl-tabs__panel is-active" id="tabNewProvider">
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
-                <div class="full-width panel mdl-shadow--2dp "style="height:2000px;">
+                <div class="full-width panel mdl-shadow--2dp" style="height:150rem;">
                     <div class="full-width panel-tittle bg-primary text-center tittles">
 
                         Role Information
@@ -19,7 +19,7 @@
                                         <i class="zmdi zmdi-view-list-alt"></i>
                                         <p></p>
                                         <p><strong>Role Name</strong> {{$role->name}} </p>
-                                        <p><strong>Descriptión</strong>  </p>
+                                        <p><strong>Description</strong>  </p>
                                         <p>{{$role->description}}</p>
                                     </div>
                                 </div>

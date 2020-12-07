@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Storage;
 class ExportController extends Controller
 {
     /**
+     * Exports excel products depending of a specific behaviour.
+     *
      * @param  ReportRequest $request
      * @return RedirectResponse
      */

@@ -55,12 +55,11 @@ class RoleController extends Controller
 
     /**
      * Store a newly created role in storage.
-     *
-     * @param  Request $request
-     * @param  Role    $role
-     * @return RedirectResponse
+     * @param Request $request
+     * @param Role $role
+     * @return \Illuminate\Contracts\Foundation\Application|RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request, Role $role)
+    public function store(Request $request, Role $role):RedirectResponse
     {
         try {
             Logs::AuditLogger($role, 'store');
@@ -76,7 +75,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Show a specific user
+     * Show a specific role with permissions.
      *
      * @param  $id
      * @return View
@@ -92,7 +91,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Show a specific user
+     * Edit a role specific.
      *
      * @param  $id
      * @return View

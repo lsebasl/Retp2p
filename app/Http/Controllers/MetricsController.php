@@ -12,7 +12,7 @@ class MetricsController extends Controller
 {
 
     /**
-     * Show ..
+     * Show the view in report with the chart and list of invoices by status.
      *
      * @return View
      */
@@ -32,7 +32,7 @@ class MetricsController extends Controller
     }
 
     /**
-     * Create chart with using defined param.
+     * Create chart with using defined type chart.
      *
      * @param  MetricsRequest $request
      * @return View

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UpdateProductAction extends Action
 {
     /**
-     * * Create the data to store a product.
+     * * Create the data to update a product.
      *
      * @param  Model   $product
      * @param  Request $request

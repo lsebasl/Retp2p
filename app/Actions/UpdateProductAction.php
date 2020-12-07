@@ -26,7 +26,7 @@ class UpdateProductAction extends Action
         $product->price = $request->input('price');
         $product->discount = $request->input('discount');
         $product->status = $request->input('status');
-        $product->image = $request->input('image');
+        $product->image = $request->file('image')->store('images');
 
         $product->save();
 

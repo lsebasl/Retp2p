@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\facades\Cache;
+use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
@@ -34,7 +34,7 @@ class Category extends Model
     public function getCacheCategory():Collection
     {
         return Cache::remember(
-            'category',
+            'categories',
             now()->addDay(),
             function () {
                 return $this->all();

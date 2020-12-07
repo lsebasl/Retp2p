@@ -9,10 +9,9 @@ use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-
 class CartRepository
 {
-    protected  $user;
+    protected $user;
 
     public function __construct(User $user)
     {
@@ -59,6 +58,4 @@ class CartRepository
     {
         return  Invoice::orderBy('created_at', request('sorted', 'DESC'))->paginate($pages);
     }
-
-
 }

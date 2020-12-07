@@ -10,11 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
-
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
+    use HasRoles;
+    use HasApiTokens;
+
 
     const ENABLE_STATUS = 'Enable';
     const DISABLE_STATUS = 'Disable';
@@ -96,8 +99,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     /**
-     * @param Builder $query
-     * @param string|null $status
+     * @param  Builder     $query
+     * @param  string|null $status
      * @return Builder
      */
     public function scopeStatus(Builder $query, ? string $status):Builder
@@ -111,26 +114,26 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder $query
+     * @param Builder     $query
      * @param string|null $initialDate
      * @param string|null $finalDate
      */
-    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)
     {
         $initialDate = Carbon::parse($initialDate);
 
         $finalDate = Carbon::parse($finalDate);
 
         if ($initialDate && $finalDate) {
-            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+            return $query->whereBetween('created_at', [$initialDate,$finalDate]);
         }
 
         return $query;
     }
 
     /**
-     * @param Builder $query
-     * @param string|null $idType
+     * @param  Builder     $query
+     * @param  string|null $idType
      * @return Builder
      */
     public function scopeIdType(Builder $query, ? string $idType)
@@ -139,12 +142,20 @@ class User extends Authenticatable implements MustVerifyEmail
             return $query->where('id_type', $idType);
         }
         return $query;
-
     }
 
-
-
-
-
-
+    /**
+     * Query Scope Name.
+     *
+     * @param  Builder     $query
+     * @param  string|null $name
+     * @return Builder
+     */
+    public function scopeName(Builder $query, ? string $name):Builder
+    {
+        if (null !== $name) {
+            return $query->where('name', 'LIKE', "$name%");
+        }
+        return $query;
+    }
 }

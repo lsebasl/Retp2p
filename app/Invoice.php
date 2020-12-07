@@ -86,7 +86,7 @@ class Invoice extends Model implements \SplSubject
     public function detach(\SplObserver $observer):void
     {
         $key = array_search($observer, $this->observers, true);
-        if($key) {
+        if ($key) {
             unset($this->observers[$key]);
         }
     }
@@ -106,19 +106,19 @@ class Invoice extends Model implements \SplSubject
     /**
      * Scope to filter invoices by expedition date
      *
-     * @param Builder $query
-     * @param string|null $initialDate
-     * @param string|null $finalDate
+     * @param  Builder     $query
+     * @param  string|null $initialDate
+     * @param  string|null $finalDate
      * @return Builder|Builder
      */
-    public function scopeCreatedDate(Builder $query, ?string $initialDate,?string $finalDate)
+    public function scopeCreatedDate(Builder $query, ?string $initialDate, ?string $finalDate)
     {
         $initialDate = Carbon::parse($initialDate);
 
         $finalDate = Carbon::parse($finalDate);
 
         if ($initialDate && $finalDate) {
-            return $query->whereBetween('created_at',[$initialDate,$finalDate]);
+            return $query->whereBetween('created_at', [$initialDate,$finalDate]);
         }
 
         return $query;
@@ -141,7 +141,6 @@ class Invoice extends Model implements \SplSubject
 
     public function scopeMark(Builder$query, ? string $mark):Builder
     {
-
         if (null !== $mark) {
             return $query->where('mark', 'LIKE', "$mark%");
         }

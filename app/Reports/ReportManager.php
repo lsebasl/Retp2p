@@ -2,9 +2,8 @@
 
 namespace App\Reports;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class ReportManager implements ReportContract
 {
@@ -23,12 +22,15 @@ class ReportManager implements ReportContract
         $this->excelReport = $excelReport;
     }
 
+
     /**
-     * @param Request $request
-     * @return Model|mixed
+     * Export collection depends of a report type.
+     *
+     * @param  Request $request
+     * @return Collection
      */
-    public function export(Request $request)
+    public function export(Request $request):Collection
     {
-       return $this->excelReport->export($request);
+        return $this->excelReport->export($request);
     }
 }

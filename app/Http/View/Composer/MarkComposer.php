@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\View\Composers;
+namespace App\Http\View\Composer;
 
 use App\Mark;
 use Illuminate\View\View;

@@ -2,56 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MetricsRequest;
 use App\Metrics\MetricsManager;
-use App\Metrics\SellsByCategory;
-use App\Metrics\SellsByProduct;
-use App\Metrics\SellsByStatus;
-use App\Metrics\StockByCategory;
-use App\Metrics\TopClients;
-use App\Metrics\IdType;
-use App\Metrics\UsersStatus;
-use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
-
 
 class MetricsController extends Controller
 {
 
     /**
-     * Display a listing of the stock..
+     * Show ..
      *
-     * @param Request $request
      * @return View
      */
-    public function index(Request $request):View
+    public function index():View
     {
         $typeChart = 'bar';
 
-        $result = DB::table('invoices')->select(DB::raw("users_id as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
+        $tittle = 'Sells By Status';
 
-        return view('products.reports', compact('result','typeChart'));
+        $ejeX = 'Invoices Status';
 
+        $ejeY = 'Total';
+
+        $result = DB::table('invoices')->select(DB::raw("status as DATA, sum(total) as LABEL"))->groupBy('DATA')->get();
+
+        return view('products.reports', compact('result', 'typeChart', 'tittle', 'ejeX', 'ejeY'));
     }
 
     /**
-     * @param  Request $request
+     * Create chart with using defined param.
+     *
+     * @param  MetricsRequest $request
      * @return View
      */
-    public function show(Request $request)
+    public function show(MetricsRequest $request):View
     {
         $typeChart = $request->input('typeChart');
 
         $reportType = $request->input('reportType');
 
-        $metric = config('metrics.' . $reportType) ?? abort(404);
+        $tittle= config('metrics.' . $reportType.'.tittle');
+
+        $ejeX= config('metrics.' . $reportType.'.ejeX');
+
+        $ejeY= config('metrics.' . $reportType.'.ejeY');
+
+        $metric = config('metrics.' . $reportType.'.class') ?? abort(404);
 
         $result = (new MetricsManager(new $metric()))->read($request->all());
 
-        return view('products.reports', compact('result','typeChart','reportType'));
+        return view('products.reports', compact('result', 'typeChart', 'tittle', 'ejeX', 'ejeY'));
     }
 }

@@ -19,12 +19,10 @@ class Units implements \SplObserver
      */
     public function update(SplSubject $subject):void
     {
-
         $invoice = $subject->products;
 
         $invoice->each(
             function ($product) {
-
                 $newQuantity  = $product->units - $product->pivot->quantity;
 
                 $product = Product::where('id', $product->id)->first();
@@ -36,8 +34,7 @@ class Units implements \SplObserver
                 'product_name' => $product->name
                 ];
 
-                if ($newQuantity <= '10' & $newQuantity >= '0' ) {
-
+                if ($newQuantity <= '10' & $newQuantity >= '0') {
                     event(
                         new LogInvoiceEvent(
                             'alert',
@@ -48,11 +45,9 @@ class Units implements \SplObserver
 
 
                     Mail::to(config('mail.to.stock'))->send(new SendNotificationStock($details));
-
                 }
 
                 if ($newQuantity <= '0') {
-
                     event(
                         new LogInvoiceEvent(
                             'alert',

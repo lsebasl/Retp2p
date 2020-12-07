@@ -3,22 +3,131 @@
 namespace Tests\Feature;
 
 use App\Category;
+
 use App\Exports\ProductsExport;
 use App\Imports\ProductsImport;
 use App\Mark;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Http\UploadedFile;
+
 
 class ProductsTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+
+        Permission::create(['name' => 'roles.index', 'description' => 'Access to see roles lists']);
+        Permission::create(['name' => 'roles.create', 'description' => 'Access to form create roles']);
+        Permission::create(['name' => 'roles.destroy','description' => 'Access to delete roles']);
+        Permission::create(['name' => 'roles.show','description' => 'Access to see a specific roles']);
+        Permission::create(['name' => 'roles.edit','description' => 'Access to edit roles']);
+
+
+        Permission::create(['name' => 'users.index', 'description' => 'Access to see users list']);
+        Permission::create(['name' => 'users.destroy','description' => 'Access to see delete users']);
+        Permission::create(['name' => 'users.show','description' => 'Access to see a specific user']);
+        Permission::create(['name' => 'users.edit','description' =>'Access to edit users']);
+
+        Permission::create(['name' => 'products.index', 'description' => 'Access to see products lists']);
+        Permission::create(['name' => 'products.create', 'description' => 'Access to create products']);
+        Permission::create(['name' => 'products.destroy','description' => 'Access to delete products']);
+        Permission::create(['name' => 'products.show','description' => 'Access to see a specific product']);
+        Permission::create(['name' => 'products.edit','description' => 'Access to edit products']);
+
+        Permission::create(['name' => 'clients.index','description' => 'Access to see products clients']);
+        Permission::create(['name' => 'clients.create','description' => 'Access to create clients']);
+        Permission::create(['name' => 'clients.destroy','description' => 'Access to delete clients']);
+        Permission::create(['name' => 'clients.show','description' => 'Access to see a specific client']);
+        Permission::create(['name' => 'clients.edit','description' => 'Access to edit a clients']);
+
+        Permission::create(['name' => 'invoices.index','description' => 'Access to see invoices']);
+        Permission::create(['name' => 'invoices.create','description' => 'Access to create invoices']);
+        Permission::create(['name' => 'invoices.destroy','description' => 'Access to eliminate invoices']);
+        Permission::create(['name' => 'invoices.show','description' => 'Access to see a specific invoices']);
+        Permission::create(['name' => 'invoices.edit','description' => 'Access to edit invoices']);
+
+        Permission::create(['name' => 'stocks.index','description' => 'Access to see inventory']);
+
+        Permission::create(['name' => 'home','description' => 'Access to administrative interface']);
+
+        Permission::create(['name' => 'export','description' => 'Access to export excel products']);
+        Permission::create(['name' => 'import','description' => 'Access to import excel products']);
+
+        Permission::create(['name' => 'payment.attempt','description' => 'Access to pay products']);
+        Permission::create(['name' => 'payment.history','description' => 'Access to see payment attempts']);
+        Permission::create(['name' => 'payment.callback','description' => 'Access to pay products']);
+
+        Permission::create(['name' => 'store.profile','description' => 'Access to see profile']);
+        Permission::create(['name' => 'cart.add','description' => 'Access to add to shopping cart']);
+        Permission::create(['name' => 'cart.show','description' => 'Access to see to shopping cart']);
+        Permission::create(['name' => 'cart.update','description' => 'Access to update shopping cart']);
+        Permission::create(['name' => 'cart.destroy','description' => 'Access to delete shopping cart']);
+
+        $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
+        $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
+        $admin->givePermissionTo(
+            [
+            'users.index',
+            'users.destroy',
+            'users.show',
+            'users.edit',
+            'products.index',
+            'products.create',
+            'products.destroy',
+            'products.show',
+            'products.edit',
+            'roles.index',
+            'roles.create',
+            'roles.destroy',
+            'roles.show',
+            'roles.edit',
+            'clients.index',
+            'clients.create',
+            'clients.destroy',
+            'clients.show',
+            'clients.edit',
+            'invoices.index',
+            'invoices.create',
+            'invoices.destroy',
+            'invoices.show',
+            'invoices.edit',
+            'stocks.index',
+            'home',
+            'export',
+            'import',
+            'payment.attempt',
+            'payment.history',
+            'payment.callback',
+            'store.profile',
+            'cart.add',
+            'cart.show',
+            'cart.update',
+            'cart.destroy',
+            ]
+        );
+
+        $this->user = factory(User::class)->create(['role' => 'Admin']);
+        $this->user->assignRole('Admin');
+
+    }
 
     /**
      * @test
@@ -156,9 +265,8 @@ class ProductsTest extends TestCase
      */
     public function it_show_if_product_list_is_empty()
     {
-        $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('products.index'))
+        $this->actingAs($this->user)->get(route('products.index'))
             ->assertStatus(200)
             ->assertSee('Without Products')
             ->assertOk();
@@ -170,10 +278,19 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_product_list_view()
     {
-        $product = factory(Product::class)->create();
-        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create(
+            [
+                'name' => 'Computers'
+            ]
+        );
 
-        $response = $this->actingAs($user)->get(route('products.index'));
+        $product = factory(Product::class)->create(
+            [
+                'category_id' => $category->getId(),
+            ]
+        );
+
+        $response = $this->actingAs($this->user)->get(route('products.index'));
 
         $response->assertSee('Status')
             -> assertSee('Search')
@@ -192,10 +309,10 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_product_stocks_view()
     {
-        $user = factory(User::class)->create();
+
         $product = factory(Product::class)->create();
 
-        $response = $this->actingAs($user)->get(route('stocks.index'));
+        $response = $this->actingAs($this->user)->get(route('stocks.index'));
 
         $response->assertSee($product->name)
             ->assertSee($product->Barcode)
@@ -225,7 +342,7 @@ class ProductsTest extends TestCase
             ]
         );
 
-        $response = $this->actingAs($user)->get(route('goods.index'));
+        $response = $this->actingAs($this->user)->get(route('goods.index'));
 
         $response->assertSee($product->name)
             ->assertSee($product->image)
@@ -240,18 +357,19 @@ class ProductsTest extends TestCase
      */
     public function admin_can_see_create_products_form()
     {
-        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('products.create'));
+        $response = $this->actingAs($this->user)->get(route('products.create'));
 
         $response->assertSee('barcode')
             ->assertSee('name')
             ->assertSee('status')
             ->assertSee('price')
             ->assertStatus(200)
-            ->assertOk();;
+            ->assertOk();
+
 
     }
+
     /**
      * @param        string $field
      * @param        $value
@@ -288,7 +406,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('stocks.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -332,7 +450,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('products.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -376,7 +494,7 @@ class ProductsTest extends TestCase
             $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('goods.index', $filters));
 
         $response->assertSessionDoesntHaveErrors($field)
@@ -398,7 +516,7 @@ class ProductsTest extends TestCase
                 $field=> $value
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->get(route('products.index', $filters));
 
         $response->assertSessionHasErrors($field);
@@ -421,7 +539,7 @@ class ProductsTest extends TestCase
 
         Event::fake();
 
-        $this->actingAs($user)
+        $this->actingAs($this->user)
             ->put(route('products.update', $product), $this->getValidData($file))
             ->assertRedirect(route('products.show', $product));
 
@@ -450,7 +568,6 @@ class ProductsTest extends TestCase
      */
     public function admin_can_store_a_product()
     {
-        $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create(
             [
@@ -469,7 +586,7 @@ class ProductsTest extends TestCase
 
         Event::fake();
 
-         $this->actingAs($user)
+         $this->actingAs($this->user)
              ->post(route('products.store'), $this->getValidData($file))
              ->assertRedirect(route('stocks.index'))
              ->assertStatus(302);
@@ -499,13 +616,12 @@ class ProductsTest extends TestCase
      */
     public function admin_cant_store_a_incomplete_product_form()
     {
-        $user = factory(User::class)->create();
 
         Storage::fake('image');
 
         $file = uploadedfile::fake()->image('product.jpg');
 
-        $response =$this->actingAs($user)->post(
+        $response =$this->actingAs($this->user)->post(
             route('products.store'), [
 
             'image' => $file,
@@ -533,21 +649,16 @@ class ProductsTest extends TestCase
     public function admin_can_delete_a_product()
     {
         $product = factory(Product::class)->create();
-        $admin = factory(User::class)->create();
 
-        $this->actingAs($admin)->delete(route('products.destroy', $product))
+        $this->actingAs($this->user)->delete(route('products.destroy', $product))
             ->assertRedirect(route('stocks.index'));
 
         $this->assertDatabaseEmpty('products');
 
     }
 
-    /**
-     * @test
-     */
     public function admin_can_export_products_list()
     {
-
         $admin = factory(User::class)->create();
 
         Excel::fake();
@@ -559,32 +670,6 @@ class ProductsTest extends TestCase
 
     }
 
-/*
-    /**
-     * @test
-     */
-    /*
-    public function admin_can_import_products_list()
-    {
-
-        Excel::fake();
-
-        Storage::fake('diskName');
-
-        $file = UploadedFile::fake()->create('diskName.xlsx');
-
-        $admin = factory(User::class)->create();
-
-        $this->actingAs($admin)
-            ->get(route('import'), ['borrowers' => $file]);
-
-
-        Excel::assertImported('diskName.xlsx', 'diskName', function(ProductsImport $import) {
-            return true;
-        });
-
-    }
-*/
 
     /**
      * @return array

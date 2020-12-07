@@ -47,7 +47,6 @@ class UpdateStatus extends Command
 
         $pending->each(
             function (PaymentAttempt $paymentAttempt) use ($placetopay) {
-
                 $response = $placetopay->query($paymentAttempt->requestId);
 
                 $paymentAttempt->update(
@@ -57,6 +56,5 @@ class UpdateStatus extends Command
                 );
             }
         );
-
     }
 }

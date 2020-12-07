@@ -5,11 +5,39 @@ namespace Tests\Feature;
 use App\Product;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class StocksTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    public function setUp(): void
+    {
+
+        parent::setUp();
+
+        Permission::create(['name' => 'home','description' => 'Access to see Admin Console']);
+        Permission::create(['name' => 'stocks.index','description' => 'Access to see inventory']);
+
+        $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
+        $admin->givePermissionTo(
+            [
+            'home',
+            'stocks.index',
+            ]
+        );
+
+        $this->user = factory(User::class)->create(['role' => 'Admin']);
+        $this->user->assignRole('Admin');
+
+    }
 
     /**
      * @test
@@ -32,6 +60,7 @@ class StocksTest extends TestCase
             ->assertRedirect(route('login'));
 
     }
+
     /**
      * @test
      */
@@ -43,6 +72,7 @@ class StocksTest extends TestCase
             ->assertRedirect(route('login'));
 
     }
+
     /**
      * @test
      */
@@ -68,12 +98,10 @@ class StocksTest extends TestCase
     /**
      * @test
      */
-
     public function it_show_if_stock_list_is_empty()
     {
-            $user = factory(User::class)->create();
 
-            $this->actingAs($user)->get(route('stocks.index'));
+            $this->actingAs($this->user)->get(route('stocks.index'));
 
             $this->get(route('stocks.index'))
                 ->assertStatus(200)

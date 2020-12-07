@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\CategoryComposer;
-use App\Http\View\Composers\MarkComposer;
+use App\Http\View\Composer\CategoryComposer;
+use App\Http\View\Composer\MarkComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

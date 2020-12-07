@@ -35,5 +35,4 @@ class HomeController extends Controller
         //todo usuario puede ver la tienda
         return view('store.home');
     }
-
 }

@@ -23,11 +23,11 @@ $factory->define(Invoice::class, function (Faker $faker) {
     return [
         'expedition_date' => $faker->date(),
         'expiration_date' => $faker->date(),
-        'status' => 'paid',
-        'total' => $faker->numberBetween(50,999999999),
-            'VAT' => 2000,
+        'status' => $faker->randomElement(['Paid','Rejected','Pending']),
+        'subtotal' => $faker->numberBetween(50,1000),
+        'VAT' => 2000,
+        'total' => $faker->numberBetween(1000,2000),
         'users_id' => factory(User::class),
-
     ];
 });
 

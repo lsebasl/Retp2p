@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsSearchRequest;
-use App\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\View\View;
 

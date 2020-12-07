@@ -8,30 +8,32 @@ use App\Helpers\Logs;
 use App\Http\Requests\UserUpdateRequest;
 use App\Product;
 use App\Repositories\CacheUser;
+use App\Repositories\ModelRepository;
 use Illuminate\Http\RedirectResponse;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    protected $cacheUser;
+    protected $modelRepository;
 
-    public function __construct(CacheUser $cacheUser)
+    public function __construct(ModelRepository $modelRepository)
     {
-        $this->cacheUser = $cacheUser;
+        $this->modelRepository = $modelRepository;
     }
 
     /**
      * List users after paginated.
      *
-     * @param  User $user
+     * @param  Request $request
+     * @param  User    $user
      * @return View
      */
-    public function index(User $user): View
+    public function index(Request $request, User $user): View
     {
-
-        $users = $this->cacheUser->getPaginated($user);
+        $users = $this->modelRepository->getPaginated($request, $user);
 
         return view('users.index', ['users' => $users]);
     }
@@ -44,11 +46,13 @@ class UserController extends Controller
      */
     public function show(User $user):View
     {
-        Logs::AuditLogger($user, 'show');
+        $roles = Role::get();
 
-        $this->cacheUser->cacheFindByModel($user);
+        $this->modelRepository->findByModel($user);
 
-        return view('users.show', ['user'=> $user]);
+        $this->modelRepository->findByModel($roles);
+
+        return view('users.show', ['user'=> $user], ['roles' => $roles]);
     }
 
     /**
@@ -59,11 +63,13 @@ class UserController extends Controller
      */
     public function edit(User $user):View
     {
+        $roles = Role::get();
+
         Logs::AuditLogger($user, 'edit');
 
-        $this->cacheUser->cacheFindByModel($user);
+        $this->modelRepository->findByModel($user);
 
-        return view('users.edit', ['user' => $user]);
+        return view('users.edit', ['user' => $user], ['roles' => $roles ]);
     }
 
     /**
@@ -77,7 +83,9 @@ class UserController extends Controller
     {
         Logs::AuditLogger($user, 'update');
 
-        $this->cacheUser->update($request, $user);
+        $user->roles()->sync($request->get('role'));
+
+        $this->modelRepository->update($request, $user);
 
         return redirect()->route('users.show', $user)->with('success', 'Client Has Been Updated!');
     }
@@ -93,7 +101,7 @@ class UserController extends Controller
     {
         Logs::AuditLogger($user, 'delete');
 
-        $this->cacheUser->delete($user);
+        $this->modelRepository->delete($user);
 
         return redirect()->route('users.index')->with('success', 'Client Has Been Deleted!');
     }

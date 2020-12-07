@@ -34,7 +34,6 @@ class CategoryRepository
      */
     public function category($category):LengthAwarePaginator
     {
-
         return Product::where('status', 'enable')
             ->where('category_id', $category)
             ->orderBy('created_at', request('sorted', 'DESC'))

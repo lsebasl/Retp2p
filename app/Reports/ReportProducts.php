@@ -2,24 +2,26 @@
 
 namespace App\Reports;
 
-
-use App\Exports\ReportsExport;
 use App\Product;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Collection;
+
+;
 
 class ReportProducts implements ReportContract
 {
+
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\Response|mixed|BinaryFileResponse
+     * Create a product collection to export using category,mark and date filters.
+     *
+     * @param  Request $request
+     * @return Collection
      */
-    public function export(Request $request)
+    public function export(Request $request):Collection
     {
         return Product::status($request->get('status'))
-            ->createdDate($request->get('initialDate'),$request->get('finalDate'))
+            ->createdDate($request->get('initialDate'), $request->get('finalDate'))
             ->mark($request->get('mark'))
             ->category($request->get('category'))->get();
     }
-
 }

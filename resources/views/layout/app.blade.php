@@ -155,6 +155,44 @@
                         </div>
                     </a>
                 </li>
+                @can('roles.index')
+                    <li class="full-width divider-menu-h"></li>
+                    <li class="full-width">
+                        <a href="#!" class="full-width btn-subMenu">
+                            <div class="navLateral-body-cl">
+                                <i class="zmdi zmdi-account"></i>
+                            </div>
+                            <div class="navLateral-body-cr hide-on-tablet">
+                                {{__('ROLES')}}
+                            </div>
+                            <span class="zmdi zmdi-chevron-left"></span>
+                        </a>
+                        <ul class="full-width menu-principal sub-menu-options">
+
+                            <li class="full-width">
+                                <a  href="{{ route('roles.index') }}" class="full-width">
+                                    <div class="navLateral-body-cl">
+                                        <i class="zmdi zmdi-accounts"></i>
+                                    </div>
+                                    <div class="navLateral-body-cr hide-on-tablet">
+                                        {{__('Role List')}}
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="full-width">
+                                <a href="{{ route('roles.create') }}" class="full-width">
+                                    <div class="navLateral-body-cl">
+                                        <i class="zmdi zmdi-account"></i>
+                                    </div>
+                                    <div class="navLateral-body-cr hide-on-tablet">
+                                        {{__('Create New Role')}}
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('users.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="#!" class="full-width btn-subMenu">
@@ -167,6 +205,7 @@
                         <span class="zmdi zmdi-chevron-left"></span>
                     </a>
                     <ul class="full-width menu-principal sub-menu-options">
+
                         <li class="full-width">
                             <a  href="{{ route('users.index') }}" class="full-width">
                                 <div class="navLateral-body-cl">
@@ -189,6 +228,8 @@
                         </li>
                     </ul>
                 </li>
+                @endcan
+                @can('clients.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="#!" class="full-width btn-subMenu">
@@ -200,7 +241,9 @@
                         </div>
                         <span class="zmdi zmdi-chevron-left"></span>
                     </a>
+                    @endcan
                     <ul class="full-width menu-principal sub-menu-options">
+                        @can('clients.index')
                         <li class="full-width">
                             <a  href="{{ route('clients.index') }}" class="full-width">
                                 <div class="navLateral-body-cl">
@@ -211,8 +254,10 @@
                                 </div>
                             </a>
                         </li>
+                        @endcan
+                        @can('clients.create')
                         <li class="full-width">
-                            <a href="{{ route('clients.index') }}" class="full-width">
+                            <a href="{{ route('clients.create') }}" class="full-width">
                                 <div class="navLateral-body-cl">
                                     <i class="zmdi zmdi-account"></i>
                                 </div>
@@ -221,8 +266,10 @@
                                 </div>
                             </a>
                         </li>
+                            @endcan
                     </ul>
                 </li>
+                @can('products.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="#!" class="full-width btn-subMenu">
@@ -245,6 +292,7 @@
                                 </div>
                             </a>
                         </li>
+                        @can('products.create')
                         <li class="full-width">
                             <a href="{{route("products.create")}}" class="full-width">
                                 <div class="navLateral-body-cl">
@@ -255,41 +303,10 @@
                                 </div>
                             </a>
                         </li>
+                        @endcan
                     </ul>
-                <li class="full-width divider-menu-h"></li>
-                <li class="full-width">
-                    <a href="#!" class="full-width btn-subMenu">
-                        <div class="navLateral-body-cl">
-                            <i class="zmdi zmdi-receipt"></i>
-                        </div>
-                        <div class="navLateral-body-cr hide-on-tablet">
-                            {{__('INVOICES')}}
-                        </div>
-                        <span class="zmdi zmdi-chevron-left"></span>
-                    </a>
-                    <ul class="full-width menu-principal sub-menu-options">
-                        <li class="full-width">
-                            <a href="{{route('invoices.index')}}" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-view-list"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Invoice List')}}
-                                </div>
-                            </a>
-                        </li>
-                        <li class="full-width">
-                            <a href="providers.html" class="full-width">
-                                <div class="navLateral-body-cl">
-                                    <i class="zmdi zmdi-plus"></i>
-                                </div>
-                                <div class="navLateral-body-cr hide-on-tablet">
-                                    {{__('Create New Invoice')}}
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    @endcan
+                    @can('stocks.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="{{ route('stocks.index') }}" class="full-width">
@@ -301,6 +318,8 @@
                         </div>
                     </a>
                 </li>
+                    @endcan
+                    @can('report.index')
                 <li class="full-width divider-menu-h"></li>
                 <li class="full-width">
                     <a href="{{ route('report.index') }}" class="full-width">
@@ -312,6 +331,7 @@
                         </div>
                     </a>
                 </li>
+                    @endcan
             </ul>
         </nav>
     </div>

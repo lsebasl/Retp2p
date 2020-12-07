@@ -25,7 +25,7 @@ class LogInvoiceEvent
      * @param $message
      * @param array $option
      */
-    public function __construct( $type, $message, $option = [])
+    public function __construct($type, $message, $option = [])
     {
         $this->type = $type;
         $this->message = $message;

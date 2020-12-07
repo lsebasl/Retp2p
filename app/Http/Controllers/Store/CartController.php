@@ -16,9 +16,9 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-        protected  $user;
-        protected $cartRepository;
-        protected $productRepository;
+    protected $user;
+    protected $cartRepository;
+    protected $productRepository;
 
     /**
      * Create a new controller instance.
@@ -27,7 +27,7 @@ class CartController extends Controller
      * @param CartRepository    $cartRepository
      * @param ProductRepository $productRepository
      */
-    public function __construct(User $user,CartRepository $cartRepository,ProductRepository $productRepository)
+    public function __construct(User $user, CartRepository $cartRepository, ProductRepository $productRepository)
     {
         $this->cartRepository = $cartRepository;
         $this->productRepository = $productRepository;
@@ -41,13 +41,11 @@ class CartController extends Controller
      */
     public function show():View
     {
-
         $carts = $this->cartRepository->getProduct();
 
         $totalIva = $this->totalPrice($carts);
 
         return view('store.cart', compact('carts', 'totalIva'))->with('success', 'Cart Has Benn Updated   !');
-
     }
 
     /**
@@ -58,7 +56,6 @@ class CartController extends Controller
      */
     public function add(CartUpdateRequest $request):RedirectResponse
     {
-
         $this->destroyAll();
 
         $cart = $request->all();
@@ -67,8 +64,7 @@ class CartController extends Controller
 
         $totalItems = count($cart)/4;
 
-        for($i = 1;$i<=$totalItems;$i++) {
-
+        for ($i = 1;$i<=$totalItems;$i++) {
             $quantity = $request->get('quantity_' . $i);
 
             $productId = $request->get('id_' . $i);
@@ -127,7 +123,6 @@ class CartController extends Controller
         $cart->delete($id);
 
         return redirect(route('cart.show'))->with('error', 'Product Has Been Deleted!');
-
     }
 
     /**
@@ -138,7 +133,6 @@ class CartController extends Controller
      */
     public function totalPrice($cart):array
     {
-
         $subtotal = $this->getSubtotal($cart);
 
         $subtotalNoDiscount = $subtotal['subtotalNoDiscount'];
@@ -158,7 +152,6 @@ class CartController extends Controller
             'discount' => $discount,
             'value' => $subtotalWithDiscount,
         ];
-
     }
 
     /**
@@ -175,7 +168,6 @@ class CartController extends Controller
                 $item->delete($item->id);
             }
         );
-
     }
 
 
@@ -189,7 +181,6 @@ class CartController extends Controller
     {
         $subtotal = $cart->map(
             function ($cart) {
-
                 $price = $this->productRepository->getPrice($cart->product_id);
 
                 $subtotalNoDiscount = $price * $cart->quantity;
@@ -202,7 +193,6 @@ class CartController extends Controller
                 'subtotal' =>  $subtotal,
                 'subtotalNoDiscount' => $subtotalNoDiscount
                 ];
-
             }
         );
 
@@ -210,7 +200,5 @@ class CartController extends Controller
            'subtotal' => $subtotal->sum('subtotal'),
            'subtotalNoDiscount' => $subtotal->sum('subtotalNoDiscount'),
         ];
-
     }
-
 }

@@ -185,25 +185,6 @@ class RolesTest extends TestCase
     }
 
     /**
-     * @dataProvider notValidRoleItemsProvider
-     * @test
-     * @param $field
-     * @param $value
-     */
-    public function admin_can_not_create_roles_with_incorrect_data($field,$value)
-    {
-        $filters = [
-            $field=> $value
-        ];
-
-        $response = $this->actingAs($this->user)->post(route('roles.store',$filters));
-
-        $response->assertSessionHasErrors($field);
-
-        $this->assertDatabaseMissing('roles',['name' => 'Test','description' => 'description test']);
-    }
-
-    /**
      * @dataProvider ValidRoleItemsProvider
      * @test
      * @param $field

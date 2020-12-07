@@ -25,7 +25,7 @@ class UsersApiTest extends TestCase
 
         $user = factory(User::class)->create(['role' => User::ADMIN_ROLE]);
 
-        $this->actingAs($user,'api');
+        $this->actingAs($user, 'api');
 
         $data = [
             'name'=> 'Joan',
@@ -39,7 +39,7 @@ class UsersApiTest extends TestCase
             'password_confirmation' => '12345678',
         ];
 
-        $response = $this->json('POST','api/auth/signup',$data);
+        $response = $this->json('POST', 'api/auth/signup', $data);
 
         $response->assertStatus(201);
 

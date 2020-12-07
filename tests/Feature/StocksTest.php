@@ -27,10 +27,12 @@ class StocksTest extends TestCase
         Permission::create(['name' => 'stocks.index','description' => 'Access to see inventory']);
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
-        $admin->givePermissionTo([
+        $admin->givePermissionTo(
+            [
             'home',
             'stocks.index',
-        ]);
+            ]
+        );
 
         $this->user = factory(User::class)->create(['role' => 'Admin']);
         $this->user->assignRole('Admin');

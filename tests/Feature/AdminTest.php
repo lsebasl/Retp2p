@@ -73,7 +73,8 @@ class AdminTest extends TestCase
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
         $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
-        $admin->givePermissionTo([
+        $admin->givePermissionTo(
+            [
             'users.index',
             'users.destroy',
             'users.show',
@@ -110,7 +111,8 @@ class AdminTest extends TestCase
             'cart.show',
             'cart.update',
             'cart.destroy',
-        ]);
+            ]
+        );
 
         $this->user = factory(User::class)->create(['role' => 'Admin']);
         $this->user->assignRole('Admin');
@@ -320,7 +322,8 @@ class AdminTest extends TestCase
             'email' => 'test@gmail.com',
             'status' => 'Enable'
 
-            ])->assertRedirect(route('users.show', $user))
+            ]
+        )->assertRedirect(route('users.show', $user))
             ->assertSessionHasNoErrors();
 
         $this->assertDatabasehas(

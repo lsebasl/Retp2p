@@ -83,7 +83,8 @@ class ProductsTest extends TestCase
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
         $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
-        $admin->givePermissionTo([
+        $admin->givePermissionTo(
+            [
             'users.index',
             'users.destroy',
             'users.show',
@@ -120,7 +121,8 @@ class ProductsTest extends TestCase
             'cart.show',
             'cart.update',
             'cart.destroy',
-        ]);
+            ]
+        );
 
         $this->user = factory(User::class)->create(['role' => 'Admin']);
         $this->user->assignRole('Admin');

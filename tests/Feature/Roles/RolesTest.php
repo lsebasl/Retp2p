@@ -80,7 +80,8 @@ class RolesTest extends TestCase
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
         $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
-        $admin->givePermissionTo([
+        $admin->givePermissionTo(
+            [
             'report.index',
             'report.show',
             'users.export',
@@ -122,7 +123,8 @@ class RolesTest extends TestCase
             'cart.show',
             'cart.update',
             'cart.destroy',
-        ]);
+            ]
+        );
 
         $this->user = factory(User::class)->create(['role' => 'Admin']);
         $this->user->assignRole('Admin');
@@ -162,8 +164,8 @@ class RolesTest extends TestCase
     /**
      * @dataProvider ValidRoleItemsProvider
      * @test
-     * @param $field
-     * @param $value
+     * @param        $field
+     * @param        $value
      */
     public function admin_can_create_roles($field,$value)
     {
@@ -179,16 +181,16 @@ class RolesTest extends TestCase
             'permissions' => $filters
         ];
 
-        $this->actingAs($this->user)->post(route('roles.store',$request));
+        $this->actingAs($this->user)->post(route('roles.store', $request));
 
-        $this->assertDatabaseHas('roles',['name' => 'Test','description' => 'description test']);
+        $this->assertDatabaseHas('roles', ['name' => 'Test','description' => 'description test']);
     }
 
     /**
      * @dataProvider ValidRoleItemsProvider
      * @test
-     * @param $field
-     * @param $value
+     * @param        $field
+     * @param        $value
      */
     public function admin_can_update_roles($field,$value)
     {
@@ -198,11 +200,13 @@ class RolesTest extends TestCase
             $field=> $value
         ];
 
-        $role = factory(Role::class)->create([
+        $role = factory(Role::class)->create(
+            [
                 'name' => 'Old Role',
                 'description' => 'old description',
 
-            ]);
+            ]
+        );
 
         $request = [
             'name' => 'New Rol',
@@ -210,9 +214,9 @@ class RolesTest extends TestCase
             'permissions' => $filters
         ];
 
-        $this->actingAs($this->user)->put(route('roles.update',$role),$request);
+        $this->actingAs($this->user)->put(route('roles.update', $role), $request);
 
-        $this->assertDatabaseHas('roles',['name' => 'New Rol','description' => 'New Description']);
+        $this->assertDatabaseHas('roles', ['name' => 'New Rol','description' => 'New Description']);
 
     }
 
@@ -224,9 +228,9 @@ class RolesTest extends TestCase
         $role = Role::create(['name' => 'role','description' => 'Allows the user to have full access to the application.']);
 
         $this->actingAs($this->user)->delete(route('roles.destroy', $role))
-                 ->assertRedirect(route('roles.index'));
+            ->assertRedirect(route('roles.index'));
 
-        $this->assertDatabaseMissing('roles',['name' => $role->name]);
+        $this->assertDatabaseMissing('roles', ['name' => $role->name]);
 
     }
 

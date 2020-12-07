@@ -48,7 +48,7 @@ class ExportController extends Controller
                 'user' => auth()->user()->id,
             ];
 
-            Logs::errorLogger($message,$options);
+            Logs::errorLogger($message, $options);
 
             return back()->with('error', 'Report Has not Been Downloaded');
 

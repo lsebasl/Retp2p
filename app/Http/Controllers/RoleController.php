@@ -56,8 +56,8 @@ class RoleController extends Controller
     /**
      * Store a newly created role in storage.
      *
-     * @param Request $request
-     * @param Role $role
+     * @param  Request $request
+     * @param  Role    $role
      * @return RedirectResponse
      */
     public function store(Request $request, Role $role)
@@ -72,7 +72,7 @@ class RoleController extends Controller
             return redirect(route('roles.index'))->with('success', 'Role Has Been Created!');
 
         } catch (Exception $e) {
-            return back()->with('error','Name Has Been Taken');
+            return back()->with('error', 'Name Has Been Taken');
         }
 
     }
@@ -116,7 +116,7 @@ class RoleController extends Controller
     /**
      * Update a specific roles and create a Log.
      *
-     * @param Request $request
+     * @param  Request $request
      * @param  $id
      * @return RedirectResponse
      */

@@ -84,7 +84,8 @@ class ReportTest extends TestCase
 
         $admin = Role::create(['name' => 'Admin','description' => 'Allows the user to have full access to the application.']);
         $client = Role::create(['name' => 'Client','description' => 'User buyer.']);
-        $admin->givePermissionTo([
+        $admin->givePermissionTo(
+            [
             'report.index',
             'report.show',
             'users.export',
@@ -126,7 +127,8 @@ class ReportTest extends TestCase
             'cart.show',
             'cart.update',
             'cart.destroy',
-        ]);
+            ]
+        );
 
         $this->user = factory(User::class)->create(['role' => 'Admin']);
         $this->user->assignRole('Admin');
@@ -150,8 +152,8 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidChartItemsProvider
-     * @param string $field
-     * @param string|null $value
+     * @param        string      $field
+     * @param        string|null $value
      */
     public function admin_can_create_different_type_chart(string $field, ?string $value)
     {
@@ -166,7 +168,7 @@ class ReportTest extends TestCase
             'finalDate' => '2020-12-30',
         ];
 
-        $response = $this->actingAs($this->user)->get(route('report.show',$request));
+        $response = $this->actingAs($this->user)->get(route('report.show', $request));
 
         $response->assertSee('DATA')
             ->assertSee('Chart')
@@ -179,8 +181,8 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidReportTypeProvider
-     * @param string $field
-     * @param string|null $value
+     * @param        string      $field
+     * @param        string|null $value
      */
     public function admin_can_create_different_type_report(string $field, ?string $value)
     {
@@ -195,7 +197,7 @@ class ReportTest extends TestCase
             'finalDate' => '2020-12-30',
         ];
 
-        $response = $this->actingAs($this->user)->get(route('report.show',$request));
+        $response = $this->actingAs($this->user)->get(route('report.show', $request));
 
         $response->assertSee('DATA')
             ->assertSee('Chart')
@@ -208,8 +210,8 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidExportProductItemsProvider
-     * @param string $field
-     * @param $value
+     * @param        string $field
+     * @param        $value
      */
     public function admin_can_export_products_list(string $field, $value)
     {
@@ -242,7 +244,7 @@ class ReportTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(route('export',$filters));
+            ->get(route('export', $filters));
 
         Excel::assertDownloaded('products.xlsx');
 
@@ -251,14 +253,14 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidUsersExportReportItemProvider
-     * @param string $field
-     * @param $value
+     * @param        string $field
+     * @param        $value
      */
     public function admin_can_export_report_users(string $field, $value)
     {
         $this->withoutExceptionHandling();
 
-        $users = factory(User::class,10)->create();
+        $users = factory(User::class, 10)->create();
 
         Excel::fake();
 
@@ -270,7 +272,7 @@ class ReportTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(route('users.export',$filters));
+            ->get(route('users.export', $filters));
 
         Excel::assertQueued('exportUsers.xlsx');
     }
@@ -278,14 +280,14 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidProductsExportReportItemProvider
-     * @param string $field
-     * @param $value
+     * @param        string $field
+     * @param        $value
      */
     public function admin_can_export_report_products(string $field, $value)
     {
         $this->withoutExceptionHandling();
 
-        $products = factory(Product::class,10)->create();
+        $products = factory(Product::class, 10)->create();
 
         factory(Category::class)->create(
             ['id'=>1,
@@ -318,7 +320,7 @@ class ReportTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(route('products.export',$filters));
+            ->get(route('products.export', $filters));
 
         Excel::assertQueued('exportProducts.xlsx');
     }
@@ -326,14 +328,14 @@ class ReportTest extends TestCase
     /**
      * @test
      * @dataProvider ValidProductsExportReportItemProvider
-     * @param string $field
-     * @param $value
+     * @param        string $field
+     * @param        $value
      */
     public function admin_can_export_report_sells(string $field, $value)
     {
         $this->withoutExceptionHandling();
 
-        $products = factory(Product::class,10)->create();
+        $products = factory(Product::class, 10)->create();
 
         Excel::fake();
 
@@ -345,7 +347,7 @@ class ReportTest extends TestCase
         ];
 
         $this->actingAs($this->user)
-            ->get(route('sells.export',$filters));
+            ->get(route('sells.export', $filters));
 
         Excel::assertQueued('exportSells.xlsx');
     }

@@ -25,7 +25,7 @@ class ProductsApiTest extends TestCase
 
         $product =  factory(Product::class)->create();
 
-        $response = $this->json('GET','/api/products');
+        $response = $this->json('GET', '/api/products');
 
         $response->assertStatus(401);
 
@@ -40,11 +40,11 @@ class ProductsApiTest extends TestCase
 
         $user = factory(User::class)->create(['role' => User::ADMIN_ROLE]);
 
-        $this->actingAs($user,'api');
+        $this->actingAs($user, 'api');
 
         $product =  factory(Product::class)->create();
 
-        $response = $this->json('GET','/api/products');
+        $response = $this->json('GET', '/api/products');
 
         $response->assertStatus(200);
 
@@ -65,9 +65,9 @@ class ProductsApiTest extends TestCase
 
         $file = uploadedfile::fake()->image('product.jpg');
 
-        $this->actingAs($user,'api');
+        $this->actingAs($user, 'api');
 
-        $response = $this->json('POST','/api/products',$this->getValidData($file));
+        $response = $this->json('POST', '/api/products', $this->getValidData($file));
 
         $response->assertStatus(201);
 
@@ -93,9 +93,9 @@ class ProductsApiTest extends TestCase
 
         $data = $this->getValidData($file);
 
-        $this->actingAs($user,'api');
+        $this->actingAs($user, 'api');
 
-        $response = $this->json('PUT','/api/products/2',$data);
+        $response = $this->json('PUT', '/api/products/2', $data);
 
         $response->assertStatus(201);
 
@@ -112,14 +112,14 @@ class ProductsApiTest extends TestCase
 
         $admin = factory(User::class)->create();
 
-        $response = $this->actingAs($admin)->json('DELETE','/api/products/1');
+        $response = $this->actingAs($admin)->json('DELETE', '/api/products/1');
 
         $response->assertStatus(200);
 
     }
 
     /**
-     * @param \Illuminate\Http\Testing\File $file
+     * @param  \Illuminate\Http\Testing\File $file
      * @return array
      */
     public function getValidData(\Illuminate\Http\Testing\File $file): array

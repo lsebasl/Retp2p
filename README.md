@@ -10,24 +10,23 @@
 In this code we can find the simulation of a virtual store with administrative interface and online customer experience.
 
 ### Instructions for installation.
-<ul>
-<li>1.clone the repository</li>
-<li>2.composer install</li>
-<li>3.run cp .env.example .env</li>
-<li>4.create and config database</li>
-<li>5.php artisan key generate</li>
-<li>6.install and config redis to cache</li>
-<li>7.php artisan config:cache</li>
-<li>8.php artisan migrate --seed</li>
-<li>9.php artisan passport:install</li>
-<li>10.php artisan storage:link</li>
-<li>11.npm install</li>
-<li>12.npm audit fix --force</li>
-<li>13.npm run watch</li>
-</ul>
+
+1.clone the repository
+2.composer install
+3.run cp .env.example .env
+4.create and config database
+5.php artisan key generate
+6.install and config redis to cache
+7.php artisan config:cache
+8.php artisan migrate --seed
+9.php artisan passport:install
+10.php artisan storage:link
+11.npm install
+12.npm audit fix --force
+13.npm run watch
 
 ### Documentation Api Product.
 
 Allows you to manage the products of the project store, list, store, update, delete.
 
-[documentation](https://isebasi.stoplight.io/docs/retp2p/reference/Products-Manager.v1.yaml/paths/api~1products~1%7Bid%7D/get)
+[documentation](https://isebasi.stoplight.io/studio/retp2p/edit)

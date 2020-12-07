@@ -1,0 +1,809 @@
+openapi: 3.0.0
+info:
+  title: Products Manager
+  version: '1.0'
+  contact:
+    name: Joan Sebastian Baron Betancur
+    email: isebasi@hotmail.com
+  description: 'Allows you to manage the products of the project store, list, store, update, delete'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /oauth/token:
+    parameters: []
+    post:
+      summary: Create Token Autorization
+      operationId: post-oauth-token
+      responses:
+        '200':
+          description: Returns the token to authenticate
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                  expires_in:
+                    type: number
+                  access_token:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    token_type: Bearer
+                    expires_in: 31536000
+                    access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWM0N2NhODUxYzBhNWJjY2MxZmJkYjk2NGU1NWI4ZDJlZDA5M2NlZTU0NmRiMzVkNTU4ODRiNTU1NzA3ODAwZDc3ODg2MGUzNmRhYmRhOTAiLCJpYXQiOjE2MDcyMDU4NzIsIm5iZiI6MTYwNzIwNTg3MiwiZXhwIjoxNjM4NzQxODcyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.TWGttqUTZNGGpKo4twar26pBZZoGo_7btuTTe4sZiMW6Rfq7y5RHteQURPJoa75cm3z9mVjHyoxalx-NqNOLPTslYmJDND8ux1b5DBNQHz5fMB-fXus0BlhBISbGwZHPkX7vqGbar8m-8FC_FYTi9001LCxCt8CmKoWXsI7YW0PQB6N49J34DeaVc-MoUuLu16ePaGnf1PUy2XS485F7JnLMUTiX1P6N6yN10cW6M2vGBpe1L7Ypzwexj5QPENQM2FasPOMptyMuOyLT2H8ZopV4XfjrAME0Y4HCy_YD3bBQlKUQSFKgTcRrnmyJcTMaGgS_zWv5DTTcy8Z9V1lpCAroCwygzy4uyFmw18AY051-Q4im9DEzUQJYnrV80bMqUFZlY_ROhX0Bz4mgf8T0R6SPN9pR5rmqOLEU1d93GUGeFHjdPNG86AtMFhRX3-qYlvNAuxtxfJm4FiFgQrKvgjf-dDU2RFYloBFM6wAiQl0Xj3aNyH8ruKZokHCq5o4gzlggOyrI9Y5PbMPOTMdC5Py7lOKB4FNgjJkIl54DOO4SLykXNyoCxyeoKqKJYFtXwSLwNuDYpIyqKfy2QLQkgdvgv3VPqP2hK0yJBM3C1PimBHTURm0Ts7X5rFI_kPczM0c02vJv8g9zuFv8m5xydjJIYzjJAee-djVsYeS8U5o
+        '400':
+          description: Bad Request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  client_id:
+                    type: string
+                  client_secret:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    error: unsupported_grant_type
+                    error_description: The authorization grant type is not supported by the authorization server.
+                    hint: Check that all required parameters have been provided
+                    message: The authorization grant type is not supported by the authorization server.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  grant_type:
+                    type: string
+                  client_id:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    error: invalid_client
+                    error_description: Client authentication failed
+                    message: Client authentication failed
+      description: |-
+        This permit to create a authorization token for the application.
+
+        method: POST
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: grant_type
+          description: client_credentials
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: client_id
+          description: 'generate with php artisan passport:client in the console'
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: client_secret
+          description: 'generate with  php artisan passport:install'
+          required: true
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+            examples:
+              example-1:
+                value: |-
+                  {
+                    "grant_type": "client_credentials",
+                    "client_id": "1",
+                    "client_secret": "AD2Gl5JRWafBWCepiM8Z19pOuGA639qgubodNZj0"
+                  }
+        description: |-
+          grant_type: client_credentials.
+          client_id: generate with php artisan passport:client in the console.
+          client_secret:  generate with  php artisan passport:install.
+  'api/products/{id}':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Show Products.
+      operationId: Show Products
+      responses:
+        '200':
+          description: Return a specific product.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        image:
+                          type: string
+                        barcode:
+                          type: number
+                        name:
+                          type: string
+                        model:
+                          type: string
+                        mark:
+                          type: string
+                        description:
+                          type: string
+                        units:
+                          type: integer
+                        price:
+                          type: number
+                        discount:
+                          type: string
+                        status:
+                          type: string
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        created_by:
+                          type: string
+                        updated_by:
+                          type: string
+                        category_id:
+                          type: number
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - id: 16
+                        image: images/hOh8cxP8G80mcO9aohbgrHAi5Rf4p4RdKFh1bAzj.jpeg
+                        barcode: 17751620630534
+                        name: Moto G
+                        model: Quos omnis.
+                        mark: Motorola
+                        description: LemonChiffon
+                        units: 31
+                        price: 27424
+                        discount: '0.10'
+                        status: Enable
+                        created_at: '2020-12-04T12:38:14.000000Z'
+                        updated_at: '2020-12-04T12:38:14.000000Z'
+                        created_by: 4
+                        updated_by: 8
+                        category_id: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                example-1:
+                  value:
+                    message: Unauthenticated.
+                example-2:
+                  value:
+                    message: string
+      description: |-
+        This permit to access to see a specific product, using id.
+
+        method: GET
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+          required: true
+        - schema:
+            type: string
+            example: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzY0ZWE0YmFmYTM4Mzc5ODBmMzg5ZDcwMWM0Yzk5NmU0MGRiOGI1ZDZmMGI1YzU5M2I2NmJhMDNmNmQ1Y2U1NjVmOGE4NWMxMDI2ZGZlYjgiLCJpYXQiOjE2MDcxODUzOTQsIm5iZiI6MTYwNzE4NTM5NCwiZXhwIjoxNjM4NzIxMzk0LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.oyTcCUz7TqKahvRWNMOaBtdK1lzFhfvy0JyAApw8vzgKXqdszVY13ajvdjlk7quCEQnfoZo05ylsp4kkS841P4zAV75LCzTWNdmI1dc8rfVaI0HpBUPtK2yVpOzxp-dBr05zO4gdFUvNEUE4GWpckEkFSuetOb2cnqp2aSaS3N1CA6UdTey6Tv3p6Q2XAqFiMzRTSKXpQ3DQ-BtpoByLI8LswRrLiC-L-KDDoSfYe2jTtlCcBkVVR8lZN7X4h7pJrbE04eNutsuJ7Oy5lfQue4RqkXBeeZ92CpFcXiFFohA-AcHP8H7Q8JJb1hiLUQb78NjZkHtBXK4wZJZAFemwXTjT4aNwF2zcL-GjCnenrOezzf_F02nTA_3CpRwSRbE_PdDxwAEmbUhGY0Z8lA7fbFkEmM_V8BWFcCBPo7AZ4-ntg4kzQ5lYGypKPoyEHj7jbB2Cn52z0UVgNPPCxy4Rgh6MGj7VmrEYQizm_6Qyz0UF-oLeoTggW4BDTN6IDR_rhquM9n60TD4s0s1_9Bm55sbVcqZKGq7wF2qKct2HsFAHftjdA5ZUa5A5153kRlWEccOho1I7CQ375_NhwcMKB_VppK2CvI0HyJXjgztwZdJo0S3nsBbzH29Ie5mJIZdZYU0hMxODbnCTRl3WXJPoDxQY2E3av0wipOciXecMhVw
+          in: header
+          name: Authorization
+          description: 'Bearer {token}'
+          required: true
+  api/products/:
+    get:
+      summary: Get Index Product.
+      tags: []
+      operationId: getapi-index
+      description: |-
+        This permit to access to see a list of product by page.
+
+        method: GET
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer {token}'
+          required: true
+      responses:
+        '200':
+          description: Return a list of products.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    image:
+                      type: string
+                    barcode:
+                      type: integer
+                    '':
+                      type: string
+                    name:
+                      type: string
+                    model:
+                      type: string
+                    mark:
+                      type: string
+                    description:
+                      type: string
+                    units:
+                      type: integer
+                    price:
+                      type: number
+                    discount:
+                      type: string
+                    status:
+                      type: string
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                    created_by:
+                      type: string
+                    updated_by:
+                      type: string
+                    category_id:
+                      type: number
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - id: 16
+                        image: images/hOh8cxP8G80mcO9aohbgrHAi5Rf4p4RdKFh1bAzj.jpeg
+                        barcode: '17751620630534'
+                        name: Moto G
+                        model: Quos omnis.
+                        mark: Motorola
+                        description: LemonChiffon
+                        units: 31
+                        price: 27424
+                        discount: '0.10'
+                        status: Enable
+                        created_at: '2020-12-04T12:38:14.000000Z'
+                        updated_at: '2020-12-04T12:38:14.000000Z'
+                        created_by: null
+                        updated_by: null
+                        category_id: 1
+        '401':
+          description: Unauthorized
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                example-1:
+                  value: |-
+                    {
+                      "message": "Unauthenticated."
+                    }
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: string
+                  description: '?page=2'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+    parameters: []
+  api/products:
+    parameters: []
+    post:
+      summary: Create Products.
+      operationId: postapi-products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                  name:
+                    type: string
+                  category_id:
+                    type: integer
+                  model:
+                    type: string
+                  mark:
+                    type: string
+                  description:
+                    type: string
+                  units:
+                    type: number
+                  price:
+                    type: string
+                  discount:
+                    type: string
+                  status:
+                    type: string
+                  image:
+                    type: string
+                    description: ''
+                  updated_at:
+                    type: string
+                  created_at:
+                    type: string
+                  id:
+                    type: integer
+              examples:
+                example-1:
+                  value:
+                    barcode: '7171234567825434'
+                    name: IPhoneX
+                    category_id: 1
+                    model: LINDO
+                    mark: GATO
+                    description: VERDE
+                    units: 40
+                    price: '1241'
+                    discount: '0.30'
+                    status: Enable
+                    image: images/MBnKGUNGrTn8euWb5DuQWMP7y0smfm4E0qNlRhUZ.jpeg
+                    updated_at: '2020-12-05T23:30:16.000000Z'
+                    created_at: '2020-12-05T23:30:16.000000Z'
+                    id: 202
+      description: |
+        Permit to store products in the stock
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer {token}'
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: multipart/form-data; boundary=<calculated when request is sent>
+        - schema:
+            type: string
+          in: header
+          name: Content-Length
+          description: <calculated when request is sent>
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                barcode:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                  description: Unique
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                category_id:
+                  type: integer
+                  minimum: 1
+                  maximum: 4
+                  description: 'int in:1234'
+                model:
+                  type: string
+                  minLength: 2
+                  maxLength: 30
+                description:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                units:
+                  type: number
+                  minimum: 1
+                  maximum: 100000
+                price:
+                  type: number
+                discount:
+                  type: string
+                  minLength: 0.1
+                  maxLength: 0.9
+                status:
+                  type: string
+                  description: 'in:Enable,Disable'
+                updated_at:
+                  type: string
+                created_at:
+                  type: string
+                image:
+                  type: string
+                  description: Should Be A File
+                  format: uri
+              required:
+                - barcode
+                - name
+                - category_id
+                - model
+                - description
+                - units
+                - price
+                - discount
+                - status
+                - updated_at
+                - created_at
+                - image
+            examples:
+              example-1:
+                value: |-
+                  {
+                      "barcode": "7171234567825434",
+                      "name": "IPhoneX",
+                      "category_id": "1",
+                      "model": "LINDO",
+                      "mark": "GATO",
+                      "description": "VERDE",
+                      "units": "40",
+                      "price": "1241",
+                      "discount": "0.30",
+                      "status": "Enable",
+                      "image": "MBnKGUNGrTn8euWb5DuQWMP7y0smfm4E0qNlRhUZ.jpeg",
+                      "updated_at": "2020-12-05T23:30:16.000000Z",
+                      "created_at": "2020-12-05T23:30:16.000000Z",
+                      "id": 202
+                  }
+              example-2:
+                value: |-
+                  barcode:7171234567825434
+                  name:IPhoneX
+                  category_id:1
+                  model:LINDO
+                  mark:GATO
+                  description:VERDE
+                  units:40
+                  price:1241
+                  discount:0.30
+                  status:Enable
+        description: ''
+  '/api/products/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Id To delete
+    delete:
+      operationId: Delele Product
+      description: Delete a specific product with a specific id.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer {token}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                example-1:
+                  value: The Product was successfully deleted
+      summary: Delete Products
+  api/products/8:
+    parameters: []
+    post:
+      summary: Update Products
+      operationId: Update products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    minLength: 1
+                  name:
+                    type: string
+                    minLength: 1
+                  category_id:
+                    type: integer
+                  model:
+                    type: string
+                    minLength: 1
+                  mark:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  units:
+                    type: integer
+                  price:
+                    type: number
+                  discount:
+                    type: string
+                    minLength: 1
+                  status:
+                    type: string
+                    minLength: 1
+                  image:
+                    type: string
+                    minLength: 1
+                  updated_at:
+                    type: string
+                    minLength: 1
+                  created_at:
+                    type: string
+                    minLength: 1
+                  id:
+                    type: number
+                required:
+                  - barcode
+                  - name
+                  - category_id
+                  - model
+                  - mark
+                  - description
+                  - units
+                  - price
+                  - discount
+                  - status
+                  - image
+                  - updated_at
+                  - created_at
+                  - id
+              examples:
+                example-1:
+                  value:
+                    barcode: '1712345674123213'
+                    name: IPhoneX
+                    category_id: 1
+                    model: LINDO
+                    mark: GATO
+                    description: VERDE
+                    units: 40
+                    price: 1241
+                    discount: '0.30'
+                    status: Enable
+                    image: images/zLmwea1UYLk08rnZALcdKw0l3iXbZ0kXBp2D7OQh.jpeg
+                    updated_at: '2020-12-06T08:32:41.000000Z'
+                    created_at: '2020-12-06T08:32:41.000000Z'
+                    id: 206
+      description: |
+        Permit to update products in the stock
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer  {token}'
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: multipart/form-data; boundary=<calculated when request is sent>
+        - schema:
+            type: string
+          in: header
+          name: Content-Length
+          description: <calculated when request is sent>
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: File
+                barcode:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                  description: Unique
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                model:
+                  type: string
+                  minLength: 2
+                  maxLength: 30
+                mark:
+                  type: string
+                  minLength: 2
+                  maxLength: 30
+                description:
+                  type: string
+                  minLength: 3
+                  maxLength: 30
+                units:
+                  type: integer
+                  minimum: 1
+                  maximum: 10000
+                price:
+                  type: number
+                  minimum: 1
+                  maximum: 1000000
+                discount:
+                  type: string
+                  minLength: 1
+                status:
+                  type: string
+                  minLength: 1
+                created_at:
+                  type: string
+                  minLength: 1
+                updated_at:
+                  type: string
+                  minLength: 1
+                  description: 'in: int in:1234'
+                category_id:
+                  type: integer
+                  minimum: 1
+                  maximum: 4
+                .method:
+                  type: string
+                  description: put
+              required:
+                - image
+                - barcode
+                - name
+                - model
+                - mark
+                - description
+                - units
+                - price
+                - discount
+                - status
+                - created_at
+                - updated_at
+                - category_id
+                - .method
+            examples:
+              example-1:
+                value: |
+                  barcode:17122221231311
+                  name:IPhoneX
+                  category_id:1
+                  model:awqwqwq
+                  mark:GATO
+                  description:VERDE
+                  units:40
+                  price:1241
+                  discount:0.30
+                  status:Enable
+                  .method:put
+        description: Important create .method put in body.
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+  securitySchemes:
+    API Key - 1:
+      name: API Key
+      type: apiKey
+      in: query

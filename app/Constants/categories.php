@@ -10,5 +10,4 @@ class categories extends Enum
     public const COMPUTERS = 2;
     public const TV_VIDEO = 3;
     public const ACCESSORIES = 4;
-
 }

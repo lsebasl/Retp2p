@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait ApiResponse
 {
-    protected function errorResponse($message,$code)
+    protected function errorResponse($message, $code)
     {
         return response()->json(['error'=>$message,'code' => $code], $code);
     }

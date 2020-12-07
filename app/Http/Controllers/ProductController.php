@@ -7,11 +7,11 @@ use App\Events\ProductCreated;
 use App\Events\ProductSaveImage;
 use App\Exports\ProductsExport;
 use App\Helpers\Logs;
+use App\Http\Requests\ImportRequest;
 use App\Http\Requests\ProductsSearchRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Imports\ProductsImport;
-use App\Mark;
 use App\Product;
 use App\Repositories\ProductRepository;
 use Exception;
@@ -20,8 +20,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Session\SessionManager;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use App\Events\ProductUpdate;
@@ -86,7 +84,7 @@ class ProductController extends Controller
      * @param  Product $product
      * @return View
      */
-    public function show(Product $product)
+    public function show(Product $product):View
     {
         Logs::AuditLogger($product, 'show');
 
@@ -97,7 +95,8 @@ class ProductController extends Controller
      * Show the form for editing the specified product.
      *
      * @param  Product $product
-     * @return View
+     * @return V
+     * iew
      */
     public function edit(Product $product):View
     {
@@ -162,16 +161,15 @@ class ProductController extends Controller
             ->status($request->get('search-status'));
 
         return (new ProductsExport($product))->download('products.xlsx');
-
     }
 
     /**
      * Import products with validation.
      *
-     * @param  Request $request
+     * @param  ImportRequest $request
      * @return Application|RedirectResponse|Redirector
      */
-    public function import(Request $request)
+    public function import(ImportRequest $request)
     {
         try {
             Excel::import(new ProductsImport, $request->file('file'));
@@ -179,13 +177,10 @@ class ProductController extends Controller
             return redirect(route('stocks.index'))->with('success', 'All good!');
 
             //Excel::import(new ProductsImport, $request->file('file'));
-
-
-        } catch (ValidationException $e){//general un log
+        } catch (ValidationException $e) {//general un log
 
             return $this->displayErrors($e);
         }
-
     }
 
     /**
@@ -196,32 +191,24 @@ class ProductController extends Controller
      */
     public function displayErrors($e):RedirectResponse
     {
-
         $message = '';
-        foreach ($e->failures() as $fail){
-
+        foreach ($e->failures() as $fail) {
             $fail->row();
             $fail->attribute();
             $fail->errors();
             $fail->values();
 
-            $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];'<br>';
-
+            $message .= 'Row' . " "  . $fail->row() . " "  . 'Column' . " "  . $fail->attribute() . " " .$fail->errors()[0];
+            '<br>';
         }
 
         Session::flash('Validation Message', 'Error found in : <br>' . $message);
 
         return redirect(route('stocks.index'))->with('error', 'Fail!!');
-
-
     }
 
     public function keyExist($val)
     {
-
         return Product::where('id', $val['id'])->first();
-
     }
-
-
 }

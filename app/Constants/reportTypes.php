@@ -12,5 +12,4 @@ class reportTypes extends Enum
     public const SELLS_BY_PRODUCTS = 'sellByProduct';
     public const TOP_CLIENTS = 'topClient';
     public const STOCK_BY_CATEGORY = 'stockByCategory';
-
 }

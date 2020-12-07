@@ -5,17 +5,13 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Actions\StoreProductAction;
 use App\Actions\UpdateProductAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\StoreRequest;
-use App\Http\Requests\Products\UpdateRequest;
 use App\Http\Requests\ProductsStoreRequest;
 use App\Http\Requests\ProductsUpdateRequest;
 use App\Http\Resources\ProductResource;
 use App\Product;
-use App\Traits\ApiResponse;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
-use Throwable;
 
 class ProductController extends Controller
 {
@@ -36,14 +32,11 @@ class ProductController extends Controller
      * @param  ProductsStoreRequest $request
      * @param  Product              $product
      * @param  StoreProductAction   $action
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function store(ProductsStoreRequest $request, Product $product, StoreProductAction $action):Model
     {
-
         return $action->execute($product, $request);
-
-
     }
 
     /**
@@ -52,7 +45,7 @@ class ProductController extends Controller
      * @param  ProductsUpdateRequest $request
      * @param  Product               $product
      * @param  UpdateProductAction   $action
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function update(ProductsUpdateRequest $request, Product $product, UpdateProductAction $action):Model
     {
@@ -74,8 +67,8 @@ class ProductController extends Controller
      * Delete a specific product since api.
      *
      * @param  Product $product
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy(Product $product):JsonResponse
     {
@@ -83,5 +76,4 @@ class ProductController extends Controller
 
         return response()->json(__('The Product was successfully deleted'));
     }
-
 }

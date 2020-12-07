@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class CartUpdateRequest extends FormRequest
 {
     /**
@@ -24,7 +23,6 @@ class CartUpdateRequest extends FormRequest
      */
     public function rules():array
     {
-
         return [
             'quantity' => 'bail|nullable|min:1|max:1000|numeric',
         ];

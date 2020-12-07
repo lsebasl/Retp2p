@@ -2,6 +2,7 @@
 @section('content')
     <h3 class="text-center tittles">RESPONSIVE TILES</h3>
     <!-- Tiles -->
+    @can('invoices.index')
     <a class="full-width tile" href="{{ route('invoices.index') }}" >
         <div class="tile-text" >
 					<span class="text-condensedLight" >
@@ -11,6 +12,8 @@
         </div>
         <i class="zmdi zmdi-receipt tile-icon"></i>
     </a>
+    @endcan
+    @can('users.index')
     <a class="full-width tile" href="{{ route('users.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
@@ -20,15 +23,19 @@
         </div>
         <i class="zmdi zmdi-accounts tile-icon"></i>
     </a>
+    @endcan
+    @can('stocks.index')
     <a class="full-width tile" href="{{ route('stocks.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
 						3<br>
-						<small>{{__('Store')}}</small>
+						<small>{{__('Inventory')}}</small>
 					</span>
         </div>
         <i class="zmdi zmdi-store tile-icon"></i>
     </a>
+    @endcan
+    @can('stocks.index')
     <a class="full-width tile" href="{{ route('products.index')}}">
         <div class="tile-text">
 					<span class="text-condensedLight">
@@ -38,4 +45,6 @@
         </div>
         <i class="zmdi zmdi-toys tile-icon"></i>
     </a>
+    @endcan
+
 @endsection

@@ -29,7 +29,6 @@ class PaymentAttemptController extends Controller
         )->orderBy('created_at', request('sorted', 'DESC'))->get();
 
         return view('store.history', ['paymentAttempts' => $paymentAttempts]);
-
     }
 
     /**
@@ -101,7 +100,6 @@ class PaymentAttemptController extends Controller
         $paymentAttempt->save();
 
         if ($response->isSuccessful()) {
-
             $paymentAttempt->update(
                 [
                 'status' => $response->status()->status(),
@@ -122,7 +120,6 @@ class PaymentAttemptController extends Controller
                 ]
             )
         );
-
     }
 
 
@@ -134,7 +131,6 @@ class PaymentAttemptController extends Controller
      */
     public function callback(PlacetoPay $placetopay):RedirectResponse
     {
-
         $paymentAttempt = PaymentAttempt::with(
             ['invoice'=>function ($query) {
                 $user = Auth::user()->id;
@@ -165,7 +161,6 @@ class PaymentAttemptController extends Controller
             $invoice->attach(new Units());
 
             $invoice->notify();
-
         }
 
         if ($paymentAttempt->status === 'REJECTED') {
@@ -177,7 +172,5 @@ class PaymentAttemptController extends Controller
         }
 
         return redirect(route('payment.history'));
-
     }
-
 }

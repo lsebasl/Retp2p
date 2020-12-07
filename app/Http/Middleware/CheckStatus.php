@@ -19,7 +19,7 @@ class CheckStatus
     public function handle($request, Closure $next)
     {
         if (Auth::user()->status == User::DISABLE_STATUS) {
-                return redirect('/')->with('error', 'Client Disable!');
+            return redirect('/')->with('error', 'Client Disable!');
         }
         return $next($request);
     }

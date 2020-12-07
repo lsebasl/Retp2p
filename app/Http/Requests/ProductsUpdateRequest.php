@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Product;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -37,6 +36,8 @@ class ProductsUpdateRequest extends FormRequest
             'price' => 'required|numeric|min:0|max:100000000',
             'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
+
+
 
         ];
     }

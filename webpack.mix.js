@@ -10,18 +10,16 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js('resources/assets/js/app.js', 'public/js')
-
 
 mix.styles(['public/css/admin/app.css',
-    ],'public/css/admin/all2.css');
+],'public/css/admin/all2.css');
 
 mix.scripts([
-        'resources/js/admin/jquery.mCustomScrollbar.concat.min.js',
-        'resources/js/admin/jquery-1.11.2.min.js',
-        'resources/js/admin/main.js',
-        'resources/js/admin/material.min.js',
-        'resources/js/admin/sweetalert2.min.js',
+    'resources/js/admin/jquery.mCustomScrollbar.concat.min.js',
+    'resources/js/admin/jquery-1.11.2.min.js',
+    'resources/js/admin/main.js',
+    'resources/js/admin/material.min.js',
+    'resources/js/admin/sweetalert2.min.js',
 ], 'public/js/admin/all.js');
 
 mix.scripts([
@@ -73,6 +71,9 @@ mix.scripts(['public/js/checkout/classie.js',
     'public/js/checkout/simpleCart.min.js',
     'public/js/checkout/uisearch.js',
 ],'public/js/checkout/all.js');
+
+mix.scripts(['resources/js/reports/dashboard.js',
+],'public/js/reports/dashboard.js');
 
 
 

@@ -10,5 +10,4 @@ class exportTypes extends Enum
     public const Products = 'exportProducts';
     public const Sells = 'exportSells';
     public const Custom = 'exportAccessories';
-
 }

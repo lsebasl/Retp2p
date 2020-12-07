@@ -2,14 +2,16 @@
 
 namespace App\Reports;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 interface ReportContract
 {
     /**
-     * @param Request $request
+     * Interface to implement export method in report manager.
+     *
+     * @param  Request $request
      * @return mixed
      */
-    public function export(Request $request);
+    public function export(Request $request):Collection;
 }

@@ -17,7 +17,8 @@ class AuthController extends Controller
         $user->save();
         return response()->json(
             [
-            'message' => 'Successfully created user!'], 201
+            'message' => 'Successfully created user!'],
+            201
         );
     }
     public function login(Request $request)
@@ -33,7 +34,8 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json(
                 [
-                'message' => 'Unauthorized'], 401
+                'message' => 'Unauthorized'],
+                401
             );
         }
         $user = $request->user();
@@ -69,4 +71,3 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 }
-

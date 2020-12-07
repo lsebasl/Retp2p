@@ -8,5 +8,4 @@ class status extends Enum
 {
     public const ENABLE = 'Enable';
     public const DISABLE = 'Disable';
-
 }

@@ -18,7 +18,6 @@ class ProductsStoreRequest extends FormRequest
     }
 
     /**
-     * 
      * 0
      * Get the validation rules th0  at apply to the request.
      *
@@ -37,6 +36,7 @@ class ProductsStoreRequest extends FormRequest
             'price' => 'required|numeric|min:0|max:100000000',
             'discount' => 'required|numeric|min:0|max:100',
             'status' => 'required|in:Enable,Disable',
+            'image' => 'required'
 
         ];
     }

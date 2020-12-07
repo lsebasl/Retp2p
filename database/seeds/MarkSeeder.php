@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Mark;
-use App\Sidebar;
 
 
 class MarkSeeder extends Seeder

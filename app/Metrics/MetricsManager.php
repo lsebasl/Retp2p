@@ -2,8 +2,8 @@
 
 namespace App\Metrics;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class MetricsManager implements MetricsContract
 {
@@ -22,11 +22,14 @@ class MetricsManager implements MetricsContract
         $this->behaviour = $behaviour;
     }
 
+
     /**
+     * Read the a behavior depending of a specific collection.
+     *
      * @param  array $filters
-     * @return Model|mixed
+     * @return Collection
      */
-    public function read(array $filters)
+    public function read(array $filters):Collection
     {
         return $this->behaviour->read($filters);
     }

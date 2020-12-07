@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductResource extends ResourceCollection
@@ -10,10 +10,10 @@ class ProductResource extends ResourceCollection
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request):array
     {
         return [
             'data' => $this->collection,

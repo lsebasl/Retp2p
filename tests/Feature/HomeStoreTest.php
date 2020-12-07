@@ -10,10 +10,10 @@ use Tests\TestCase;
 class HomeStoreTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      */
-
     public function no_authenticated_user_cant_access_to_home_store_view()
     {
         $this->get(route('home.store'))

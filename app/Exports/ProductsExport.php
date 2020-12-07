@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Queue\InteractsWithQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -11,9 +11,7 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-
-
-class ProductsExport implements FromQuery, WithHeadings,WithColumnFormatting
+class ProductsExport implements FromQuery, WithHeadings, WithColumnFormatting
 {
     use Exportable, InteractsWithQueue, Queueable;
 
@@ -24,7 +22,12 @@ class ProductsExport implements FromQuery, WithHeadings,WithColumnFormatting
         $this->products = $products;
     }
 
-    public function query()
+    /**
+     * Return query to products for export.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query():\Illuminate\Database\Eloquent\Builder
     {
         return $this->products;
     }
@@ -67,6 +70,4 @@ class ProductsExport implements FromQuery, WithHeadings,WithColumnFormatting
 
         ];
     }
-
-
 }

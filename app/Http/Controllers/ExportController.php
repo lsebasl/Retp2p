@@ -29,7 +29,6 @@ class ExportController extends Controller
         Storage::disk()->put('actualTable.txt', config('reports.' .$exportType)['table']);
 
         try {
-
             $export = (new ReportManager(new $report['behaviour']))->export($request);
 
             $filePath = asset('storage/'.$exportType.'.xlsx');
@@ -38,9 +37,7 @@ class ExportController extends Controller
                 ->chain([new NotifyUserOfCompletedExport($filePath, auth()->user())]);
 
             return back()->with('success', 'Report Has Been Downloaded Wait Notification In Your E-mail!');
-
         } catch (Exception $e) {
-
             $message = 'download report'. " " . $e->getMessage();
 
             $options=[
@@ -51,10 +48,6 @@ class ExportController extends Controller
             Logs::errorLogger($message, $options);
 
             return back()->with('error', 'Report Has not Been Downloaded');
-
         }
-
-
-
     }
 }

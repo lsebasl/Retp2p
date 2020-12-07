@@ -70,11 +70,9 @@ class RoleController extends Controller
             $role->syncPermissions($request->input('permission'));
 
             return redirect(route('roles.index'))->with('success', 'Role Has Been Created!');
-
         } catch (Exception $e) {
             return back()->with('error', 'Name Has Been Taken');
         }
-
     }
 
     /**

@@ -24,9 +24,8 @@ class Logs
      * @param  array $options
      * @return void
      */
-    public static function errorLogger($message,$options=[]):void
+    public static function errorLogger($message, $options=[]):void
     {
         Log::error("Action fail in $message", $options);
     }
-
 }

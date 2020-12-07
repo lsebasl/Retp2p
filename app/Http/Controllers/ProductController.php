@@ -94,9 +94,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified product.
      *
-     * @param  Product $product
-     * @return V
-     * iew
+     * @param Product $product
+     * @return View
+     * i
      */
     public function edit(Product $product):View
     {
@@ -148,8 +148,9 @@ class ProductController extends Controller
         return redirect()->route('stocks.index')->with('success', 'Product Has Been Deleted');
     }
 
-
     /**
+     * Download products to browser filter by category,mark,status.
+     *
      * @param  Request $request
      * @return Response|BinaryFileResponse
      */
@@ -176,7 +177,6 @@ class ProductController extends Controller
 
             return redirect(route('stocks.index'))->with('success', 'All good!');
 
-            //Excel::import(new ProductsImport, $request->file('file'));
         } catch (ValidationException $e) {//general un log
 
             return $this->displayErrors($e);
